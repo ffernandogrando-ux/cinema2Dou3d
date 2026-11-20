@@ -174,9 +174,9 @@ const sombraContato = (x, y, w) => `<ellipse cx="${x}" cy="${y + 3}" rx="${w / 2
 // o.fundo: cor da parede; o.forma: cor das formas do fundo; o.brilho: cor de um brilho em anéis lisos (ex.: o portal fora de quadro); o.lado: 1 = brilho à direita
 function reacaoToon(P, t, tl, st = {}, o = {}) {
   let r = `<rect x="-200" y="-200" width="1000" height="1500" fill="${o.fundo || '#E3B04B'}"/>`;
-  if (o.forma) r += `<rect x="-200" y="210" width="1000" height="16" fill="${o.forma}"/><rect x="${o.lado > 0 ? 40 : 380}" y="120" width="120" height="90" rx="6" fill="${o.forma}"/>`;
+  if (o.forma) r += `<rect x="-200" y="210" width="1000" height="16" fill="${o.forma}"/>`;
   if (o.brilho) { const bx = o.lado > 0 ? 640 : -60; r += `<circle cx="${bx}" cy="430" r="330" fill="${o.brilho}" opacity=".18"/><circle cx="${bx}" cy="430" r="210" fill="${o.brilho}" opacity=".22"/>`; }
-  return r + toon(P, { x: 250, y: 1240, s: 1.5, t, semCorte: true, ...st, boca: typeof st.boca === 'string' ? BOCAS[st.boca] : st.boca }); }
+  return r + toon(P, { x: 250, y: 1200, s: 1.5, t, semCorte: true, ...st, boca: typeof st.boca === 'string' ? BOCAS[st.boca] : st.boca }); }
 // atalho: pt(P, x, y, s, t, st) — st.boca aceita nome: neutra, sorriso, riso, grito, o
 const BOCAS = { neutra: { sm: -.3 }, sorriso: { sm: .7 }, riso: { o: .5, sm: .9 }, grito: { o: 1, w: 1.15 }, o: { o: .5, w: .5 } };
 const pt = (P, x, y, s, t, o = {}) => toon(P, { x, y, s, t, ...o, boca: typeof o.boca === 'string' ? BOCAS[o.boca] : o.boca });
