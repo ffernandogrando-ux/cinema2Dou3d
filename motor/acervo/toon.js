@@ -70,7 +70,7 @@ function tMao(x, y, ang, r, cor, punho) {
 const T_ALT = { adulto: { hip: -150, omb: -335, cab: -470, larg: 1 }, baixo: { hip: -96, omb: -215, cab: -320, larg: .9 } };
 function toon(P, st = {}) {
   const A = T_ALT[P.alt || 'adulto'], t = st.t || 0, s = st.s || 1, f = st.flip ? -1 : 1, L = A.larg, bar = P.barriga || 0;
-  const resp = st.still ? 0 : Math.sin(t * 2.4 + (st.ph || 0)) * 2.2;
+  const ag = st.still ? 0 : (st.agito ?? 1), ph = st.ph ?? P.ph ?? 0, resp = Math.sin(t * 2.4 + ph) * 4 * ag, peso = Math.sin(t * 1.1 + ph * 1.7) * 5 * ag;
   const w = st.walk != null ? Math.sin(st.walk * Math.PI * 2) : 0;
   let r = `<g transform="translate(${_p(st.x || 0)} ${_p(st.y || 0)}) scale(${s * f} ${s})">`;
   if (st.sombra !== false) r += `<ellipse cx="0" cy="4" rx="${90 * L}" ry="13" fill="#000" opacity=".18"/>`;
@@ -86,11 +86,12 @@ function toon(P, st = {}) {
       tPinta(tPoli([[ank[0] - 40, ank[1] + 18], [ank[0] + 60, ank[1] + 18], [ank[0] + 60, ank[1] + 40], [ank[0] - 40, ank[1] + 40]]), P.sapatoS || '#2a52a8'));
   }
   // tronco (inclina em torno do quadril)
-  r += `<g transform="rotate(${_p((st.inclina || 0) * 180 / Math.PI)} 0 ${A.hip}) translate(0 ${_p(resp)})">`;
+  r += `<g transform="rotate(${_p((st.inclina || 0) * 180 / Math.PI + peso * .35)} 0 ${A.hip}) translate(${_p(peso)} ${_p(resp)})">`;
   const omb = A.omb, hip = A.hip, H = hip - omb, ws = 62 * L, ww = (60 + bar * 34) * L, wh = (66 + bar * 20) * L;
   const shB = [-ws + 6, omb + 8], shF = [ws - 8, omb + 10];
   const TR = P.tronco || { cor: '#4C7BD9', corS: '#3A62B8', tipo: 'moletom' };
-  const braco = (sh, arm, segura, frente) => { arm = arm || { h: [sh[0] < 0 ? -44 - bar * 30 : 14, 160], bend: sh[0] < 0 ? -22 : 14 };
+  const braco = (sh, arm, segura, frente) => { const solto = !arm, bal = Math.sin(t * 2.1 + ph + (sh[0] < 0 ? 1.7 : 0)) * 10 * ag; arm = arm || { h: [sh[0] < 0 ? -44 - bar * 30 : 14, 160], bend: sh[0] < 0 ? -22 : 14 };
+    if (solto || ag) arm = { ...arm, h: [arm.h[0] + bal, arm.h[1] - Math.abs(bal) * .3] };
     const hp = [sh[0] + arm.h[0], sh[1] + arm.h[1]], ang = Math.atan2(hp[1] - sh[1], hp[0] - sh[0]); let o = '';
     if (TR.tipo === 'moletom') o += tForma(tMacarrao(sh, hp, arm.bend ?? 0, 44 * L, 38 * L), frente ? TR.cor : TR.corS);
     else { o += tForma(tMacarrao(sh, hp, arm.bend ?? 0, 30 * L, 26 * L), P.pele);
@@ -113,7 +114,7 @@ function toon(P, st = {}) {
   // pescoço e cabeça
   r += tForma(tMacarrao([14, omb + 4], [24, omb - 34], 4, 30, 30), P.pele);
   const cx = 34, cy = A.cab - A.omb + omb;
-  r += `<g transform="translate(${cx} ${_p(cy)}) rotate(${_p(((st.cabInc ?? .06) + (st.still ? 0 : Math.sin(t * 1.3 + (st.ph || 0)) * .015)) * 180 / Math.PI)})">` + tCabeca(P, st, t) + `</g>`;
+  r += `<g transform="translate(${cx} ${_p(cy)}) rotate(${_p(((st.cabInc ?? .06) + Math.sin(t * 1.3 + ph) * .045 * ag + Math.sin(t * 3.1 + ph) * .012 * ag) * 180 / Math.PI)})">` + tCabeca(P, st, t) + `</g>`;
   r += braco(shF, st.bD, st.segura, true);
   r += `</g></g>`;
   if (typeof window !== 'undefined') { const X = st.x || 0, Y = (st.y || 0) + (A.cab - 10) * s;
@@ -131,7 +132,7 @@ function tCabeca(P, st, t) {
     for (let i = 0; i < 26; i++) { const a = (Math.sin(i * 12.9898) * 43758.5453) % 1, b = (Math.sin(i * 78.233) * 12543.53) % 1; sh += `<circle cx="${_p(-30 + Math.abs(a) * 120)}" cy="${_p(58 + Math.abs(b) * 44)}" r="1.8" fill="${TINK}" opacity=".35"/>`; } }
   r += tForma(HD, pele, sh);
   // olhos (o da frente maior: vista de 3/4)
-  const pisca = st.olhos === 'fechados' || (!st.semPiscar && (t + (st.ph || 0)) % 3.9 > 3.78);
+  const fp = st.ph ?? P.ph ?? 0, ciclo = (t + fp) % 2.6, pisca = st.olhos === 'fechados' || (!st.semPiscar && (ciclo > 2.48 || (Math.floor((t + fp) / 2.6) % 3 === 1 && ciclo > 1.1 && ciclo < 1.2)));
   const arr = st.olhos === 'arregalados', lid = arr ? 0 : (st.palpebra ?? .4), lk = st.olhar || [0, 0], big = arr ? 1.12 : 1;
   r += tOlho(8, -10, 32 * big, 35 * big, { lid, look: lk, fechado: pisca, pele, pupila: arr ? 3.6 : 4.5 });
   r += tOlho(58, -12, 25 * big, 30 * big, { lid, look: lk, fechado: pisca, pele, pupila: arr ? 3.2 : 4 });
