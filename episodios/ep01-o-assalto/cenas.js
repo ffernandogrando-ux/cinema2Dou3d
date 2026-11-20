@@ -123,6 +123,40 @@ function salaCofre(o = {}) { const y = o.chao ?? 800;
 const caixaFerramentas = (aberta) => `<g>${tForma(tPoli([[-60, -40], [60, -40], [60, 30], [-60, 30]]), '#C0392B', tPinta(tPoli([[20, -40], [60, -40], [60, 30], [20, 30]]), '#9E2E22'))}`
   + (aberta ? `<g transform="translate(-26 -40) rotate(-12)">${tForma(tPoli([[-6, -70], [6, -70], [6, 0], [-6, 0]]), '#9AA3AD')}${tForma('M-16 -70 L-16 -96 L-6 -86 L6 -86 L16 -96 L16 -70Z', '#9AA3AD')}</g><g transform="translate(24 -40) rotate(14)">${tForma(tPoli([[-9, -40], [9, -40], [9, 0], [-9, 0]]), '#E8434F')}${tForma(tPoli([[-3, -86], [3, -86], [3, -40], [-3, -40]]), '#9AA3AD')}</g>` : '') + tTraco('M-24 -40 Q0 -70 24 -40', TLW * 1.5) + `</g>`;
 
+// ---------------------------------------------------------------- PEÇAS DO BLOCO D (dentro do cofre, escada, sala 719)
+// dentro do cofre: prateleiras vazias de metal, poeira, uma mesa com as pastas; a câmera de segurança no canto
+function cofreDentro(o = {}) { const t = o.t || 0;
+  let r = paredeToon(COF.paredeS, '#5A6B7E', 800, { passo: 120 }) + chaoToon(COF.chao, COF.chaoS, 800);
+  for (const y of [300, 460, 620]) r += tForma(tPoli([[20, y], [556, y], [556, y + 18], [20, y + 18]]), COF.metal) + sombraContato(288, y + 18, 400).replace('opacity=".2"', 'opacity=".12"');
+  for (let i = 0; i < 14; i++) { const x = 40 + (i * 97) % 500, y = ((t * 40 + i * 70) % 700) + 100; r += `<circle cx="${x}" cy="${y}" r="3" fill="#E9EEF2" opacity=".5"/>`; }
+  if (o.camera !== false) r += cameraSeg(o.camX ?? 500, o.camY ?? 110, o.camLuz ?? (Math.floor(t * 2) % 2 === 0), o.camS ?? 1, o.camRot ?? 30);
+  return r; }
+function cameraSeg(x, y, luz, s = 1, rot = 30) { return `<g transform="translate(${x} ${y}) scale(${s}) rotate(${rot})">` + tTraco('M60 -40 L20 0', TLW * 2) + tForma(tPoli([[-70, -24], [30, -24], [30, 24], [-70, 24]]), '#E9EEF2', tPinta(tPoli([[-70, 8], [30, 8], [30, 24], [-70, 24]]), '#C9D1D9'))
+  + tForma(tElip(-74, 0, 18, 20), '#2A2F38') + tForma(tElip(-76, 0, 9, 10), '#5A6B7E') + (luz ? `<circle cx="18" cy="-10" r="12" fill="#FF3B30" opacity=".35"/><circle cx="18" cy="-10" r="6" fill="#FF3B30"/>` : `<circle cx="18" cy="-10" r="6" fill="#7A2A26"/>`) + `</g>`; }
+const mesaMetal = (y = 700) => tForma(tPoli([[80, y - 20], [500, y - 20], [500, y], [80, y]]), COF.metal) + tTraco(`M100 ${y} V800 M480 ${y} V800`, TLW * 2.2, COF.metalS) + sombraContato(290, 800, 420);
+const pasta = (nome, aberta = 0) => `<g>${tForma(tPoli([[-90, -60], [90, -60], [90, 60], [-90, 60]]), '#C9A46A', tPinta(tPoli([[40, -60], [90, -60], [90, 60], [40, 60]]), '#B08A50'))}`
+  + (aberta ? tForma(tPoli([[-90, -60], [90, -60], [70, -60 - 80 * aberta], [-70, -60 - 80 * aberta]]), '#D9B87E') : '') + `<g transform="translate(0 ${aberta ? 10 : -10}) scale(.5)">${etiquetaNome(nome)}</g></g>`;
+const etiquetaProva = `<g transform="rotate(8)">${tTraco('M0 -60 L0 -10', TLW * .8, '#9A8A6A')}${tForma(tPoli([[-70, -10], [70, -10], [70, 50], [-70, 50]]), '#FBF3D0')}<text x="0" y="30" font-family="'Baloo 2'" font-weight="800" font-size="34" text-anchor="middle" fill="#C0392B">PROVA Nº 1</text></g>`;
+// escada em caracol vista de baixo (contra-plongée)
+function escadaCaracol(t) { let r = fundoChapado('#3E4756');
+  for (let i = 0; i < 9; i++) { const y = 1000 - i * 120, a = i * .7 + t * .2, x = 288 + Math.cos(a) * 140, w = 180 - i * 8;
+    r += tForma(tPoli([[x - w / 2, y], [x + w / 2, y], [x + w / 2 - 20, y + 24], [x - w / 2 + 20, y + 24]]), '#8A96A6', tPinta(tPoli([[x, y], [x + w / 2, y], [x + w / 2 - 20, y + 24], [x, y + 24]]), '#738093')); }
+  return r + tTraco('M288 1200 V-100', TLW * 3, '#2A2F38'); }
+// corredor vinho com porta dupla e a placa da sala
+const VINHO = { parede: '#6E2A36', paredeS: '#58202B', chao: '#3A1E24', chaoS: '#2C161B', ouro: '#D4A93A' };
+function corredor719(o = {}) { let r = paredeToon(VINHO.parede, VINHO.paredeS, 820, { passo: 220 }) + chaoToon(VINHO.chao, VINHO.chaoS, 820);
+  r += tForma(tPoli([[150, 340], [426, 340], [426, 820], [150, 820]]), '#3A1E24') + tTraco('M288 340 V820', TLW) + tForma(tElip(270, 600, 10, 10), VINHO.ouro) + tForma(tElip(306, 600, 10, 10), VINHO.ouro);
+  r += `<g transform="translate(288 290) scale(${o.placaS || 1})">` + tForma(tPoli([[-90, -34], [90, -34], [90, 34], [-90, 34]]), VINHO.ouro) + `<text x="0" y="16" font-family="'Baloo 2'" font-weight="800" font-size="40" text-anchor="middle" fill="${TINK}">SALA 719</text></g>`;
+  return r; }
+// sala do dono: parede vinho e ouro, retratos do dono, tela grande ao fundo, cadeira de couro
+function salaDono(o = {}) { let r = paredeToon(VINHO.parede, VINHO.paredeS, 820, { passo: 180 }) + chaoToon(VINHO.chao, VINHO.chaoS, 820);
+  r += retratoDono(80, 300, .75) + retratoDono(500, 300, .75);
+  r += tForma(tPoli([[150, 160], [426, 160], [426, 380], [150, 380]]), '#0D1410') + (o.tela ? o.tela : '');
+  r += tForma(tPoli([[120, 640], [460, 640], [460, 700], [120, 700]]), '#5A3A28') + tTraco('M150 700 V820 M430 700 V820', TLW * 2);
+  return r; }
+// cadeira de couro vista de trás (encosto alto) — gira: k 0 = de costas, 1 = de frente (encosto atrás da pessoa)
+const encosto = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})">${tForma(tSpl([[-110, -40], [-100, -330], [0, -360], [100, -330], [110, -40]]), '#4A1E26', tPinta(tSpl([[40, -340], [110, -330], [110, -40], [50, -40]]), '#3A161D'))}${tTraco('M0 -40 V60', TLW * 3)}${tTraco('M-70 60 H70', TLW * 3)}</g>`;
+
 // ================================================================ PLANOS
 const pT = (P, x, y, s, t, o = {}) => pt(P, x, y, s, t, o);
 const CENAS = [
@@ -246,8 +280,8 @@ const CENAS = [
   { l: 18, w: 3, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
     f: (tl, d, t) => reacaoToon(comEtiqueta(BELEM, 'BELÉM'), t, tl, { y: 1130, mascara: 'baixada', olhar: tl < .4 ? [-.8, 0] : [.8, 0], sobr: -.4, agito: .5 }, { fundo: SAG.parede, forma: SAG.paredeS }) },
   // 39 · frente do cofre (porta redonda), a porta da ESCADA ao lado; os 4 diante do cofre
-  { l: 19, cam: { s: [1, 1.03], c: [300, 520] },
-    f: (tl, d, t) => salaCofre({ t }) + [[MESTRE, 500, ''], [MANAUS, 170, 'MANAUS'], [RECIFE, 280, 'RECIFE'], [BELEM, 390, 'BELÉM']].map(([P, x, n]) => pT(n ? comEtiqueta(P, n) : P, x, 830, .44, t, { mascara: 'baixada', flip: x > 450, olhar: [-.2, -.3] })).join('') },
+  { l: 19, cam: { s: [1, 1.02], c: [288, 520] },
+    f: (tl, d, t) => salaCofre({ t, tx: 470, ty: 440, ts: .6 }) + [[MESTRE, 420, ''], [MANAUS, 150, 'MANAUS'], [RECIFE, 245, 'RECIFE'], [BELEM, 340, 'BELÉM']].map(([P, x, n]) => pT(n ? comEtiqueta(P, n) : P, x, 830, .44, t, { mascara: 'baixada', flip: x > 450, olhar: [-.2, -.3] })).join('') },
   // 40 · close: a Manaus abre a caixa de ferramentas
   { l: 19, w: 4, split: false, sfx: [{ t: .1, s: 'galeria/metal_rattler_1', v: .4 }], cam: { s: [1, 1.05], c: [288, 520] },
     f: (tl, d, t) => fundoChapado(COF.parede) + pT(comEtiqueta(MANAUS, 'MANAUS'), 200, 1050, 1.3, t, { mascara: 'baixada', olhar: [.7, .5], bD: { h: [130, 40], bend: 20 }, segura: `<g transform="translate(40 40)">${caixaFerramentas(tl > .2)}</g>`, semCorte: true }) },
@@ -264,4 +298,57 @@ const CENAS = [
   // 46 · close na trava: gira — clec
   { l: 21, w: 3, split: false, blur: false, sfx: [{ t: .05, s: 'galeria/metal_beam_hit_1', v: .5 }], cam: { s: [1, 1.04], c: [288, 500], shake: 6 },
     f: (tl, d, t) => fundoChapado(COF.parede) + cofrePorta(288, 500, 300, 0, lerp(0, 90, ease(sobe(0, .4, tl)))) },
+  // ---------------------------------------------------------------- BLOCO D (47–63): o cofre vazio, a prova, a escada, a sala 719
+  // 47 · a porta redonda gira e abre (câmera recuando); luz branca de dentro
+  { l: 22, sfx: [{ t: .05, s: 'galeria/metal_wobble_1', v: .4 }, { t: .3, s: 'rangido', v: .4 }], cam: { s: [1.15, 1], c: [300, 480] },
+    f: (tl, d, t) => salaCofre({ t, aberta: ease(sobe(0, .8, tl)), giro: 90 }) + [[MANAUS, 110, 'MANAUS'], [RECIFE, 210, 'RECIFE'], [BELEM, 410, 'BELÉM'], [MESTRE, 520, '']].map(([P, x, n]) => pT(n ? comEtiqueta(P, n) : P, x, 840, .5, t, { mascara: 'baixada', flip: x > 300, olhar: [-.3, -.3] })).join('') },
+  // 48 · dentro do cofre: prateleiras vazias, poeira; uma moeda gira no chão e para
+  { l: 22, w: 3, split: false, sfx: [{ t: .1, s: 'galeria/coconut_hit_2', v: .25 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => { const k = sobe(0, d, tl); return cofreDentro({ t, camera: false }) + `<g transform="translate(300 790) scale(${Math.cos(t * 18 * (1 - k)) * (1 - k) + k} 1)">${tForma(tElip(0, 0, 22, 22), '#E8B84A')}</g>`; } },
+  // 49 · a mesa de metal com 3 pastas pardas
+  { l: 23, cam: { s: [1, 1.05], c: [288, 560], c1: [300, 556] },
+    f: (tl, d, t) => cofreDentro({ t, camera: false }) + mesaMetal(700) + [130, 290, 450].map((x, i) => `<g transform="translate(${x} 640) scale(.8)">${pasta(['MANAUS', 'RECIFE', 'BELÉM'][i])}</g>`).join('') },
+  // 50 · close nas etiquetas das pastas (rima com as do peito)
+  { l: 23, w: 3, split: false, blur: false, cam: { s: [1, 1], c: [200, 520], c1: [380, 520] },
+    f: (tl, d, t) => fundoChapado('#C9A46A') + [40, 288, 536].map((x, i) => `<g transform="translate(${x} 500) scale(1.3)">${pasta(['MANAUS', 'RECIFE', 'BELÉM'][i])}</g>`).join('') },
+  // 51 · close nas mãos de luva abrindo a pasta BELÉM
+  { l: 24, split: false, blur: false, sfx: [{ t: .05, s: 'papel', v: .5 }], cam: { s: [1, 1.05], c: [288, 520] },
+    f: (tl, d, t) => fundoChapado(COF.metal) + `<g transform="translate(288 600) scale(2.4)">${pasta('BELÉM', ease(sobe(0, .4, tl)))}</g>` + tMao(140, lerp(520, 420, sobe(0, .4, tl)), -Math.PI / 2, 40, LUVA, false) + tMao(440, lerp(520, 420, sobe(0, .4, tl)), -Math.PI / 2, 40, LUVA, false) },
+  // 52 · close extremo na chave (cabeça de casinha), push-in; o Belém levanta a máscara (reação ao fundo)
+  { l: 25, split: false, blur: false, sfx: [{ t: .05, s: 'galeria/glockenspiel_magic_2', v: .3 }, { t: .9, s: 'galeria/rubber_snapping_1', v: .4 }], cam: { s: [1, 1.12], c: [288, 470] },
+    f: (tl, d, t) => fundoChapado('#D9B87E') + pT(comEtiqueta(BELEM, 'BELÉM'), 420, 1240, 1.3, t, { mascara: tl > .9 ? 'testa' : 'baixada', olhar: [-.6, .5], olhos: tl > .9 ? 'arregalados' : null, semCorte: true, nocheck: true, agito: .4 }) + `<g transform="translate(200 470) rotate(-10)">${CHAVE(2.6)}</g>` },
+  // 53 · flash 0,4 s: a chave da mãe no cordão, mesma posição (memória)
+  { l: 25, w: 8, split: false, blur: false, cam: { s: [1, 1], c: [288, 470] },
+    f: (tl, d, t) => memoria(fundoChapado(MAE.tronco.cor) + tTraco('M200 -100 V320', TLW * 1.4, '#C9A64A') + `<g transform="translate(200 470) rotate(-10)">${CHAVE(2.6)}</g>`) },
+  // 54 · close na etiqueta amarrada na chave: PROVA Nº 1
+  { l: 26, split: false, blur: false, semFala: true, cam: { s: [1, 1.08], c: [288, 470] },
+    f: (tl, d, t) => fundoChapado('#D9B87E') + `<g transform="translate(180 430) rotate(-10)">${CHAVE(2.2)}</g>` + `<g transform="translate(360 ${lerp(470, 520, ease(sobe(0, .3, tl)))}) scale(2)">${etiquetaProva}</g>` },
+  // 55 · canto do teto: a câmera de segurança, a luz vermelha pisca (PISTA 4)
+  { l: 27, sfx: [{ t: .1, s: 'galeria/ding_3', v: .25 }], cam: { s: [1.3, 1.36], c: [430, 200] },
+    f: (tl, d, t) => cofreDentro({ t, camLuz: Math.floor(t * 3) % 2 === 0 }) },
+  // 56 · reação: Belém sem máscara (na testa), dutch; a lente gira e foca nele
+  { l: 27, w: 10, split: false, blur: false, cam: { s: [1, 1.06], c: [288, 470], rot: [-6, -8] },
+    f: (tl, d, t) => reacaoToon(comEtiqueta(BELEM, 'BELÉM'), t, tl, { y: 1130, mascara: 'testa', olhar: [.8, -.6], olhos: 'arregalados', sobr: .6, boca: { o: .3, w: .5 }, agito: .6 }, { fundo: COF.paredeS, forma: '#5A6B7E' }) + cameraSeg(520, 120, true, 1.4, 20 + Math.sin(t * 6) * 6) },
+  // 57 · plano aberto: Manaus e Recife olhando as próprias pastas; a porta da ESCADA balançando, a sombra do Mestre subindo
+  { l: 28, sfx: [{ t: .1, s: 'rangido', v: .35 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => cofreDentro({ t, camera: false }) + tForma(tPoli([[20, 320], [120, 320], [120, 800], [20, 800]]), '#4A3A30') + `<g transform="translate(120 560) scale(${.6 + .4 * Math.cos(t * 8)} 1)">${tForma(tPoli([[0, -240], [-100, -240], [-100, 240], [0, 240]]), '#6A5040')}</g>`
+      + `<path d="M40 ${lerp(500, 300, sobe(0, d, tl))} q30 -60 60 0 v120 h-60z" fill="#000" opacity=".35"/>` + mesaMetal(700)
+      + pT(comEtiqueta(MANAUS, 'MANAUS'), 300, 800, .6, t, { mascara: 'testa', olhar: [.3, .7], bD: { h: [60, 40], bend: 30 }, segura: `<g transform="scale(.5)">${pasta('MANAUS')}</g>` })
+      + pT(comEtiqueta(RECIFE, 'RECIFE'), 460, 800, .6, t, { flip: true, mascara: 'testa', olhar: [.3, .7], bD: { h: [60, 40], bend: 30 }, segura: `<g transform="scale(-.5 .5)">${pasta('RECIFE')}</g>` }) },
+  // 58 · escada em caracol (contra-plongée): Belém sobe correndo
+  { l: 29, split: false, sfx: [{ t: .02, s: 'passo1', v: .4 }, { t: .2, s: 'passo2', v: .4 }, { t: .38, s: 'passo1', v: .4 }], cam: { s: [1, 1.08], c: [288, 560], c1: [288, 480] },
+    f: (tl, d, t) => escadaCaracol(t) + pT(comEtiqueta(BELEM, 'BELÉM'), 300, lerp(900, 700, sobe(0, d, tl)), .6, t, { mascara: 'testa', walk: tl * 3, inclina: -.1, olhar: [.2, -.6] }) },
+  // 59 · corredor vinho: a câmera avança até a porta dupla (placa ainda pequena)
+  { l: 30, cam: { s: [1, 1.25], c: [288, 520], c1: [288, 380] }, f: (tl, d, t) => corredor719() },
+  // 60 · close na placa SALA 719
+  { l: 30, w: 9, split: false, blur: false, sfx: [{ t: .05, s: 'galeria/ding_2', v: .35 }], cam: { s: [1, 1.05], c: [288, 290] }, f: (tl, d, t) => corredor719({ placaS: 2.4 }) },
+  // 61 · flash 0,4 s: o teclado 7-1-9 (memória)
+  { l: 30, w: 12, split: false, blur: false, cam: { s: [1, 1], c: [288, 500] }, f: (tl, d, t) => memoria(fundoChapado('#2A2F38') + teclado(288, 420, 3.9, [7, 1, 9])) },
+  // 62 · sala do dono: insert da luva soltando a máscara de porquinho em cima da mesa (o Mestre fora de quadro)
+  { l: 31, split: false, sfx: [{ t: .3, s: 'galeria/rubber_snapping_2', v: .45 }], cam: { s: [1.4, 1.45], c: [288, 620] },
+    f: (tl, d, t) => salaDono() + `<g transform="translate(300 ${lerp(480, 610, ease(sobe(.2, .6, tl)))}) rotate(${lerp(-20, 0, sobe(.2, .6, tl))}) scale(.55)">${tMascaraPorco('testa')}</g>` + (tl < .5 ? tMao(330, lerp(470, 560, sobe(0, .5, tl)), Math.PI / 2, 26, LUVA, false) : '') },
+  // 63 · a cadeira gira: o Mestre de macacão aberto e gravata, o rosto dos retratos; sorriso de canto
+  { l: 31, w: 7, split: false, sfx: [{ t: .05, s: 'rangido', v: .45 }], cam: { s: [1, 1.08], c: [288, 520] },
+    f: (tl, d, t) => { const k = ease(sobe(0, .5, tl));
+      return salaDono() + (k < .5 ? encosto(300, 820, 1.2 * (1 - k * 2) + .02) : encosto(300, 760, 1.1) + pT(MESTRE_DONO, 260, 820, .78, t, { sentado: true, olhar: [.3, 0], palpebra: .45, boca: { sm: .6, skew: .5 } })); } },
 ];
