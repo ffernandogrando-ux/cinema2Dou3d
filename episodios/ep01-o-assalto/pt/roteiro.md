@@ -1,4 +1,4 @@
-# EP01 · O Assalto (v5.1 — motor raiva → justiça)
+# EP01 · O Assalto (v5.2 — motor raiva → justiça)
 
 **Emoção principal:** raiva da injustiça → **justiça** ("bem feito!"). **Apoio:** riso (o talento "inútil" vira a arma) e ternura (a mãe volta para casa).
 **Última sensação:** alívio e prazer de justiça — o dono do banco preso com a "prova" na mão, e a mãe abrindo a porta da casa com a chave do cordão.
@@ -39,7 +39,7 @@
 ## Cenários
 Abertura 3D: rua com o banco (variação do `bairroToon` com fachada de banco). 2D: esconderijo com o quadro, quarto de aluguel da mãe, saguão do banco, cofre, escada, sala 719, rua com sirenes, ficha policial. Paletas: esconderijo (verde-musgo), quarto (azul-acinzentado), banco (mármore bege e dourado), cofre (cinza-azulado), sala 719 (vinho e ouro), sirenes (azul e vermelho).
 
-## Narração v5.1 (texto exato em `narracao.txt`)
+## Narração v5.2 (texto exato em `narracao.txt`)
 Eu tinha um macacão vermelho, uma máscara de porquinho e um plano.
 Assaltar o banco que tomou a casa da minha mãe.
 O plano era do Mestre, e ele juntou três pessoas. Cada uma ganhou um apelido de cidade.
@@ -48,15 +48,15 @@ E eu? Belém. Meu único talento era trocar etiqueta de preço no mercado.
 O Mestre riu: "Disso a gente não vai precisar."
 O banco tomou a nossa casa por três parcelas atrasadas.
 Minha mãe foi pra um quarto de aluguel.
-Mas ainda guarda a chave da casa velha, num cordão no pescoço.
+Mas guarda a chave da casa velha num cordão.
 Toda noite, ela aperta a chave e diz: "Um dia a gente volta."
 No quadro: entrar às nove. Sair às nove e doze.
 Na porta, o Mestre chamou o segurança pelo nome: "Bom dia, Jairo."
-O Recife correu pro alarme. Mas ele já tava desligado.
+O alarme? Já tava desligado.
 No cofre, o Mestre digitou a senha de cabeça.
 Sete. Um. Nove. Clec.
 Mas lá dentro não tinha um real.
-Só três pastas. Uma com o nome de cada um.
+Só três pastas, com os nossos nomes.
 Abri a minha. Dentro, a cópia da chave da nossa casa.
 Com uma etiqueta: "Prova número um: o motivo."
 O Mestre tinha subido.
@@ -69,13 +69,13 @@ O roubo de mentira era pra ele receber o seguro. E a culpa ia ficar com a gente.
 Na mesa dele, o contrato do seguro.
 Só que ele tinha rido do meu talento.
 Quando ele desceu pra fazer papel de vítima, eu entrei.
-Tirei a etiqueta "Prova número um" da minha chave. Colei nele.
-E pus no cofre, no lugar da minha pasta.
-Nove e doze, a polícia entrou. A gente de mãos pro alto.
+Tirei a etiqueta "Prova número um" da minha chave. Colei no contrato.
+E deixei o contrato no cofre, no lugar das nossas pastas.
+Nove e doze, a polícia entrou.
 Ele apontou: "A prova tá ali!"
-O delegado abriu. O seguro do assalto, assinado pelo dono.
-Quem saiu algemado foi o dono.
-O banco devolveu as casas que tomou.
+O delegado abriu. Um seguro contra assalto, feito ontem, com hora marcada: nove e doze.
+Quem saiu algemado foi o dono. A gente saiu pela porta da frente.
+E a justiça mandou o banco devolver as casas que tomou.
 E a mansão dele foi a leilão. Por três parcelas atrasadas.
 Minha mãe tirou a chave do cordão.
 A gente voltou.
@@ -89,3 +89,4 @@ A gente voltou.
 - **Usuário (20/11), depois do vídeo da v3.1:** "no fim não tem nada de nada" — faltou emoção; o final punia o herói. Decisão: motor **raiva → justiça** (com crítica ao capitalismo). **v4:** plantio do talento de trocar etiqueta; virada de poder (etiquetas trocadas, "Pega!", o Mestre preso com a chave na mão); banco a leilão "por três parcelas atrasadas"; as casas voltam; "A gente voltou."
 - **v4 → revisor 7,1 (lógica 5,5) · espectador: clareza 6,5, satisfação 7, último segundo "bem feito" + ternura.** Os dois apontam a mecânica fraca (trocar nome na capa da pasta não prova nada; "Pega!" e reflexo; casas voltando por mágica). **v5:** o talento vira a arma (etiqueta "Prova número um" colada no contrato do seguro; o Mestre aponta a própria prova); tela "Culpados: três"; "Até que eu vi a minha"; "Foi aí que eu entendi"; pela fresta (não é visto); mansão a leilão por três parcelas; final em 2 frases. 359 palavras.
 - **v5 → revisor 8,0 ✅ (lógica 7,5, emoção 8,5) · espectador: clareza 7,0, satisfação 7,5, último segundo "bem feito" + alívio.** **v5.1** (dúvidas do espectador + correções do revisor): "Prova número um: o motivo"; "O roubo de mentira era pra ele receber o seguro"; "fazer papel de vítima"; "A gente de mãos pro alto"; punição dita ("O seguro do assalto, assinado pelo dono. Quem saiu algemado foi o dono."); causa da volta ("O banco teve que devolver as casas que tomou"); "Mas lá dentro…"; quadro enxugado ("entrar às nove, sair às nove e doze"). Storyboard: Belém escondido atrás da porta enquanto o Mestre desce; as pastas da Manaus e do Recife também levadas.
+- **v5.1 → espectador novo: clareza 7, satisfação 7,5** ("colei nele" ambíguo; seguro não prova a fraude; parceiros somem; casas devolvidas sem causa). **v5.2:** "Colei no contrato"; "no lugar das nossas pastas"; prova da fraude = "seguro contra assalto, feito ontem, com hora marcada: nove e doze"; "A gente saiu pela porta da frente"; "a justiça mandou o banco devolver as casas".
