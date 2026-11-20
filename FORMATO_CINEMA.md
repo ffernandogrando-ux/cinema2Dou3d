@@ -7,6 +7,14 @@ Este arquivo **manda sobre** `ESTRUTURA_ZAYLENTO.md`, `ESTRUTURA_DO_ROTEIRO.md` 
 
 ---
 
+## 0. Emoção primeiro (regra do usuário, 20/11/2026)
+Lição do EP01 v3: o roteiro misturou homenagem a filme, quebra-cabeça, crítica e drama, e terminou punindo o herói. O público sente a injustiça e fica sem saída: "no fim não tem nada de nada". Por isso, **antes de qualquer frase**:
+1. **Motor do canal: raiva → justiça.** O pequeno sofre uma regra injusta do sistema (banco, patrão, aluguel, preço — crítica ao capitalismo como fábula), descobre a falha e **vira o jogo**; o poderoso prova do próprio veneno.
+2. **Última sensação = "bem feito!"** (alívio e prazer de justiça), com no máximo uma emoção de apoio (riso ou ternura). O roteiro é escrito **de trás para frente**, a partir do último segundo.
+3. **A virada de poder é plantada cedo**: o talento ou detalhe que o herói usa no fim aparece nos primeiros 30 s, parecendo inútil.
+4. **Teste do espectador** ganha a pergunta "o que você sentiu no último segundo?". Se não for justiça/alívio, o roteiro volta.
+5. Referência a filme é **tempero opcional**, não regra.
+
 ## 1. O que fica do Regra Torta (já provado no TikTok)
 - **Imagem que se entende no 1º segundo.** Lá era a imagem-regra (o Dudu afundado até o queixo). Aqui é a **cena-ícone do gênero**: quatro stickmen de macacão vermelho e máscara na porta de um banco dizem "assalto" sem uma palavra.
 - **Narração desde o segundo zero**, em 1ª pessoa, com frases de 4 a 10 palavras, uma ação por frase e 310 a 360 palavras (cerca de 2:00).
