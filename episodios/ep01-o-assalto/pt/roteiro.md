@@ -10,7 +10,7 @@
 | **B · O plano** (4–15 s) | O Mestre junta três pessoas com nome de cidade: Manaus abre portas, Recife desliga alarmes. |
 | **C · Eu e o que eu quero** (15–35 s) | Eu sou Belém. O banco tomou a nossa casa; a mãe mora num quarto de aluguel e guarda a chave da casa velha num cordão ("Um dia a gente volta"). Quero a nossa casa de volta. |
 | **D · Execução com pistas** (35–60 s) | Quadro: 9h00 / 9h10 / 9h12, "Ninguém se machuca" — e ninguém se machucou. Tudo dá certo demais: "Bom dia, Jairo" (o segurança nem se mexe); o alarme não toca sem o Recife encostar; o Mestre passa na frente da Manaus e digita a senha de cabeça (7-1-9). Mas o cofre está vazio, só três pastas com os nossos nomes. |
-| **E · Algo estranho, comigo** (~80 s) | No cofre não tem um real: só três pastas com os nossos nomes. "Até que eu reparei na minha": a cópia da chave da nossa casa (a que o banco tomou), com a etiqueta "Prova número um". A câmera do canto, luz vermelha acesa, apontada para mim. |
+| **E · Algo estranho, comigo** (~80 s) | No cofre não tem um real: só três pastas com os nossos nomes. "Abri a minha": a cópia da chave da nossa casa (a que o banco tomou), com a etiqueta "Prova número um". A câmera do canto, luz vermelha acesa, apontada para mim. |
 | **F · O lugar escondido** (~95 s) | O Mestre sumiu escada acima; eu vou atrás. Na porta, o número da sala: 719, a senha do cofre. Ele tira a máscara e senta na cadeira do dono. |
 | **G · Virada** (~105 s) | Na tela: "Seguro do assalto: dois bilhões." / "Culpados: três devedores." O Mestre era o dono do banco; o cofre já estava vazio; o assalto era só para ele receber o seguro; a culpa ia ficar com a gente. **Flash de pistas** (2 s, sem narração extra): "Bom dia, Jairo", o alarme mudo, a senha de cabeça, a luz vermelha, a placa 719. |
 | **H · Final (eco da chave)** (~120 s) | Sirenes (só som). "A polícia me pegou com a chave na mão. E a minha mãe continua com a dela no pescoço. Sem casa nenhuma." Imagem: a ficha policial do Belém com a chave na mão → a mãe no quarto de aluguel apertando a chave do cordão. |
@@ -66,7 +66,7 @@ Mas o Mestre passou na frente e digitou a senha de cabeça.
 Sete. Um. Nove. Clec.
 A porta abriu. E lá dentro não tinha um real.
 Só três pastas. Uma com o nome de cada um.
-Até que eu reparei na minha.
+Abri a minha.
 Dentro, a cópia da chave da nossa casa. A que o banco tomou.
 Com uma etiqueta: "Prova número um."
 Lá no canto, uma câmera com a luzinha vermelha acesa. Apontada pra mim.
@@ -88,3 +88,4 @@ E a minha mãe continua com a dela no pescoço. Sem casa nenhuma.
 - **v2 → 8,0 ✅ liberada para a voz** (revisor-roteiro). **v2.1** aplica as correções curtas: chave "igualzinha à do cordão" (cópia do banco, sem contradizer a mãe); desejo "a nossa casa de volta" fecha com o eco da chave; "Seguro pago" no lugar de "Assalto segurado"; sem repetição de "Só". Nota de storyboard: Manaus e Recife parados olhando as próprias pastas enquanto Belém sobe a escada.
 - **Pergunta do usuário (20/11): o final não estava claro** ("a gente era a prova" — que prova?). **Teste do espectador** (agente que só "ouve" a narração uma vez): v2.1 → 7/10. **v3:** a virada dita com todas as letras (o assalto era só para o dono receber o seguro; a culpa ia para três devedores com motivo de sobra); "não tinha um real" + três pastas; a chave é "a cópia da chave da nossa casa, a que o banco tomou"; o Mestre some escada acima e eu vou atrás; a sala 719 = "a senha do cofre"; final fecha com a mãe ("continua com a chave no pescoço, sem casa nenhuma"). Teste do espectador v3 → 8,5/10.
 - **v3 → 7,8** (revisor-roteiro: clareza resolvida; final empilhado e repetições). **v3.1:** final em 2 frases (sem "Lá fora, as sirenes" e sem "O banco ganhou dois bilhões", que repetiam a tela); sem "Três devedores, com motivo de sobra"; volta "Até que eu reparei na minha"; "Eu era uma delas"; espinha G/H sincronizada.
+- **Teste do espectador v3.1 → 9/10** ✅ (único tropeço: "Até que eu reparei na minha" → trocado por "Abri a minha."). **Liberado para a voz.**
