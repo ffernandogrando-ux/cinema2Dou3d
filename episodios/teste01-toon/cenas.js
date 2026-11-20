@@ -35,7 +35,7 @@ const VIZ = { tipo: 'adulto', pele: '#D49A72', peleSombra: '#B57B55', calca: '#8
 
 // ---------------------------------------------------------------- peças
 const bandas = (cores, ys) => cores.map((c, i) => `<rect x="-400" y="${ys[i]}" width="1400" height="${(ys[i + 1] ?? 2000) - ys[i]}" fill="${c}"/>`).join('');
-const CAIXA = `<rect x="512" y="620" width="18" height="180" fill="${INKT}"/><rect x="470" y="560" width="104" height="70" rx="12" fill="#D9534F" stroke="${INKT}" stroke-width="6"/><path d="M482 584 h80" stroke="${INKT}" stroke-width="5"/>`;
+const CAIXA = `<rect x="452" y="620" width="18" height="180" fill="${INKT}"/><rect x="410" y="560" width="104" height="70" rx="12" fill="#D9534F" stroke="${INKT}" stroke-width="6"/><path d="M422 584 h80" stroke="${INKT}" stroke-width="5"/>`;
 function garagem(P) { // parede, prateleira, bancada, porta de enrolar; chão em y 800
   return bandas([P.parede, P.chao], [-400, 800]) + `<rect x="-400" y="800" width="1400" height="14" fill="${P.chaoS}"/>`
     + `<rect x="300" y="230" width="330" height="420" fill="${P.paredeS}" stroke="${INKT}" stroke-width="6"/>` + [0, 1, 2, 3, 4, 5].map(i => `<path d="M300 ${290 + i * 60} h330" stroke="${INKT}" stroke-width="4"/>`).join('')
@@ -101,17 +101,17 @@ const CENAS = [
   { l: 2, sfx: [{ t: .3, s: 'whoosh', v: .5 }, { t: .75, s: 'pop', v: .5 }], cam: { s: [1, 1.05], c: [288, 548], c1: [292, 544] },
     f: (tl, d, t) => { const u = clamp((tl - .2) / .6), x = lerp(450, 300, ease(u)), y = lerp(800, 610, ease(u)) - Math.sin(u * Math.PI) * 120, esc = .72 * (1 - sobe(.55, 1, u));
       return garagem(GARAGEM) + lavagem(1) + portal(300, 520, 170, 1, t)
-        + boleto(522, 598, .8, t, { anda: 0, olhar: -1, boca: 1 })
+        + boleto(462, 598, .8, t, { anda: 0, olhar: -1, boca: 1 })
         + (esc > .03 ? fig(VIZ, x, y, esc, t, { flip: true, olhar: -.8, olhos: 'arregalados', palpebra: 0, boca: 'grito', pose: { tronco: -75 * ease(u), bD: [165, 0], bE: [165, 0], pE: [-40, 30], pD: [-10, 20] }, semCorte: true, sombra: false }) : '')
-        + (u > .1 ? CHINELO(436, 796) : ''); } },
+        + (u > .1 ? CHINELO(372, 796) : ''); } },
   // 5 · "Mas ontem," — mundo novo de cor: a garagem à noite (anil), o portal sozinho; o boleto na caixa
   { l: 3, sfx: [{ t: .1, s: 'interruptor', v: .5 }], cam: { s: [.94, .98], c: [288, 548] },
-    f: (tl, d, t) => garagem(NOITE) + lavagem(1.4) + portal(300, 520, 170, 1, t) + CHINELO(436, 796) + boleto(522, 598, .8, t, { anda: 0, olhar: -1 }) },
+    f: (tl, d, t) => garagem(NOITE) + lavagem(1.4) + portal(300, 520, 170, 1, t) + CHINELO(372, 796) + boleto(462, 598, .8, t, { anda: 0, olhar: -1 }) },
   // 6 · "o boleto atravessou" — o boleto pula da caixa, anda até o portal e salta para dentro (encolhe no aro, clarão roxo)
   { l: 3, w: 2, sfx: [{ t: .1, s: 'papel', v: .6 }, { t: .78, s: 'pop', v: .5 }], cam: { s: [1.05, 1.1], c: [330, 580], c1: [320, 576] },
     f: (tl, d, t) => { const a = sobe(0, .55, tl), b = sobe(.55, .95, tl);
-      const x = b > 0 ? lerp(380, 300, b) : lerp(522, 380, a), y = b > 0 ? lerp(800, 560, b) - Math.sin(b * Math.PI) * 90 : lerp(598, 800, sobe(0, .15, tl)), esc = .85 * (1 - sobe(.5, 1, b));
-      return garagem(NOITE) + lavagem(1.4 + (b > .9 ? 3 : 0)) + portal(300, 520, 170, 1, t) + CHINELO(436, 796)
+      const x = b > 0 ? lerp(380, 300, b) : lerp(462, 380, a), y = b > 0 ? lerp(800, 560, b) - Math.sin(b * Math.PI) * 90 : lerp(598, 800, sobe(0, .15, tl)), esc = .85 * (1 - sobe(.5, 1, b));
+      return garagem(NOITE) + lavagem(1.4 + (b > .9 ? 3 : 0)) + portal(300, 520, 170, 1, t) + CHINELO(372, 796)
         + (esc > .03 ? boleto(x, y, esc, t, { olhar: -1, boca: 1, rot: -25 * b, anda: b > 0 ? 0 : 1 }) : ''); } },
   // 7 · "o portal atrás dele." — do outro lado: praia (laranja e verde-água), ele relaxando com um coco; o boleto sai do portal atrás dele; o coco cai
   { l: 3, w: 5, sfx: [{ t: .15, s: 'pop', v: .55 }, { t: .55, s: 'impacto', v: .35 }, { t: 1.25, s: 'pedra_chao', v: .5 }], cam: { s: [1, 1.04], c: [288, 520], c1: [282, 516] },
