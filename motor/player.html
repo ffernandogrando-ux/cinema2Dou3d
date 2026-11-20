@@ -1,6 +1,6 @@
 <!doctype html>
 <html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Caveat:wght@700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Caveat:wght@700&family=Shippori+Mincho+B1:wght@800&family=Playfair+Display:wght@900&display=block" rel="stylesheet">
 <style>
 html,body{margin:0;padding:0;background:#000;overflow:hidden}
 #stage{position:relative;width:576px;height:1024px;overflow:hidden;background:#000}
@@ -28,6 +28,8 @@ svg{position:absolute;inset:0}
 <script>const PALAVRAS = /*PALAVRAS*/;</script>
 <script>/*CENAS*/</script>
 <script>
+// estilo próprio do episódio (legenda na faixa de cinema etc.): ESTILO_CSS no cenas.js
+if (typeof ESTILO_CSS !== 'undefined') { const st = document.createElement('style'); st.textContent = ESTILO_CSS; document.head.appendChild(st); }
 // ---------------- tempos dos planos (amarrados às palavras do áudio)
 const LINHAS = {}; PALAVRAS.forEach((p, i) => { (LINHAS[p.linha] = LINHAS[p.linha] || []).push(i); });
 // falas de personagem = palavras entre aspas na narração (a boca de quem tem falante: true mexe só nelas)
@@ -131,8 +133,10 @@ async function render(t) {
   let s2 = DEFS;
   if (pl.over) s2 += pl.over(t - pl.base, pl.dTot, t);
   if (typeof HUD !== 'undefined') s2 += HUD(t, pl);
+  // moldura do episódio (faixas de cinema etc.), por cima de tudo menos legenda: MOLDURA(t, pl) devolve SVG
+  if (typeof MOLDURA !== 'undefined') s2 += MOLDURA(t, pl);
   const gx = Math.floor((t * 30 * 37) % 256), gy = Math.floor((t * 30 * 91) % 256);
-  s2 += `<rect width="576" height="1024" fill="url(#vin)"/><rect x="${-gx}" y="${-gy}" width="${576 + 256}" height="${1024 + 256}" fill="url(#grao)" opacity=".07" style="mix-blend-mode:multiply"/>`;
+  if (typeof SEM_VINHETA === 'undefined' || !SEM_VINHETA) s2 += `<rect width="576" height="1024" fill="url(#vin)"/><rect x="${-gx}" y="${-gy}" width="${576 + 256}" height="${1024 + 256}" fill="url(#grao)" opacity=".07" style="mix-blend-mode:multiply"/>`;
   if (pl.flash) { const k = 1 - clamp(tl / pl.flash); if (k > 0) s2 += `<rect width="576" height="1024" fill="#fff" opacity="${k * .8}"/>`; }
   document.getElementById('svg').innerHTML = s; document.getElementById('svg2').innerHTML = s2;
   const oc = document.getElementById('oc');
@@ -177,9 +181,9 @@ window.CHECAR = async (passo = .25) => { const out = [];
     // objeto importante cortado pela borda (aparece, mas não inteiro)
     (window._marcasT || []).forEach(m => { const fora = m.x - m.r < -8 || m.x + m.r > 584 || m.y - m.r < -8 || m.y + m.r > 1032, visivel = m.x + m.r > 0 && m.x - m.r < 576 && m.y + m.r > 0 && m.y - m.r < 1024;
       if (fora && visivel) out.push({ ...base, tipo: 'objeto cortado: ' + m.nome }); });
-    // fonte que não está carregada (cai numa serifada padrão): só Poppins, Caveat e monospace
+    // fonte que não está carregada (cai numa serifada padrão): só Poppins, Caveat, monospace e as serifadas de cartela (Shippori Mincho B1, Playfair Display)
     { const fs = new Set([...document.getElementById('svg').innerHTML.matchAll(/font-family="([^"]+)"/g)].map(m => m[1].split(',')[0].trim()));
-      fs.forEach(f => { if (!['Poppins', 'Caveat', 'monospace'].includes(f)) out.push({ ...base, tipo: 'fonte não carregada: ' + f }); }); }
+      fs.forEach(f => { if (!['Poppins', 'Caveat', 'monospace', 'Shippori Mincho B1', 'Playfair Display'].includes(f)) out.push({ ...base, tipo: 'fonte não carregada: ' + f }); }); }
     // texto de documento ou placa debaixo da legenda (faixa de ~78 % a 87 % da altura, no meio do quadro)
     if (!pl.semTexto && document.getElementById('sub').innerHTML) (window._textosT || []).forEach(m => { if (m.y1 > 800 && m.y0 < 890 && m.x1 > 120 && m.x0 < 456) out.push({ ...base, tipo: 'texto sob a legenda: ' + m.nome }); }); }
   return out; };
