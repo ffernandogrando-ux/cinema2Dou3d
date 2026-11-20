@@ -5,7 +5,6 @@ function telaTerminal(linhas, k = 1, grande = false) { let r = fundoChapado('#0D
   linhas.forEach((ln, i) => { const n = Math.max(0, Math.min(ln.length, cont)); cont -= ln.length;
     r += `<text x="288" y="${300 + i * 150}" font-family="VT323" font-size="${grande && i === 1 ? 104 : 62}" text-anchor="middle" fill="#7CFFB2">${ln.slice(0, n)}${n < ln.length && n > 0 ? '▌' : ''}</text>`; });
   return r; }
-const telaMini = (linhas) => linhas.map((ln, i) => `<text x="288" y="${280 + i * 40}" font-family="VT323" font-size="40" text-anchor="middle" fill="#7CFFB2">${ln}</text>`).join('');
 // fichinha com foto (para a tela "CULPADOS")
 function fichaMini(P, nome, x, y, t) { const id = 'fm' + (_tN++);
   return `<g transform="translate(${x} ${y})">` + tForma(tPoli([[-74, -96], [74, -96], [74, 96], [-74, 96]]), '#E9F2F7') + `<defs><clipPath id="${id}"><rect x="-64" y="-86" width="128" height="140"/></clipPath></defs><rect x="-64" y="-86" width="128" height="140" fill="#B9BEC4"/>`
