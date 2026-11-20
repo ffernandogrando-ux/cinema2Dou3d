@@ -27,7 +27,7 @@ const trancasAtras = (cor = '#2a1810') => () => [0, 1].map(i => tForma(tMacarrao
 const MANAUS = { pele: '#B57A52', peleS: '#966141', sobrancelha: '#2a1810', tronco: VERM, calca: VERM_C, sapato: BOTA, sapatoS: '#15111a', mao: LUVA, cabeca: trancas(), atras: trancasAtras(), ph: 1.7 };
 const RECIFE = { pele: '#E0A47E', peleS: '#C38862', sobrancelha: '#3a2a20', bigode: '#3a2a20', tronco: VERM, calca: VERM_C, sapato: BOTA, sapatoS: '#15111a', mao: LUVA, cabeca: curtoLiso('#4a3424'), ph: 2.4 };
 const cocoque = () => tForma(tSpl([[-88, -10], [-86, -96], [-30, -130], [40, -128], [92, -92], [96, -40], [60, -80], [0, -90], [-50, -70]]), '#B9B4AE') + tForma(tElip(-70, -96, 34, 30), '#B9B4AE');
-const MAE = { pele: '#8D5A3B', peleS: '#704530', sobrancelha: '#8a8580', tronco: { tipo: 'moletom', cor: '#8E6FA8', corS: '#73578C', manga: '#7A5C94',
+const MAE = { pele: '#8D5A3B', peleS: '#704530', sobrancelha: '#8a8580', tronco: { tipo: 'moletom', cor: '#8E6FA8', corS: '#73578C', manga: '#7A5C94', semCordao: 1,
     detalhe: (omb, hip, st = {}) => tTraco(`M-22 ${omb - 2} Q-4 ${omb + 40} 14 ${omb + 62} M30 ${omb - 4} Q24 ${omb + 30} 14 ${omb + 62}`, TLW * .9, '#C9A64A') + (st.segura ? '' : `<g transform="translate(14 ${omb + 92})">${CHAVE(.32)}</g>`) }, calca: { cor: '#4A4F66', corS: '#3a3e52' }, sapato: '#C9B9A0', sapatoS: '#A8987F', cabeca: cocoque, ph: .4 };
 const quepe = () => tForma(tSpl([[-90, -60], [-80, -120], [0, -146], [80, -126], [98, -70]]), '#24304F') + tForma(tSpl([[20, -66], [130, -60], [134, -44], [24, -50]]), '#1A2440') + tForma(tElip(10, -106, 14, 12), '#E8C34A');
 const JAIRO = { pele: '#C98E66', peleS: '#AA744F', barriga: .95, sobrancelha: '#2a1a12', bigode: '#2a1a12', tronco: { tipo: 'camiseta', cor: '#2F3B5C', corS: '#232D47', detalhe: (omb) => tForma(tPoli([[20, omb + 40], [50, omb + 40], [50, omb + 64], [20, omb + 64]]), '#E8C34A') }, calca: { cor: '#232D47', corS: '#1A2238' }, sapato: '#141414', sapatoS: '#000', cabeca: quepe, ph: 2.9 };
@@ -88,7 +88,7 @@ const COF = { parede: '#7C8FA3', paredeS: '#687A8E', chao: '#55606E', chaoS: '#4
 function retratoDono(x, y, s = 1, t = 0) { const id = 'rt' + (_tN++);
   return `<g transform="translate(${x} ${y}) scale(${s})">` + tForma(tPoli([[-80, -110], [80, -110], [80, 110], [-80, 110]]), SAG.ouro, '')
     + `<defs><clipPath id="${id}"><rect x="-66" y="-96" width="132" height="192"/></clipPath></defs><rect x="-66" y="-96" width="132" height="192" fill="#5A2A34"/>`
-    + `<g clip-path="url(#${id})">${toon({ ...MESTRE, tronco: { tipo: 'camiseta', cor: '#6E1E2E', corS: '#561624', detalhe: (omb) => tForma(`M-8 ${omb} L8 ${omb} L4 ${omb + 70} L-4 ${omb + 70}Z`, '#E8C34A') }, mao: MESTRE.pele }, { x: -20, y: 300, s: .5, t: 0, still: true, semPiscar: true, nocheck: true, semCorte: true, boca: { sm: .5 } })}</g>`
+    + `<g clip-path="url(#${id})">${toon({ ...MESTRE, tronco: { tipo: 'camiseta', cor: '#6E1E2E', corS: '#561624', detalhe: (omb) => tForma(`M-8 ${omb} L8 ${omb} L4 ${omb + 70} L-4 ${omb + 70}Z`, '#E8C34A') }, mao: MESTRE.pele }, { x: -18, y: 222, s: .5, t: 0, still: true, semPiscar: true, nocheck: true, semCorte: true, boca: { sm: .5 } })}</g>`
     + tTraco('M-66 -96 H66 V96 H-66Z', TLW) + `</g>`; }
 function saguao(o = {}) { const y = o.chao ?? 800;
   let r = paredeToon(SAG.parede, SAG.paredeS, y, { passo: 200 }) + chaoToon(SAG.chao, SAG.chaoS, y) + `<rect x="-400" y="${y - 260}" width="1400" height="14" fill="${SAG.ouro}"/>`;
@@ -117,7 +117,8 @@ function teclado(x, y, s, acesos = []) { let r = `<g transform="translate(${x} $
   return r + `</g>`; }
 function salaCofre(o = {}) { const y = o.chao ?? 800;
   let r = paredeToon(COF.parede, COF.paredeS, y, { passo: 170 }) + chaoToon(COF.chao, COF.chaoS, y, { tabuas: 1 });
-  r += cofrePorta(o.cx ?? 300, o.cy ?? 470, o.cr ?? 190, o.aberta || 0, o.giro || 0) + teclado(o.tx ?? 530, o.ty ?? 470, o.ts ?? .8, o.acesos || []);
+  const tec = teclado(o.tx ?? 530, o.ty ?? 470, o.ts ?? .8, o.acesos || []), porta = cofrePorta(o.cx ?? 300, o.cy ?? 470, o.cr ?? 190, o.aberta || 0, o.giro || 0);
+  r += o.aberta ? tec + porta : porta + tec;
   if (o.escada !== false) r += tForma(tPoli([[30, 300], [130, 300], [130, 800], [30, 800]]), '#4A3A30', tPinta(tPoli([[100, 300], [130, 300], [130, 800], [100, 800]]), '#3A2C24')) + `<text x="80" y="290" font-family="Poppins" font-weight="800" font-size="20" text-anchor="middle" fill="${TINK}">ESCADA</text>`;
   return r; }
 const caixaFerramentas = (aberta) => `<g>${tForma(tPoli([[-60, -40], [60, -40], [60, 30], [-60, 30]]), '#C0392B', tPinta(tPoli([[20, -40], [60, -40], [60, 30], [20, 30]]), '#9E2E22'))}`
@@ -251,10 +252,10 @@ const CENAS = [
     f: (tl, d, t) => fundoChapado(MAE.tronco.cor) + tTraco('M288 -100 V380', TLW * 1.5, '#C9A64A') + `<g transform="translate(288 520) scale(${Math.cos(t * 1.6) * .9 + .1 * Math.sign(Math.cos(t * 1.6))} 1)">${CHAVE(2.6)}</g>` },
   // 21 · plano médio: ela aperta a chave contra o peito, olhos fechados
   { l: 9, cam: { s: [1.1, 1.14], c: [260, 470] },
-    f: (tl, d, t) => quartoMae() + camaAtras(688) + pT(MAE, 150, 800, .9, t, { sentado: true, olhos: 'fechados', boca: { sm: .1 }, bD: { h: [-40, 70], bend: 40, punho: true }, segura: CHAVE(.35), agito: .4 }) },
+    f: (tl, d, t) => quartoMae() + camaAtras(688) + pT(MAE, 150, 800, .9, t, { sentado: true, olhos: 'fechados', boca: { sm: .1 }, bD: { h: [-70, 40], bend: 70, punho: true }, segura: CHAVE(.35), agito: .4 }) },
   // 22 · close fechado: "Um dia a gente volta." (fala)
   { l: 9, w: 8, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => reacaoToon(MAE, t, tl, { falante: true, olhar: [.3, -.2], palpebra: .45, boca: { sm: .25 }, agito: .4 }, { fundo: QUARTO.parede, forma: QUARTO.paredeS }) },
+    f: (tl, d, t) => reacaoToon(MAE, t, tl, { y: 1100, falante: true, olhar: [.3, -.2], palpebra: .45, boca: { sm: .25 }, agito: .4 }, { fundo: QUARTO.parede, forma: QUARTO.paredeS }) },
   // 23 · Belém na porta do quarto, em contraluz (corredor claro atrás); baixa a máscara no rosto
   { l: 10, sfx: [{ t: .9, s: 'galeria/rubber_snapping_1', v: .45 }], cam: { s: [1, 1.05], c: [288, 520] },
     f: (tl, d, t) => fundoChapado(QUARTO.parede) + tForma(tPoli([[150, 260], [430, 260], [430, 800], [150, 800]]), '#F4EAD0') + chaoToon(QUARTO.chao, QUARTO.chaoS, 800)
@@ -266,7 +267,7 @@ const CENAS = [
   // 25–27 · closes no quadro: 9:00 ENTRAR / 9:10 COFRE / 9:12 SAIR
   ...[[12, 0, '9:00', 'ENTRAR', -3], [12, 3, '9:10', 'COFRE', 2], [12, 7, '9:12', 'SAIR', -2]].map(([l, w, h, v, rot], i) => ({ l, w, split: false, blur: false, sfx: [{ t: .02, s: 'galeria/washboard_scrape_2', v: .3 }, { t: .3, s: 'tic', v: .4 }],
     cam: [{ s: [1, 1], c: [200, 470], c1: [376, 470] }, { s: [1, 1], c: [288, 380], c1: [288, 540] }, { s: [1, 1.14], c: [288, 470] }][i],
-    f: (tl, d, t) => fundoChapado('#7A5434') + tForma(tPoli([[40, 200], [536, 200], [536, 720], [40, 720]]), '#22302A') + horario(h, v, sobe(0, .5, tl))
+    f: (tl, d, t) => fundoChapado(ESC.parede) + tForma(tPoli([[24, 184], [552, 184], [552, 736], [24, 736]]), '#7A5434') + tForma(tPoli([[40, 200], [536, 200], [536, 720], [40, 720]]), '#22302A') + horario(h, v, sobe(0, .5, tl))
       + (i === 2 ? `<g>${tForma(tMacarrao([620, 900], [480, 600], -20, 70, 60), VERM.cor)}${tMao(470, 590, Math.PI * 1.2, 34, LUVA, true)}<g transform="translate(450 570) rotate(-30)">${tForma(tPoli([[-8, -30], [8, -30], [8, 10], [-8, 10]]), '#F4F1EA')}</g></g>` : '') })),
   // 28 · close 3/4 do Mestre (máscara + óculos), falante: o focinho mexe; ajeita os óculos
   { l: 13, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
@@ -315,7 +316,7 @@ const CENAS = [
       + pT(MESTRE, lerp(470, 380, ease(sobe(0, .4, tl))), 820, .7, t, { mascara: 'baixada', flip: true, olhar: [.3, 0], bD: { h: [110, 40], bend: 10 } }) },
   // 42 · close: o dedo de luva digitando sem papel (PISTA 3)
   { l: 20, w: 7, split: false, blur: false, cam: { s: [1, 1.04], c: [288, 500] },
-    f: (tl, d, t) => fundoChapado(COF.parede) + teclado(300, 480, 2.6, []) + `<g>${tForma(tMacarrao([620, 900], [400, lerp(560, 600, Math.abs(Math.sin(t * 12)))], -20, 70, 60), VERM.cor)}${tMao(390, lerp(570, 610, Math.abs(Math.sin(t * 12))), Math.PI * 1.15, 34, LUVA, false)}</g>` },
+    f: (tl, d, t) => fundoChapado(COF.parede) + teclado(300, 480, 2.6, []) + `<g>${tForma(tMacarrao([620, 900], [250, lerp(590, 610, Math.abs(Math.sin(t * 12)))], -30, 70, 60), VERM.cor)}${tMao(236, lerp(584, 604, Math.abs(Math.sin(t * 12))), Math.PI * 1.15, 34, LUVA, false)}</g>` },
   // 43–45 · close extremo: 7 · 1 · 9 acendem
   ...[[21, 0, [7]], [21, 1, [7, 1]], [21, 2, [7, 1, 9]]].map(([l, w, ac], i) => ({ l, w, split: false, blur: false, sfx: [{ t: .02, s: 'galeria/ding_2', v: .35 }], cam: { s: [1, 1.03], c: [288 + (i - 1) * 30, 500], rot: [(i - 1) * 3, (i - 1) * 3] },
     f: (tl, d, t) => fundoChapado('#2A2F38') + teclado(288, 420, 3.9, ac) })),
@@ -358,8 +359,8 @@ const CENAS = [
   { l: 28, sfx: [{ t: .1, s: 'rangido', v: .35 }], cam: { s: [1, 1.04], c: [288, 520] },
     f: (tl, d, t) => cofreDentro({ t, camera: false }) + tForma(tPoli([[20, 320], [120, 320], [120, 800], [20, 800]]), '#4A3A30') + `<g transform="translate(120 560) scale(${.25 + .75 * Math.abs(Math.cos(t * 7))} 1)">${tForma(tPoli([[0, -240], [-100, -240], [-100, 240], [0, 240]]), '#6A5040')}</g>`
       + `<g opacity=".4" transform="translate(${lerp(150, 200, sobe(0, d, tl))} ${lerp(560, 300, sobe(0, d, tl))}) scale(.45) rotate(-20)" style="filter:brightness(0)">${toon(MESTRE, { t, still: true, nocheck: true, semCorte: true, mascara: 'baixada', walk: tl * 2 })}</g>` + mesaMetal(700)
-      + pT(comEtiqueta(MANAUS, 'MANAUS'), 220, 800, .58, t, { mascara: 'testa', olhar: [.4, 1], palpebra: .5, cabInc: .25, bD: { h: [90, 0], bend: 30 }, segura: `<g transform="translate(30 -20) scale(.75)">${pasta('MANAUS', 1)}</g>` })
-      + pT(comEtiqueta(RECIFE, 'RECIFE'), 500, 800, .58, t, { flip: true, mascara: 'testa', olhar: [.4, 1], palpebra: .5, cabInc: .25, bD: { h: [90, 0], bend: 30 }, segura: `<g transform="translate(30 -20) scale(-.75 .75)">${pasta('RECIFE', 1)}</g>` }) },
+      + pT(comEtiqueta(MANAUS, 'MANAUS'), 190, 800, .58, t, { mascara: 'testa', olhar: [.4, 1], palpebra: .5, cabInc: .25, bD: { h: [90, 0], bend: 30 }, segura: `<g transform="translate(30 -20) scale(.75)">${pasta('MANAUS', 1)}</g>` })
+      + pT(comEtiqueta(RECIFE, 'RECIFE'), 420, 800, .58, t, { flip: true, mascara: 'testa', olhar: [.4, 1], palpebra: .5, cabInc: .25, bD: { h: [90, 0], bend: 30 }, segura: `<g transform="translate(30 -20) scale(-.75 .75)">${pasta('RECIFE', 1)}</g>` }) },
   // 58 · escada em caracol (contra-plongée): Belém sobe correndo
   { l: 29, split: false, sfx: [{ t: .02, s: 'passo1', v: .4 }, { t: .2, s: 'passo2', v: .4 }, { t: .38, s: 'passo1', v: .4 }], cam: { s: [1, 1.08], c: [288, 560], c1: [288, 480] },
     f: (tl, d, t) => { const i = Math.min(3, Math.floor(sobe(0, d, tl) * 4)), y = 1000 - i * 120, x = 288 + Math.cos(i * .7 + t * .2) * 140; return escadaCaracol(t) + pT(comEtiqueta(BELEM, 'BELÉM'), x, y, .6, t, { mascara: 'testa', walk: tl * 3, inclina: -.1, olhar: [.2, -.6], semCorte: true }); } },
@@ -404,14 +405,13 @@ const CENAS = [
     f: (tl, d, t) => fundoChapado('#141018') + tForma(tPoli([[40, 200], [536, 200], [536, 700], [40, 700]]), '#1E2A22')
       + `<defs><clipPath id="telaCam"><rect x="40" y="200" width="496" height="500"/></clipPath></defs><g clip-path="url(#telaCam)"><g style="filter:grayscale(.85)">${fundoChapado(COF.paredeS)}${pT(comEtiqueta(BELEM, 'BELÉM'), 290, 900, .9, t, { mascara: 'testa', olhar: [.4, .6], bD: { h: [110, -60], bend: 30, punho: true }, segura: `<g transform="translate(10 -40)">${CHAVE(.7)}</g>`, nocheck: true, semCorte: true })}</g></g>`
       + tTraco('M40 200 H536 V700 H40Z', TLW * 1.4) + `<circle cx="80" cy="240" r="10" fill="#FF3B30"/><text x="100" y="254" font-family="VT323" font-size="44" fill="#FF3B30">REC</text>`
-      + (tl > .3 ? `<rect x="150" y="226" width="276" height="64" fill="#C0392B"/><text x="288" y="272" font-family="'Baloo 2'" font-weight="800" font-size="46" text-anchor="middle" fill="#fff">SUSPEITO</text>` : '') },
+      + (tl > .3 ? `<rect x="150" y="290" width="276" height="64" fill="#C0392B"/><text x="288" y="336" font-family="'Baloo 2'" font-weight="800" font-size="46" text-anchor="middle" fill="#fff">SUSPEITO</text>` : '') },
   // 76 · flagrante: Belém de mãos para o alto, a chave numa delas; lanternas e giroflex desenhados; o Mestre sentado ao fundo
   { l: 38, sfx: [{ t: 0, s: 'galeria/siren_whistle_2', v: .35 }], cam: { s: [1.05, 1.1], c: [288, 500] },
     f: (tl, d, t) => { const az = Math.floor(t * 4) % 2;
       return salaDono() + encosto(470, 760, .8) + pT(MESTRE_DONO, 440, 820, .56, t, { sentado: true, olhar: [-.4, 0], boca: { sm: .7 }, nocheck: true })
         + pT(comEtiqueta(BELEM, 'BELÉM'), 230, 830, .78, t, { mascara: 'testa', olhos: 'arregalados', sobr: 1, boca: { o: .5, w: .6 }, bD: { h: [110, -210], bend: 30 }, bE: { h: [-90, -200], bend: -30 }, segura: `<g transform="translate(14 -30)">${CHAVE(.65)}</g>` })
         + [[-10, 1], [586, -1]].map(([x, f]) => `<g style="filter:brightness(0)">${pT(JAIRO, x, 860, .8, t, { flip: f < 0, nocheck: true, semCorte: true, still: true })}</g>`).join('')
-        + `<circle cx="288" cy="40" r="60" fill="${az ? '#2B5BFF' : '#FF2B3A'}" opacity=".5"/>`
         + `<path d="M-40 300 L180 620 L60 700Z" fill="#FFF3B0" opacity=".35"/><path d="M620 260 L330 620 L460 700Z" fill="#FFF3B0" opacity=".3"/>`
         + `<rect x="-50" y="-50" width="676" height="1124" fill="${az ? '#2B5BFF' : '#FF2B3A'}" opacity=".14"/>`; } },
   // 77 · ficha policial rápida: régua de altura, Belém com a plaquinha; a chave num saquinho de prova ao lado

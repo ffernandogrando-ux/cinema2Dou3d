@@ -111,7 +111,7 @@ function toon(P, st = {}) {
   if (TR.tipo === 'moletom') somb += tPinta(tSpl([[-36, omb - 4], [0, omb + 26], [36, omb - 4], [0, omb + 8]]), TR.corS) + tPinta(tPoli([[-40, hip - 64], [44, hip - 64], [40, hip - 22], [-36, hip - 22]]), TR.corS);
   if (P.manchas) somb += P.manchas(omb, hip);
   r += tForma(corpo, TR.cor, somb);
-  if (TR.tipo === 'moletom') r += tTraco(`M-12 ${omb + 14} l-4 ${H * .3} M12 ${omb + 14} l4 ${H * .3}`, TLW * .8, '#f4f1ea') + tTraco(`M-40 ${hip - 64} H44 L40 ${hip - 22} H-36Z`, TLW * .8);
+  if (TR.tipo === 'moletom' && !TR.semCordao) r += tTraco(`M-12 ${omb + 14} l-4 ${H * .3} M12 ${omb + 14} l4 ${H * .3}`, TLW * .8, '#f4f1ea') + tTraco(`M-40 ${hip - 64} H44 L40 ${hip - 22} H-36Z`, TLW * .8);
   if (TR.tipo === 'regata') r += tTraco(`M-34 ${omb - 8} Q0 ${omb + 40} 34 ${omb - 8}`);
   if (TR.tipo === 'macacao') { if (TR.aberto) r += tForma(`M-26 ${omb - 4} L0 ${omb + H * .45} L26 ${omb - 4}Z`, TR.camisa || '#F4F1EA') + (TR.gravata ? tForma(`M-7 ${omb + 4} L7 ${omb + 4} L10 ${omb + H * .38} L0 ${omb + H * .46} L-10 ${omb + H * .38}Z`, TR.gravata) : '') + tTraco(`M-26 ${omb - 4} L0 ${omb + H * .45} L26 ${omb - 4}`);
     else r += tTraco(`M0 ${omb + 6} V${hip - 6}`, TLW * .7) + tForma(`M-28 ${omb - 4} L-6 ${omb + 26} L-2 ${omb + 4}Z`, TR.corS) + tForma(`M28 ${omb - 4} L6 ${omb + 26} L2 ${omb + 4}Z`, TR.corS);
