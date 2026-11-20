@@ -22,6 +22,23 @@ Ajudantes comuns: tempos por palavra, P3 (stickman no 3D), HUD, câmera de segur
 - `segCam(t, cam, hora)`
 - `horaSeg(t)`
 
+## `cine`
+
+Barato: tudo é uma camada SVG por cima do plano (use em `over: (tl, d, t) => ...` do plano, que fica sobre a cena e sob a legenda).
+
+- `_cN`
+- `cEscuro`
+- `cLuzChave(x, y, r, o = {})`
+- `cFacho`
+- `cBrilho`
+- `cLuzLateral(lado = 1, o = {})`
+- `cSirene`
+- `cVinheta`
+- `cFaixas`
+- `cGrao`
+- `cSilhueta`
+- `CINE`
+
 ## `elenco`
 
 Personagens prontos: Dudu (DUDU, DUDU_C), Sofia (SOFIA, SOFIA_PIJ), MULHER, FIG (figurantes), SENHORA11, RICO, CANUDO e poses/estados prontos.

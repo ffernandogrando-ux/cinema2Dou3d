@@ -1,7 +1,7 @@
 // TESTE 01 · pele "scifi-toon" (estilos: Sci-Fi Sitcom Toon do Lemo-Opuscar, só a gramática) no stickman do anima-ovitinho.
 // v2: personagens de corpo inteiro (kit toon, motor/acervo/toon.js), sem linha tremendo; cor chapada com sombra recortada, olhos brancos grandes de pupila pequena,
 // uma paleta por mundo, o portal é a única coisa que brilha, etiqueta de terminal (VT323). Elenco e portal nossos.
-//@acervo toon toon3d
+//@acervo toon toon3d cine
 // v2: personagens de corpo inteiro (kit toon), sem linha tremendo (pedido do usuário)
 const LEGENDA_PALAVRAS = 3, CORTE_MAX_EP = 99, EFEITOS_DB = -24, CAUDA = 1.0;
 const AMBIENTE = { '0': null };
@@ -136,3 +136,17 @@ const CENAS = [
         + pt(VIZ, 420, 720, .62, t, { flip: true, semPiscar: true, segura: cai > 0 ? '' : COCO_T, olhar: [1, .3], olhos: 'arregalados', boca: 'o', sobr: 1, inclina: -.08, descalco: 'D', bD: { h: [60, 110], bend: 30 } })
         + (cai > 0 ? `<g transform="translate(${lerp(372, 380, cai)} ${lerp(600, 716, cai * cai)})">${COCO_T}</g>` : ''); } },
 ];
+// ---------------------------------------------------------------- teste de luz de cinema (kit cine): uma camada por plano
+const CINE_ON = true;
+if (CINE_ON) [
+  (tl, d, t) => cFaixas(1, 84) + cVinheta(.5) + cGrao(t),                                                   // abertura 3D
+  (tl, d, t) => CINE.interior(t, { x: 270, y: 520, r: 470 }) + cBrilho(270, 520, 320, '#C04BFF', .35),       // o portal acende a garagem
+  (tl, d, t) => CINE.close(t, { lado: 1 }),                                                                 // close com luz do portal pela direita
+  (tl, d, t) => CINE.interior(t, { x: 300, y: 520, r: 450 }) + cBrilho(300, 520, 320, '#C04BFF', .3),
+  (tl, d, t) => CINE.close(t, { lado: 1 }),
+  (tl, d, t) => CINE.noite(t, { x: 300, y: 520, r: 380 }) + cBrilho(300, 520, 330, '#C04BFF', .45),         // noite: só o portal ilumina
+  (tl, d, t) => CINE.noite(t, { x: 300, y: 540, r: 400 }) + cBrilho(300, 520, 330, '#C04BFF', .45),
+  (tl, d, t) => cEscuro('#6a3010', .12) + cVinheta(.42) + cGrao(t),                                         // praia: quente, leve
+  (tl, d, t) => tl < .5 ? CINE.tensao(t, { x: 270, y: 330, r: 440 }) : cVinheta(.5) + cGrao(t),             // pânico: luz fechada na cara
+].forEach((f, i) => { if (CENAS[i]) CENAS[i].over = f; });
+
