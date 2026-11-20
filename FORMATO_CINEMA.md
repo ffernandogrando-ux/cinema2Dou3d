@@ -51,15 +51,16 @@ Pelo menos **uma camada 2 ou 3 é também pista da virada**.
 **Pode:** pose, enquadramento, cor, número, objeto genérico do gênero (macacão, máscara com desenho nosso, agasalho numerado, marmota de pelúcia), paráfrase.
 **Não pode:** nome de personagem, logotipo, música original do filme, fala literal, cena refeita quadro a quadro, a máscara ou o desenho oficial de uma série. O título do post nunca cita o filme.
 
-## 5. Visual: o motor de sempre + a pele de gênero
-- **Faixas de cinema:** faixa preta em cima e embaixo do quadro 9:16. **A legenda mora dentro da faixa de baixo** (resolve legenda sobre rosto). O enquadramento passa a valer só para a área entre as faixas.
-- **Paleta por gênero** (uma por episódio) e **silhuetas em contraluz** nos momentos de tensão.
-- **Cartela de título no estilo trailer** logo depois da cena-ícone (≤ 1 s).
-- **Figurino define o gênero:** o stickman é o mesmo e a roupa muda.
-- **Pele de gênero:** cada episódio pega a gramática de um estilo de `estilos/` (ver `estilos/README.md`). Só a gramática (cortes, cartelas, textura, cor); os personagens são sempre os nossos stickmen.
+## 5. Visual (decidido em 20/11/2026, depois de 2 testes)
+- **Estilo de desenho adulto de sitcom de ficção científica** (gramática do Sci-Fi Sitcom Toon, sem a linha tremendo): personagens de corpo inteiro do kit `motor/acervo/toon.js` (cor chapada, sombra recortada, olhos brancos grandes de pupila pequena, pálpebra pesada, olheira, barba, boca com dentes), animados a 12 qps, com vida (respira, balança, pisca). Teste de referência: `episodios/teste01-toon/`.
+- **Abertura em 3D** (peça `motor/acervo/toon3d.js`: rua de casas em desenho, câmera descendo até o lugar da história) e o resto em 2D.
+- **Close de reação depois de toda imagem absurda** (`reacaoToon`): a piada mora na cara de quem viu.
+- **Uma paleta por lugar** (3 a 5 cores); só a coisa mágica/tecnológica brilha. Cenário com acabamento (`paredeToon`, `chaoToon`, `sombraContato`).
+- **Efeitos da galeria** `sons/galeria/` (sons de desenho), ~20 dB abaixo da voz.
+- Faixas de cinema e cartelas-relâmpago (teste 00) ficam como recurso pontual, não como padrão.
 
 ## 6. Banco de temas (pilotos)
-1. **O Assalto** (gênero assalto · pele `spy-titles`): eu entro numa quadrilha de macacão vermelho para assaltar o banco que tomou a casa da minha mãe. Pistas: o Professor sabe a senha de cabeça, sabe o nome de cada segurança, e o alarme nunca toca. Virada: o cofre está vazio e a tela mostra "ASSALTO SEGURADO: R$ 2 BI. CULPADOS: 8". O Professor é o dono do banco, e a gente era o álibi.
+1. **O Assalto** (gênero assalto) → em produção como `episodios/ep01-o-assalto/`: eu entro numa quadrilha de macacão vermelho para assaltar o banco que tomou a casa da minha mãe. Pistas: o Professor sabe a senha de cabeça, sabe o nome de cada segurança, e o alarme nunca toca. Virada: o cofre está vazio e a tela mostra "ASSALTO SEGURADO: R$ 2 BI. CULPADOS: 8". O Professor é o dono do banco, e a gente era o álibi.
 2. **Segunda-feira** (gênero loop temporal · pele `backrooms`, com o REC e a data da câmera como prova): todo dia eu acordo às 6:00 e é segunda. Pistas: a data no canto da filmadora, a altura do filho no batente, a marmota de pelúcia cada vez mais gasta. Virada: a data pula, já se passaram 11 anos e o filho está de beca. Não era loop, era a escala 6x1.
 3. **Processo Seletivo** (gênero jogo mortal · pele `text-flash-cuts`): 456 candidatos de agasalho numerado disputam uma vaga de estágio. Virada: "AUDIÊNCIA: 2 MILHÕES. VAGAS: 0". A seleção era o produto.
 4. Para depois: investigação policial (pele `halftone-dossier`, as pistas viram "provas numeradas"); filme mudo (pele `silent-film`, cartela de intertítulo como virada).
