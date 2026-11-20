@@ -1,7 +1,7 @@
 // TESTE 01 · pele "scifi-toon" (estilos: Sci-Fi Sitcom Toon do Lemo-Opuscar, só a gramática) no stickman do anima-ovitinho.
 // v2: personagens de corpo inteiro (kit toon, motor/acervo/toon.js), sem linha tremendo; cor chapada com sombra recortada, olhos brancos grandes de pupila pequena,
 // uma paleta por mundo, o portal é a única coisa que brilha, etiqueta de terminal (VT323). Elenco e portal nossos.
-//@acervo toon
+//@acervo toon toon3d
 // v2: personagens de corpo inteiro (kit toon), sem linha tremendo (pedido do usuário)
 const LEGENDA_PALAVRAS = 3, CORTE_MAX_EP = 99, EFEITOS_DB = -24, CAUDA = 1.0;
 const AMBIENTE = { '0': null };
@@ -31,15 +31,12 @@ const VIZ = { ph: 1.3, pele: '#D49A72', peleS: '#B57B55', barriga: .9, sobrancel
   manchas: (omb, hip) => tPinta(tElip(20, omb + 120, 14, 10), '#C9A15A', .8), cabeca: escorredorT };
 const CONTROLE_T = `<g transform="translate(6 -26)">${tForma(tSpl([[-16, -30], [16, -30], [18, 30], [-18, 30]]), '#7E8A97')}${tForma(tElip(0, -10, 8, 7), '#FF4F6D')}</g>`;
 const COCO_T = `<g transform="translate(4 -22)">${tForma(tElip(0, 0, 26, 24), '#7A4E2D', tPinta(tElip(-14, 6, 14, 20), '#5e3a1f'))}${tTraco('M4 -20 l12 -30', 5, '#FF4F6D')}</g>`;
-const BOCAS = { neutra: { sm: -.3 }, sorriso: { sm: .7 }, riso: { o: .5, sm: .9 }, grito: { o: 1, w: 1.15 }, o: { o: .5, w: .5 } };
-// atalho: personagem toon; o.boca aceita o nome (neutra/sorriso/riso/grito/o)
-const pt = (P, x, y, s, t, o = {}) => toon(P, { x, y, s, t, ...o, boca: typeof o.boca === 'string' ? BOCAS[o.boca] : o.boca });
 
 // ---------------------------------------------------------------- peças
 const bandas = (cores, ys) => cores.map((c, i) => `<rect x="-400" y="${ys[i]}" width="1400" height="${(ys[i + 1] ?? 2000) - ys[i]}" fill="${c}"/>`).join('');
 const CAIXA = `<rect x="452" y="620" width="18" height="180" fill="${INKT}"/><rect x="410" y="560" width="104" height="70" rx="12" fill="#D9534F" stroke="${INKT}" stroke-width="6"/><path d="M422 584 h80" stroke="${INKT}" stroke-width="5"/>`;
 function garagem(P) { // parede, prateleira, bancada, porta de enrolar; chão em y 800
-  return bandas([P.parede, P.chao], [-400, 800]) + `<rect x="-400" y="800" width="1400" height="14" fill="${P.chaoS}"/>`
+  return paredeToon(P.parede, P.paredeS, 800) + chaoToon(P.chao, P.chaoS, 800, { tabuas: 1 }) + sombraContato(85, 800, 260) + sombraContato(461, 800, 70)
     + `<rect x="300" y="230" width="330" height="420" fill="${P.paredeS}" stroke="${INKT}" stroke-width="6"/>` + [0, 1, 2, 3, 4, 5].map(i => `<path d="M300 ${290 + i * 60} h330" stroke="${INKT}" stroke-width="4"/>`).join('')
     + `<path d="M-60 330 h300" stroke="${INKT}" stroke-width="8"/><rect x="-20" y="270" width="44" height="60" fill="#D9534F" stroke="${INKT}" stroke-width="5"/><rect x="40" y="290" width="70" height="40" fill="#5BC0A0" stroke="${INKT}" stroke-width="5"/>`
     + `<circle cx="160" cy="300" r="26" fill="#FFF3D6" stroke="${INKT}" stroke-width="5"/><path d="M160 300 v-16 M160 300 l12 6" stroke="${INKT}" stroke-width="4" stroke-linecap="round"/>`
@@ -81,33 +78,6 @@ function boleto(x, y, s, t, o = {}) {
 }
 
 // ---------------------------------------------------------------- planos
-// ---------------------------------------------------------------- 3D: o bairro em desenho (abertura). Casas com cor chapada de 2 tons
-// (MeshToonMaterial) e contorno preto grosso (casca invertida). A garagem do vizinho no centro, com a porta aberta e luz roxa lá dentro.
-MUNDO.registrar('bairroToon', (sc, o, K) => {
-  const { THREE } = K;
-  sc.background = new THREE.Color('#F2C25B'); sc.fog = new THREE.Fog('#F2C25B', 40, 120);
-  const grad = new THREE.DataTexture(new Uint8Array([90, 90, 90, 255, 255, 255, 255, 255]), 2, 1, THREE.RGBAFormat); grad.needsUpdate = true; grad.minFilter = grad.magFilter = THREE.NearestFilter;
-  sc.add(new THREE.AmbientLight(0xffffff, .55)); const sol = new THREE.DirectionalLight(0xffffff, 1.6); sol.position.set(-20, 30, 18); sc.add(sol);
-  const contorno = new THREE.MeshBasicMaterial({ color: '#1b1422', side: THREE.BackSide });
-  const pe = (g, cor, x, y, z, borda = .06) => { const M = new THREE.Mesh(g, new THREE.MeshToonMaterial({ color: cor, gradientMap: grad })); M.position.set(x, y, z); sc.add(M);
-    if (borda) { const H = new THREE.Mesh(g, contorno); H.position.copy(M.position); H.rotation.copy(M.rotation); g.computeBoundingBox(); const b = g.boundingBox, sz = new THREE.Vector3(); b.getSize(sz);
-      H.scale.set(1 + borda * 2 / sz.x, 1 + borda * 2 / sz.y, 1 + borda * 2 / sz.z); sc.add(H); } return M; };
-  pe(new THREE.BoxGeometry(400, .2, 400), '#3E8C84', 0, -.1, 0, 0);                         // chão
-  pe(new THREE.BoxGeometry(400, .22, 7), '#4B4A60', 0, -.08, 9, 0);                          // rua
-  for (let i = -20; i < 20; i++) pe(new THREE.BoxGeometry(1.4, .24, .25), '#F4F1EA', i * 3.2, -.06, 9, 0);
-  pe(new THREE.BoxGeometry(400, .3, 2.2), '#C9C2B0', 0, -.02, 4.6, 0);                         // calçada
-  const cores = ['#E86A5A', '#F7E3B0', '#7FB8E8', '#E9A0C8', '#9BD08A', '#F0B45A'], R = rng(8);
-  const casa = (x, z, w, h, cor, garagem) => { pe(new THREE.BoxGeometry(w, h, 5), cor, x, h / 2, z);
-    const tel = pe(new THREE.ConeGeometry(w * .78, 2.2, 4), '#8C4A3A', x, h + 1.1, z); tel.rotation.y = Math.PI / 4;
-    if (garagem) { pe(new THREE.BoxGeometry(w * .62, h * .7, .2), '#2a1f3a', x, h * .35, z + 2.52, .03);
-      const luz = new THREE.Mesh(new THREE.PlaneGeometry(w * .5, h * .55), new THREE.MeshBasicMaterial({ color: '#C04BFF', transparent: true, opacity: .55 })); luz.position.set(x, h * .3, z + 2.64); sc.add(luz); }
-    else { pe(new THREE.BoxGeometry(1, 2, .2), '#5a3a28', x - w * .2, 1, z + 2.52, .03); pe(new THREE.BoxGeometry(1.4, 1.1, .2), '#BFE3F5', x + w * .22, h * .6, z + 2.52, .03); } };
-  for (let i = -6; i <= 6; i++) { const x = i * 7.4; casa(x, 0, 6, 3.6 + R() * 1.6, i === 0 ? '#E3B04B' : cores[(i + 12) % 6], i === 0);
-    casa(x + 3.7, -14, 6, 3.6 + R() * 2, cores[(i + 15) % 6], false); }
-  for (let i = -6; i <= 6; i++) { const tr = pe(new THREE.CylinderGeometry(.18, .22, 2.4, 8), '#7A4E2D', i * 7.4 + 3.7, 1.2, 5.6); pe(new THREE.SphereGeometry(1.1, 12, 8), '#2F9E5B', i * 7.4 + 3.7, 2.9, 5.6); }
-  return {};
-});
-const p3T = (P, pos, t, o = {}, alt = 1.75) => { const q = MUNDO.proj(pos); if (q.atras) return ''; return pt(P, q.x, q.y, q.ppm * alt / 600, t, o); };
 
 const CHINELO = (x, y) => `<g transform="translate(${x} ${y})"><path d="M-26 0 q-4 -12 10 -14 h30 q14 0 14 10 l-2 6z" fill="#2E9BD6" stroke="${INKT}" stroke-width="5" stroke-linejoin="round"/><path d="M-4 -14 q8 -10 16 0" stroke="${INKT}" stroke-width="5" fill="none"/></g>`;
 const sobe = (a, b, k) => clamp((k - a) / (b - a));
@@ -123,16 +93,18 @@ const CENAS = [
       + pt(EU, 92, 800, .68, t, { olhar: [.9, 0], olhos: 'arregalados', boca: 'o', sobr: 1 }) + (tl > .5 ? tagTerminal('DIMENSÃO 0800', (tl - .5) / 1.1, '#7CFFB2', 300, 318) : ''); } },
   // 3 · "E usa pra quê?" — reação: close em mim, cara de nada (pálpebra pesada), o brilho roxo de lado
   { l: 1, split: false, blur: false, cam: { s: [1, 1.08], c: [288, 470] },
-    f: (tl, d, t) => `<g filter="url(#dof2)" transform="translate(-260 -420) scale(1.7)">${garagem(GARAGEM)}</g>` + `<defs><radialGradient id="brilhoLado" cx="1" cy=".45" r=".7"><stop offset="0" stop-color="${BRILHO[0]}" stop-opacity=".45"/><stop offset="1" stop-color="${BRILHO[0]}" stop-opacity="0"/></radialGradient></defs><rect x="-100" y="-100" width="800" height="1200" fill="url(#brilhoLado)"/>`
-      + pt(EU, 250, 1230, 1.5, t, { olhar: [.15 + .5 * clamp((tl - .35) / .1), 0], palpebra: .58, boca: { sm: -.2, skew: .4 }, semCorte: true, agito: .4 }) },
+    f: (tl, d, t) => reacaoToon(EU, t, tl, { olhar: [.15 + .5 * clamp((tl - .35) / .1), 0], palpebra: .58, boca: { sm: -.2, skew: .4 }, agito: .4 }, { fundo: GARAGEM.parede, forma: GARAGEM.paredeS, brilho: BRILHO[0], lado: 1 }) },
   // 4 · "Pra fugir do boleto." — o boleto na caixa olha para ele; ele foge e mergulha de cabeça no portal: o corpo some pela boca do redemoinho; o chinelo cai no chão
-  { l: 2, sfx: [{ t: .25, s: 'galeria/slide_whistle_up_1', v: .55 }, { t: .4, s: 'galeria/flip_flop_slap_1', v: .5 }, { t: .78, s: 'galeria/balloon_pop_1', v: .5 }], cam: { s: [1, 1.05], c: [288, 530], c1: [292, 526] },
-    f: (tl, d, t) => { const u = clamp((tl - .2) / .7), perde = u > .25, esc = .6 * (1 - ease(sobe(.15, .85, u))), x = lerp(395, 300, ease(u)), y = lerp(800, 520 + 300 * esc, ease(u)) - Math.sin(u * Math.PI) * 80;
+  { l: 2, sfx: [{ t: .08, s: 'galeria/slide_whistle_up_1', v: .55 }, { t: .2, s: 'galeria/flip_flop_slap_1', v: .5 }, { t: .5, s: 'galeria/balloon_pop_1', v: .5 }], cam: { s: [1, 1.05], c: [288, 530], c1: [292, 526] },
+    f: (tl, d, t) => { const u = clamp((tl - .05) / .5), perde = u > .25, esc = .6 * (1 - ease(sobe(.15, .85, u))), x = lerp(395, 300, ease(u)), y = lerp(800, 520 + 300 * esc, ease(u)) - Math.sin(u * Math.PI) * 80;
       const boca = `<defs><mask id="bocaP"><rect x="-400" y="-400" width="1400" height="2000" fill="#fff"/><ellipse cx="300" cy="520" rx="${170 * .7}" ry="${170 * .9}" fill="#000"/></mask></defs>`;
       return garagem(GARAGEM) + lavagem(1) + portal(300, 520, 170, 1, t) + boca
         + boleto(462, 598, .8, t, { anda: 0, olhar: -1, boca: 1 })
         + (perde ? CHINELO(lerp(380, 330, sobe(.25, .45, u)), lerp(700, 796, sobe(.25, .45, u))) : '')
         + (esc > .1 ? `<g>` + pt(VIZ, x, y, esc, t, { flip: true, olhar: [1, 0], olhos: 'arregalados', boca: 'grito', inclina: 4.5 * ease(sobe(.1, .85, u)), bD: { h: [130, -40], bend: -10 }, bE: { h: [110, -60], bend: -10 }, pE: [-40, -30], pD: [-20, -10], descalco: perde ? 'D' : null, semCorte: true, sombra: false }) + `</g>` : ''); } },
+  // 4b · "boleto." — REAÇÃO: close em mim olhando o lugar onde ele sumiu (boca aberta), depois a cara de nada
+  { l: 2, w: 3, split: false, blur: false, cam: { s: [1, 1.06], c: [288, 470] },
+    f: (tl, d, t) => reacaoToon(EU, t, tl, { olhar: [.8, 0], olhos: tl < .3 ? 'arregalados' : null, palpebra: .55, boca: tl < .3 ? 'o' : { sm: -.25, skew: -.4 }, sobr: tl < .3 ? .8 : 0, agito: .5 }, { fundo: GARAGEM.parede, forma: GARAGEM.paredeS, brilho: BRILHO[0], lado: 1 }) },
   // 5 · "Mas ontem," — mundo novo de cor: a garagem à noite (anil), o portal sozinho; o boleto na caixa
   { l: 3, sfx: [{ t: .1, s: 'interruptor', v: .5 }, { t: .5, s: 'galeria/trumpet_sad_1', v: .35 }], cam: { s: [.94, .98], c: [288, 548] },
     f: (tl, d, t) => garagem(NOITE) + lavagem(1.4) + portal(300, 520, 170, 1, t) + CHINELO(330, 796) + boleto(462, 598, .8, t, { anda: 0, olhar: -1, boca: tl > .4 ? 1 : 0 }) },
@@ -143,13 +115,24 @@ const CENAS = [
       return garagem(NOITE) + lavagem(1.4) + portal(300, 520, 170, 1, t) + CHINELO(330, 796) + (b > .9 ? `<rect x="-400" y="-400" width="1400" height="2000" fill="${BRILHO[1]}" opacity="${.55 * (1 - sobe(.95, 1.1, tl))}"/>` : '')
         + (esc > .03 ? boleto(x, y, esc, t, { olhar: -1, boca: 1, rot: -25 * b, anda: b > 0 ? 0 : 1 }) : ''); } },
   // 7 · "o portal atrás dele." — do outro lado: praia (laranja e verde-água), ele relaxando com um coco; o boleto sai do portal atrás dele; o coco cai
-  { l: 3, w: 5, sfx: [{ t: .15, s: 'galeria/mouth_pop_1', v: .55 }, { t: .55, s: 'galeria/slide_whistle_up_2', v: .45 }, { t: 1.25, s: 'galeria/coconut_hit_1', v: .55 }], cam: { s: [1, 1.04], c: [288, 520], c1: [282, 516] },
-    f: (tl, d, t) => { const u = sobe(.1, .55, tl), assusta = tl > .55, cai = sobe(1.0, 1.25, tl);
+  { l: 3, w: 5, sfx: [{ t: .15, s: 'galeria/mouth_pop_1', v: .55 }, { t: .55, s: 'galeria/slide_whistle_up_2', v: .45 }], cam: { s: [1, 1.04], c: [288, 520], c1: [282, 516] },
+    f: (tl, d, t) => { const u = sobe(.1, .55, tl), assusta = tl > .55, cai = 0;
       return bandas([PRAIA.ceu, PRAIA.ceu2, PRAIA.mar, PRAIA.areia], [-400, 300, 560, 700]) + `<circle cx="480" cy="190" r="56" fill="#FFF1C2" stroke="${INKT}" stroke-width="6"/>`
         + `<path d="M520 770 q-30 -230 10 -400" stroke="${INKT}" stroke-width="14" fill="none"/><path d="M530 370 q-90 -30 -150 30 M530 370 q-40 -80 -120 -80 M530 370 q70 -40 120 10" stroke="#2F9E5B" stroke-width="22" fill="none" stroke-linecap="round"/>`
         + portal(150, 380, 120, 1, t) + `<rect x="-400" y="-400" width="1400" height="2000" fill="${BRILHO[0]}" opacity=".08"/>`
         + boleto(lerp(150, 230, u), lerp(470, 720, ease(u)), .85, t, { olhar: 1, boca: 1, rot: lerp(-40, 0, u), anda: u >= 1 ? .3 : 1 })
         + pt(VIZ, 420, 720, .62, t, { flip: true, segura: cai > 0 ? '' : COCO_T, olhar: assusta ? [1, .3] : [.2, 0], olhos: assusta ? 'arregalados' : null, palpebra: assusta ? 0 : .65, boca: assusta ? 'o' : 'sorriso', sobr: assusta ? 1 : 0,
             inclina: assusta ? -.08 : .04, descalco: 'D', bD: assusta ? { h: [60, 110], bend: 30 } : { h: [40, 120], bend: 30 } })
+        + (cai > 0 ? `<g transform="translate(${lerp(372, 380, cai)} ${lerp(600, 716, cai * cai)})">${COCO_T}</g>` : ''); } },
+  // 8 · "dele." — REAÇÃO: close no vizinho apavorado (tremendo); corta para o plano aberto e o coco cai no pé descalço
+  { l: 3, w: 8, split: false, blur: false, sfx: [{ t: .05, s: 'galeria/head_shake_1', v: .4 }, { t: .78, s: 'galeria/coconut_hit_1', v: .55 }], cam: { s: [1, 1.04], c: [288, 470] },
+    f: (tl, d, t) => { if (tl < .5) { const tr = Math.floor(t * 12) % 2 ? 4 : -4;
+        return `<g transform="translate(${tr} 0)">` + reacaoToon(VIZ, t, tl, { flip: true, x: 330, olhar: [1, .2], olhos: 'arregalados', boca: 'grito', sobr: 1, descalco: 'D', agito: 1.6 }, { fundo: PRAIA.ceu2, forma: PRAIA.ceu, brilho: BRILHO[0], lado: -1 }) + `</g>`; }
+      const cai = sobe(.55, .8, tl);
+      return bandas([PRAIA.ceu, PRAIA.ceu2, PRAIA.mar, PRAIA.areia], [-400, 300, 560, 700]) + `<circle cx="480" cy="190" r="56" fill="#FFF1C2" stroke="${INKT}" stroke-width="6"/>`
+        + `<path d="M520 770 q-30 -230 10 -400" stroke="${INKT}" stroke-width="14" fill="none"/><path d="M530 370 q-90 -30 -150 30 M530 370 q-40 -80 -120 -80 M530 370 q70 -40 120 10" stroke="#2F9E5B" stroke-width="22" fill="none" stroke-linecap="round"/>`
+        + portal(150, 380, 120, 1, t) + `<rect x="-400" y="-400" width="1400" height="2000" fill="${BRILHO[0]}" opacity=".08"/>`
+        + boleto(230, 720, .85, t, { olhar: 1, boca: 1, anda: .3 })
+        + pt(VIZ, 420, 720, .62, t, { flip: true, segura: cai > 0 ? '' : COCO_T, olhar: [1, .3], olhos: 'arregalados', boca: 'o', sobr: 1, inclina: -.08, descalco: 'D', bD: { h: [60, 110], bend: 30 } })
         + (cai > 0 ? `<g transform="translate(${lerp(372, 380, cai)} ${lerp(600, 716, cai * cai)})">${COCO_T}</g>` : ''); } },
 ];

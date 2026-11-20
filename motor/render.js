@@ -15,10 +15,14 @@ const html = fs.readFileSync(path.join(MOTOR, 'player.html'), 'utf8')
   .replace('/*THREE*/', () => { const f = path.join(MOTOR, '..', 'node_modules', 'three', 'build', 'three.min.js'); return fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : ''; })
   .replace('/*LIB*/', () => ['lib.js', 'stick.js', 'mundo3d.js'].map(f => fs.readFileSync(path.join(MOTOR, f), 'utf8')).join('\n'))
   .replace('/*PALAVRAS*/', () => fs.readFileSync(path.join(L, 'palavras.json'), 'utf8'))
-  .replace('/*CENAS*/', () => comAcervo(fs.readFileSync(path.join(EP, 'cenas.js'), 'utf8')));
+  .replace('/*CENAS*/', () => vozRms() + comAcervo(fs.readFileSync(path.join(EP, 'cenas.js'), 'utf8')));
 // Acervo: o cenas.js declara as peças prontas que usa numa linha "//@acervo base elenco objetos ..." e o motor
 // carrega motor/acervo/<nome>.js antes do episódio, no mesmo escopo. As peças do acervo não entram na chave do cache
 // (como as do cenas.js): a conferência por PSNR refaz só os planos que mudaram de verdade.
+// envelope da voz (RMS a 24 por segundo, 0..1 em relação ao percentil 95): a boca dos personagens que falam segue a voz
+function vozRms() { try { const raw = execFileSync('ffmpeg', ['-v', 'error', '-i', path.join(L, 'voz.wav'), '-ac', '1', '-ar', '24000', '-f', 's16le', '-'], { maxBuffer: 1 << 29 });
+  const N = raw.length >> 1, W = 1000, v = []; for (let i = 0; i + W <= N; i += W) { let q = 0; for (let j = i; j < i + W; j++) { const x = raw.readInt16LE(j * 2) / 32768; q += x * x; } v.push(Math.sqrt(q / W)); }
+  const ref = [...v].sort((a, b) => a - b)[Math.floor(v.length * .95)] || 1; return `const VOZ_RMS = [${v.map(x => Math.min(1, x / ref).toFixed(2)).join(',')}];\n`; } catch (e) { return ''; } }
 function comAcervo(src) {
   const m = /^\/\/\s*@acervo\s+(.+)$/m.exec(src); if (!m) return src;
   const nomes = m[1].trim().split(/[\s,]+/).filter(Boolean);

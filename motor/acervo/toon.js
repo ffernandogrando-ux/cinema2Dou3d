@@ -69,7 +69,7 @@ function tMao(x, y, ang, r, cor, punho) {
 //       bE/bD: {h:[dx,dy], bend, punho}, pE/pD: [dx, dy], segura (SVG na mão da frente), seguraE, walk (fase), semCorte, nocheck }
 const T_ALT = { adulto: { hip: -150, omb: -335, cab: -470, larg: 1 }, baixo: { hip: -96, omb: -215, cab: -320, larg: .9 } };
 function toon(P, st = {}) {
-  const A = T_ALT[P.alt || 'adulto'], t = st.t || 0, s = st.s || 1, f = st.flip ? -1 : 1, L = A.larg, bar = P.barriga || 0;
+  const A = T_ALT[P.alt || 'adulto'], t = st.liso ? (st.t || 0) : Math.floor((st.t || 0) * 12 + 1e-6) / 12, s = st.s || 1, f = st.flip ? -1 : 1, L = A.larg, bar = P.barriga || 0;
   const ag = st.still ? 0 : (st.agito ?? 1), ph = st.ph ?? P.ph ?? 0, resp = Math.sin(t * 2.4 + ph) * 4 * ag, peso = Math.sin(t * 1.1 + ph * 1.7) * 5 * ag;
   const w = st.walk != null ? Math.sin(st.walk * Math.PI * 2) : 0;
   let r = `<g transform="translate(${_p(st.x || 0)} ${_p(st.y || 0)}) scale(${s * f} ${s})">`;
@@ -142,10 +142,33 @@ function tCabeca(P, st, t) {
   if (P.barba) r += tForma(tSpl([[-62, 36], [-30, 60], [10, 64], [50, 58], [90, 34], [96, 70], [70, 118], [20, 138], [-30, 124], [-60, 84]]), P.barba.cor, tPinta(tSpl([[-80, 40], [-40, 70], [-30, 140], [-90, 140]]), P.barba.corS || P.barba.cor));
   r += tForma(tSpl(P.nariz === 'reto' ? [[40, -10], [56, 22], [72, 36], [58, 44], [40, 40]] : [[34, -12], [46, 18], [70, 36], [64, 54], [40, 50], [30, 36]]), pele, tPinta(tElip(62, 48, 14, 8), peleS));
   const fala = typeof stkFalaAgora === 'function' && stkFalaAgora(st);
-  const b = { ...(st.boca || {}) }; if (fala) { b.o = .25 + .5 * Math.abs(Math.sin(t * 13)); if (typeof window !== 'undefined') window._falou = true; }
+  const b = { ...(st.boca || {}) }; if (fala) { const vr = typeof VOZ_RMS !== 'undefined' ? VOZ_RMS[Math.floor(t * 24)] : null; b.o = vr != null ? (vr < .12 ? 0 : .15 + .8 * vr) : .25 + .5 * Math.abs(Math.sin(t * 13)); if (typeof window !== 'undefined') window._falou = true; }
   if (b.sm == null) b.sm = -.3;
   r += tBoca(40 + (b.skew || 0) * 6, 82, 60, b);
   if (P.bigode) r += tForma(tSpl([[6, 62], [40, 54], [76, 60], [70, 72], [40, 68], [12, 74]]), P.bigode);
   if (P.cabeca) r += P.cabeca(st);
   return r;
 }
+
+// ---------------------------------------------------------------- acabamento de cenário (cor chapada, sem degradê)
+// parede com juntas verticais e rodapé de 2 linhas; chão com faixa clara junto ao rodapé. yChao = linha do chão
+function paredeToon(cor, corS, yChao, o = {}) { const passo = o.passo || 140, x0 = o.x0 ?? -400, x1 = o.x1 ?? 1000; let r = `<rect x="${x0}" y="-400" width="${x1 - x0}" height="${yChao + 400}" fill="${cor}"/>`;
+  for (let x = x0 + (o.fase || 60); x < x1; x += passo) r += `<path d="M${x} -400 V${yChao - 30}" stroke="${corS}" stroke-width="4"/>`;
+  r += `<rect x="${x0}" y="${yChao - 30}" width="${x1 - x0}" height="30" fill="${corS}"/>` + tTraco(`M${x0} ${yChao - 30} H${x1}`, TLW) + tTraco(`M${x0} ${yChao - 18} H${x1}`, TLW * .6);
+  return r; }
+function chaoToon(cor, corS, yChao, o = {}) { const x0 = o.x0 ?? -400, x1 = o.x1 ?? 1000;
+  return `<rect x="${x0}" y="${yChao}" width="${x1 - x0}" height="1200" fill="${cor}"/><rect x="${x0}" y="${yChao}" width="${x1 - x0}" height="22" fill="${o.faixa || '#ffffff'}" opacity=".18"/>`
+    + tTraco(`M${x0} ${yChao} H${x1}`, TLW) + (o.tabuas ? [1, 2, 3].map(i => `<path d="M${x0} ${yChao + 40 * i * i} H${x1}" stroke="${corS}" stroke-width="3"/>`).join('') : ''); }
+// sombra de contato chapada embaixo de móvel/objeto (x centro, y chão, largura)
+const sombraContato = (x, y, w) => `<ellipse cx="${x}" cy="${y + 3}" rx="${w / 2}" ry="${Math.max(6, w * .07)}" fill="#000" opacity=".2"/>`;
+// ---------------------------------------------------------------- close de reação (regra do estilo: depois de toda imagem absurda, a cara de quem viu)
+// fundo chapado simplificado (2–3 formas da cor do lugar) + o personagem grande, rosto entre 30 % e 50 % da altura.
+// o.fundo: cor da parede; o.forma: cor das formas do fundo; o.brilho: cor de um brilho em anéis lisos (ex.: o portal fora de quadro); o.lado: 1 = brilho à direita
+function reacaoToon(P, t, tl, st = {}, o = {}) {
+  let r = `<rect x="-200" y="-200" width="1000" height="1500" fill="${o.fundo || '#E3B04B'}"/>`;
+  if (o.forma) r += `<rect x="-200" y="210" width="1000" height="16" fill="${o.forma}"/><rect x="${o.lado > 0 ? 40 : 380}" y="120" width="120" height="90" rx="6" fill="${o.forma}"/>`;
+  if (o.brilho) { const bx = o.lado > 0 ? 640 : -60; r += `<circle cx="${bx}" cy="430" r="330" fill="${o.brilho}" opacity=".18"/><circle cx="${bx}" cy="430" r="210" fill="${o.brilho}" opacity=".22"/>`; }
+  return r + toon(P, { x: 250, y: 1240, s: 1.5, t, semCorte: true, ...st, boca: typeof st.boca === 'string' ? BOCAS[st.boca] : st.boca }); }
+// atalho: pt(P, x, y, s, t, st) — st.boca aceita nome: neutra, sorriso, riso, grito, o
+const BOCAS = { neutra: { sm: -.3 }, sorriso: { sm: .7 }, riso: { o: .5, sm: .9 }, grito: { o: 1, w: 1.15 }, o: { o: .5, w: .5 } };
+const pt = (P, x, y, s, t, o = {}) => toon(P, { x, y, s, t, ...o, boca: typeof o.boca === 'string' ? BOCAS[o.boca] : o.boca });

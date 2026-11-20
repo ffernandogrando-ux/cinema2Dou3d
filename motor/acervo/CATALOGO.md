@@ -139,3 +139,38 @@ Objetos: sacola, celular, alicate, boleto, calendário, carimbo, xícara, pasta,
 - `appEmprestimo(x, y, apertou)`
 - `aprovado(x, y, tl)`
 - `cronometro(x, y, v)`
+
+## `toon`
+
+Gramática do "Sci-Fi Sitcom Toon" (Lemo-Opuscar, MIT no código): contorno grosso escuro de largura constante na tela,
+
+- `TINK`
+- `TLW`: espessura do contorno, em px de tela (constante em qualquer enquadramento)
+- `_tN`
+- `_p`
+- `tSpl(c, fechado = true)`
+- `tPoli`
+- `tElip`
+- `tForma(d, cor, sombra = '', lw = TLW)`
+- `tTraco`
+- `tPinta`
+- `tMacarrao(a, b, bend, w0, w1)`
+- `tOlho(cx, cy, rx, ry, o = {})`
+- `tBoca(cx, cy, mw, o = {})`
+- `tMao(x, y, ang, r, cor, punho)`
+- `T_ALT`
+- `toon(P, st = {})`
+- `tCabeca(P, st, t)`
+- `paredeToon(cor, corS, yChao, o = {})`
+- `chaoToon(cor, corS, yChao, o = {})`
+- `sombraContato`
+- `reacaoToon(P, t, tl, st = {}, o = {})`
+- `BOCAS`
+- `pt`
+
+## `toon3d`
+
+Cenário 'bairroToon': rua de casas 3D com cor chapada de 2 tons (MeshToonMaterial) e contorno preto grosso (casca invertida),
+
+- cenário 3D `bairroToon` (opções: ceu, corCasa, cores, garagem, grama, luz, semente)
+- `p3T`
