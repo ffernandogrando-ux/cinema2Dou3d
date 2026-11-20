@@ -91,20 +91,20 @@ const CENAS = [
   // 2 · "um portal pra outras dimensões." — ele aperta o controle; o portal abre com overshoot; lavagem roxa; etiqueta de terminal
   { l: 0, w: 4, sfx: [{ t: .05, s: 'riser', v: .5 }, { t: .3, s: 'vapor', v: .4 }], cam: { s: [.94, .97], c: [288, 512], c1: [288, 510] },
     f: (tl, d, t) => { const k = abre(tl - .05); return garagem(GARAGEM) + lavagem(k) + portal(270, 520, 160, k, t)
-      + pt(VIZ, 470, 800, .68, t, { flip: true, olhar: [.6, -.1], boca: 'riso', palpebra: .1, sobr: .8, bD: { h: [60, 120], bend: 20 }, segura: CONTROLE_T })
-      + pt(EU, 80, 800, .68, t, { olhar: [.9, 0], olhos: 'arregalados', boca: 'o', sobr: 1 }) + (tl > .5 ? tagTerminal('DIMENSÃO 0800', (tl - .5) / 1.1, '#7CFFB2', 160, 286) : ''); } },
+      + pt(VIZ, 460, 800, .68, t, { flip: true, olhar: [.6, -.1], boca: 'riso', palpebra: .1, sobr: .8, bD: { h: [60, 120], bend: 20 }, segura: CONTROLE_T })
+      + pt(EU, 92, 800, .68, t, { olhar: [.9, 0], olhos: 'arregalados', boca: 'o', sobr: 1 }) + (tl > .5 ? tagTerminal('DIMENSÃO 0800', (tl - .5) / 1.1, '#7CFFB2', 160, 286) : ''); } },
   // 3 · "E usa pra quê?" — reação: close em mim, cara de nada (pálpebra pesada), o brilho roxo de lado
   { l: 1, split: false, blur: false, cam: { s: [1, 1.03], c: [288, 470] },
     f: (tl, d, t) => `<g filter="url(#dof2)" transform="translate(-260 -420) scale(1.7)">${garagem(GARAGEM)}</g>` + `<rect x="420" y="-400" width="600" height="2000" fill="${BRILHO[0]}" opacity=".18"/>`
       + pt(EU, 250, 1420, 1.5, t, { olhar: [.15, 0], palpebra: .58, boca: { sm: -.2, skew: .4 }, semCorte: true, still: true, semPiscar: true }) },
   // 4 · "Pra fugir do boleto." — o boleto na caixa olha para ele; ele foge e mergulha de cabeça no portal: o corpo some pela boca do redemoinho; o chinelo cai no chão
   { l: 2, sfx: [{ t: .3, s: 'whoosh', v: .5 }, { t: .75, s: 'pop', v: .5 }], cam: { s: [1, 1.05], c: [288, 530], c1: [292, 526] },
-    f: (tl, d, t) => { const u = clamp((tl - .2) / .7), x = lerp(450, 440, ease(u)), y = lerp(800, 690, ease(u)) - Math.sin(u * Math.PI) * 50, perde = u > .25, esc = lerp(.66, .5, ease(u)) * (1 - sobe(.82, 1, u));
+    f: (tl, d, t) => { const u = clamp((tl - .2) / .7), perde = u > .25, esc = .66 * (1 - ease(sobe(.35, 1, u))), x = lerp(450, 300, ease(u)), y = lerp(800, 520 + 300 * esc, ease(u)) - Math.sin(u * Math.PI) * 80;
       const boca = `<defs><mask id="bocaP"><rect x="-400" y="-400" width="1400" height="2000" fill="#fff"/><ellipse cx="300" cy="520" rx="${170 * .7}" ry="${170 * .9}" fill="#000"/></mask></defs>`;
       return garagem(GARAGEM) + lavagem(1) + portal(300, 520, 170, 1, t) + boca
         + boleto(462, 598, .8, t, { anda: 0, olhar: -1, boca: 1 })
         + (perde ? CHINELO(lerp(400, 372, sobe(.25, .45, u)), lerp(700, 796, sobe(.25, .45, u))) : '')
-        + (esc > .12 ? `<g mask="${u > .3 ? 'url(#bocaP)' : ''}">` + pt(VIZ, x, y, esc, t, { flip: true, olhar: [1, 0], olhos: 'arregalados', boca: 'grito', inclina: 1.45 * ease(u), bD: { h: [130, -40], bend: -10 }, bE: { h: [110, -60], bend: -10 }, pE: [-40, -30], pD: [-20, -10], descalco: perde ? 'D' : null, semCorte: true, sombra: false }) + `</g>` : ''); } },
+        + (esc > .1 ? `<g>` + pt(VIZ, x, y, esc, t, { flip: true, olhar: [1, 0], olhos: 'arregalados', boca: 'grito', inclina: 1.3 * ease(u) + 2.4 * sobe(.5, 1, u), bD: { h: [130, -40], bend: -10 }, bE: { h: [110, -60], bend: -10 }, pE: [-40, -30], pD: [-20, -10], descalco: perde ? 'D' : null, semCorte: true, sombra: false }) + `</g>` : ''); } },
   // 5 · "Mas ontem," — mundo novo de cor: a garagem à noite (anil), o portal sozinho; o boleto na caixa
   { l: 3, sfx: [{ t: .1, s: 'interruptor', v: .5 }], cam: { s: [.94, .98], c: [288, 548] },
     f: (tl, d, t) => garagem(NOITE) + lavagem(1.4) + portal(300, 520, 170, 1, t) + CHINELO(372, 796) + boleto(462, 598, .8, t, { anda: 0, olhar: -1, boca: tl > .4 ? 1 : 0 }) },
