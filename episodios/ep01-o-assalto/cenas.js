@@ -216,7 +216,7 @@ const CENAS = [
   // ---------------------------------------------------------------- BLOCO C (29–46): entrada no banco, pistas 1–3, senha
   // 29 · 3D: os 4 (máscara baixada) entram pela porta do banco — mesmo cenário do plano 1, outro trecho da trilha
   { l: 14, mb: false, semFala: true, sfx: [{ t: .1, s: 'galeria/slide_whistle_up_1', v: .3 }],
-    g3d: (tl, d) => ({ set: 'bairroToon', opts: { banco: 1, ceu: '#9FC6E0', grama: '#6E8F55', luz: null, garagem: false }, ...MUNDO.trilha([[[-2.5, 1.4, 9.5], [0, 1.6, 3.2]], [[-1.4, 1.5, 8.6], [0, 1.4, 3]]], tl / d), fov: 56 }),
+    g3d: (tl, d) => ({ set: 'bairroToon', opts: { banco: 1, ceu: '#9FC6E0', grama: '#6E8F55', luz: null, garagem: false }, ...MUNDO.trilha([[[-1.3, 1.4, 9.8], [0, 1.6, 3.2]], [[-.8, 1.5, 8.8], [0, 1.4, 3]]], tl / d), fov: 56 }),
     f: (tl, d, t) => [[MESTRE, -.95], [MANAUS, -.32], [RECIFE, .32], [BELEM, .95]].map(([P, x], i) => p3T(i ? comEtiqueta(P, ['', 'MANAUS', 'RECIFE', 'BELÉM'][i]) : P, [x, 0, lerp(4.6, 3.7, ease(sobe(0, 1, tl / d))) + i * .05], t, { mascara: 'baixada', walk: tl * 1.8 + i * .3, olhar: [-.3, 0] })).join('') },
   // 30 · saguão (mármore bege e dourado): os 4 atravessam; ao fundo, o retrato do dono (PISTA plantada); travelling
   { l: 15, sfx: [{ t: .05, s: 'passo1', v: .3 }, { t: .35, s: 'passo2', v: .3 }], cam: { s: [1, 1.04], c: [250, 520], c1: [330, 520] },
