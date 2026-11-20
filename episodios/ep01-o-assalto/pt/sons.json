@@ -1,0 +1,310 @@
+{
+ "cues": [
+  {
+   "t": 0.02,
+   "som": "galeria/slide_whistle_down_2",
+   "v": 0.4
+  },
+  {
+   "t": 3.45,
+   "som": "galeria/rubber_snapping_1",
+   "v": 0.5
+  },
+  {
+   "t": 6.87,
+   "som": "rangido",
+   "v": 0.3
+  },
+  {
+   "t": 11.110000000000001,
+   "som": "galeria/ding_1",
+   "v": 0.35
+  },
+  {
+   "t": 12.09,
+   "som": "galeria/ding_1",
+   "v": 0.35
+  },
+  {
+   "t": 12.71,
+   "som": "galeria/ding_1",
+   "v": 0.35
+  },
+  {
+   "t": 14.790000000000001,
+   "som": "galeria/thin_metal_bop_1",
+   "v": 0.5
+  },
+  {
+   "t": 15.54,
+   "som": "galeria/siren_whistle_1",
+   "v": 0.3
+  },
+  {
+   "t": 16.37,
+   "som": "galeria/rubber_snapping_2",
+   "v": 0.5
+  },
+  {
+   "t": 19.34,
+   "som": "galeria/drum_bonk_1",
+   "v": 0.5
+  },
+  {
+   "t": 20.68,
+   "som": "papel",
+   "v": 0.5
+  },
+  {
+   "t": 20.91,
+   "som": "papel",
+   "v": 0.5
+  },
+  {
+   "t": 21.16,
+   "som": "papel",
+   "v": 0.5
+  },
+  {
+   "t": 26.05,
+   "som": "galeria/glockenspiel_magic_2",
+   "v": 0.3
+  },
+  {
+   "t": 33.96,
+   "som": "galeria/rubber_snapping_1",
+   "v": 0.45
+  },
+  {
+   "t": 35.040000000000006,
+   "som": "galeria/washboard_scrape_1",
+   "v": 0.3
+  },
+  {
+   "t": 37.080000000000005,
+   "som": "galeria/washboard_scrape_2",
+   "v": 0.3
+  },
+  {
+   "t": 37.36,
+   "som": "tic",
+   "v": 0.4
+  },
+  {
+   "t": 38.42,
+   "som": "galeria/washboard_scrape_2",
+   "v": 0.3
+  },
+  {
+   "t": 38.699999999999996,
+   "som": "tic",
+   "v": 0.4
+  },
+  {
+   "t": 39.760000000000005,
+   "som": "galeria/washboard_scrape_2",
+   "v": 0.3
+  },
+  {
+   "t": 40.04,
+   "som": "tic",
+   "v": 0.4
+  },
+  {
+   "t": 42.28,
+   "som": "galeria/slide_whistle_up_1",
+   "v": 0.3
+  },
+  {
+   "t": 43.71,
+   "som": "passo1",
+   "v": 0.3
+  },
+  {
+   "t": 44.010000000000005,
+   "som": "passo2",
+   "v": 0.3
+  },
+  {
+   "t": 47.94,
+   "som": "galeria/bite_apple_1",
+   "v": 0.2
+  },
+  {
+   "t": 49.21,
+   "som": "passo1",
+   "v": 0.4
+  },
+  {
+   "t": 49.36000000000001,
+   "som": "passo2",
+   "v": 0.4
+  },
+  {
+   "t": 49.510000000000005,
+   "som": "passo1",
+   "v": 0.4
+  },
+  {
+   "t": 53.49,
+   "som": "tic",
+   "v": 0.5
+  },
+  {
+   "t": 53.99,
+   "som": "tic",
+   "v": 0.5
+  },
+  {
+   "t": 56.7,
+   "som": "galeria/metal_rattler_1",
+   "v": 0.4
+  },
+  {
+   "t": 62.14000000000001,
+   "som": "galeria/ding_2",
+   "v": 0.35
+  },
+  {
+   "t": 62.580000000000005,
+   "som": "galeria/ding_2",
+   "v": 0.35
+  },
+  {
+   "t": 62.900000000000006,
+   "som": "galeria/ding_2",
+   "v": 0.35
+  },
+  {
+   "t": 63.39,
+   "som": "galeria/metal_beam_hit_1",
+   "v": 0.5
+  },
+  {
+   "t": 63.769999999999996,
+   "som": "galeria/metal_wobble_1",
+   "v": 0.4
+  },
+  {
+   "t": 64.02,
+   "som": "rangido",
+   "v": 0.4
+  },
+  {
+   "t": 64.75999999999999,
+   "som": "galeria/coconut_hit_2",
+   "v": 0.25
+  },
+  {
+   "t": 69.55,
+   "som": "papel",
+   "v": 0.5
+  },
+  {
+   "t": 70.37,
+   "som": "galeria/glockenspiel_magic_2",
+   "v": 0.3
+  },
+  {
+   "t": 71.22000000000001,
+   "som": "galeria/rubber_snapping_1",
+   "v": 0.4
+  },
+  {
+   "t": 76.1,
+   "som": "galeria/ding_3",
+   "v": 0.25
+  },
+  {
+   "t": 80.47999999999999,
+   "som": "rangido",
+   "v": 0.35
+  },
+  {
+   "t": 82.75999999999999,
+   "som": "passo1",
+   "v": 0.4
+  },
+  {
+   "t": 82.94,
+   "som": "passo2",
+   "v": 0.4
+  },
+  {
+   "t": 83.11999999999999,
+   "som": "passo1",
+   "v": 0.4
+  },
+  {
+   "t": 86.25,
+   "som": "galeria/ding_2",
+   "v": 0.35
+  },
+  {
+   "t": 89.06,
+   "som": "galeria/rubber_snapping_2",
+   "v": 0.45
+  },
+  {
+   "t": 90.92999999999999,
+   "som": "rangido",
+   "v": 0.45
+  },
+  {
+   "t": 92.7,
+   "som": "galeria/ding_1",
+   "v": 0.3
+  },
+  {
+   "t": 95.28,
+   "som": "galeria/ding_2",
+   "v": 0.3
+  },
+  {
+   "t": 96.36,
+   "som": "galeria/ding_1",
+   "v": 0.3
+  },
+  {
+   "t": 97.85,
+   "som": "galeria/drum_bonk_1",
+   "v": 0.4
+  },
+  {
+   "t": 98.1,
+   "som": "galeria/drum_bonk_2",
+   "v": 0.4
+  },
+  {
+   "t": 98.35,
+   "som": "galeria/drum_bonk_3",
+   "v": 0.4
+  },
+  {
+   "t": 102.24,
+   "som": "galeria/slide_whistle_down_1",
+   "v": 0.25
+  },
+  {
+   "t": 106.46,
+   "som": "galeria/ding_3",
+   "v": 0.3
+  },
+  {
+   "t": 108.32000000000001,
+   "som": "galeria/siren_whistle_2",
+   "v": 0.35
+  },
+  {
+   "t": 109.69,
+   "som": "galeria/ding_1",
+   "v": 0.4
+  },
+  {
+   "t": 113.56,
+   "som": "galeria/siren_whistle_3",
+   "v": 0.12
+  }
+ ],
+ "amb": []
+}
