@@ -113,11 +113,11 @@ const CHINELO = (x, y) => `<g transform="translate(${x} ${y})"><path d="M-26 0 q
 const sobe = (a, b, k) => clamp((k - a) / (b - a));
 const CENAS = [
   // 1 · "Meu vizinho inventou" — ABERTURA 3D: a câmera desce do céu sobre o bairro em desenho até a garagem do vizinho (luz roxa lá dentro); ele e eu na entrada
-  { l: 0, sfx: [{ t: .02, s: 'whoosh', v: .45 }], mb: false, blur: false, g3d: (tl, d) => ({ set: 'bairroToon', ...MUNDO.trilha([[[-9, 9, 24], [0, 1.4, 2]], [[-3, 4.5, 15], [0, 1.4, 2.4]], [[.9, 1.8, 10.2], [0, 1.3, 2.8]]], tl / d), fov: 50 }),
+  { l: 0, sfx: [{ t: .02, s: 'galeria/slide_whistle_down_2', v: .45 }], mb: false, blur: false, g3d: (tl, d) => ({ set: 'bairroToon', ...MUNDO.trilha([[[-9, 9, 24], [0, 1.4, 2]], [[-3, 4.5, 15], [0, 1.4, 2.4]], [[.9, 1.8, 10.2], [0, 1.3, 2.8]]], tl / d), fov: 50 }),
     f: (tl, d, t) => p3T(VIZ, [.75, 0, 3.3], t, { flip: true, olhar: [.3, 0], boca: 'sorriso', palpebra: .3, bD: { h: [70, 120], bend: 20 }, segura: CONTROLE_T, agito: 1.4 })
       + p3T(EU, [-.85, 0, 3.6], t, { olhar: [.6, 0], palpebra: .5, agito: 1.2 }) },
   // 2 · "um portal pra outras dimensões." — ele aperta o controle; o portal abre com overshoot; lavagem roxa; etiqueta de terminal
-  { l: 0, w: 4, sfx: [{ t: .05, s: 'riser', v: .5 }, { t: .3, s: 'vapor', v: .4 }], cam: { s: [.94, .97], c: [288, 512], c1: [288, 510] },
+  { l: 0, w: 4, sfx: [{ t: .05, s: 'galeria/glockenspiel_magic_1', v: .55 }, { t: .3, s: 'galeria/metal_wobble_2', v: .45 }], cam: { s: [.94, .97], c: [288, 512], c1: [288, 510] },
     f: (tl, d, t) => { const k = abre(tl - .05); return garagem(GARAGEM) + lavagem(k) + portal(270, 520, 160, k, t)
       + pt(VIZ, 460, 800, .68, t, { flip: true, olhar: [.6, -.1], boca: 'riso', palpebra: .1, sobr: .8, bD: { h: [60, 120], bend: 20 }, segura: CONTROLE_T })
       + pt(EU, 92, 800, .68, t, { olhar: [.9, 0], olhos: 'arregalados', boca: 'o', sobr: 1 }) + (tl > .5 ? tagTerminal('DIMENSÃO 0800', (tl - .5) / 1.1, '#7CFFB2', 300, 318) : ''); } },
@@ -126,7 +126,7 @@ const CENAS = [
     f: (tl, d, t) => `<g filter="url(#dof2)" transform="translate(-260 -420) scale(1.7)">${garagem(GARAGEM)}</g>` + `<defs><radialGradient id="brilhoLado" cx="1" cy=".45" r=".7"><stop offset="0" stop-color="${BRILHO[0]}" stop-opacity=".45"/><stop offset="1" stop-color="${BRILHO[0]}" stop-opacity="0"/></radialGradient></defs><rect x="-100" y="-100" width="800" height="1200" fill="url(#brilhoLado)"/>`
       + pt(EU, 250, 1230, 1.5, t, { olhar: [.15 + .5 * clamp((tl - .35) / .1), 0], palpebra: .58, boca: { sm: -.2, skew: .4 }, semCorte: true, agito: .4 }) },
   // 4 · "Pra fugir do boleto." — o boleto na caixa olha para ele; ele foge e mergulha de cabeça no portal: o corpo some pela boca do redemoinho; o chinelo cai no chão
-  { l: 2, sfx: [{ t: .3, s: 'whoosh', v: .5 }, { t: .75, s: 'pop', v: .5 }], cam: { s: [1, 1.05], c: [288, 530], c1: [292, 526] },
+  { l: 2, sfx: [{ t: .25, s: 'galeria/slide_whistle_up_1', v: .55 }, { t: .4, s: 'galeria/flip_flop_slap_1', v: .5 }, { t: .78, s: 'galeria/balloon_pop_1', v: .5 }], cam: { s: [1, 1.05], c: [288, 530], c1: [292, 526] },
     f: (tl, d, t) => { const u = clamp((tl - .2) / .7), perde = u > .25, esc = .6 * (1 - ease(sobe(.15, .85, u))), x = lerp(395, 300, ease(u)), y = lerp(800, 520 + 300 * esc, ease(u)) - Math.sin(u * Math.PI) * 80;
       const boca = `<defs><mask id="bocaP"><rect x="-400" y="-400" width="1400" height="2000" fill="#fff"/><ellipse cx="300" cy="520" rx="${170 * .7}" ry="${170 * .9}" fill="#000"/></mask></defs>`;
       return garagem(GARAGEM) + lavagem(1) + portal(300, 520, 170, 1, t) + boca
@@ -134,16 +134,16 @@ const CENAS = [
         + (perde ? CHINELO(lerp(380, 330, sobe(.25, .45, u)), lerp(700, 796, sobe(.25, .45, u))) : '')
         + (esc > .1 ? `<g>` + pt(VIZ, x, y, esc, t, { flip: true, olhar: [1, 0], olhos: 'arregalados', boca: 'grito', inclina: 4.5 * ease(sobe(.1, .85, u)), bD: { h: [130, -40], bend: -10 }, bE: { h: [110, -60], bend: -10 }, pE: [-40, -30], pD: [-20, -10], descalco: perde ? 'D' : null, semCorte: true, sombra: false }) + `</g>` : ''); } },
   // 5 · "Mas ontem," — mundo novo de cor: a garagem à noite (anil), o portal sozinho; o boleto na caixa
-  { l: 3, sfx: [{ t: .1, s: 'interruptor', v: .5 }], cam: { s: [.94, .98], c: [288, 548] },
+  { l: 3, sfx: [{ t: .1, s: 'interruptor', v: .5 }, { t: .5, s: 'galeria/trumpet_sad_1', v: .35 }], cam: { s: [.94, .98], c: [288, 548] },
     f: (tl, d, t) => garagem(NOITE) + lavagem(1.4) + portal(300, 520, 170, 1, t) + CHINELO(330, 796) + boleto(462, 598, .8, t, { anda: 0, olhar: -1, boca: tl > .4 ? 1 : 0 }) },
   // 6 · "o boleto atravessou" — o boleto pula da caixa, anda até o portal e salta para dentro (encolhe no aro, clarão roxo)
-  { l: 3, w: 2, sfx: [{ t: .1, s: 'papel', v: .6 }, { t: .78, s: 'pop', v: .5 }], cam: { s: [1.05, 1.1], c: [330, 580], c1: [320, 576] },
+  { l: 3, w: 2, sfx: [{ t: .05, s: 'galeria/rubber_snapping_1', v: .5 }, { t: .2, s: 'galeria/stretch_2', v: .4 }, { t: .78, s: 'galeria/balloon_pop_2', v: .5 }], cam: { s: [1.05, 1.1], c: [330, 580], c1: [320, 576] },
     f: (tl, d, t) => { const a = sobe(0, .55, tl), b = sobe(.55, .95, tl);
       const x = b > 0 ? lerp(380, 300, b) : lerp(462, 380, a), y = b > 0 ? lerp(800, 560, b) - Math.sin(b * Math.PI) * 90 : lerp(598, 800, sobe(0, .15, tl)), esc = .85 * (1 - sobe(.5, 1, b));
       return garagem(NOITE) + lavagem(1.4) + portal(300, 520, 170, 1, t) + CHINELO(330, 796) + (b > .9 ? `<rect x="-400" y="-400" width="1400" height="2000" fill="${BRILHO[1]}" opacity="${.55 * (1 - sobe(.95, 1.1, tl))}"/>` : '')
         + (esc > .03 ? boleto(x, y, esc, t, { olhar: -1, boca: 1, rot: -25 * b, anda: b > 0 ? 0 : 1 }) : ''); } },
   // 7 · "o portal atrás dele." — do outro lado: praia (laranja e verde-água), ele relaxando com um coco; o boleto sai do portal atrás dele; o coco cai
-  { l: 3, w: 5, sfx: [{ t: .15, s: 'pop', v: .55 }, { t: .55, s: 'impacto', v: .35 }, { t: 1.25, s: 'pedra_chao', v: .5 }], cam: { s: [1, 1.04], c: [288, 520], c1: [282, 516] },
+  { l: 3, w: 5, sfx: [{ t: .15, s: 'galeria/mouth_pop_1', v: .55 }, { t: .55, s: 'galeria/slide_whistle_up_2', v: .45 }, { t: 1.25, s: 'galeria/coconut_hit_1', v: .55 }], cam: { s: [1, 1.04], c: [288, 520], c1: [282, 516] },
     f: (tl, d, t) => { const u = sobe(.1, .55, tl), assusta = tl > .55, cai = sobe(1.0, 1.25, tl);
       return bandas([PRAIA.ceu, PRAIA.ceu2, PRAIA.mar, PRAIA.areia], [-400, 300, 560, 700]) + `<circle cx="480" cy="190" r="56" fill="#FFF1C2" stroke="${INKT}" stroke-width="6"/>`
         + `<path d="M520 770 q-30 -230 10 -400" stroke="${INKT}" stroke-width="14" fill="none"/><path d="M530 370 q-90 -30 -150 30 M530 370 q-40 -80 -120 -80 M530 370 q70 -40 120 10" stroke="#2F9E5B" stroke-width="22" fill="none" stroke-linecap="round"/>`

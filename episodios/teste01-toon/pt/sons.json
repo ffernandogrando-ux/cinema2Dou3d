@@ -2,27 +2,32 @@
  "cues": [
   {
    "t": 0.02,
-   "som": "whoosh",
+   "som": "galeria/slide_whistle_down_2",
    "v": 0.45
   },
   {
    "t": 1.27,
-   "som": "riser",
-   "v": 0.5
+   "som": "galeria/glockenspiel_magic_1",
+   "v": 0.55
   },
   {
    "t": 1.52,
-   "som": "vapor",
-   "v": 0.4
+   "som": "galeria/metal_wobble_2",
+   "v": 0.45
   },
   {
-   "t": 4.22,
-   "som": "whoosh",
+   "t": 4.17,
+   "som": "galeria/slide_whistle_up_1",
+   "v": 0.55
+  },
+  {
+   "t": 4.32,
+   "som": "galeria/flip_flop_slap_1",
    "v": 0.5
   },
   {
-   "t": 4.67,
-   "som": "pop",
+   "t": 4.7,
+   "som": "galeria/balloon_pop_1",
    "v": 0.5
   },
   {
@@ -31,29 +36,39 @@
    "v": 0.5
   },
   {
-   "t": 6.06,
-   "som": "papel",
-   "v": 0.6
+   "t": 5.64,
+   "som": "galeria/trumpet_sad_1",
+   "v": 0.35
+  },
+  {
+   "t": 6.01,
+   "som": "galeria/rubber_snapping_1",
+   "v": 0.5
+  },
+  {
+   "t": 6.16,
+   "som": "galeria/stretch_2",
+   "v": 0.4
   },
   {
    "t": 6.74,
-   "som": "pop",
+   "som": "galeria/balloon_pop_2",
    "v": 0.5
   },
   {
    "t": 7.15,
-   "som": "pop",
+   "som": "galeria/mouth_pop_1",
    "v": 0.55
   },
   {
    "t": 7.55,
-   "som": "impacto",
-   "v": 0.35
+   "som": "galeria/slide_whistle_up_2",
+   "v": 0.45
   },
   {
    "t": 8.25,
-   "som": "pedra_chao",
-   "v": 0.5
+   "som": "galeria/coconut_hit_1",
+   "v": 0.55
   }
  ],
  "amb": []

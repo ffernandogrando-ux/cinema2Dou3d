@@ -1,0 +1,884 @@
+[
+[
+"pancada",
+"book hit",
+"book_hit",
+4,
+10
+],
+[
+"pancada",
+"box crunch",
+"box_crunch",
+4,
+9
+],
+[
+"pancada",
+"brick hit",
+"brick_hit",
+4,
+45
+],
+[
+"pancada",
+"can crunch",
+"can_crunch",
+4,
+23
+],
+[
+"pancada",
+"cardboard box dropped",
+"cardboard_box_dropped",
+4,
+5
+],
+[
+"pancada",
+"cardboard box hit",
+"cardboard_box_hit",
+4,
+30
+],
+[
+"pancada",
+"cardboard boxes dropped",
+"cardboard_boxes_dropped",
+4,
+8
+],
+[
+"pancada",
+"cardboard boxes hit and tumble",
+"cardboard_boxes_hit_and_tumble",
+4,
+7
+],
+[
+"pancada",
+"cereal crunch",
+"cereal_crunch",
+4,
+22
+],
+[
+"pancada",
+"cooler hit",
+"cooler_hit",
+4,
+22
+],
+[
+"pancada",
+"flip flop slap",
+"flip_flop_slap",
+4,
+22
+],
+[
+"pancada",
+"fronds crunch",
+"fronds_crunch",
+4,
+22
+],
+[
+"pancada",
+"fronds hit",
+"fronds_hit",
+4,
+17
+],
+[
+"pancada",
+"glass bottle hit",
+"glass_bottle_hit",
+4,
+26
+],
+[
+"pancada",
+"ground thump",
+"ground_thump",
+4,
+5
+],
+[
+"pancada",
+"knife hit",
+"knife_hit",
+4,
+28
+],
+[
+"pancada",
+"knife schwing",
+"knife_schwing",
+4,
+7
+],
+[
+"pancada",
+"metal beam hit",
+"metal_beam_hit",
+4,
+16
+],
+[
+"pancada",
+"metal briefcase dropped on carpet",
+"metal_briefcase_dropped_on_carpet",
+4,
+6
+],
+[
+"pancada",
+"metal briefcase hit",
+"metal_briefcase_hit",
+4,
+31
+],
+[
+"pancada",
+"metal hit",
+"metal_hit",
+4,
+68
+],
+[
+"pancada",
+"metal pan hit",
+"metal_pan_hit",
+4,
+25
+],
+[
+"pancada",
+"paper crunch",
+"paper_crunch",
+4,
+9
+],
+[
+"pancada",
+"plastic crunch",
+"plastic_crunch",
+4,
+23
+],
+[
+"pancada",
+"plastic jug dropped on carpet",
+"plastic_jug_dropped_on_carpet",
+4,
+10
+],
+[
+"pancada",
+"plastic jug hit",
+"plastic_jug_hit",
+4,
+12
+],
+[
+"pancada",
+"plastic rice bag hit",
+"plastic_rice_bag_hit",
+4,
+15
+],
+[
+"pancada",
+"punch clothes",
+"punch_clothes",
+4,
+17
+],
+[
+"pancada",
+"punch flesh",
+"punch_flesh",
+4,
+15
+],
+[
+"pancada",
+"resonating metal hit",
+"resonating_metal_hit",
+4,
+22
+],
+[
+"pancada",
+"rolled up paper hit",
+"rolled_up_paper_hit",
+4,
+10
+],
+[
+"pancada",
+"silicon hit",
+"silicon_hit",
+4,
+41
+],
+[
+"pancada",
+"slap",
+"slap",
+4,
+20
+],
+[
+"pancada",
+"spatula hit",
+"spatula_hit",
+4,
+60
+],
+[
+"pancada",
+"thermos hit",
+"thermos_hit",
+4,
+8
+],
+[
+"pancada",
+"thin metal hit",
+"thin_metal_hit",
+4,
+14
+],
+[
+"pancada",
+"tiny hit",
+"tiny_hit",
+4,
+20
+],
+[
+"pancada",
+"umbrella hit",
+"umbrella_hit",
+4,
+19
+],
+[
+"pancada",
+"wood hit",
+"wood_hit",
+4,
+34
+],
+[
+"toon",
+"ba dum ching",
+"ba_dum_ching",
+4,
+7
+],
+[
+"toon",
+"balloon deflate",
+"balloon_deflate",
+4,
+15
+],
+[
+"toon",
+"balloon fart",
+"balloon_fart",
+4,
+10
+],
+[
+"toon",
+"balloon pop",
+"balloon_pop",
+4,
+4
+],
+[
+"toon",
+"bell",
+"bell",
+4,
+24
+],
+[
+"toon",
+"bird whistle",
+"bird_whistle",
+4,
+30
+],
+[
+"toon",
+"bite apple",
+"bite_apple",
+4,
+9
+],
+[
+"toon",
+"chatter",
+"chatter",
+4,
+9
+],
+[
+"toon",
+"christmas bells",
+"christmas_bells",
+4,
+22
+],
+[
+"toon",
+"christmas bells long",
+"christmas_bells_long",
+4,
+5
+],
+[
+"toon",
+"clown horn",
+"clown_horn",
+4,
+12
+],
+[
+"toon",
+"coconut hit",
+"coconut_hit",
+4,
+10
+],
+[
+"toon",
+"coconut horse",
+"coconut_horse",
+4,
+5
+],
+[
+"toon",
+"dice bite",
+"dice_bite",
+4,
+6
+],
+[
+"toon",
+"dice bones movement",
+"dice_bones_movement",
+4,
+13
+],
+[
+"toon",
+"dice hit",
+"dice_hit",
+4,
+4
+],
+[
+"toon",
+"dice shake",
+"dice_shake",
+4,
+10
+],
+[
+"toon",
+"ding",
+"ding",
+4,
+8
+],
+[
+"toon",
+"drum bonk",
+"drum_bonk",
+4,
+6
+],
+[
+"toon",
+"drum quick",
+"drum_quick",
+4,
+7
+],
+[
+"toon",
+"fist clenched",
+"fist_clenched",
+4,
+8
+],
+[
+"toon",
+"glockenspiel magic",
+"glockenspiel_magic",
+4,
+16
+],
+[
+"toon",
+"head shake",
+"head_shake",
+4,
+12
+],
+[
+"toon",
+"inflate",
+"inflate",
+4,
+13
+],
+[
+"toon",
+"kalimba",
+"kalimba",
+4,
+6
+],
+[
+"toon",
+"kazoo",
+"kazoo",
+4,
+10
+],
+[
+"toon",
+"lip twiddle",
+"lip_twiddle",
+4,
+13
+],
+[
+"toon",
+"lyre",
+"lyre",
+4,
+14
+],
+[
+"toon",
+"maraca",
+"maraca",
+4,
+16
+],
+[
+"toon",
+"metal disc rattles",
+"metal_disc_rattles",
+4,
+25
+],
+[
+"toon",
+"metal rattler",
+"metal_rattler",
+4,
+8
+],
+[
+"toon",
+"metal wobble",
+"metal_wobble",
+4,
+35
+],
+[
+"toon",
+"mouth pop",
+"mouth_pop",
+4,
+4
+],
+[
+"toon",
+"party blower",
+"party_blower",
+4,
+9
+],
+[
+"toon",
+"party blowers multiple",
+"party_blowers_multiple",
+4,
+8
+],
+[
+"toon",
+"party honk",
+"party_honk",
+4,
+11
+],
+[
+"toon",
+"pluck",
+"pluck",
+4,
+4
+],
+[
+"toon",
+"rubber snapping",
+"rubber_snapping",
+4,
+13
+],
+[
+"toon",
+"siren whistle",
+"siren_whistle",
+4,
+20
+],
+[
+"toon",
+"slide whistle down",
+"slide_whistle_down",
+4,
+14
+],
+[
+"toon",
+"slide whistle down slow",
+"slide_whistle_down_slow",
+3,
+3
+],
+[
+"toon",
+"slide whistle up",
+"slide_whistle_up",
+4,
+12
+],
+[
+"toon",
+"slide whistle up slow",
+"slide_whistle_up_slow",
+3,
+3
+],
+[
+"toon",
+"slide whistle wacky",
+"slide_whistle_wacky",
+4,
+17
+],
+[
+"toon",
+"slinky",
+"slinky",
+4,
+17
+],
+[
+"toon",
+"slinky resonance",
+"slinky_resonance",
+4,
+10
+],
+[
+"toon",
+"spring tube",
+"spring_tube",
+4,
+37
+],
+[
+"toon",
+"spring tube ghost",
+"spring_tube_ghost",
+4,
+8
+],
+[
+"toon",
+"stretch",
+"stretch",
+4,
+23
+],
+[
+"toon",
+"thin metal bop",
+"thin_metal_bop",
+4,
+10
+],
+[
+"toon",
+"tin whistle nonsense",
+"tin_whistle_nonsense",
+4,
+12
+],
+[
+"toon",
+"train whistle",
+"train_whistle",
+4,
+10
+],
+[
+"toon",
+"train whistle wind",
+"train_whistle_wind",
+4,
+7
+],
+[
+"toon",
+"trumpet elephant",
+"trumpet_elephant",
+4,
+4
+],
+[
+"toon",
+"trumpet sad",
+"trumpet_sad",
+4,
+8
+],
+[
+"toon",
+"trumpet sick",
+"trumpet_sick",
+4,
+6
+],
+[
+"toon",
+"voice - ah haha",
+"voice_ah_haha",
+1,
+1
+],
+[
+"toon",
+"voice - ahh",
+"voice_ahh",
+1,
+1
+],
+[
+"toon",
+"voice - bah",
+"voice_bah",
+1,
+1
+],
+[
+"toon",
+"voice - blaah",
+"voice_blaah",
+1,
+1
+],
+[
+"toon",
+"voice - blah",
+"voice_blah",
+1,
+1
+],
+[
+"toon",
+"voice - bleh bleh blah",
+"voice_bleh_bleh_blah",
+1,
+1
+],
+[
+"toon",
+"voice - bleh bleh bleh blah",
+"voice_bleh_bleh_bleh_blah",
+1,
+1
+],
+[
+"toon",
+"voice - blehblehblehblehblehbleh",
+"voice_blehblehblehblehblehbleh",
+1,
+1
+],
+[
+"toon",
+"voice - bluh",
+"voice_bluh",
+1,
+1
+],
+[
+"toon",
+"voice - bluh bleh bleh blah",
+"voice_bluh_bleh_bleh_blah",
+1,
+1
+],
+[
+"toon",
+"voice - blut",
+"voice_blut",
+1,
+1
+],
+[
+"toon",
+"voice - ha ha",
+"voice_ha_ha",
+1,
+1
+],
+[
+"toon",
+"voice - heh heh heh heh",
+"voice_heh_heh_heh_heh",
+1,
+1
+],
+[
+"toon",
+"voice - hmeh meh meh meh",
+"voice_hmeh_meh_meh_meh",
+1,
+1
+],
+[
+"toon",
+"voice - hmeh meh meh myah",
+"voice_hmeh_meh_meh_myah",
+1,
+1
+],
+[
+"toon",
+"voice - hmm",
+"voice_hmm",
+4,
+4
+],
+[
+"toon",
+"voice - hneh nehhhh",
+"voice_hneh_nehhhh",
+1,
+1
+],
+[
+"toon",
+"voice - mhmmhmm",
+"voice_mhmmhmm",
+1,
+1
+],
+[
+"toon",
+"voice - oh",
+"voice_oh",
+1,
+1
+],
+[
+"toon",
+"voice - oh god",
+"voice_oh_god",
+2,
+2
+],
+[
+"toon",
+"voice - oh no",
+"voice_oh_no",
+4,
+6
+],
+[
+"toon",
+"voice - oohh",
+"voice_oohh",
+1,
+1
+],
+[
+"toon",
+"voice - raaaaaa",
+"voice_raaaaaa",
+1,
+1
+],
+[
+"toon",
+"voice - sneeze",
+"voice_sneeze",
+1,
+1
+],
+[
+"toon",
+"voice - thank you",
+"voice_thank_you",
+3,
+3
+],
+[
+"toon",
+"voice - what",
+"voice_what",
+2,
+2
+],
+[
+"toon",
+"voice - wow",
+"voice_wow",
+4,
+5
+],
+[
+"toon",
+"washboard scrape",
+"washboard_scrape",
+4,
+9
+],
+[
+"toon",
+"wind up toy",
+"wind_up_toy",
+4,
+7
+],
+[
+"toon",
+"wood frog",
+"wood_frog",
+4,
+11
+],
+[
+"toon",
+"xylophone",
+"xylophone",
+3,
+3
+]
+]
