@@ -1,4 +1,4 @@
-# EP01 · O Assalto (v2.1)
+# EP01 · O Assalto (v3)
 
 **Gênero:** filme de assalto. **Formato:** `FORMATO_CINEMA.md`. **Episódio único.** 1ª pessoa, ~330 palavras (~2:05).
 **A ideia em uma frase:** parece um filme de assalto a banco, mas a virada mostra que o assalto era do próprio banco, e os ladrões foram escolhidos por estarem devendo: eles não roubavam, eram a prova.
@@ -41,11 +41,11 @@
 ## Cenários
 Abertura 3D: rua com o banco (variação do `bairroToon` com fachada de banco). 2D: esconderijo com o quadro, quarto de aluguel da mãe, saguão do banco, cofre, escada, sala 719, rua com sirenes, ficha policial. Paletas: esconderijo (verde-musgo), quarto (azul-acinzentado), banco (mármore bege e dourado), cofre (cinza-azulado), sala 719 (vinho e ouro), sirenes (azul e vermelho).
 
-## Narração v2.1 (texto exato em `narracao.txt`)
+## Narração v3 (texto exato em `narracao.txt`)
 Eu tinha um macacão vermelho, uma máscara de porquinho e um plano.
 Assaltar o banco que tomou a casa da minha mãe.
 O plano era do Mestre.
-Ele juntou três pessoas, cada uma com um nome de cidade.
+Ele juntou três pessoas, eu incluído. Cada uma ganhou um apelido de cidade.
 A Manaus abria qualquer porta. O Recife desligava qualquer alarme.
 E eu? Belém.
 O banco tomou a nossa casa por três parcelas atrasadas.
@@ -57,33 +57,34 @@ O Mestre desenhou tudo no quadro.
 Nove horas, entrar. Nove e dez, cofre. Nove e doze, sair.
 "Ninguém se machuca."
 E ninguém se machucou.
-Na porta, o Mestre ajeitou os óculos e sorriu pro segurança: "Bom dia, Jairo."
+Na porta, o Mestre chamou o segurança pelo nome: "Bom dia, Jairo."
 O Jairo nem se mexeu.
 O Recife correu pro alarme. Mas nem precisou encostar. Ele não tocou.
-Nove e cinco. Nove e oito. Tudo no horário. Fácil demais.
+Tudo no horário. Fácil demais.
 No cofre, a Manaus abriu a caixa de ferramentas.
 Mas o Mestre passou na frente e digitou a senha de cabeça.
 Sete. Um. Nove. Clec.
-Mas o cofre tava vazio.
-Dentro, três pastas, uma com o nome de cada um.
-Até que eu reparei numa coisa estranha.
-Dentro da minha pasta tinha uma chave.
-Igualzinha à do cordão da minha mãe.
+A porta abriu. E lá dentro não tinha um real.
+Só três pastas. Uma com o nome de cada um.
+Na minha, a cópia da chave da nossa casa. A que o banco tomou.
 Com uma etiqueta: "Prova número um."
 Lá no canto, uma câmera com a luzinha vermelha acesa. Apontada pra mim.
-Por isso, eu segui o Mestre escada acima.
-Até a sala sete, um, nove.
-Ele tirou a máscara e sentou na cadeira do dono.
-Na tela, apareceu: "Seguro pago: dois bilhões."
-E embaixo: "Culpados: três. Motivo: dívida."
+E o Mestre tinha sumido escada acima.
+Eu fui atrás.
+Na porta lá de cima, o número da sala: sete, um, nove. A senha do cofre.
+Lá dentro, o Mestre tirou a máscara e sentou na cadeira do dono.
+Na tela, apareceu: "Seguro do assalto: dois bilhões."
+E embaixo: "Culpados: três devedores."
 Foi aí que eu entendi.
 O Mestre era o dono do banco.
-A gente não tava roubando o banco.
-A gente era a prova.
+O cofre já tava vazio. O assalto era só pra ele receber o seguro.
+E a culpa ia ficar com a gente. Três devedores, com motivo de sobra.
 Lá fora, as sirenes.
-Eu consegui a chave de volta.
-Na foto da polícia, ela tava na minha mão.
+A polícia me pegou com a chave na mão.
+O banco ganhou dois bilhões.
+E a minha mãe continua com a chave no pescoço. Sem casa nenhuma.
 
 ## Revisões
 - **v1 → 6,8** (revisor-roteiro): o protagonista não era a chave (estranheza pública); "álibi" errado; final quebrava tempo/ponto de vista; explicação demais depois da virada; nomes demais e "Natal" ambíguo; "o Professor" perto demais de cópia; 288 palavras. **v2:** a chave da mãe vira a "Prova nº 1" na pasta dele e a câmera aponta para ele; "a gente era a prova"; final em eco do desejo (a chave na mão, na foto da polícia); cortes da explicação; 3 culpados (sem Salvador), só "Belém", Recife no lugar de Natal; "o Mestre"; sala 719 = senha; mãe concreta ("Um dia a gente volta"); 329 palavras.
 - **v2 → 8,0 ✅ liberada para a voz** (revisor-roteiro). **v2.1** aplica as correções curtas: chave "igualzinha à do cordão" (cópia do banco, sem contradizer a mãe); desejo "a nossa casa de volta" fecha com o eco da chave; "Seguro pago" no lugar de "Assalto segurado"; sem repetição de "Só". Nota de storyboard: Manaus e Recife parados olhando as próprias pastas enquanto Belém sobe a escada.
+- **Pergunta do usuário (20/11): o final não estava claro** ("a gente era a prova" — que prova?). **Teste do espectador** (agente que só "ouve" a narração uma vez): v2.1 → 7/10. **v3:** a virada dita com todas as letras (o assalto era só para o dono receber o seguro; a culpa ia para três devedores com motivo de sobra); "não tinha um real" + três pastas; a chave é "a cópia da chave da nossa casa, a que o banco tomou"; o Mestre some escada acima e eu vou atrás; a sala 719 = "a senha do cofre"; final fecha com a mãe ("continua com a chave no pescoço, sem casa nenhuma"). Teste do espectador v3 → 8,5/10.
