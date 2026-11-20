@@ -1,6 +1,6 @@
 <!doctype html>
 <html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Caveat:wght@700&family=Shippori+Mincho+B1:wght@800&family=Playfair+Display:wght@900&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Caveat:wght@700&family=Shippori+Mincho+B1:wght@800&family=Playfair+Display:wght@900&family=Baloo+2:wght@800&family=VT323&display=block" rel="stylesheet">
 <style>
 html,body{margin:0;padding:0;background:#000;overflow:hidden}
 #stage{position:relative;width:576px;height:1024px;overflow:hidden;background:#000}
@@ -123,8 +123,9 @@ async function render(t) {
   window.FALA_AGORA = falaEm(t); window._falou = false;
   window._cab = []; window._corpos = []; window._marcas = []; window._textos = []; window.CAM = cam; if (MUNDO) MUNDO.limpaPessoas();
   const bl = pl.blur === false ? 0 : 16 * (1 - clamp(tl / 0.13)), bdir = PLANOS.indexOf(pl) % 2 ? 1 : -1;
-  let s = DEFS + (bl > .5 ? `<defs><filter id="mb" x="-10%" y="0" width="120%" height="100%"><feGaussianBlur stdDeviation="${bl} ${bl * .15}"/></filter></defs>` : '')
-    + `<g ${bl > .5 ? 'filter="url(#mb)"' : ''} transform="translate(${288 + bdir * bl * 2.5} 512) rotate(${cam.rot || 0}) scale(${cam.s}) translate(${-cam.cx} ${-cam.cy})">${pl.f(t - pl.base, pl.dTot, t)}</g>`;
+  const boil = typeof BOIL !== 'undefined' && BOIL && pl.boil !== false, bs = Math.floor(t * 12 + 1e-6) % 3;
+  let s = DEFS + (boil ? `<defs><filter id="boil" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="${BOIL.freq || .022}" numOctaves="1" seed="${bs * 17 + 3}"/><feDisplacementMap in="SourceGraphic" scale="${BOIL.amp || 3.4}" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#boil)">` : '') + (bl > .5 ? `<defs><filter id="mb" x="-10%" y="0" width="120%" height="100%"><feGaussianBlur stdDeviation="${bl} ${bl * .15}"/></filter></defs>` : '')
+    + `<g ${bl > .5 ? 'filter="url(#mb)"' : ''} transform="translate(${288 + bdir * bl * 2.5} 512) rotate(${cam.rot || 0}) scale(${cam.s}) translate(${-cam.cx} ${-cam.cy})">${pl.f(t - pl.base, pl.dTot, t)}</g>` + (boil ? '</g>' : '');
   window._olhos = window._cab.map(h => ({ x: (h.x - cam.cx) * cam.s + 288, y: (h.y - cam.cy) * cam.s + 512, r: h.r * cam.s })); window._cab = null;
   { const X = v => (v - cam.cx) * cam.s + 288, Y = v => (v - cam.cy) * cam.s + 512;
     window._corposT = window._corpos.map(h => ({ x: X(h.x), y: Y(h.y), r: h.r * cam.s, pe: Y(h.pe) })); window._corpos = null;
@@ -183,7 +184,7 @@ window.CHECAR = async (passo = .25) => { const out = [];
       if (fora && visivel) out.push({ ...base, tipo: 'objeto cortado: ' + m.nome }); });
     // fonte que não está carregada (cai numa serifada padrão): só Poppins, Caveat, monospace e as serifadas de cartela (Shippori Mincho B1, Playfair Display)
     { const fs = new Set([...document.getElementById('svg').innerHTML.matchAll(/font-family="([^"]+)"/g)].map(m => m[1].split(',')[0].trim()));
-      fs.forEach(f => { if (!['Poppins', 'Caveat', 'monospace', 'Shippori Mincho B1', 'Playfair Display'].includes(f)) out.push({ ...base, tipo: 'fonte não carregada: ' + f }); }); }
+      fs.forEach(f => { if (!['Poppins', 'Caveat', 'monospace', 'Shippori Mincho B1', 'Playfair Display', 'Baloo 2', 'VT323'].includes(f)) out.push({ ...base, tipo: 'fonte não carregada: ' + f }); }); }
     // texto de documento ou placa debaixo da legenda (faixa de ~78 % a 87 % da altura, no meio do quadro)
     if (!pl.semTexto && document.getElementById('sub').innerHTML) (window._textosT || []).forEach(m => { if (m.y1 > 800 && m.y0 < 890 && m.x1 > 120 && m.x0 < 456) out.push({ ...base, tipo: 'texto sob a legenda: ' + m.nome }); }); }
   return out; };

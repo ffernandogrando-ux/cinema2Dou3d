@@ -5,6 +5,7 @@
 const STK_INK = '#1d1f2b';
 const rad = a => a * Math.PI / 180;
 // falante: true = personagem que "fala" as falas entre aspas da narração (boca e mão mexem sozinhas só durante a fala)
+const stkToon = () => typeof STK_TOON !== 'undefined' && !!STK_TOON;
 const stkFalaAgora = st => !!(st.falante && typeof window !== 'undefined' && window.FALA_AGORA);
 
 // tipos de corpo
@@ -26,7 +27,7 @@ function stkMembro(x, y, l1, l2, a1, a2, lado) {
 function stkTubo(d, cor, esp, luz = true) {
   return `<path d="${d}" fill="none" stroke="${STK_INK}" stroke-width="${esp + 9}" stroke-linecap="round" stroke-linejoin="round"/>`
     + `<path d="${d}" fill="none" stroke="${cor}" stroke-width="${esp}" stroke-linecap="round" stroke-linejoin="round"/>`
-    + (luz ? `<path d="${d}" fill="none" stroke="#fff" stroke-width="${esp * .28}" stroke-linecap="round" opacity=".22" transform="translate(${-esp * .22} ${-esp * .1})"/>` : '');
+    + (luz && !stkToon() ? `<path d="${d}" fill="none" stroke="#fff" stroke-width="${esp * .28}" stroke-linecap="round" opacity=".22" transform="translate(${-esp * .22} ${-esp * .1})"/>` : '');
 }
 const stkMao = (p, cor) => `<circle cx="${p[0]}" cy="${p[1]}" r="11" fill="${cor}" stroke="${STK_INK}" stroke-width="4.5"/>`;
 const stkPe = (p, cor, lado) => `<path d="M${p[0] - 6 * lado} ${p[1] - 8} q${22 * lado} -6 ${30 * lado} 8 l0 4 h${-34 * lado}z" fill="${cor}" stroke="${STK_INK}" stroke-width="4.5" stroke-linejoin="round"/>`;
@@ -108,7 +109,7 @@ function stick(p, st = {}) {
   const pernaL = D.perna[0] + D.perna[1];
   const hipY = -pernaL + (st.walk != null ? Math.abs(Math.sin(st.walk * Math.PI * 2)) * 6 : 0);
   let s = `<g transform="translate(${st.x || 0} ${st.y || 0}) scale(${(st.s || 1) * lado} ${st.s || 1})">`;
-  if (st.sombra !== false) s += `<ellipse cx="0" cy="6" rx="${D.cab * 1.25}" ry="13" fill="#000" opacity=".16" filter="url(#stkBlur)"/>`;
+  if (st.sombra !== false) s += stkToon() ? `<ellipse cx="0" cy="5" rx="${D.cab * 1.1}" ry="11" fill="#000" opacity=".22"/>` : `<ellipse cx="0" cy="6" rx="${D.cab * 1.25}" ry="13" fill="#000" opacity=".16" filter="url(#stkBlur)"/>`;
   // pernas (atrás do tronco)
   const pe = [];
   for (const [sd, a] of [[-1, P.pE], [1, P.pD]]) {
@@ -152,6 +153,7 @@ function stkCabeca(p, st, r, cy, id) {
   const t = st.t || 0;
   let s = '';
   if (p.atras) s += p.atras(r, cy);
+  if (stkToon()) return s + stkCabecaToon(p, st, r, cy, id);
   s += `<defs><radialGradient id="${id}g" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="${p.peleLuz || p.pele}"/><stop offset=".7" stop-color="${p.pele}"/><stop offset="1" stop-color="${p.peleSombra || p.pele}"/></radialGradient></defs>`;
   s += `<circle cx="0" cy="${cy}" r="${r}" fill="url(#${id}g)" stroke="${STK_INK}" stroke-width="5.5"/>`;
   s += `<ellipse cx="${-r * .38}" cy="${cy - r * .5}" rx="${r * .2}" ry="${r * .11}" fill="#fff" opacity=".28" transform="rotate(-30 ${-r * .38} ${cy - r * .5})"/>`;
@@ -176,6 +178,44 @@ function stkCabeca(p, st, r, cy, id) {
   else if (b === 'o') s += `<ellipse cx="${mx}" cy="${my}" rx="${r * .08}" ry="${r * .11}" fill="#5a1f2a" stroke="${STK_INK}" stroke-width="3.5"/>`;
   else s += `<path d="M${mx - r * .13} ${my} h${r * .26}" stroke="${STK_INK}" stroke-width="4.5" stroke-linecap="round"/>`;
   if (p.bigode) s += `<path d="M${mx - r * .28} ${my - r * .1} q${r * .14} ${-r * .14} ${r * .28} -${r * .02} q${r * .14} ${-r * .12} ${r * .28} ${r * .02}" stroke="${p.bigode}" stroke-width="6" fill="none" stroke-linecap="round"/>`;
+  if (p.frente) s += p.frente(r, cy, st);
+  return s;
+}
+
+// cabeça no modo toon: pele chapada + sombra recortada, olhos brancos grandes que se tocam, pupila pequena,
+// pálpebra pesada (st.palpebra 0..1), olheira; bocas elásticas. st.olhar move as pupilas (-1..1), st.olharCima sobe.
+function stkCabecaToon(p, st, r, cy, id) {
+  const t = st.t || 0, ink = STK_INK;
+  let s = `<defs><clipPath id="${id}c"><circle cx="0" cy="${cy}" r="${r}"/></clipPath></defs>`;
+  s += `<circle cx="0" cy="${cy}" r="${r}" fill="${p.pele}"/>`;
+  s += `<g clip-path="url(#${id}c)"><circle cx="${-r * .32}" cy="${cy - r * .28}" r="${r * 1.02}" fill="none" stroke="${p.peleSombra || p.pele}" stroke-width="${r * .5}"/></g>`;
+  s += `<circle cx="0" cy="${cy}" r="${r}" fill="none" stroke="${ink}" stroke-width="6"/>`;
+  const ox = (st.olhar ?? .18) * r * .55, ey = cy - r * .08, er = r * .27, pu = (st.olhar ?? .18) * er * .45, pv = st.olharCima ? -er * .45 : er * .08;
+  const pisca = st.olhos === 'fechados' || (!st.semPiscar && (t + (st.ph || 0)) % 3.7 > 3.6);
+  const lid = st.palpebra ?? .35;
+  for (const sd of [-1, 1]) {
+    const ex = ox + sd * er * .98, big = st.olhos === 'arregalados' ? 1.15 : 1;
+    s += `<path d="M${ex - er * .8} ${ey + er * 1.15} q${er * .8} ${er * .45} ${er * 1.6} 0" stroke="${ink}" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round"/>`; // olheira
+    if (pisca) { s += `<path d="M${ex - er} ${ey} q${er} ${er * .5} ${er * 2} 0" stroke="${ink}" stroke-width="5" fill="none" stroke-linecap="round"/>`; continue; }
+    s += `<ellipse cx="${ex}" cy="${ey}" rx="${er * big}" ry="${er * 1.08 * big}" fill="#fff" stroke="${ink}" stroke-width="5"/>`;
+    s += `<circle cx="${ex + pu}" cy="${ey + pv}" r="${Math.max(3.2, r * .05)}" fill="${ink}"/>`;
+    if (lid > 0) { const ry = er * 1.08 * big, yl = ey - ry + 2 * ry * lid, cid = `${id}p${sd < 0 ? 'e' : 'd'}`;
+      s += `<defs><clipPath id="${cid}"><ellipse cx="${ex}" cy="${ey}" rx="${er * big}" ry="${ry}"/></clipPath></defs>`
+        + `<rect x="${ex - er * big - 4}" y="${ey - ry - 4}" width="${er * big * 2 + 8}" height="${yl - (ey - ry) + 4}" fill="${p.pele}" clip-path="url(#${cid})"/>`
+        + `<ellipse cx="${ex}" cy="${ey}" rx="${er * big}" ry="${ry}" fill="none" stroke="${ink}" stroke-width="5"/>`
+        + `<path d="M${ex - Math.sqrt(Math.max(0, 1 - Math.pow((yl - ey) / ry, 2))) * er * big} ${yl} H${ex + Math.sqrt(Math.max(0, 1 - Math.pow((yl - ey) / ry, 2))) * er * big}" stroke="${ink}" stroke-width="5" stroke-linecap="round"/>`; }
+    const bro = { bravo: sd * 9, triste: -sd * 10, surpreso: 0 }[st.sobrancelha] ?? 0, by = ey - er * (st.sobrancelha === 'surpreso' ? 1.55 : 1.3);
+    s += `<path d="M${ex - er * .6} ${by + Math.max(0, bro * sd) * .5} L${ex + er * .6} ${by + Math.max(0, -bro * sd) * .5}" stroke="${p.sobrancelha || ink}" stroke-width="6" stroke-linecap="round"/>`;
+  }
+  const my = cy + r * .5, mx = ox * .8;
+  const falando = stkFalaAgora(st); if ((falando || st.fala) && typeof window !== 'undefined') window._falou = true;
+  const b = falando ? 'fala' : st.boca || (st.fala ? 'fala' : 'neutra');
+  if (b === 'fala' || b === 'grito') { const k = b === 'grito' ? 1 : .3 + .7 * Math.abs(Math.sin(t * 13)) * (.6 + .4 * Math.sin(t * 5.3)), w = r * (b === 'grito' ? .34 : .24);
+    s += `<path d="M${mx - w} ${my - 4} q${w} ${r * .42 * k + 4} ${w * 2} 0z" fill="#5a1f2a" stroke="${ink}" stroke-width="5" stroke-linejoin="round"/><path d="M${mx - w * .8} ${my - 2} h${w * 1.6}" stroke="#fff" stroke-width="4"/>`; }
+  else if (b === 'sorriso') s += `<path d="M${mx - r * .26} ${my - 6} q${r * .26} ${r * .22} ${r * .52} -${r * .04}" stroke="${ink}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  else if (b === 'triste') s += `<path d="M${mx - r * .2} ${my + 6} q${r * .2} ${-r * .14} ${r * .4} 0" stroke="${ink}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  else if (b === 'o') s += `<ellipse cx="${mx}" cy="${my}" rx="${r * .1}" ry="${r * .14}" fill="#5a1f2a" stroke="${ink}" stroke-width="4.5"/>`;
+  else s += `<path d="M${mx - r * .2} ${my} q${r * .1} ${r * .04} ${r * .2} 0 t${r * .2} 0" stroke="${ink}" stroke-width="5" fill="none" stroke-linecap="round"/>`; // reta torta (deadpan)
   if (p.frente) s += p.frente(r, cy, st);
   return s;
 }
