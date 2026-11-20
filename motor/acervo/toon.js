@@ -189,7 +189,7 @@ function tMascaraPorco(modo, ab = 0, o = {}) {
   m += tForma(tSpl([[-52, -72], [30, -88], [94, -62], [104, 0], [94, 66], [50, 98], [-12, 98], [-56, 62], [-66, 0]]), ROSA, tPinta(tSpl([[-90, -20], [-60, -90], [-30, 0], [-50, 110], [-100, 110]]), ROSA_S));
   m += tForma(tPoli([[4, -70], [36, -70], [36, -63], [4, -63]]), '#7a3a4a');                                  // fenda da moeda
   if (modo === 'baixada') {
-    m += tOlho(8, -10, 24, 27, { lid: o.lid ?? .3, look: o.lk || [0, 0], fechado: o.pisca, pele: ROSA, pupila: 3.4 }) + tOlho(60, -12, 19, 23, { lid: o.lid ?? .3, look: o.lk || [0, 0], fechado: o.pisca, pele: ROSA, pupila: 3 });
+    const ml = (o.lid ?? .3) * .4; m += tOlho(8, -10, 24, 27, { lid: ml, look: o.lk || [0, 0], fechado: o.pisca, pele: ROSA, pupila: 3.4 }) + tOlho(60, -12, 19, 23, { lid: ml, look: o.lk || [0, 0], fechado: o.pisca, pele: ROSA, pupila: 3 });
     const fy = 40 + ab * 6, fry = 22 + ab * 8;
     m += tForma(tElip(54, fy, 32, fry), FOC, tPinta(tElip(46, fy + 4, 28, fry * .7), ROSA_S)) + `<ellipse cx="44" cy="${fy}" rx="5" ry="8" fill="#7a3a4a"/><ellipse cx="66" cy="${fy}" rx="5" ry="8" fill="#7a3a4a"/>`;
     return tTraco('M-66 0 L-84 2', TLW * 1.2, '#7a3a4a') + m; }

@@ -33,7 +33,7 @@ const quepe = () => tForma(tSpl([[-90, -60], [-80, -120], [0, -146], [80, -126],
 const JAIRO = { pele: '#C98E66', peleS: '#AA744F', barriga: .95, sobrancelha: '#2a1a12', bigode: '#2a1a12', tronco: { tipo: 'camiseta', cor: '#2F3B5C', corS: '#232D47', detalhe: (omb) => tForma(tPoli([[20, omb + 40], [50, omb + 40], [50, omb + 64], [20, omb + 64]]), '#E8C34A') }, calca: { cor: '#232D47', corS: '#1A2238' }, sapato: '#141414', sapatoS: '#000', cabeca: quepe, ph: 2.9 };
 
 // etiqueta de cidade no peito (depois do plano 10 todos usam)
-const comEtiqueta = (P, nome) => ({ ...P, tronco: { ...P.tronco, detalhe: (omb, hip, st = {}) => `<g transform="translate(-6 ${omb + 82}) scale(${st.flip ? -.36 : .36} .36)">${etiquetaNome(nome)}</g>` } });
+const comEtiqueta = (P, nome) => ({ ...P, tronco: { ...P.tronco, detalhe: (omb, hip, st = {}) => `<g transform="translate(-6 ${omb + 52}) scale(${st.flip ? -.36 : .36} .36)">${etiquetaNome(nome)}</g>` } });
 // ================================================================ PEÇAS DO EPISÓDIO
 const CHAVE = (s = 1, rot = 0) => `<g transform="scale(${s}) rotate(${rot})">${tForma(tPoli([[-26, -60], [0, -84], [26, -60], [26, -30], [-26, -30]]), '#E8B84A', tPinta(tPoli([[0, -84], [26, -60], [26, -30], [0, -30]]), '#C8962E'))}`
   + `${tForma(tElip(0, -52, 7, 7), '#5a3a10')}${tForma(tPoli([[-6, -30], [6, -30], [6, 40], [-6, 40]]), '#E8B84A')}${tForma(tPoli([[6, 14], [22, 14], [22, 22], [6, 22]]), '#E8B84A')}${tForma(tPoli([[6, 28], [18, 28], [18, 36], [6, 36]]), '#E8B84A')}</g>`;
@@ -49,7 +49,7 @@ function esconderijo(o = {}) { const y = o.chao ?? 800;
 // caixa de alarme com luz vermelha giratória (a mesma no esconderijo e no banco)
 function alarmeCaixa(x, y, on, t, s = 1) { const a = (t * 8) % (Math.PI * 2);
   return `<g transform="translate(${x} ${y}) scale(${s})">` + tForma(tPoli([[-34, -10], [34, -10], [34, 60], [-34, 60]]), '#C9C4BA', tPinta(tPoli([[10, -10], [34, -10], [34, 60], [10, 60]]), '#ADA89E'))
-    + tForma(`M-20 -10 Q-20 -48 0 -48 Q20 -48 20 -10Z`, on ? '#FF3B30' : '#7A2A26')
+    + tForma(`M-20 -10 Q-20 -48 0 -48 Q20 -48 20 -10Z`, on ? '#FF3B30' : '#B9B4AE')
     + (on ? `<circle cx="0" cy="-30" r="${40 + 8 * Math.sin(t * 16)}" fill="#FF3B30" opacity=".28"/>` + [0, 1, 2, 3].map(i => { const b = a + i * Math.PI / 2; return `<path d="M${Math.cos(b) * 30} ${-30 + Math.sin(b) * 22} L${Math.cos(b) * 62} ${-30 + Math.sin(b) * 44}" stroke="#FF6B5E" stroke-width="5" stroke-linecap="round" opacity=".8"/>`; }).join('') : '') + tTraco('M0 60 V140', TLW * 1.2) + `</g>`; }
 // casinha amarela da família (memória)
 function casaFamilia(o = {}) { let r = fundoChapado('#9FC6E0') + `<rect x="-400" y="760" width="1400" height="800" fill="#7FA35A"/>` + tTraco('M-400 760 H1000');
@@ -97,10 +97,10 @@ function saguao(o = {}) { const y = o.chao ?? 800;
   if (o.alarme) r += alarmeCaixa(o.ax ?? 500, o.ay ?? 430, o.alarmeOn ?? false, o.t || 0);
   if (o.relogio) r += relogioParede(o.rlx ?? 120, o.rly ?? 330, 9, 8, .7);
   return r; }
-const relogioParede = (x, y, h, m, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})">${tForma(tElip(0, 0, 80, 80), '#FBF8EF', tPinta(tElip(-10, 6, 70, 70), '#EDE6D6'))}`
+const relogioParede = (x, y, h, m, s = 1, sec = null) => `<g transform="translate(${x} ${y}) scale(${s})">${tForma(tElip(0, 0, 80, 80), '#FBF8EF', tPinta(tElip(-10, 6, 70, 70), '#EDE6D6'))}`
   + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(i => { const a = i * Math.PI / 6; return `<path d="M${Math.sin(a) * 62} ${-Math.cos(a) * 62} L${Math.sin(a) * 70} ${-Math.cos(a) * 70}" stroke="${TINK}" stroke-width="5"/>`; }).join('')
   + `<path d="M0 0 L${Math.sin((h + m / 60) * Math.PI / 6) * 36} ${-Math.cos((h + m / 60) * Math.PI / 6) * 36}" stroke="${TINK}" stroke-width="9" stroke-linecap="round"/>`
-  + `<path d="M0 0 L${Math.sin(m * Math.PI / 30) * 56} ${-Math.cos(m * Math.PI / 30) * 56}" stroke="#C0392B" stroke-width="6" stroke-linecap="round"/><circle r="7" fill="${TINK}"/></g>`;
+  + `<path d="M0 0 L${Math.sin(m * Math.PI / 30) * 58} ${-Math.cos(m * Math.PI / 30) * 58}" stroke="${TINK}" stroke-width="6" stroke-linecap="round"/>` + (sec != null ? `<path d="M0 0 L${Math.sin(sec * Math.PI / 30) * 62} ${-Math.cos(sec * Math.PI / 30) * 62}" stroke="#C0392B" stroke-width="3" stroke-linecap="round"/>` : '') + `<circle r="7" fill="${TINK}"/></g>`;
 const copoCafe = `<g transform="translate(6 -26)">${tForma(tPoli([[-16, -26], [16, -26], [12, 26], [-12, 26]]), '#FBF8EF')}${tForma(tPoli([[-17, -8], [17, -8], [15, 8], [-15, 8]]), '#8A5A3A')}</g>`;
 // porta redonda do cofre (aberta 0..1 = gira e afasta para o lado) + teclado ao lado
 function cofrePorta(x, y, r, aberta = 0, giro = 0) { const ox = aberta * r * 1.7;
@@ -118,10 +118,10 @@ function teclado(x, y, s, acesos = []) { let r = `<g transform="translate(${x} $
 function salaCofre(o = {}) { const y = o.chao ?? 800;
   let r = paredeToon(COF.parede, COF.paredeS, y, { passo: 170 }) + chaoToon(COF.chao, COF.chaoS, y, { tabuas: 1 });
   r += cofrePorta(o.cx ?? 300, o.cy ?? 470, o.cr ?? 190, o.aberta || 0, o.giro || 0) + teclado(o.tx ?? 530, o.ty ?? 470, o.ts ?? .8, o.acesos || []);
-  if (o.escada !== false) r += tForma(tPoli([[-20, 300], [70, 300], [70, 800], [-20, 800]]), '#4A3A30', tPinta(tPoli([[40, 300], [70, 300], [70, 800], [40, 800]]), '#3A2C24')) + `<text x="26" y="290" font-family="Poppins" font-weight="800" font-size="20" text-anchor="middle" fill="${TINK}">ESCADA</text>`;
+  if (o.escada !== false) r += tForma(tPoli([[30, 300], [130, 300], [130, 800], [30, 800]]), '#4A3A30', tPinta(tPoli([[100, 300], [130, 300], [130, 800], [100, 800]]), '#3A2C24')) + `<text x="80" y="290" font-family="Poppins" font-weight="800" font-size="20" text-anchor="middle" fill="${TINK}">ESCADA</text>`;
   return r; }
 const caixaFerramentas = (aberta) => `<g>${tForma(tPoli([[-60, -40], [60, -40], [60, 30], [-60, 30]]), '#C0392B', tPinta(tPoli([[20, -40], [60, -40], [60, 30], [20, 30]]), '#9E2E22'))}`
-  + (aberta ? [-40, -20, 0, 20, 40].map((x, i) => tForma(tPoli([[x - 5, -40 - 30 - i * 6], [x + 5, -40 - 30 - i * 6], [x + 5, -40], [x - 5, -40]]), ['#9AA3AD', '#E8B84A', '#9AA3AD', '#5A6370', '#E8B84A'][i])).join('') : tTraco('M-24 -40 Q0 -70 24 -40', TLW * 1.5)) + `</g>`;
+  + (aberta ? `<g transform="translate(-26 -40) rotate(-12)">${tForma(tPoli([[-6, -70], [6, -70], [6, 0], [-6, 0]]), '#9AA3AD')}${tForma('M-16 -70 L-16 -96 L-6 -86 L6 -86 L16 -96 L16 -70Z', '#9AA3AD')}</g><g transform="translate(24 -40) rotate(14)">${tForma(tPoli([[-9, -40], [9, -40], [9, 0], [-9, 0]]), '#E8434F')}${tForma(tPoli([[-3, -86], [3, -86], [3, -40], [-3, -40]]), '#9AA3AD')}</g>` : '') + tTraco('M-24 -40 Q0 -70 24 -40', TLW * 1.5) + `</g>`;
 
 // ================================================================ PLANOS
 const pT = (P, x, y, s, t, o = {}) => pt(P, x, y, s, t, o);
@@ -216,20 +216,20 @@ const CENAS = [
   // ---------------------------------------------------------------- BLOCO C (29–46): entrada no banco, pistas 1–3, senha
   // 29 · 3D: os 4 (máscara baixada) entram pela porta do banco — mesmo cenário do plano 1, outro trecho da trilha
   { l: 14, mb: false, semFala: true, sfx: [{ t: .1, s: 'galeria/slide_whistle_up_1', v: .3 }],
-    g3d: (tl, d) => ({ set: 'bairroToon', opts: { banco: 1, ceu: '#9FC6E0', grama: '#6E8F55', luz: null, garagem: false }, ...MUNDO.trilha([[[-1.3, 1.4, 9.8], [0, 1.6, 3.2]], [[-.8, 1.5, 8.8], [0, 1.4, 3]]], tl / d), fov: 56 }),
-    f: (tl, d, t) => [[MESTRE, -.95], [MANAUS, -.32], [RECIFE, .32], [BELEM, .95]].map(([P, x], i) => p3T(i ? comEtiqueta(P, ['', 'MANAUS', 'RECIFE', 'BELÉM'][i]) : P, [x, 0, lerp(4.6, 3.7, ease(sobe(0, 1, tl / d))) + i * .05], t, { mascara: 'baixada', walk: tl * 1.8 + i * .3, olhar: [-.3, 0] })).join('') },
+    g3d: (tl, d) => ({ set: 'bairroToon', opts: { banco: 1, ceu: '#9FC6E0', grama: '#6E8F55', luz: null, garagem: false }, ...MUNDO.trilha([[[0, 1.6, 10.4], [0, 1.6, 3.2]], [[.2, 1.6, 9.4], [0, 1.6, 3]]], tl / d), fov: 56 }),
+    f: (tl, d, t) => `<g style="filter:brightness(0)">` + [[MESTRE, -.7], [MANAUS, -.23], [RECIFE, .23], [BELEM, .7]].map(([P, x], i) => { const k = ease(sobe(i * .08, .8 + i * .05, tl / d)); return k > .97 ? '' : p3T(P, [x * (1 - k * .8), 0, lerp(4.8, 3.2, k)], t, { mascara: 'baixada', walk: tl * 1.8 + i * .3, nocheck: true }); }).join('') + `</g>` },
   // 30 · saguão (mármore bege e dourado): os 4 atravessam; ao fundo, o retrato do dono (PISTA plantada); travelling
-  { l: 15, sfx: [{ t: .05, s: 'passo1', v: .3 }, { t: .35, s: 'passo2', v: .3 }], cam: { s: [1, 1.04], c: [250, 520], c1: [330, 520] },
-    f: (tl, d, t) => saguao({ t, rx: 330, ry: 420 }) + [[MESTRE, 0, ''], [MANAUS, 1, 'MANAUS'], [RECIFE, 2, 'RECIFE'], [BELEM, 3, 'BELÉM']].map(([P, i, n]) => pT(n ? comEtiqueta(P, n) : P, lerp(-60, 260, ease(sobe(0, 1, tl / d))) + 110 * (3 - i) - 120, 800, .55, t, { mascara: 'baixada', walk: tl * 2 + i * .25, olhar: [.3, 0], semCorte: true })).join('') },
+  { l: 15, sfx: [{ t: .05, s: 'passo1', v: .3 }, { t: .35, s: 'passo2', v: .3 }], cam: { s: [1, 1.03], c: [270, 520], c1: [300, 520] },
+    f: (tl, d, t) => saguao({ t, rx: 470, ry: 270, rs: .85 }) + [[MESTRE, 0, ''], [MANAUS, 1, 'MANAUS'], [RECIFE, 2, 'RECIFE'], [BELEM, 3, 'BELÉM']].map(([P, i, n]) => pT(n ? comEtiqueta(P, n) : P, lerp(40, 90, ease(sobe(0, 1, tl / d))) + 118 * (3 - i), 800, .46, t, { mascara: 'baixada', walk: tl * 2 + i * .25, olhar: [.3, 0] })).join('') },
   // 31 · plano médio: o Mestre passa pelo Jairo (quepe, café); o retrato atrás
   { l: 15, w: 6, cam: { s: [1.05, 1.08], c: [300, 500] },
-    f: (tl, d, t) => saguao({ t, rx: 410, ry: 400, rs: .9 }) + pT(JAIRO, 430, 800, .72, t, { flip: true, olhar: [.4, 0], palpebra: .65, bD: { h: [30, 90], bend: 30 }, segura: copoCafe }) + pT(MESTRE, lerp(120, 220, ease(sobe(0, 1, tl / d))), 800, .74, t, { mascara: 'baixada', walk: tl * 2, olhar: [.5, 0] }) },
+    f: (tl, d, t) => saguao({ t, rx: 220, ry: 260, rs: .8 }) + pT(JAIRO, 430, 800, .72, t, { flip: true, olhar: [.4, 0], palpebra: .65, bD: { h: [30, 90], bend: 30 }, segura: copoCafe }) + pT(MESTRE, lerp(120, 220, ease(sobe(0, 1, tl / d))), 800, .74, t, { mascara: 'baixada', walk: tl * 2, olhar: [.5, 0] }) },
   // 32 · close 3/4 do Mestre: "Bom dia, Jairo." — aceno (PISTA 1)
   { l: 15, w: 9, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => reacaoToon(MESTRE, t, tl, { mascara: 'baixada', falante: true, olhar: [.6, 0], bD: { h: [150, -40 + Math.sin(t * 14) * 14], bend: 40 }, agito: .6 }, { fundo: SAG.parede, forma: SAG.paredeS }) },
+    f: (tl, d, t) => reacaoToon(MESTRE, t, tl, { mascara: 'baixada', falante: true, olhar: [.6, 0], bD: { h: [100, -70 + Math.sin(t * 14) * 14], bend: 40 }, agito: .6 }, { fundo: SAG.parede, forma: SAG.paredeS }) },
   // 33 · reação do Jairo: cara de nada, gole de café; o retrato do dono atrás dele
   { l: 16, split: false, blur: false, semFala: true, sfx: [{ t: .4, s: 'galeria/bite_apple_1', v: .2 }], cam: { s: [1, 1.04], c: [288, 470] },
-    f: (tl, d, t) => fundoChapado(SAG.parede) + retratoDono(440, 260, .9, t) + pT(JAIRO, 230, 1240, 1.5, t, { olhar: [.1, 0], palpebra: .7, boca: { sm: -.1 }, bD: { h: [20, lerp(90, 10, sobe(.3, .6, tl))], bend: 60 }, segura: copoCafe, semCorte: true, agito: .4 }) },
+    f: (tl, d, t) => fundoChapado(SAG.parede) + retratoDono(400, 250, .85, t) + pT(JAIRO, 230, 1240, 1.5, t, { olhar: [.1, 0], palpebra: .7, boca: { sm: -.1 }, bD: { h: [20, lerp(90, 10, sobe(.3, .6, tl))], bend: 60 }, segura: copoCafe, semCorte: true, agito: .4 }) },
   // 34 · Recife corre até a caixa de alarme do banco (câmera na mão)
   { l: 17, sfx: [{ t: .05, s: 'passo1', v: .4 }, { t: .2, s: 'passo2', v: .4 }, { t: .35, s: 'passo1', v: .4 }], cam: { s: [1.05, 1.1], c: [300, 500], c1: [330, 494] },
     f: (tl, d, t) => saguao({ t, rx: 160, ry: 400, rs: .8, alarme: 1, ax: 480, ay: 420 }) + pT(comEtiqueta(RECIFE, 'RECIFE'), lerp(100, 350, ease(sobe(0, 1, tl / d))), 800, .74, t, { mascara: 'baixada', walk: tl * 3, inclina: .15, bD: { h: [80, 60], bend: 10 }, segura: alicate }) },
@@ -238,29 +238,29 @@ const CENAS = [
     f: (tl, d, t) => saguao({ t, retrato: false, alarme: 1, ax: 480, ay: 420 }) + pT(comEtiqueta(RECIFE, 'RECIFE'), 330, 840, .9, t, { mascara: 'baixada', olhar: [.8, -.2], bD: { h: [100, 0], bend: 0 }, segura: alicate, semCorte: true }) },
   // 36 · reação: Recife de mãos vazias, confuso, olhando o alicate e a caixa
   { l: 17, w: 9, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => reacaoToon(comEtiqueta(RECIFE, 'RECIFE'), t, tl, { mascara: 'baixada', olhar: tl < .4 ? [.6, .5] : [.9, -.3], sobr: .8, boca: { o: .3, w: .5 }, bD: { h: [60, 40], bend: 30 }, segura: alicate, agito: .5 }, { fundo: SAG.parede, forma: SAG.paredeS }) },
+    f: (tl, d, t) => reacaoToon(comEtiqueta(RECIFE, 'RECIFE'), t, tl, { y: 1130, mascara: 'baixada', olhar: tl < .4 ? [.6, .5] : [.9, -.3], sobr: .8, boca: { o: .3, w: .5 }, bD: { h: [60, 40], bend: 30 }, segura: `<g transform="rotate(150)">${alicate}</g>`, agito: .5 }, { fundo: SAG.parede, forma: SAG.paredeS }) + `<text x="470" y="260" font-family="'Baloo 2'" font-weight="800" font-size="110" fill="${TINK}">?</text>` },
   // 37 · close no relógio do saguão: 9:08
   { l: 18, split: false, sfx: [{ t: .05, s: 'tic', v: .5 }, { t: .55, s: 'tic', v: .5 }], cam: { s: [1, 1.05], c: [288, 480] },
-    f: (tl, d, t) => fundoChapado(SAG.parede) + relogioParede(288, 470, 9, 8 + (tl > .5 ? 1 : 0) * 0, 2.6) },
+    f: (tl, d, t) => fundoChapado(SAG.parede) + relogioParede(288, 470, 9, 8, 2.6, 20 + Math.floor(tl * 4)) },
   // 38 · reação do Belém (máscara baixada): vira a cabeça, desconfiado
   { l: 18, w: 3, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => reacaoToon(comEtiqueta(BELEM, 'BELÉM'), t, tl, { mascara: 'baixada', olhar: tl < .4 ? [-.8, 0] : [.8, 0], sobr: -.4, agito: .5 }, { fundo: SAG.parede, forma: SAG.paredeS }) },
+    f: (tl, d, t) => reacaoToon(comEtiqueta(BELEM, 'BELÉM'), t, tl, { y: 1130, mascara: 'baixada', olhar: tl < .4 ? [-.8, 0] : [.8, 0], sobr: -.4, agito: .5 }, { fundo: SAG.parede, forma: SAG.paredeS }) },
   // 39 · frente do cofre (porta redonda), a porta da ESCADA ao lado; os 4 diante do cofre
-  { l: 19, cam: { s: [.92, .95], c: [300, 520] },
-    f: (tl, d, t) => salaCofre({ t }) + [[MESTRE, 520, ''], [MANAUS, 150, 'MANAUS'], [RECIFE, 260, 'RECIFE'], [BELEM, 380, 'BELÉM']].map(([P, x, n]) => pT(n ? comEtiqueta(P, n) : P, x, 830, .56, t, { mascara: 'baixada', flip: x > 450, olhar: [-.2, -.3] })).join('') },
+  { l: 19, cam: { s: [1, 1.03], c: [300, 520] },
+    f: (tl, d, t) => salaCofre({ t }) + [[MESTRE, 500, ''], [MANAUS, 170, 'MANAUS'], [RECIFE, 280, 'RECIFE'], [BELEM, 390, 'BELÉM']].map(([P, x, n]) => pT(n ? comEtiqueta(P, n) : P, x, 830, .44, t, { mascara: 'baixada', flip: x > 450, olhar: [-.2, -.3] })).join('') },
   // 40 · close: a Manaus abre a caixa de ferramentas
   { l: 19, w: 4, split: false, sfx: [{ t: .1, s: 'galeria/metal_rattler_1', v: .4 }], cam: { s: [1, 1.05], c: [288, 520] },
-    f: (tl, d, t) => fundoChapado(COF.parede) + pT(comEtiqueta(MANAUS, 'MANAUS'), 200, 1100, 1.3, t, { mascara: 'baixada', olhar: [.6, .6], bD: { h: [120, 110], bend: 20 }, semCorte: true }) + `<g transform="translate(420 760) scale(1.6)">${caixaFerramentas(tl > .2)}</g>` },
+    f: (tl, d, t) => fundoChapado(COF.parede) + pT(comEtiqueta(MANAUS, 'MANAUS'), 200, 1050, 1.3, t, { mascara: 'baixada', olhar: [.7, .5], bD: { h: [130, 40], bend: 20 }, segura: `<g transform="translate(40 40)">${caixaFerramentas(tl > .2)}</g>`, semCorte: true }) },
   // 41 · plano médio, push-in: o Mestre afasta a Manaus com a mão
   { l: 20, cam: { s: [1, 1.1], c: [330, 500] },
-    f: (tl, d, t) => salaCofre({ t, cx: 230, cr: 160, tx: 470, ty: 450 }) + pT(comEtiqueta(MANAUS, 'MANAUS'), lerp(380, 300, ease(sobe(.2, .6, tl))), 820, .7, t, { mascara: 'baixada', olhar: [-.6, 0], flip: true })
-      + pT(MESTRE, lerp(560, 470, ease(sobe(0, .4, tl))), 820, .74, t, { mascara: 'baixada', flip: true, olhar: [.3, 0], bD: { h: [110, 40], bend: 10 } }) },
+    f: (tl, d, t) => salaCofre({ t, cx: 200, cr: 150, tx: 500, ty: 420, ts: .7, escada: false }) + pT(comEtiqueta(MANAUS, 'MANAUS'), lerp(330, 210, ease(sobe(.2, .6, tl))), 820, .66, t, { mascara: 'baixada', olhar: [-.6, 0], flip: true, inclina: -.25 * sobe(.2, .5, tl) * (1 - sobe(.5, .9, tl)) })
+      + pT(MESTRE, lerp(470, 380, ease(sobe(0, .4, tl))), 820, .7, t, { mascara: 'baixada', flip: true, olhar: [.3, 0], bD: { h: [110, 40], bend: 10 } }) },
   // 42 · close: o dedo de luva digitando sem papel (PISTA 3)
   { l: 20, w: 7, split: false, blur: false, cam: { s: [1, 1.04], c: [288, 500] },
     f: (tl, d, t) => fundoChapado(COF.parede) + teclado(300, 480, 2.6, []) + `<g>${tForma(tMacarrao([620, 900], [400, lerp(560, 600, Math.abs(Math.sin(t * 12)))], -20, 70, 60), VERM.cor)}${tMao(390, lerp(570, 610, Math.abs(Math.sin(t * 12))), Math.PI * 1.15, 34, LUVA, false)}</g>` },
   // 43–45 · close extremo: 7 · 1 · 9 acendem
   ...[[21, 0, [7]], [21, 1, [7, 1]], [21, 2, [7, 1, 9]]].map(([l, w, ac], i) => ({ l, w, split: false, blur: false, sfx: [{ t: .02, s: 'galeria/ding_2', v: .35 }], cam: { s: [1, 1.03], c: [288 + (i - 1) * 30, 500], rot: [(i - 1) * 3, (i - 1) * 3] },
-    f: (tl, d, t) => fundoChapado('#2A2F38') + teclado(288, 500, 4.4, ac) })),
+    f: (tl, d, t) => fundoChapado('#2A2F38') + teclado(288, 420, 3.9, ac) })),
   // 46 · close na trava: gira — clec
   { l: 21, w: 3, split: false, blur: false, sfx: [{ t: .05, s: 'galeria/metal_beam_hit_1', v: .5 }], cam: { s: [1, 1.04], c: [288, 500], shake: 6 },
     f: (tl, d, t) => fundoChapado(COF.parede) + cofrePorta(288, 500, 300, 0, lerp(0, 90, ease(sobe(0, .4, tl)))) },
