@@ -22,10 +22,17 @@ MUNDO.registrar('bairroToon', (sc, o, K) => {
     if (garagem) { pe(new THREE.BoxGeometry(w * .62, h * .7, .2), '#2a1f3a', x, h * .35, z + 2.52, .03);
       const luz = new THREE.Mesh(new THREE.PlaneGeometry(w * .5, h * .55), new THREE.MeshBasicMaterial({ color: o.luz || '#C04BFF', transparent: true, opacity: o.luz === null ? 0 : .55 })); luz.position.set(x, h * .3, z + 2.64); sc.add(luz); }
     else { pe(new THREE.BoxGeometry(1, 2, .2), '#5a3a28', x - w * .2, 1, z + 2.52, .03); pe(new THREE.BoxGeometry(1.4, 1.1, .2), '#BFE3F5', x + w * .22, h * .6, z + 2.52, .03); } };
-  for (let i = -6; i <= 6; i++) { const x = i * 7.4; casa(x, 0, 6, 3.6 + R() * 1.6, i === 0 ? (o.corCasa || '#E3B04B') : cores[(i + 12) % 6], i === 0 && o.garagem !== false);
+  // opção banco: no lugar da casa do meio, um banco largo de colunas, frontão e letreiro (o texto vai em 2D por cima: MUNDO.proj(BANCO_LETREIRO))
+  if (o.banco) { pe(new THREE.BoxGeometry(11, 6, 6), '#E8DCC0', 0, 3, 0); pe(new THREE.BoxGeometry(12, .5, 7), '#CDBF9E', 0, 6.25, 0);
+    const fr = pe(new THREE.CylinderGeometry(6.6, 6.6, 7, 3, 1), '#E8DCC0', 0, 7.6, 0); fr.rotation.x = Math.PI / 2; fr.rotation.z = Math.PI / 2; fr.scale.set(1, 1, .32);
+    for (let c = -2; c <= 2; c++) if (c) pe(new THREE.CylinderGeometry(.32, .36, 5.2, 12), '#F4EEDD', c * 1.9, 2.8, 3.3);
+    pe(new THREE.BoxGeometry(12, .4, 2.2), '#CDBF9E', 0, .2, 3.6); pe(new THREE.BoxGeometry(2.4, 3.2, .3), '#3a2a20', 0, 1.6, 3.05, .03);
+    pe(new THREE.BoxGeometry(5.2, .9, .2), '#2a2238', 0, 5.4, 3.12, .03); }
+  for (let i = -6; i <= 6; i++) { if (o.banco && Math.abs(i) <= 1) continue; const x = i * 7.4; casa(x, 0, 6, 3.6 + R() * 1.6, i === 0 ? (o.corCasa || '#E3B04B') : cores[(i + 12) % 6], i === 0 && o.garagem !== false);
     casa(x + 3.7, -14, 6, 3.6 + R() * 2, cores[(i + 15) % 6], false); }
   for (let i = -6; i <= 6; i++) { const tr = pe(new THREE.CylinderGeometry(.18, .22, 2.4, 8), '#7A4E2D', i * 7.4 + 3.7, 1.2, 5.6); pe(new THREE.SphereGeometry(1.1, 12, 8), '#2F9E5B', i * 7.4 + 3.7, 2.9, 5.6); }
   return {};
 });
 // personagem toon em pé no 3D (pés em pos, altura em metros)
+const BANCO_LETREIRO = [0, 5.4, 3.25];
 const p3T = (P, pos, t, o = {}, alt = 1.75) => { const q = MUNDO.proj(pos); if (q.atras) return ''; return pt(P, q.x, q.y, q.ppm * alt / 600, t, o); };

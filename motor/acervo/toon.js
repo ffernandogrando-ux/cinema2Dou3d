@@ -69,15 +69,17 @@ function tMao(x, y, ang, r, cor, punho) {
 //       bE/bD: {h:[dx,dy], bend, punho}, pE/pD: [dx, dy], segura (SVG na mão da frente), seguraE, walk (fase), semCorte, nocheck }
 const T_ALT = { adulto: { hip: -150, omb: -335, cab: -470, larg: 1 }, baixo: { hip: -96, omb: -215, cab: -320, larg: .9 } };
 function toon(P, st = {}) {
-  const A = T_ALT[P.alt || 'adulto'], t = st.liso ? (st.t || 0) : Math.floor((st.t || 0) * 12 + 1e-6) / 12, s = st.s || 1, f = st.flip ? -1 : 1, L = A.larg, bar = P.barriga || 0;
+  const A0 = T_ALT[P.alt || 'adulto'], A = st.sentado ? { ...A0, hip: -125, omb: A0.omb - A0.hip - 125, cab: A0.cab - A0.hip - 125 } : A0, t = st.liso ? (st.t || 0) : Math.floor((st.t || 0) * 12 + 1e-6) / 12, s = st.s || 1, f = st.flip ? -1 : 1, L = A.larg, bar = P.barriga || 0;
   const ag = st.still ? 0 : (st.agito ?? 1), ph = st.ph ?? P.ph ?? 0, resp = Math.sin(t * 2.4 + ph) * 4 * ag, peso = Math.sin(t * 1.1 + ph * 1.7) * 5 * ag;
   const w = st.walk != null ? Math.sin(st.walk * Math.PI * 2) : 0;
   let r = `<g transform="translate(${_p(st.x || 0)} ${_p(st.y || 0)}) scale(${s * f} ${s})">`;
   if (st.sombra !== false) r += `<ellipse cx="0" cy="4" rx="${90 * L}" ry="13" fill="#000" opacity=".18"/>`;
   // pernas
   for (const [sd, pe] of [[-1, st.pE || [0, 0]], [1, st.pD || [0, 0]]]) {
-    const hip = [sd * 26 * L, A.hip], ank = [sd * 30 * L + pe[0] + w * 26 * sd, -24 + pe[1] - Math.max(0, w * sd) * 14];
+    const hip = [sd * 26 * L, A.hip], ank = st.sentado ? [sd * 16 + 100 + pe[0], -24 + pe[1]] : [sd * 30 * L + pe[0] + w * 26 * sd, -24 + pe[1] - Math.max(0, w * sd) * 14];
     const C = P.calca || { cor: '#3A3F5C', corS: '#2b2f45' };
+    if (st.sentado) { const jo = [sd * 16 + 96, A.hip + 4]; r += tForma(tMacarrao(hip, jo, 0, 44 * L, 40 * L), sd < 0 ? (C.corS || C.cor) : C.cor) + tForma(tMacarrao(jo, ank, 0, 38 * L, 34 * L), sd < 0 ? (C.corS || C.cor) : C.cor);
+      r += tForma(tSpl([[ank[0] - 28, ank[1] + 26], [ank[0] - 24, ank[1] + 2], [ank[0] + 10, ank[1] - 2], [ank[0] + 46, ank[1] + 12], [ank[0] + 40, ank[1] + 28]]), P.sapato || '#3b6fd6'); continue; }
     if (C.curta) { const joelho = [(hip[0] + ank[0]) / 2, (hip[1] + ank[1]) / 2];
       r += tForma(tMacarrao(hip, ank, sd * -4, 30, 26), P.pele) + tForma(tMacarrao(hip, joelho, 0, 46 * L, 44 * L), C.cor, tPinta(`M-200 ${A.hip} h400 v400 h-400z`, C.corS, 0) ); }
     else r += tForma(tMacarrao(hip, ank, sd * -6, 42 * L, 36 * L), C.cor, tPinta(tPoli([[sd < 0 ? -200 : 0, -600], [sd < 0 ? hip[0] - 4 : 200, -600], [sd < 0 ? hip[0] - 4 : 200, 50], [sd < 0 ? -200 : 0, 50]]), C.corS || C.cor, sd < 0 ? 1 : 0));
@@ -93,11 +95,12 @@ function toon(P, st = {}) {
   const braco = (sh, arm, segura, frente) => { const solto = !arm, bal = Math.sin(t * 2.1 + ph + (sh[0] < 0 ? 1.7 : 0)) * 10 * ag; arm = arm || { h: [sh[0] < 0 ? -44 - bar * 30 : 14, 160], bend: sh[0] < 0 ? -22 : 14 };
     if (solto || ag) arm = { ...arm, h: [arm.h[0] + bal, arm.h[1] - Math.abs(bal) * .3] };
     const hp = [sh[0] + arm.h[0], sh[1] + arm.h[1]], ang = Math.atan2(hp[1] - sh[1], hp[0] - sh[0]); let o = '';
-    if (TR.tipo === 'moletom') o += tForma(tMacarrao(sh, hp, arm.bend ?? 0, 44 * L, 38 * L), frente ? TR.cor : TR.corS);
+    const manga = TR.tipo === 'moletom' || TR.tipo === 'macacao';
+    if (manga) o += tForma(tMacarrao(sh, hp, arm.bend ?? 0, 44 * L, 38 * L), frente ? TR.cor : TR.corS);
     else { o += tForma(tMacarrao(sh, hp, arm.bend ?? 0, 30 * L, 26 * L), P.pele);
       if (TR.tipo === 'camiseta') o += tForma(tMacarrao(sh, [sh[0] + arm.h[0] * .3, sh[1] + arm.h[1] * .3], 0, 46 * L, 42 * L), frente ? TR.cor : TR.corS); }
-    if (TR.tipo === 'moletom') o += tForma(tElip(hp[0] - Math.cos(ang) * 4, hp[1] - Math.sin(ang) * 4, 21 * L, 21 * L), TR.corS);
-    o += tMao(hp[0], hp[1], ang, 19 * L, P.pele, arm.punho || !!segura);
+    if (manga) o += tForma(tElip(hp[0] - Math.cos(ang) * 4, hp[1] - Math.sin(ang) * 4, 21 * L, 21 * L), TR.corS);
+    o += tMao(hp[0], hp[1], ang, 19 * L, P.mao || P.pele, arm.punho || !!segura);
     if (segura) o += `<g transform="translate(${_p(hp[0])} ${_p(hp[1])})">${segura}</g>`;
     return o; };
   r += braco(shB, st.bE, st.seguraE, false);
@@ -110,6 +113,9 @@ function toon(P, st = {}) {
   r += tForma(corpo, TR.cor, somb);
   if (TR.tipo === 'moletom') r += tTraco(`M-12 ${omb + 14} l-4 ${H * .3} M12 ${omb + 14} l4 ${H * .3}`, TLW * .8, '#f4f1ea') + tTraco(`M-40 ${hip - 64} H44 L40 ${hip - 22} H-36Z`, TLW * .8);
   if (TR.tipo === 'regata') r += tTraco(`M-34 ${omb - 8} Q0 ${omb + 40} 34 ${omb - 8}`);
+  if (TR.tipo === 'macacao') { if (TR.aberto) r += tForma(`M-26 ${omb - 4} L0 ${omb + H * .45} L26 ${omb - 4}Z`, TR.camisa || '#F4F1EA') + (TR.gravata ? tForma(`M-7 ${omb + 4} L7 ${omb + 4} L10 ${omb + H * .38} L0 ${omb + H * .46} L-10 ${omb + H * .38}Z`, TR.gravata) : '') + tTraco(`M-26 ${omb - 4} L0 ${omb + H * .45} L26 ${omb - 4}`);
+    else r += tTraco(`M0 ${omb + 6} V${hip - 6}`, TLW * .7) + tForma(`M-28 ${omb - 4} L-6 ${omb + 26} L-2 ${omb + 4}Z`, TR.corS) + tForma(`M28 ${omb - 4} L6 ${omb + 26} L2 ${omb + 4}Z`, TR.corS);
+    r += tForma(tPoli([[16, omb + 46], [46, omb + 46], [46, omb + 76], [16, omb + 76]]), TR.corS); }
   if (TR.detalhe) r += TR.detalhe(omb, hip);
   // pescoço e cabeça
   r += tForma(tMacarrao([14, omb + 4], [24, omb - 34], 4, 30, 30), P.pele);
@@ -147,6 +153,8 @@ function tCabeca(P, st, t) {
   r += tBoca(40 + (b.skew || 0) * 6, 82, 60, b);
   if (P.bigode) r += tForma(tSpl([[6, 62], [40, 54], [76, 60], [70, 72], [40, 68], [12, 74]]), P.bigode);
   if (P.cabeca) r += P.cabeca(st);
+  if (st.mascara) r += tMascaraPorco(st.mascara, fala ? (b.o || 0) : 0, { lid, lk, pisca, arr });
+  if (P.oculos) r += tOculos(P.oculos);
   return r;
 }
 
@@ -172,3 +180,20 @@ function reacaoToon(P, t, tl, st = {}, o = {}) {
 // atalho: pt(P, x, y, s, t, st) — st.boca aceita nome: neutra, sorriso, riso, grito, o
 const BOCAS = { neutra: { sm: -.3 }, sorriso: { sm: .7 }, riso: { o: .5, sm: .9 }, grito: { o: 1, w: 1.15 }, o: { o: .5, w: .5 } };
 const pt = (P, x, y, s, t, o = {}) => toon(P, { x, y, s, t, ...o, boca: typeof o.boca === 'string' ? BOCAS[o.boca] : o.boca });
+
+// ---------------------------------------------------------------- máscara de porquinho-cofre (nossa) e óculos
+// modo 'baixada' (cobre o rosto; olhos pelos furos; o focinho mexe na fala, ab = abertura) ou 'testa' (levantada sobre a cabeça)
+function tMascaraPorco(modo, ab = 0, o = {}) {
+  const ROSA = '#F4A6B8', ROSA_S = '#E58CA2', FOC = '#EE8FA6';
+  let m = tForma(tSpl([[-34, -86], [-62, -132], [-6, -100]]), ROSA, '') + tForma(tSpl([[40, -98], [74, -142], [88, -80]]), ROSA, '');
+  m += tForma(tSpl([[-52, -72], [30, -88], [94, -62], [104, 0], [94, 66], [50, 98], [-12, 98], [-56, 62], [-66, 0]]), ROSA, tPinta(tSpl([[-90, -20], [-60, -90], [-30, 0], [-50, 110], [-100, 110]]), ROSA_S));
+  m += tForma(tPoli([[4, -70], [36, -70], [36, -63], [4, -63]]), '#7a3a4a');                                  // fenda da moeda
+  if (modo === 'baixada') {
+    m += tOlho(8, -10, 24, 27, { lid: o.lid ?? .3, look: o.lk || [0, 0], fechado: o.pisca, pele: ROSA, pupila: 3.4 }) + tOlho(60, -12, 19, 23, { lid: o.lid ?? .3, look: o.lk || [0, 0], fechado: o.pisca, pele: ROSA, pupila: 3 });
+    const fy = 40 + ab * 6, fry = 22 + ab * 8;
+    m += tForma(tElip(54, fy, 32, fry), FOC, tPinta(tElip(46, fy + 4, 28, fry * .7), ROSA_S)) + `<ellipse cx="44" cy="${fy}" rx="5" ry="8" fill="#7a3a4a"/><ellipse cx="66" cy="${fy}" rx="5" ry="8" fill="#7a3a4a"/>`;
+    return tTraco('M-66 0 L-84 2', TLW * 1.2, '#7a3a4a') + m; }
+  return `<g transform="translate(6 -112) rotate(-14) scale(.62)">${tForma(tElip(54, 40, 32, 22), FOC)}${m}${`<ellipse cx="44" cy="40" rx="5" ry="8" fill="#7a3a4a"/><ellipse cx="66" cy="40" rx="5" ry="8" fill="#7a3a4a"/>`}</g>`;
+}
+const tOculos = (cor = TINK) => `<circle cx="8" cy="-10" r="30" fill="#CFE8FF" fill-opacity=".22" stroke="${cor}" stroke-width="${TLW * 1.4}" vector-effect="non-scaling-stroke"/>`
+  + `<circle cx="60" cy="-12" r="24" fill="#CFE8FF" fill-opacity=".22" stroke="${cor}" stroke-width="${TLW * 1.4}" vector-effect="non-scaling-stroke"/>` + tTraco('M38 -12 Q36 -18 36 -12', TLW * 1.2, cor) + tTraco('M-22 -10 L-70 -2', TLW * 1.2, cor);
