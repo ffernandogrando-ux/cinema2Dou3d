@@ -90,7 +90,7 @@ const CENAS = [
   { l: 0, w: 4, sfx: [{ t: .05, s: 'galeria/glockenspiel_magic_1', v: .55 }, { t: .3, s: 'galeria/metal_wobble_2', v: .45 }], cam: { s: [.94, .97], c: [288, 512], c1: [288, 510] },
     f: (tl, d, t) => { const k = abre(tl - .05); return garagem(GARAGEM) + lavagem(k) + portal(270, 520, 160, k, t)
       + pt(VIZ, 460, 800, .68, t, { flip: true, olhar: [.6, -.1], boca: 'riso', palpebra: .1, sobr: .8, bD: { h: [60, 120], bend: 20 }, segura: CONTROLE_T })
-      + pt(EU, 92, 800, .68, t, { olhar: [.9, 0], olhos: 'arregalados', boca: 'o', sobr: 1 }) + (tl > .5 ? tagTerminal('DIMENSÃO 0800', (tl - .5) / 1.1, '#7CFFB2', 300, 318) : ''); } },
+      + pt(EU, 92, 800, .68, t, { olhar: [.9, 0], olhos: 'arregalados', boca: 'o', sobr: 1 }) + (tl > .5 ? tagTerminal('DIMENSÃO 0800', (tl - .5) / 1.1, '#7CFFB2', 176, 236) : ''); } },
   // 3 · "E usa pra quê?" — reação: close em mim, cara de nada (pálpebra pesada), o brilho roxo de lado
   { l: 1, split: false, blur: false, cam: { s: [1, 1.08], c: [288, 470] },
     f: (tl, d, t) => reacaoToon(EU, t, tl, { olhar: [.15 + .5 * clamp((tl - .35) / .1), 0], palpebra: .58, boca: { sm: -.2, skew: .4 }, agito: .4 }, { fundo: GARAGEM.parede, forma: GARAGEM.paredeS, brilho: BRILHO[0], lado: 1 }) },
@@ -127,12 +127,12 @@ const CENAS = [
   // 8 · "dele." — REAÇÃO: close no vizinho apavorado (tremendo); corta para o plano aberto e o coco cai no pé descalço
   { l: 3, w: 8, split: false, blur: false, sfx: [{ t: .05, s: 'galeria/head_shake_1', v: .4 }, { t: .78, s: 'galeria/coconut_hit_1', v: .55 }], cam: { s: [1, 1.04], c: [288, 470] },
     f: (tl, d, t) => { if (tl < .5) { const tr = Math.floor(t * 12) % 2 ? 4 : -4;
-        return `<g transform="translate(${tr} 0)">` + reacaoToon(VIZ, t, tl, { flip: true, x: 330, olhar: [1, .2], olhos: 'arregalados', boca: 'grito', sobr: 1, descalco: 'D', agito: 1.6 }, { fundo: PRAIA.ceu2, forma: PRAIA.ceu, brilho: BRILHO[0], lado: -1 }) + `</g>`; }
+        return `<g transform="translate(${tr} 0)">` + reacaoToon(VIZ, t, tl, { flip: true, x: 330, olhar: [1, .2], olhos: 'arregalados', boca: { o: 1.3, w: 1.2 }, sobr: 1, descalco: 'D', agito: 1.6, bD: { h: [40, -150], bend: 40, punho: false }, bE: { h: [-30, -150], bend: -40 } }, { fundo: PRAIA.ceu2, brilho: BRILHO[0], lado: -1 }) + `</g>`; }
       const cai = sobe(.55, .8, tl);
       return bandas([PRAIA.ceu, PRAIA.ceu2, PRAIA.mar, PRAIA.areia], [-400, 300, 560, 700]) + `<circle cx="480" cy="190" r="56" fill="#FFF1C2" stroke="${INKT}" stroke-width="6"/>`
         + `<path d="M520 770 q-30 -230 10 -400" stroke="${INKT}" stroke-width="14" fill="none"/><path d="M530 370 q-90 -30 -150 30 M530 370 q-40 -80 -120 -80 M530 370 q70 -40 120 10" stroke="#2F9E5B" stroke-width="22" fill="none" stroke-linecap="round"/>`
         + portal(150, 380, 120, 1, t) + `<rect x="-400" y="-400" width="1400" height="2000" fill="${BRILHO[0]}" opacity=".08"/>`
         + boleto(230, 720, .85, t, { olhar: 1, boca: 1, anda: .3 })
-        + pt(VIZ, 420, 720, .62, t, { flip: true, segura: cai > 0 ? '' : COCO_T, olhar: [1, .3], olhos: 'arregalados', boca: 'o', sobr: 1, inclina: -.08, descalco: 'D', bD: { h: [60, 110], bend: 30 } })
+        + pt(VIZ, 420, 720, .62, t, { flip: true, semPiscar: true, segura: cai > 0 ? '' : COCO_T, olhar: [1, .3], olhos: 'arregalados', boca: 'o', sobr: 1, inclina: -.08, descalco: 'D', bD: { h: [60, 110], bend: 30 } })
         + (cai > 0 ? `<g transform="translate(${lerp(372, 380, cai)} ${lerp(600, 716, cai * cai)})">${COCO_T}</g>` : ''); } },
 ];
