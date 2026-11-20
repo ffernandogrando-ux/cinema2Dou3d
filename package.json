@@ -1,0 +1,8 @@
+{
+  "name": "anima-ovitinho",
+  "private": true,
+  "description": "Motor de animação do canal (render com Playwright + three.js para cenários 3D)",
+  "dependencies": {
+    "three": "0.160.0"
+  }
+}

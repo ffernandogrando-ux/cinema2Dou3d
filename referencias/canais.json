@@ -1,0 +1,881 @@
+{
+ "canais": [
+  {
+   "nome": "@zaylento.yt",
+   "url": "https://www.tiktok.com/@zaylento.yt",
+   "idioma": "en",
+   "pasta_transcricoes": "transcricoes_zaylento",
+   "papel": "dobra de nicho (formato em teste)",
+   "vistos": {
+    "7707085218670185760": {
+     "data_post": "2026-11-12",
+     "views": 13100000,
+     "titulo": "In this town, the Monster can only move in the dark 🔦 Learn how to make these: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7706894821323033889": {
+     "data_post": "2026-11-11",
+     "views": 7700000,
+     "titulo": "In this town, everyone is watching these In This Town videos! 📱Learn how: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7706689478533909792": {
+     "data_post": "2026-11-10",
+     "views": 6200000,
+     "titulo": "In this town, the ice cream truck only comes at night🍦Learn to make these vids:blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7706523987047664929": {
+     "data_post": "2026-11-10",
+     "views": 664600,
+     "titulo": "In this town, the floor turns into lava every hour🌋 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7706289215964859680": {
+     "data_post": "2026-11-09",
+     "views": 1500000,
+     "titulo": "In this town, everyone has a mammoth except me 🦣 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7706161704190610721": {
+     "data_post": "2026-11-09",
+     "views": 2000000,
+     "titulo": "In this town, the era changes every single day ⏳ #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7705945181471657249": {
+     "data_post": "2026-11-08",
+     "views": 751600,
+     "titulo": "In this town, every living thing is the opposite size 🐘 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7705770809222024481": {
+     "data_post": "2026-11-08",
+     "views": 723400,
+     "titulo": "In this town, one cereal box contains a golden ticket 🎫🥣 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7705544571169590561": {
+     "data_post": "2026-11-07",
+     "views": 1200000,
+     "titulo": "In this town, you get paid for being embarrassed 🤑 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7705390647926213921": {
+     "data_post": "2026-11-07",
+     "views": 2800000,
+     "titulo": "In this town, one person gets hunted for 10 days 👑 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7705153517203377441": {
+     "data_post": "2026-11-06",
+     "views": 1900000,
+     "titulo": "In this town, poor people become invisible 👻 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7705008879855308065": {
+     "data_post": "2026-11-06",
+     "views": 2200000,
+     "titulo": "In this town, everyone lives inside the Backrooms 🚪 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7704795245535350049": {
+     "data_post": "2026-11-05",
+     "views": 5300000,
+     "titulo": "In this town, you get paid for being unlucky 🍀 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7704661562530811169": {
+     "data_post": "2026-11-05",
+     "views": 1400000,
+     "titulo": "In this town, everyone is a ninja except me 🥷 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7704432418194804001": {
+     "data_post": "2026-11-04",
+     "views": 1500000,
+     "titulo": "In this town, you can enter any book 📚 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7704287984052456737": {
+     "data_post": "2026-11-04",
+     "views": 1900000,
+     "titulo": "In this town, everyone must choose between two pills 💊 (Part 2) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7704102508859264289": {
+     "data_post": "2026-11-04",
+     "views": 3500000,
+     "titulo": "In this town, everyone must choose between two pills 💊 (Part 2 soon) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7703950881158466848": {
+     "data_post": "2026-11-03",
+     "views": 3100000,
+     "titulo": "In this world, everyone lives on a train that never stops 🚆 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7703800777336212768": {
+     "data_post": "2026-11-03",
+     "views": 6200000,
+     "titulo": "In this town, touching the ground costs $10 💸 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7703678904145317152": {
+     "data_post": "2026-11-02",
+     "views": 1800000,
+     "titulo": "In my town, everyone believes in christmas except me…🎄 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7703557612477910305": {
+     "data_post": "2026-11-02",
+     "views": 5400000,
+     "titulo": "In this town, nobody is allowed to look at the moon🌙 #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7703429226372009249": {
+     "data_post": "2026-11-02",
+     "views": 3200000,
+     "titulo": "In this town, the richer you are the higher your house is🤑 (Part 2) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7703332734629924128": {
+     "data_post": "2026-11-01",
+     "views": 12700000,
+     "titulo": "In this town, the richer you are the higher your house is🤑 (Part 2 soon) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7703171633225256224": {
+     "data_post": "2026-11-01",
+     "views": 1900000,
+     "titulo": "In this town, everyone has a bunker except me🧟‍♂️ (Part 2) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7703024247081291040": {
+     "data_post": "2026-11-01",
+     "views": 14600000,
+     "titulo": "In this town, everyone has a bunker except me 🧟 (Part 2 soon) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7702896756677217569": {
+     "data_post": "2026-10-31",
+     "views": 701600,
+     "titulo": "It rains something different every day🌧️ ( Part 2) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7702831782365760801": {
+     "data_post": "2026-10-31",
+     "views": 1600000,
+     "titulo": "It rains something different every day🌧️ (Part 2 soon) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7707395253933706528": {
+     "data_post": "2026-11-12",
+     "views": 4900000,
+     "titulo": "In this town, the Monster can only move in the dark 🔦 (Part 2) #Roblox #RobloxStories",
+     "visto_em": "2026-11-12"
+    },
+    "7707825858169277729": {
+     "data_post": "2026-11-14",
+     "views": 1400000,
+     "titulo": "In this town, everyone sleepwalks at night except me 😴Learn how to make these vids: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-14"
+    },
+    "7707617010720460064": {
+     "data_post": "2026-11-13",
+     "views": 1100000,
+     "titulo": "In this town, we all live inside a TV 📺 Learn how to make vids like this: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-14"
+    },
+    "7708306487327706401": {
+     "data_post": "2026-11-15",
+     "views": 5300000,
+     "titulo": "In this town, we can never stop moving 🐌 Want to make your own vids like this: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-15"
+    },
+    "7708051476211371297": {
+     "data_post": "2026-11-14",
+     "views": 2500000,
+     "titulo": "In this town, if you lie, you turn into stone! 🗿Want to make these vids yourself: blockframeacademy.com👀 #Roblox #RobloxStories",
+     "visto_em": "2026-11-15"
+    },
+    "7708677016832199968": {
+     "data_post": "2026-11-16",
+     "views": 5000000,
+     "titulo": "In this town, nobody is locked in except me 💪Learn how to make these:blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-16"
+    },
+    "7708466743462710561": {
+     "data_post": "2026-11-15",
+     "views": 1700000,
+     "titulo": "In this town, everyone's goal is to steal land 👑 Want to make your own vids: blockframeacademy.com#Roblox #RobloxStories",
+     "visto_em": "2026-11-16"
+    },
+    "7708893370877250849": {
+     "data_post": "2026-11-16",
+     "views": 4700000,
+     "titulo": "In this town, we live on the back of a giant capybara! 🦫 Want to make your own vids: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-17"
+    },
+    "7709636133969333536": {
+     "data_post": "2026-11-18",
+     "views": 2300000,
+     "titulo": "In this town, there's a monster that's terrified of pets 🐶 Learn how to make these vids: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-19"
+    },
+    "7709378871094807841": {
+     "data_post": "2026-11-18",
+     "views": 3400000,
+     "titulo": "In this town, everything is normal 🏡 Want to make videos like these: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-19"
+    },
+    "7709152038411570464": {
+     "data_post": "2026-11-17",
+     "views": 673600,
+     "titulo": "In this town, everyone gets a superpower on their 13th birthday! 🎂 #Roblox #RobloxStories",
+     "visto_em": "2026-11-19"
+    },
+    "7710141043781471520": {
+     "data_post": "2026-11-20",
+     "views": 1200000,
+     "titulo": "In this town, hussing is strictly forbidden 🚫Want to make these vids yourself: blockframeacademy.com #Roblox #RobloxStories",
+     "visto_em": "2026-11-20"
+    },
+    "7709868474952191265": {
+     "data_post": "2026-11-19",
+     "views": 3000000,
+     "titulo": "In this town, the rich live in giant bunkers ⛈️ How to make these vids: blockframeacademy.com#Roblox #RobloxStories",
+     "visto_em": "2026-11-20"
+    }
+   },
+   "ultima_checagem": "2026-11-20"
+  },
+  {
+   "nome": "@historiasdertr",
+   "url": "https://www.tiktok.com/@historiasdertr",
+   "idioma": "pt",
+   "pasta_transcricoes": "transcricoes_historiasdertr",
+   "papel": "formato atual (stickman, crítica social)",
+   "vistos": {
+    "7707000262703074578": {
+     "data_post": "2026-11-12",
+     "views": 503000,
+     "titulo": "Nesse mundo o chão é lava. DE VERDADE 🌋 faz 300 anos que ninguém pisa nele... e ninguém sabe por quê #19 (pra mim esse tem o final mais engraçado da série 😂 eu ",
+     "visto_em": "2026-11-12"
+    },
+    "7707081228456889608": {
+     "data_post": "2026-11-12",
+     "views": 25000,
+     "titulo": "José do Egito (Ep. 1) 📖 Os próprios irmãos venderam ele por vinte moedas de prata. Poço, escravidão, prisão, dois anos esquecido... e um dia a vida deles estava",
+     "visto_em": "2026-11-12"
+    },
+    "7706984112501951751": {
+     "data_post": "2026-11-12",
+     "views": 179800,
+     "titulo": "Nesse mundo, tudo que a gente desenha vira de verdade ✏️ aí o Guto desenhou um sorriso num bichinho que não tinha boca... #20 (pra mim é o bichinho mais fofo e ",
+     "visto_em": "2026-11-12"
+    },
+    "7706983605641170183": {
+     "data_post": "2026-11-12",
+     "views": 216000,
+     "titulo": "Ela sabe que alguém saiu. Só não sabe quem 🐇 BOM PASTO #2: 78 % de vocês mandou a Malu voltar pra casa, e esse episódio é o preço. Eu acho que o medo mais forte",
+     "visto_em": "2026-11-12"
+    },
+    "7706698599794576648": {
+     "data_post": "2026-11-11",
+     "views": 125500,
+     "titulo": "Nesse mundo, cada um tira só um pouquinho 🫘 quem comeu a merenda da escola? #18 (pra mim o final mais doído da série 😳 o garfo me pegou. fica até o último segun",
+     "visto_em": "2026-11-12"
+    },
+    "7706697177300487431": {
+     "data_post": "2026-11-11",
+     "views": 1800000,
+     "titulo": "Nesse mundo, a sombra faz o que a gente tem vontade de fazer 🕯️ e a sombra da mãe dela ia pra porta toda noite #17 (pra mim o final mais bonito da série 🥹 assis",
+     "visto_em": "2026-11-12"
+    },
+    "7706696181384088850": {
+     "data_post": "2026-11-11",
+     "views": 313900,
+     "titulo": "Nesse mundo, pra trabalhar, tem que pedir licença 🏷️ por que o filho multava a mãe todo dia? #16 (pra mim a melhor virada da série até agora 😳 fica até o último",
+     "visto_em": "2026-11-12"
+    },
+    "7706525928494566674": {
+     "data_post": "2026-11-10",
+     "views": 356400,
+     "titulo": "nesse mundo, todo mundo nasce com um narrador 🎙️ e o do Danilo era o pior do Brasil. quis contar a história daquela voz que manda a gente levar casaco... e que ",
+     "visto_em": "2026-11-12"
+    },
+    "7706491236919594248": {
+     "data_post": "2026-11-10",
+     "views": 802500,
+     "titulo": "nesse mundo, quem mais precisa, mais recebe 👓 como o cego viu o colar? #15 (fica até o último segundo 😳) #EntretenimentoEmDobro #nessemundo #animação #historia ",
+     "visto_em": "2026-11-12"
+    },
+    "7706489916569718034": {
+     "data_post": "2026-11-10",
+     "views": 209900,
+     "titulo": "la foi adotada e nunca mais escreveu 🐇 Nesse orfanato, toda criança tem um número no pescoço, e nenhuma sabe por quê. BOM PASTO #1 é a minha nova série animada ",
+     "visto_em": "2026-11-12"
+    },
+    "7705986047326407954": {
+     "data_post": "2026-11-09",
+     "views": 1800000,
+     "titulo": "nesse mundo, todo mundo espera numa fila que dá a volta no planeta 🌍 o que tem lá na frente? #11 (fica até o último segundo 😳) #nessemundo #animação #historia #",
+     "visto_em": "2026-11-12"
+    },
+    "7705979590484806920": {
+     "data_post": "2026-11-09",
+     "views": 83700,
+     "titulo": "A mãe dele tinha ingresso e NUNCA teve coragem de ver ele correr 🏁 BOX, BOX! #3 (FINAL) — vocês mandaram atacar, o câmbio travou na sexta... igual ao Senna em I",
+     "visto_em": "2026-11-12"
+    },
+    "7705976021819985159": {
+     "data_post": "2026-11-09",
+     "views": 2400000,
+     "titulo": "nesse mundo, todo mundo ganha igual 🤔 🍞 oque faria? #13 (fica até o último segundo 😳) #nessemundo #animação #historia #historiaanimada #fabula #reflexão #plottw",
+     "visto_em": "2026-11-12"
+    },
+    "7705912610880785682": {
+     "data_post": "2026-11-08",
+     "views": 67600,
+     "titulo": "Apocalipse zumbi, Dia 27: o FINAL 🐶🌅 Vinte e sete dias atrás, a primeira regra era calar o cachorro... hoje ele cura a cidade 💛 A chamada, o apito, a borracha, ",
+     "visto_em": "2026-11-12"
+    },
+    "7705651665369664776": {
+     "data_post": "2026-11-08",
+     "views": 1400000,
+     "titulo": "nesse mundo, uma vez por ano você acorda no corpo de quem mais te odeia 🔁 no corpo de quem VOCÊ ia acordar? #12 (fica até o último segundo 😳) #nessemundo #anima",
+     "visto_em": "2026-11-12"
+    },
+    "7705612235086908690": {
+     "data_post": "2026-11-08",
+     "views": 119400,
+     "titulo": "nesse bairro, quem ri sai voando 🪁 #6 — tenta não rir até o final 😂 (em quantos segundos você ia voar?) #nessebairro #animação #historia #fabula #historiaanimad",
+     "visto_em": "2026-11-12"
+    },
+    "7705253971857870087": {
+     "data_post": "2026-11-07",
+     "views": 1100000,
+     "titulo": "Na minha cidade, robô é igualzinho a gente 🤖 E eu sei quem é... 👀 Em que segundo você desconfiou? Mal Contada #2 #MalContada #historiasmalcontadas #animação #mi",
+     "visto_em": "2026-11-12"
+    },
+    "7705246334852336914": {
+     "data_post": "2026-11-07",
+     "views": 523700,
+     "titulo": "\"pai, qual é o lugar mais alto do mundo?\" 🏙️ nesse mundo, o seu andar é o seu dinheiro #9 (fica até o final 🥲) #nessemundo #animação #historia #historiaanimada ",
+     "visto_em": "2026-11-12"
+    },
+    "7705251590671797512": {
+     "data_post": "2026-11-07",
+     "views": 37500,
+     "titulo": "Apocalipse zumbi, Dia 25: a cura 🧪🐶 O navio que atirou no Roberto achou ele de novo 🚢 E o recado do velho dizia: o sangue dele come o deles 📝 Um tubo. Uma dose.",
+     "visto_em": "2026-11-12"
+    },
+    "7705112505600789767": {
+     "data_post": "2026-11-06",
+     "views": 1700000,
+     "titulo": "nesse mundo, o número em cima da sua cabeça é quantas vezes você já errou 🔢 por que o dele só sobe? #10 (fica até o final 🥲) #nessemundo #animação #historia #hi",
+     "visto_em": "2026-11-12"
+    },
+    "7704884295113903367": {
+     "data_post": "2026-11-06",
+     "views": 1100000,
+     "titulo": "eles nasceram no mesmo segundo 👶👶 nesse mundo, o seu andar é o seu dinheiro 🏙️ #8 (fica até o final) #nessemundo #animação #historia #historiaanimada #desiguald",
+     "visto_em": "2026-11-12"
+    },
+    "7704883168096095506": {
+     "data_post": "2026-11-06",
+     "views": 50800,
+     "titulo": "Uma COZINHA trocou os 4 pneus em 1,9 segundo 🍳🏁 BOX, BOX! #2 — a um décimo do recorde do mundo, e aí desabou a chuva em Interlagos. Faltam 5 voltas: ATACA ⚔️ ou",
+     "visto_em": "2026-11-12"
+    },
+    "7704786717659942162": {
+     "data_post": "2026-11-05",
+     "views": 46000,
+     "titulo": "Apocalipse zumbi, Dia 24: até a revisão 🩺🐶 Vocês deixaram a Laika... só ninguém contou pro Roberto 🥺 Pra tirar o dono do vidro dela, ele deu o primeiro passo de",
+     "visto_em": "2026-11-12"
+    },
+    "7704656325229186322": {
+     "data_post": "2026-11-05",
+     "views": 587200,
+     "titulo": "nesse mundo, o seu andar é o seu dinheiro 🏙️💸 #7 — ela sabia que era golpe (fica até o final) #nessemundo #animação #historia #historiaanimada #vo #golpe #plott",
+     "visto_em": "2026-11-12"
+    },
+    "7704628878110706951": {
+     "data_post": "2026-11-05",
+     "views": 2000000,
+     "titulo": "Na minha cidade, um de nós não é gente 👁️ Toda manhã a cidade inteira aponta quem é 👉 Em que segundo você desconfiou? Mal Contada #1 🔪 #MalContada #historiasmal",
+     "visto_em": "2026-11-12"
+    },
+    "7704447885294849298": {
+     "data_post": "2026-11-04",
+     "views": 751600,
+     "titulo": "nesse bairro, a sua sombra faz o que você tem vontade 👤 #5 — fica até o final 👀 (o que a SUA sombra ia fazer?) #nessebairro #animação #historia #fabula #histori",
+     "visto_em": "2026-11-12"
+    },
+    "7704280414864559367": {
+     "data_post": "2026-11-04",
+     "views": 81500,
+     "titulo": "Ele é IGUALZINHO ao Senna... e chega sempre em último 🏁 BOX, BOX! #1 — começou a chover em Interlagos e você é o engenheiro dele: BOX 🛞 ou PISTA? Comenta que el",
+     "visto_em": "2026-11-12"
+    },
+    "7704277623324642568": {
+     "data_post": "2026-11-04",
+     "views": 68200,
+     "titulo": "Apocalipse zumbi, Dia 23: ela pediu \"me leva\" 🧒🐶 Vocês pediram uma borracha na pata e a Laika deu a dela 🥺 A rua esvaziou... menos UM 😨 e a Lívia não tem o chei",
+     "visto_em": "2026-11-12"
+    },
+    "7704070624876055816": {
+     "data_post": "2026-11-03",
+     "views": 1300000,
+     "titulo": "nesse mundo, quando alguém pensa em você, a sua orelha acende 👂🔥 #6 — a do Caio nunca piscou (fica até o final) #nessemundo #animação #historia #historiaanimada",
+     "visto_em": "2026-11-12"
+    },
+    "7703752859224919317": {
+     "data_post": "2026-11-03",
+     "views": 753100,
+     "titulo": "nesse mundo, no Finados os mortos voltam pra casa 🕯️ #5 — até o Silvio Santos volta 😂 e a coruja do Duolingo também 🦉 (fica até o final) #nessemundo #animação #",
+     "visto_em": "2026-11-12"
+    },
+    "7703731638215200020": {
+     "data_post": "2026-11-03",
+     "views": 54100,
+     "titulo": "Apocalipse zumbi, Dia 22: a pata de ferro 🦾🐶 O plano foi de vocês: esperar a rotina voltar ⏰ Só que a bicicleta tinha DONO 🚲 e o Roberto veio atrás de três pata",
+     "visto_em": "2026-11-12"
+    },
+    "7703547268770630933": {
+     "data_post": "2026-11-02",
+     "views": 1400000,
+     "titulo": "nesse mundo, dá pra pular as partes chatas da vida ⏩ #4 — ele pulou todo domingo com o pai (fica até o final) #nessemundo #animação #historia #historiaanimada #",
+     "visto_em": "2026-11-12"
+    },
+    "7703403151646330133": {
+     "data_post": "2026-11-02",
+     "views": 2100000,
+     "titulo": "nesse mundo, cada mentira faz o seu nariz crescer 👃 #3 — a mãe dele tinha o maior nariz do bairro (fica até o final) #nessemundo #animação #historia #historiaan",
+     "visto_em": "2026-11-12"
+    },
+    "7703342985227865364": {
+     "data_post": "2026-11-01",
+     "views": 141100,
+     "titulo": "Apocalipse zumbi, Dia 21: a cirurgia no escuro 🔦🐶 A anestesia acabou no meio... e se o Roberto chorasse, a praia inteira entrava 😱 Vocês escolheram ROBERTA, mas",
+     "visto_em": "2026-11-12"
+    },
+    "7703246101851262228": {
+     "data_post": "2026-11-01",
+     "views": 1600000,
+     "titulo": "nesse bairro, se você dormir... você não acorda nunca mais 😴 #4 — fica até o final 👀 (achou o Roman filmando? 🎥) #nessebairro #animação #historia #fabula #histo",
+     "visto_em": "2026-11-12"
+    },
+    "7703239494291541269": {
+     "data_post": "2026-11-01",
+     "views": 2800000,
+     "titulo": "nesse mundo, você só vive enquanto falam o seu nome 🗣️ #2 — olha o número em cima da cabeça dele 👀 (fica até o final) #nessemundo #animação #historia #historiaa",
+     "visto_em": "2026-11-12"
+    },
+    "7702919280966241557": {
+     "data_post": "2026-11-01",
+     "views": 595600,
+     "titulo": "nesse bairro, se você sorrir... você é colhido 🍊 #3 — fica até o final 👀 (achou a pipa da Nina? 🪁) #nessebairro #frutinovela #frutas #animação #historia #fabula",
+     "visto_em": "2026-11-12"
+    },
+    "7702883525439081749": {
+     "data_post": "2026-10-31",
+     "views": 2500000,
+     "titulo": "nesse mundo, a foto da escola mostra você daqui a 25 anos 📸 #1 — olha o CANTO da foto 👀 (fica até o final) #nessemundo #animação #historia #historiaanimada #plo",
+     "visto_em": "2026-11-12"
+    },
+    "7702832419610660117": {
+     "data_post": "2026-10-31",
+     "views": 72900,
+     "titulo": "Apocalipse zumbi, Dia 20: o único veterinário aberto no fim do mundo 🐶🟢 Vocês atravessaram a fila deles e trouxeram a praia inteira junto 😱 Lá dentro, uma cadel",
+     "visto_em": "2026-11-12"
+    },
+    "7702802498922335508": {
+     "data_post": "2026-10-31",
+     "views": 2300000,
+     "titulo": "nesse bairro, você só pode falar 100 palavras por dia 🤐 #2 — fica até o final 👀 (achou o Subaru? 🧡) #nessebairro #animação #historia #fabula #curiosidades #hist",
+     "visto_em": "2026-11-12"
+    },
+    "7702589460235521332": {
+     "data_post": "2026-10-30",
+     "views": 61700,
+     "titulo": "Apocalipse zumbi, Dia 19: o Roberto pulou na frente do tiro por você 😭🐶 O gigante atravessou o mar com a filha erguida na mão... e uma palavra dela soltou o nav",
+     "visto_em": "2026-11-12"
+    },
+    "7702451693015043348": {
+     "data_post": "2026-10-30",
+     "views": 1100000,
+     "titulo": "nesse bairro, quem olha pra cima vira pedra 🪨☁️ #1 — fica até o final 👀 #nessebairro #animação #historia #fabula #curiosidades #historiaanimada #fyp #foryou #pa",
+     "visto_em": "2026-11-12"
+    },
+    "7702236599513304341": {
+     "data_post": "2026-10-30",
+     "views": 56800,
+     "titulo": "Apocalipse zumbi, Dia 18: um apito acordou a praia inteira 😨 A mão do gigante subiu em cima do bote... até uma vozinha gritar da areia 🧟✋ Agora dez fuzis aponta",
+     "visto_em": "2026-11-12"
+    },
+    "7702139479695330581": {
+     "data_post": "2026-10-29",
+     "views": 25600,
+     "titulo": "Motorista de app pega um passageiro que ninguém vê. 🚗😨 Setealém, Entrada 2. Você FINALIZA ou CANCELA a corrida? Comenta 👇 A maioria decide a Entrada 3. (Volta n",
+     "visto_em": "2026-11-12"
+    },
+    "7702126452245843221": {
+     "data_post": "2026-10-29",
+     "views": 40900,
+     "titulo": "Apocalipse zumbi, Dia 17: só criança passa por baixo da mão dele 😨 Sete saíram uma por uma... mas a última da chamada não pode sair: \"Ele não solta a minha mão\"",
+     "visto_em": "2026-11-12"
+    },
+    "7701851475634539796": {
+     "data_post": "2026-10-28",
+     "views": 23000,
+     "titulo": "Ele foi entregar no 7º andar. O prédio tem 6. 🛗😨 Você SAI NO 7 ou APERTA O T? Comenta 👇 A maioria decide a Entrada 2. (Conta os andares no começo… e repara no n",
+     "visto_em": "2026-11-12"
+    },
+    "7701822111861443861": {
+     "data_post": "2026-10-28",
+     "views": 29800,
+     "titulo": "o sangue do seu cachorro é a cura do apocalipse 💉🐶 A médica tirou TRÊS tubos... e o soldado tem até 11:45 ⏳ Às 7 ele começou a chamar as crianças, cada nome mai",
+     "visto_em": "2026-11-12"
+    },
+    "7701538673652780294": {
+     "data_post": "2026-10-28",
+     "views": 34500,
+     "titulo": "Ele fugiu do programa pra voltar pra filha 📺 147 chamadas perdidas 📱 E quando ela finalmente ligou... ele teve que recusar 💔 Às 6h ele bate no SEU portão: você ",
+     "visto_em": "2026-11-12"
+    },
+    "7701485318570003733": {
+     "data_post": "2026-10-27",
+     "views": 21100,
+     "titulo": "Você fingiu que esqueceu 🤫 Eles fingiram que acreditaram 📺 Atrás da cama 12: NÃO BEBA O CAFÉ... com a SUA letra ☕😳 Amanhã tem paredão: Dona Neide 🙏 ou Kauã 📱? C",
+     "visto_em": "2026-11-12"
+    },
+    "7701133885823896852": {
+     "data_post": "2026-10-27",
+     "views": 34200,
+     "titulo": "POV: o único navio do apocalipse proíbe o seu cachorro 🚢🐶 A escada subiu de volta... e só o Roberto pulou no mar pra salvar um homem 🌊 Mas era o motorista do ôn",
+     "visto_em": "2026-11-12"
+    },
+    "7701086601765539124": {
+     "data_post": "2026-10-26",
+     "views": 21800,
+     "titulo": "A plateia mandou ele embora 📺 A porta abriu pela 1ª vez... e no dia seguinte NINGUÉM lembrava dele 😶 Só você. Você conta pra casa 🗣️ ou finge que esqueceu 🤫? Co",
+     "visto_em": "2026-11-12"
+    },
+    "7700772043863706901": {
+     "data_post": "2026-10-26",
+     "views": 52900,
+     "titulo": "POV: apocalipse zumbi e você foge pra praia 🏖️🧟 Eles repetem tudo: o mate, o Globo, o frescobol e a hora da farofa 😂 Mas o Roberto pegou a bolinha... e a praia ",
+     "visto_em": "2026-11-12"
+    },
+    "7700633121003212053": {
+     "data_post": "2026-10-25",
+     "views": 66500,
+     "titulo": "POV: apocalipse zumbi e você precisa pegar o último trem com a sua família 🚆🧟 Lá dentro, 200 deles indo trabalhar... e pela janela, o gigante destruindo a base ",
+     "visto_em": "2026-11-12"
+    },
+    "7700353051466599700": {
+     "data_post": "2026-10-25",
+     "views": 63900,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 12: até que a morte os separe 💍 O noivo que fugiu voltou pro altar... e lá de cima da serra você viu: todo mundo repete alguma ",
+     "visto_em": "2026-11-12"
+    },
+    "7700306522470911253": {
+     "data_post": "2026-10-24",
+     "views": 34200,
+     "titulo": "Você acordou AO VIVO num reality show 📺 Ninguém lembra de ter se inscrito... e quem decide quem sai é a plateia: VOCÊ 👁️ Regra 3: quando a música parar, ninguém",
+     "visto_em": "2026-11-12"
+    },
+    "7700298105228446996": {
+     "data_post": "2026-10-24",
+     "views": 76100,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 11: a música não pode parar 🎶 A noiva pôs o véu na Bia e cem convidados voltaram pro casamento dela 💍 Regra 18: na festa deles,",
+     "visto_em": "2026-11-12"
+    },
+    "7700009791535451413": {
+     "data_post": "2026-10-23",
+     "views": 80600,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 10: quem é ela? 👰 Vocês escolheram a SERRA — e lá em cima tinha um hotel com um casamento montado há 10 dias 🕯️ Regra 17: choro",
+     "visto_em": "2026-11-12"
+    },
+    "7699691192660888853": {
+     "data_post": "2026-10-23",
+     "views": 182700,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 9: ele entrou na frente 🤠 Vocês votaram SOLTA (72%) — e o tio Jorge levou o tiro no lugar do cachorro 💔 Regra 16: eles não atac",
+     "visto_em": "2026-11-12"
+    },
+    "7699611225772084501": {
+     "data_post": "2026-10-22",
+     "views": 117600,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 8: a fazenda já tinha dono 🌽 Vocês votaram FAZENDA (72%) — mas o Tonhão chegou primeiro 🤠 Os peões mortos ainda trabalham... ca",
+     "visto_em": "2026-11-12"
+    },
+    "7699333101406801173": {
+     "data_post": "2026-10-22",
+     "views": 294600,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 7: a fuga 🚗 Vocês votaram DEIXA (71%) — o menino soltou o seu dedo e foi pra mão da mãe 🥹 mas antes amarrou a pulseirinha no ca",
+     "visto_em": "2026-11-12"
+    },
+    "7699235006123740436": {
+     "data_post": "2026-10-21",
+     "views": 97700,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 6: eles não atacam quem amam ❤️ Vocês votaram SALVA: 87% de 2.114 comentários! A Bia jogou a corda da cama dela e, 20 anos depo",
+     "visto_em": "2026-11-12"
+    },
+    "7698911614745038101": {
+     "data_post": "2026-10-21",
+     "views": 154400,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 5: o 4º coração tá vivo ❤️ Vocês votaram VAI: 67% (six seven 🕺) de 3.242 comentários! 112 deles em volta do carro e nenhum pisc",
+     "visto_em": "2026-11-12"
+    },
+    "7698708376288496916": {
+     "data_post": "2026-10-20",
+     "views": 223700,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 4: só sobraram 3. Vocês votaram silêncio (54%)... e a escola inteira virou um deles. Às 3h a água acabou e você desceu na padar",
+     "visto_em": "2026-11-12"
+    },
+    "7698508156795653396": {
+     "data_post": "2026-10-19",
+     "views": 246400,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 3: ela já é um deles. Vocês deixaram ela descer (87%)... e NENHUM deles atacou. Às 18h a rua inteira foi atrás dela até a escol",
+     "visto_em": "2026-11-12"
+    },
+    "7698187867218021653": {
+     "data_post": "2026-10-19",
+     "views": 316200,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 2: eles não esqueceram quem eram. Você jogou a escada... e o Seu Antônio subiu nela — todo domingo, por vinte anos, ele subia p",
+     "visto_em": "2026-11-12"
+    },
+    "7698034790120852756": {
+     "data_post": "2026-10-18",
+     "views": 466700,
+     "titulo": "Apocalipse zumbi no Brasil 🧟 Dia 1: eles não enxergam, eles seguem o barulho. Seu vizinho bate a cabeça no portão, você cala o cachorro, sobe pra laje e puxa a ",
+     "visto_em": "2026-11-12"
+    },
+    "7697753349755637044": {
+     "data_post": "2026-10-17",
+     "views": 54500,
+     "titulo": "Tempestade solar: o que você faria se a cidade inteira apagasse? 🌌⚡ DIA 1 — o céu ficou verde às 3 da manhã, 4 regras pra sobreviver ao apagão... e às 23:58 bat",
+     "visto_em": "2026-11-12"
+    },
+    "7661436413556083989": {
+     "data_post": "2026-07-12",
+     "views": 14300,
+     "titulo": "🪳 Cientistas transformaram baratas VIVAS em ciborgues controlados por controle remoto... e isso é REAL! 🤖😱 🎮 Uma \"mochila\" eletrônica nas costas + eletrodos nas",
+     "visto_em": "2026-11-12"
+    },
+    "7659928408800972053": {
+     "data_post": "2026-07-07",
+     "views": 8263,
+     "titulo": "🌊 O ponto MAIS FUNDO do planeta esconde coisas que a ciência ainda não explica... e tudo isso é REAL! 😱 🕳️ Quase 11 mil metros: o Everest inteiro afundaria e so",
+     "visto_em": "2026-11-12"
+    },
+    "7659035759839612180": {
+     "data_post": "2026-07-05",
+     "views": 5593,
+     "titulo": "As criaturas mais BIZARRAS do fundo do mar 🌊😱 #shorts 🌊 Mais de 80% do oceano nunca foi explorado... e o que vive lá no fundo parece de OUTRO PLANETA. E tudo is",
+     "visto_em": "2026-11-12"
+    },
+    "7658797049642503444": {
+     "data_post": "2026-07-04",
+     "views": 4165,
+     "titulo": "🐊 Você foi largado sozinho na natureza, cercado pelos animais mais mortais do planeta... quanto tempo VOCÊ sobreviveria? 💀 🦛 Hipopótamo: corre a 30 km/h e mata ",
+     "visto_em": "2026-11-12"
+    },
+    "7658657479231900949": {
+     "data_post": "2026-07-04",
+     "views": 3339,
+     "titulo": "☀️ Nesse exato momento o Sol está cuspindo fogo na direção da Terra... e os cientistas estão preocupados! ⚡ 🌞 10 explosões solares em 24 horas + nuvens gigantes",
+     "visto_em": "2026-11-12"
+    },
+    "7658390723645000980": {
+     "data_post": "2026-07-03",
+     "views": 2646,
+     "titulo": "🌪️ A natureza pode te matar de formas que você nem imagina... quanto tempo VOCÊ sobreviveria? 💀 🌋 No vulcão: gás e rocha a 700°C descendo a 700 km/h 🌀 Tornado c",
+     "visto_em": "2026-11-12"
+    },
+    "7657961378979843348": {
+     "data_post": "2026-07-02",
+     "views": 2181,
+     "titulo": "🌊 Se você mergulhasse sem parar, até onde sobreviveria? A resposta assusta! 💀 🤿 A 10 metros seus pulmões já encolhem pela METADE 🥴 A 40 metros o nitrogênio te d",
+     "visto_em": "2026-11-12"
+    },
+    "7657946457932041493": {
+     "data_post": "2026-07-02",
+     "views": 1935,
+     "titulo": "🌞 A luz que está te tocando agora é mais velha que toda a civilização humana! 🤯 ☀️ Ela nasceu no centro do Sol e levou CEM MIL ANOS só pra escapar de lá... ⚡ No",
+     "visto_em": "2026-11-12"
+    },
+    "7657662964622707989": {
+     "data_post": "2026-07-01",
+     "views": 1822,
+     "titulo": "⚽ A Copa do Mundo tem historias tao absurdas que parecem mentira... e TODAS sao reais! 😱 🕊️ Um jogo que ajudou a PARAR uma guerra 💀 Um gol contra que terminou e",
+     "visto_em": "2026-11-12"
+    },
+    "7657332463550614801": {
+     "data_post": "2026-06-30",
+     "views": 1754,
+     "titulo": "🌊 Mais de 90% do oceano NUNCA foi explorado... e o que vive la embaixo vai te dar arrepio! 😱 🎣 O peixe-diabo que atrai presas com uma luz na cabeca 🦷 O peixe-vi",
+     "visto_em": "2026-11-12"
+    },
+    "7657293551709048080": {
+     "data_post": "2026-06-30",
+     "views": 1659,
+     "titulo": "⏳ Quanto tempo voce sobreviveria em cada era da historia? A resposta vai te assustar! 💀😱 🦖 Na era dos dinossauros voce seria so comida... um predador de 10 metr",
+     "visto_em": "2026-11-12"
+    },
+    "7657219456736726288": {
+     "data_post": "2026-06-30",
+     "views": 1631,
+     "titulo": "🪐 Quanto tempo voce sobreviveria em cada planeta do Sistema Solar? 💀 ☄️ Em Venus voce morre em 1 SEGUNDO, em Jupiter cai pra sempre, em Netuno chove DIAMANTE...",
+     "visto_em": "2026-11-12"
+    },
+    "7656901660534476033": {
+     "data_post": "2026-06-29",
+     "views": 1567,
+     "titulo": "🌞 A luz que esta te tocando agora e mais velha que toda a civilizacao humana! 🤯 ☀️ Ela nasceu no centro do Sol e levou CEM MIL ANOS so pra escapar de la... depo",
+     "visto_em": "2026-11-12"
+    },
+    "7656619847358483729": {
+     "data_post": "2026-06-29",
+     "views": 1664,
+     "titulo": "Em 1854, Londres culpava o ar pela cólera. Mas John Snow fez um mapa, encontrou um padrão assustador e ajudou a mudar a história da ciência. #Shorts #HistoriaRe",
+     "visto_em": "2026-11-12"
+    },
+    "7707724594605575432": {
+     "data_post": "2026-11-13",
+     "views": 35400,
+     "titulo": "Um deles conta tudo pra Mamãe. Em quem você confia? 🐇 | Bom Pasto #3: nesse orfanato as crianças são engordadas pra virar comida, e 94 % de vocês mandou a Malu ",
+     "visto_em": "2026-11-14"
+    },
+    "7707412867040988424": {
+     "data_post": "2026-11-13",
+     "views": 18000,
+     "titulo": "Davi e Golias (Ep. 2) 📖 Quarenta dias o gigante gritou e o exército inteiro deu um passo pra trás. Aí chegou um rapaz que só tinha ido levar pão e queijo 🧀 Pra ",
+     "visto_em": "2026-11-14"
+    },
+    "7707416880704720146": {
+     "data_post": "2026-11-13",
+     "views": 419600,
+     "titulo": "nesse mundo, aos 12 anos você pesca no céu o bicho que decide a sua vida 🪁 o Murilo pescou um dragão. eu pesquei um pingo 💧 #21 (pra mim é o bichinho mais inúti",
+     "visto_em": "2026-11-14"
+    },
+    "7708053690351045894": {
+     "data_post": "2026-11-14",
+     "views": 133000,
+     "titulo": "Nesse mundo, todo mundo assiste Nesse Mundo 📱 até o padre no meio do casamento. só que ninguém sabe quem faz... 🤔 (esse aqui é especial: tem 12 episódios nossos",
+     "visto_em": "2026-11-15"
+    },
+    "7708005068741594386": {
+     "data_post": "2026-11-14",
+     "views": 19600,
+     "titulo": "Arca de Noé (Ep. 3) 📖 Mais de um ano trancado num barco, sem nenhuma notícia de fora. E a melhor notícia foi uma pomba que não voltou 🕊️ Pra mim, o detalhe mais",
+     "visto_em": "2026-11-15"
+    },
+    "7707997749567884551": {
+     "data_post": "2026-11-14",
+     "views": 66900,
+     "titulo": "Nesse mundo, o asteroide errou e os dinossauros viraram CLT 🦖 o Reginaldo passou 30 anos dizendo \"depois eu vejo\"... até faltarem 3 minutos #24 (pra mim esse é ",
+     "visto_em": "2026-11-15"
+    },
+    "7708419364151676167": {
+     "data_post": "2026-11-15",
+     "views": 161900,
+     "titulo": "Nesse mundo, embaixo de toda cama tem uma cidade 🛏️ e embaixo das caminhas de lá, outra... o Léo descobriu quem fica no topo #25 (eu fiquei com medo de olhar em",
+     "visto_em": "2026-11-16"
+    },
+    "7708055597387615496": {
+     "data_post": "2026-11-15",
+     "views": 177000,
+     "titulo": "Nesse mundo, cada \"tô bem\" te deixa um pouco transparente 🫥 o seu Nando respondeu \"tô bem\" pra filha todo dia... até sumir #22 (esse é o episódio que eu mais qu",
+     "visto_em": "2026-11-16"
+    },
+    "7708570896759278855": {
+     "data_post": "2026-11-16",
+     "views": 323500,
+     "titulo": "Nesse bairro, cada passo te deixa 1 dia mais velho 👣 #7 — sinceramente, eu já tinha batido a meta de 27 anos antes do almoço 😂 (quantos dias você já andou hoje?",
+     "visto_em": "2026-11-17"
+    },
+    "7708571714770291976": {
+     "data_post": "2026-11-16",
+     "views": 10100,
+     "titulo": "Nesse mundo, os bichos do Jumanji têm medo de um jogo: o Mundo Real 🦁🎲 segunda-feira, boleto, ônibus lotado... o leão Juba jogou pra provar coragem #26 (no film",
+     "visto_em": "2026-11-17"
+    },
+    "7708524181054393607": {
+     "data_post": "2026-11-16",
+     "views": 56900,
+     "titulo": "Nesse bairro, todo mundo espera o GTA VI há 70 anos 🎮 #8 — sinceramente, se adiar de novo eu viro o vizinho 💀 (lança ou adia? aposta aí) #nessebairro #gta6 #gta",
+     "visto_em": "2026-11-17"
+    },
+    "7709476592820522247": {
+     "data_post": "2026-11-18",
+     "views": 117500,
+     "titulo": "Nesse mundo, a minha cidade tem uma bomba do tamanho de uma casa... e só uma chave faz ela parar 🔑 #31 (eu nunca torci tanto pra alguém NÃO achar uma coisa 😬) #",
+     "visto_em": "2026-11-19"
+    },
+    "7709168272431795464": {
+     "data_post": "2026-11-18",
+     "views": 6262,
+     "titulo": "Nesse mundo, antes de dormir você salva o dia... e o cartão só tem 100 💾 #28 (eu ia apagar a formatura sem pensar duas vezes 😅) #nessemundo #animação #historiaa",
+     "visto_em": "2026-11-19"
+    },
+    "7709168248054484230": {
+     "data_post": "2026-11-18",
+     "views": 143100,
+     "titulo": "Nesse mundo, tudo custa um real... por isso não tem nada pra comprar 🏷️ #29 (depois desse eu nunca mais vou olhar uma etiqueta de \"preço justo\" do mesmo jeito 😬",
+     "visto_em": "2026-11-19"
+    },
+    "7708923328966298898": {
+     "data_post": "2026-11-17",
+     "views": 314100,
+     "titulo": "Nesse mundo, tudo é de ouro... e o dinheiro é papel higiênico 🧻✨ #27 (o pior é que depois desse vídeo eu olhei pro meu rolo de papel com outros olhos 😅) #nessem",
+     "visto_em": "2026-11-19"
+    },
+    "7708926106509856018": {
+     "data_post": "2026-11-17",
+     "views": 6413,
+     "titulo": "Trancados na geladeira até o forno apitar 🧊 | Bom Pasto #4: nesse orfanato as crianças são engordadas pra virar comida, e 54 % de vocês escolheu o Nico pra fugi",
+     "visto_em": "2026-11-19"
+    },
+    "7708844926582197556": {
+     "data_post": "2026-11-17",
+     "views": 20900,
+     "titulo": "Nesse mundo, enquanto você dorme, gigantes seguram o céu 🌙 o doutor pagava o céu mais caro da cidade e nunca respondeu o boa noite do porteiro... #23 (pra mim é",
+     "visto_em": "2026-11-19"
+    },
+    "7710234885864180999": {
+     "data_post": "2026-11-20",
+     "views": 739,
+     "titulo": "Quarenta mil anos atrás não tinha celular... e mesmo assim a gente já tinha música, aposta, bola e até desenho animado. Pra mim, a parte mais louca é a piada ma",
+     "visto_em": "2026-11-20"
+    },
+    "7709650064083275015": {
+     "data_post": "2026-11-19",
+     "views": 6318,
+     "titulo": "Nesse mundo, a nossa cidade mora nas costas de uma tartaruga gigante 🐢 #30 (esse final me pegou de jeito, não vou mentir 🥹) #nessemundo #historiaanimada #plottw",
+     "visto_em": "2026-11-20"
+    },
+    "7709650036468043026": {
+     "data_post": "2026-11-19",
+     "views": 690400,
+     "titulo": "Nessa cidade, quem rouba ganha um pix na hora... e o primeiro lugar vale 1 bilhão 💸 #32 (eu só entendi por que o velho saiu rindo no último segundo 😬 e tem 10 r",
+     "visto_em": "2026-11-20"
+    }
+   },
+   "ultima_checagem": "2026-11-20"
+  },
+  {
+   "nome": "@aprendendocomvitinho",
+   "url": "https://www.tiktok.com/@aprendendocomvitinho",
+   "idioma": "pt",
+   "pasta_transcricoes": "transcricoes",
+   "papel": "formato antigo (EP01–EP02)",
+   "vistos": {},
+   "ativo": false,
+   "obs": "conta sem vídeos públicos em 2026-11-12 (apagou ou escondeu)"
+  }
+ ],
+ "ultima_busca": "2026-11-20"
+}

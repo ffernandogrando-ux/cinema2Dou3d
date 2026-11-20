@@ -1,0 +1,204 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Caveat:wght@700&display=block" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#000;overflow:hidden}
+#stage{position:relative;width:576px;height:1024px;overflow:hidden;background:#000}
+svg{position:absolute;inset:0}
+#sub{position:absolute;left:12px;right:12px;top:808px;text-align:center;font-family:Poppins;font-weight:800;font-size:43px;letter-spacing:-1px;line-height:1.15;transform-origin:50% 50%}
+#sub span{display:inline-block;color:#fff;-webkit-text-stroke:9px #1f2340;paint-order:stroke fill;text-shadow:0 5px 0 rgba(20,20,50,.35);margin:0 5px}
+#sub span.on{color:#FFD43B}
+#perg{position:absolute;left:50%;top:150px;width:440px;margin-left:-220px;background:#fff;border-radius:22px;border:5px solid #1f2340;box-shadow:0 8px 0 rgba(20,20,50,.25);padding:18px 22px;font-family:Poppins;font-weight:800;font-size:31px;line-height:1.15;color:#1f2340;text-align:center;transform-origin:50% 100%;display:none}
+#perg b{color:#E5485E}
+#gancho{position:absolute;left:24px;right:24px;top:118px;text-align:center;font-family:Poppins;font-weight:800;font-size:46px;line-height:1.08;letter-spacing:-1px;color:#fff;-webkit-text-stroke:10px #1f2340;paint-order:stroke fill;text-shadow:0 6px 0 rgba(20,20,50,.35);display:none;transform-origin:50% 50%}
+#gancho b{color:#FFD43B}
+#perg:after{content:"";position:absolute;bottom:-22px;left:60px;border:14px solid transparent;border-top:18px solid #1f2340}
+</style></head><body>
+<div id="stage">
+<canvas id="gl" style="position:absolute;inset:0;width:576px;height:1024px;display:none"></canvas>
+<svg id="svg" viewBox="0 0 576 1024" width="576" height="1024"></svg>
+<canvas id="oc" style="position:absolute;inset:0;width:576px;height:1024px;display:none;pointer-events:none"></canvas>
+<svg id="svg2" viewBox="0 0 576 1024" width="576" height="1024"></svg>
+<div id="gancho"></div>
+<div id="perg"></div>
+<div id="sub"></div>
+</div>
+<script>/*THREE*/</script>
+<script>/*LIB*/</script>
+<script>const PALAVRAS = /*PALAVRAS*/;</script>
+<script>/*CENAS*/</script>
+<script>
+// ---------------- tempos dos planos (amarrados às palavras do áudio)
+const LINHAS = {}; PALAVRAS.forEach((p, i) => { (LINHAS[p.linha] = LINHAS[p.linha] || []).push(i); });
+// falas de personagem = palavras entre aspas na narração (a boca de quem tem falante: true mexe só nelas)
+const EM_FALA = (() => { const a = []; let dentro = false; PALAVRAS.forEach((p, i) => { const w = p.w, abre = /^["“]/.test(w), fecha = /["”][.,!?:;…]*$/.test(w) && !(abre && w.length < 2);
+  if (abre) dentro = true; a[i] = dentro; if (fecha && (dentro || abre)) dentro = false; }); return a; })();
+const falaEm = t => PALAVRAS.some((p, i) => EM_FALA[i] && t >= p.s - .05 && t <= p.e + .12);
+const FIM = PALAVRAS[PALAVRAS.length - 1].e + (typeof CAUDA !== 'undefined' ? CAUDA : 0.8);
+const PLANOS = CENAS.map(c => { const idx = LINHAS[c.l][c.w || 0]; return { ...c, ini: Math.max(0, PALAVRAS[idx].s - 0.08) }; });
+PLANOS[0].ini = 0;
+PLANOS.forEach(p => { if (p.g3d) { if (p.split === undefined) p.split = false; p.enq = false; } });
+PLANOS.forEach((p, i) => { p.fim = i + 1 < PLANOS.length ? PLANOS[i + 1].ini : FIM; p.base = p.ini; p.dTot = p.fim - p.ini; });
+// ---------------- mais cortes: plano longo ganha um "punch-in" (close na mesma cena) numa palavra do meio
+const CORTE_MAX = typeof CORTE_MAX_EP !== 'undefined' ? CORTE_MAX_EP : 2.0;
+for (let i = 0; i < PLANOS.length; i++) {
+  const p = PLANOS[i], d = p.fim - p.ini, c = p.cam || {};
+  if (p.split === false || p.sub || d < CORTE_MAX || (c.s && c.s[0] >= 1.5)) continue;
+  const alvo = p.ini + d / 2; let best = null;
+  PALAVRAS.forEach(w => { const t = w.s - 0.06; if (t > p.ini + 0.8 && t < p.fim - 0.7 && (!best || Math.abs(t - alvo) < Math.abs(best - alvo))) best = t; });
+  if (!best) continue;
+  const s1 = (c.s ? c.s[1] : 1.06), foco = p.foco || c.c1 || c.c || [288, 470];
+  const sub = { ...p, autoFoco: !p.foco, ini: best, fim: p.fim, sub: true, wh: false, flash: 0, sfx: [], passos: p.passos, cam: { s: [s1 * 1.32, s1 * 1.4], c: foco, c1: [foco[0], foco[1] - 8] } };
+  p.fim = best; PLANOS.splice(i + 1, 0, sub); i++;
+}
+// ---------------- legenda: blocos de até 3 palavras, quebra em pontuação
+const BLOCOS = []; let cur = [];
+PALAVRAS.forEach((p, i) => { cur.push(i); const pont = /[.,!?:;]["”]?$/.test(p.w), gap = i + 1 < PALAVRAS.length && PALAVRAS[i + 1].s - p.e > 0.35;
+  if (cur.length >= (typeof LEGENDA_PALAVRAS !== 'undefined' ? LEGENDA_PALAVRAS : 3) || pont || gap || i === PALAVRAS.length - 1) { BLOCOS.push(cur); cur = []; } });
+// ---------------- defs globais (filtros, gradientes, grão)
+let GRAO = '';
+(function () { const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'), im = g.createImageData(256, 256); const R = rng(99);
+  for (let i = 0; i < im.data.length; i += 4) { const v = R() * 255; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; } g.putImageData(im, 0, 0); GRAO = c.toDataURL(); })();
+const DEFS = `<defs>${typeof STK_DEFS !== 'undefined' ? STK_DEFS : ''}
+ <filter id="sepia"><feColorMatrix type="matrix" values=".39 .77 .19 0 0  .35 .69 .17 0 0  .27 .53 .13 0 0  0 0 0 1 0"/></filter>
+ <radialGradient id="brilhoVermelho"><stop offset="0" stop-color="#FF7A8A" stop-opacity=".9"/><stop offset="1" stop-color="#FF7A8A" stop-opacity="0"/></radialGradient>
+ <radialGradient id="vin" cx=".5" cy=".45" r=".78"><stop offset=".62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#140c28" stop-opacity=".42"/></radialGradient>
+ <filter id="dof1" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+ <filter id="dof2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+ <filter id="dof3" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="12"/></filter>
+ <pattern id="grao" width="256" height="256" patternUnits="userSpaceOnUse"><image href="${GRAO}" width="256" height="256"/></pattern>
+</defs>`;
+const MOV = 2.2;
+const AUTO_ENQ = typeof AUTO_ENQ_EP !== 'undefined' ? AUTO_ENQ_EP : true, OLHO_MAX = .55, OLHO_ALVO = .45; // olhos: entre 25% e 55% da altura; legenda em ~82% // intensidade do movimento de câmera (1 = suave; referência ≈ 2)
+function camera(pl, tl, d) {
+  if (pl.g3d && !pl.cam) return { s: 1, cx: 288, cy: 512 };
+  const c = pl.cam || {}; const k = ease(tl / Math.max(d, .01)) * .7 + (tl / Math.max(d, .01)) * .3;
+  const s0 = c.s ? c.s[0] : 1, s1raw = c.s ? c.s[1] : 1.06, s1 = s0 + (s1raw - s0) * MOV;
+  const i = PLANOS.indexOf(pl), dir = i % 2 ? 1 : -1;
+  const c0 = c.c0 || c.c || [288, 512], c1 = c.c1 || [c0[0] + dir * 14 * MOV, c0[1] - 6 * MOV];
+  const pop = c.pop === false ? 1 : 1 + 0.09 * (1 - easeOut(tl / 0.28));
+  const shake = c.shake ? Math.sin(tl * 60) * c.shake * Math.max(0, 1 - tl / .6) : 0;
+  const rot = c.rot ? lerp(c.rot[0], c.rot[1], k) : 0;
+  return { s: lerp(s0, s1, k) * pop, cx: lerp(c0[0], c1[0], k) + shake, cy: lerp(c0[1], c1[1], k), rot };
+}
+// profundidade 2D: camada z (1 = plano da ação, >1 longe e mexe menos, <1 perto e mexe mais)
+function prof(z, conteudo, ref = [288, 512]) { const c = window.CAM; if (!c || z === 1) return conteudo;
+  const sz = 1 + (c.s - 1) / z, cx = ref[0] + (c.cx - ref[0]) / z, cy = ref[1] + (c.cy - ref[1]) / z;
+  return `<g transform="translate(${c.cx} ${c.cy}) scale(${sz / c.s}) translate(${-cx} ${-cy})">${conteudo}</g>`; }
+// 2,5D: camadas com paralaxe + foco. L = [[z, conteudo, desfoque?], ...] do fundo para a frente.
+// z > 1 fica longe (mexe menos), z < 1 fica perto (mexe mais). Desfoque em px (0 = nítido) simula profundidade de campo.
+// marca(nome, x, y, raio): objeto importante dentro do plano (coordenadas do desenho) que a checagem não deixa sair cortado
+function marca(nome, x, y, r) { if (window._marcas) window._marcas.push({ nome, x, y, r }); return ''; }
+// marcaTexto(nome, x0, y0, x1, y1): área de texto de um documento/placa (coordenadas do desenho) que a legenda não pode cobrir
+function marcaTexto(nome, x0, y0, x1, y1) { if (window._textos) window._textos.push({ nome, x0, y0, x1, y1 }); return ''; }
+function camadas(L, ref) { return L.map(([z, c, b]) => { const g = prof(z, c, ref); return b ? `<g filter="url(#dof${Math.min(3, Math.max(1, Math.round(b / 4)))})">${g}</g>` : g; }).join(''); }
+async function render(t) {
+  let i = PLANOS.findIndex(p => t >= p.ini && t < p.fim); if (i < 0) i = PLANOS.length - 1;
+  const pl = PLANOS[i], tl = t - pl.ini, d = pl.fim - pl.ini;
+  if (pl.autoFoco && !pl._focoOk) { window._cab = []; const tm = pl.ini + d / 2; pl.f(tm - pl.base, pl.dTot, tm); // close automático mira nos rostos em cena
+    const hs = (window._cab || []).filter(h => h.r > 20); window._cab = null; pl._focoOk = true;
+    if (hs.length) { const mx = hs.reduce((a, h) => a + h.x, 0) / hs.length, my = hs.reduce((a, h) => a + h.y, 0) / hs.length + 40; pl.cam = { ...pl.cam, c: [mx, my], c1: [mx, my - 8] }; } }
+  const cam = camera(pl, tl, d);
+  // enquadramento automático: mede o rosto principal no início do plano e sobe a câmera se os olhos ficarem baixos
+  if (AUTO_ENQ && pl.enq !== false) { if (pl._dy === undefined) { const c0 = camera(pl, 0, d); window._cab = []; for (const k of [0, .5, .9]) { const tt = pl.ini + d * k; pl.f(tt - pl.base, pl.dTot, tt); }
+      const hs = (window._cab || []).map(h => ({ y: (h.y - c0.cy) * c0.s + 512, x: (h.x - c0.cx) * c0.s + 288, r: h.r * c0.s })).filter(h => h.r > 34 && h.x > 0 && h.x < 576);
+      if (!hs.length) pl._dy = 0; else { const baixo = Math.max(...hs.map(h => h.y)), alto = Math.min(...hs.map(h => h.y - h.r));
+        let dy = baixo > OLHO_MAX * 1024 ? baixo - OLHO_MAX * 1024 + 20 : 0; dy = Math.min(dy, Math.max(0, alto - 0.04 * 1024)); pl._dy = dy / c0.s; } }
+    cam.cy += pl._dy; }
+  const gl = document.getElementById('gl');
+  const bl0 = pl.blur === false ? 0 : 16 * (1 - clamp(tl / 0.13));
+  let blur3d = 0;
+  if (pl.g3d && MUNDO) { gl.style.display = 'block'; const sp = pl.g3d(t - pl.base, pl.dTot, t, tl, d);
+    // borrão de movimento: compara com a câmera de 1 quadro antes (giro rápido / voo rápido borram o cenário)
+    if (pl.mb !== false && tl > .04) { const sp0 = pl.g3d(t - pl.base - 1 / 30, pl.dTot, t - 1 / 30, tl - 1 / 30, d);
+      const dir = (s) => { const v = s.alvo.map((a, i) => a - s.p[i]), n = Math.hypot(...v) || 1; return v.map(x => x / n); };
+      const a1 = dir(sp), a0 = dir(sp0), ang = Math.acos(Math.min(1, a1[0] * a0[0] + a1[1] * a0[1] + a1[2] * a0[2])) * 180 / Math.PI;
+      const dist = Math.hypot(...sp.alvo.map((a, i) => a - sp.p[i])) || 1, mv = Math.hypot(...sp.p.map((v, i) => v - sp0.p[i])) / dist * 57;
+      blur3d = Math.min(6, Math.max(0, (ang + mv * .5) * 30 / (sp.fov || 42) - .35) * 2.2); }
+    blur3d += sp.dof || 0; // desfoque de profundidade do cenário (personagem 2D nítido na frente)
+    MUNDO.quadro(sp, t); }
+  else gl.style.display = 'none';
+  window.FALA_AGORA = falaEm(t); window._falou = false;
+  window._cab = []; window._corpos = []; window._marcas = []; window._textos = []; window.CAM = cam; if (MUNDO) MUNDO.limpaPessoas();
+  const bl = pl.blur === false ? 0 : 16 * (1 - clamp(tl / 0.13)), bdir = PLANOS.indexOf(pl) % 2 ? 1 : -1;
+  let s = DEFS + (bl > .5 ? `<defs><filter id="mb" x="-10%" y="0" width="120%" height="100%"><feGaussianBlur stdDeviation="${bl} ${bl * .15}"/></filter></defs>` : '')
+    + `<g ${bl > .5 ? 'filter="url(#mb)"' : ''} transform="translate(${288 + bdir * bl * 2.5} 512) rotate(${cam.rot || 0}) scale(${cam.s}) translate(${-cam.cx} ${-cam.cy})">${pl.f(t - pl.base, pl.dTot, t)}</g>`;
+  window._olhos = window._cab.map(h => ({ x: (h.x - cam.cx) * cam.s + 288, y: (h.y - cam.cy) * cam.s + 512, r: h.r * cam.s })); window._cab = null;
+  { const X = v => (v - cam.cx) * cam.s + 288, Y = v => (v - cam.cy) * cam.s + 512;
+    window._corposT = window._corpos.map(h => ({ x: X(h.x), y: Y(h.y), r: h.r * cam.s, pe: Y(h.pe) })); window._corpos = null;
+    window._marcasT = window._marcas.map(m => ({ nome: m.nome, x: X(m.x), y: Y(m.y), r: m.r * cam.s })); window._marcas = null;
+    window._textosT = window._textos.map(m => ({ nome: m.nome, x0: X(m.x0), y0: Y(m.y0), x1: X(m.x1), y1: Y(m.y1) })); window._textos = null; }
+  let s2 = DEFS;
+  if (pl.over) s2 += pl.over(t - pl.base, pl.dTot, t);
+  if (typeof HUD !== 'undefined') s2 += HUD(t, pl);
+  const gx = Math.floor((t * 30 * 37) % 256), gy = Math.floor((t * 30 * 91) % 256);
+  s2 += `<rect width="576" height="1024" fill="url(#vin)"/><rect x="${-gx}" y="${-gy}" width="${576 + 256}" height="${1024 + 256}" fill="url(#grao)" opacity=".07" style="mix-blend-mode:multiply"/>`;
+  if (pl.flash) { const k = 1 - clamp(tl / pl.flash); if (k > 0) s2 += `<rect width="576" height="1024" fill="#fff" opacity="${k * .8}"/>`; }
+  document.getElementById('svg').innerHTML = s; document.getElementById('svg2').innerHTML = s2;
+  const oc = document.getElementById('oc');
+  { const sat = pl.sat ?? (typeof SAT !== 'undefined' ? SAT(t, pl) : 1); document.getElementById('svg').style.filter = document.getElementById('svg2').style.filter = sat === 1 ? '' : `saturate(${sat})`;
+    const bt = (bl0 > .5 ? bl0 * .35 : 0) + blur3d; gl.style.filter = oc.style.filter = (sat === 1 ? '' : `saturate(${sat}) `) + (bt > .3 ? `blur(${bt.toFixed(1)}px)` : ''); }
+  // legenda
+  const sub = document.getElementById('sub');
+  let bi = -1; BLOCOS.forEach((b, k) => { if (t >= PALAVRAS[b[0]].s - 0.06) bi = k; });
+  const b = BLOCOS[bi];
+  if (!b || t > PALAVRAS[b[b.length - 1]].e + 0.9) sub.innerHTML = '';
+  else { const t0 = PALAVRAS[b[0]].s - 0.06; sub.style.transform = `scale(${0.86 + 0.14 * easeOut((t - t0) / 0.12)})`;
+    sub.innerHTML = b.map(j => `<span class="${b.length > 1 && t >= PALAVRAS[j].s - 0.03 && (j === b[b.length - 1] || t < PALAVRAS[j + 1].s - 0.03) ? 'on' : ''}">${PALAVRAS[j].w}</span>`).join(''); }
+  // texto-gancho do 1º segundo (funciona sem som): GANCHO = { html, dur }
+  const gc = document.getElementById('gancho');
+  if (typeof GANCHO !== 'undefined' && t < GANCHO.dur) { gc.style.display = 'block'; gc.innerHTML = GANCHO.html; const k = t > GANCHO.dur - .2 ? easeOut((GANCHO.dur - t) / .2) : 1; gc.style.transform = `scale(${(0.9 + 0.1 * easeOut(t / .15)) * k}) rotate(-1.5deg)`; } else gc.style.display = 'none';
+  // pergunta na tela
+  const pg = document.getElementById('perg');
+  if (typeof PERGUNTA !== 'undefined') { const lp = PALAVRAS[LINHAS[PERGUNTA.l][0]].s, tk = t - lp;
+    if (tk >= 0 && tk < PERGUNTA.dur) { pg.style.display = 'block'; pg.innerHTML = PERGUNTA.html; const sc = easeOut(tk / .25) * (tk > PERGUNTA.dur - .2 ? easeOut((PERGUNTA.dur - tk) / .2) : 1); pg.style.transform = `scale(${sc}) rotate(-2deg)`; } else pg.style.display = 'none'; }
+  // oclusão (no fim, é a única parte assíncrona): o que no 3D está na frente do personagem é redesenhado por cima dele.
+  // OCLUSAO = false no cenas.js (ou ocl: false no plano) desliga.
+  const dpr = window.devicePixelRatio || 1; if (oc.width !== Math.round(576 * dpr)) { oc.width = Math.round(576 * dpr); oc.height = Math.round(1024 * dpr); }
+  const usaOc = !!(pl.g3d && MUNDO && pl.ocl !== false && (typeof OCLUSAO === 'undefined' || OCLUSAO));
+  if (!usaOc && MUNDO) MUNDO.limpaPessoas(); oc.style.display = usaOc ? 'block' : 'none';
+  if (usaOc) await MUNDO.frente(oc, MUNDO.ultimo(), cam);
+}
+window.render = render; window.DUR = FIM;
+// checagem de enquadramento: olhos de personagem (não figurante) devem ficar entre 25% e 60% da altura, longe da legenda (82%)
+window.CHECAR = async (passo = .25) => { const out = [];
+  for (let t = .1; t < FIM; t += passo) { await render(t); const pl = PLANOS.find(p => t >= p.ini && t < p.fim) || PLANOS[PLANOS.length - 1];
+    (window._olhos || []).filter(o => o.r > 34 && o.x > -o.r && o.x < 576 + o.r && o.y > -o.r && o.y < 1024 + o.r).forEach(o => {
+      const pct = o.y / 1024; if (pct > .60 && pct < 1.05) out.push({ t: +t.toFixed(2), linha: pl.l, palavra: pl.w || 0, tipo: 'legenda', olho: Math.round(pct * 100) }); });
+    const base = { t: +t.toFixed(2), linha: pl.l, palavra: pl.w || 0 };
+    // personagem cortado: pés na tela e cabeça fora (só pernas), ou cabeça cortada na lateral
+    (window._corposT || []).filter(o => o.r > 14).forEach(o => {
+      const peNaTela = o.pe > 40 && o.pe < 1024 && o.x > 0 && o.x < 576;
+      if (peNaTela && o.y + o.r * .3 < 0) out.push({ ...base, tipo: 'só pernas (cabeça fora do quadro)' });
+      else if (peNaTela && o.y - o.r < -o.r * .2 && o.y > 0) out.push({ ...base, tipo: 'cabeça cortada em cima' });
+      else if (o.y > o.r && o.y < 1024 && (o.x - o.r < -o.r * .25 || o.x + o.r > 576 + o.r * .25) && o.x > -o.r && o.x < 576 + o.r) out.push({ ...base, tipo: 'cabeça cortada na lateral' }); });
+    if (pl.g3d && MUNDO && MUNDO.atravessa) { const a = MUNDO.atravessa(); if (a) out.push({ ...base, tipo: 'câmera atravessando parede/teto/objeto (cenário some ou fica vazio)' }); }
+    if (window.FALA_AGORA && !window._falou && !pl.semFala) out.push({ ...base, tipo: 'fala de personagem sem boca mexendo (marque falante: true em quem fala)' });
+    // objeto importante cortado pela borda (aparece, mas não inteiro)
+    (window._marcasT || []).forEach(m => { const fora = m.x - m.r < -8 || m.x + m.r > 584 || m.y - m.r < -8 || m.y + m.r > 1032, visivel = m.x + m.r > 0 && m.x - m.r < 576 && m.y + m.r > 0 && m.y - m.r < 1024;
+      if (fora && visivel) out.push({ ...base, tipo: 'objeto cortado: ' + m.nome }); });
+    // fonte que não está carregada (cai numa serifada padrão): só Poppins, Caveat e monospace
+    { const fs = new Set([...document.getElementById('svg').innerHTML.matchAll(/font-family="([^"]+)"/g)].map(m => m[1].split(',')[0].trim()));
+      fs.forEach(f => { if (!['Poppins', 'Caveat', 'monospace'].includes(f)) out.push({ ...base, tipo: 'fonte não carregada: ' + f }); }); }
+    // texto de documento ou placa debaixo da legenda (faixa de ~78 % a 87 % da altura, no meio do quadro)
+    if (!pl.semTexto && document.getElementById('sub').innerHTML) (window._textosT || []).forEach(m => { if (m.y1 > 800 && m.y0 < 890 && m.x1 > 120 && m.x0 < 456) out.push({ ...base, tipo: 'texto sob a legenda: ' + m.nome }); }); }
+  return out; };
+// lista de efeitos sonoros com tempo absoluto: {t, som, v}
+function ambDe(pl) { // ambiente do plano: AMBIENTE = { 'linha' ou 'linha:palavra': ['nome', volume] | null }
+  if (pl.amb !== undefined) return pl.amb; if (typeof AMBIENTE === 'undefined') return null;
+  let best = null, bk = -1; const me = pl.l * 1000 + (pl.w || 0);
+  for (const k in AMBIENTE) { const [l, w] = k.split(':').map(Number), kk = l * 1000 + (w || 0); if (kk <= me && kk > bk) { bk = kk; best = AMBIENTE[k]; } }
+  return best;
+}
+window.SONS = () => { const out = [], amb = [];
+  PLANOS.forEach((pl, i) => {
+    const a = ambDe(pl), last = amb[amb.length - 1];
+    if (a) { if (last && last.som === a[0] && Math.abs(last.fim - pl.ini) < .01) last.fim = pl.fim; else amb.push({ ini: pl.ini, fim: pl.fim, som: a[0], v: a[1] }); }
+    if (pl.passos && !pl.sub) { const r = pl.passos.r || 2.2; let k = 0; for (let t = pl.base + (pl.passos.d || .1); t < pl.base + pl.dTot - .05; t += 1 / r) out.push({ t, som: k++ % 2 ? 'passo2' : 'passo1', v: pl.passos.v ?? .3 }); }
+    if (pl.wh) out.push({ t: Math.max(0, pl.ini - 0.12), som: 'whoosh', v: (pl.wh === true ? .35 : pl.wh) * .6 });
+    // (sem whoosh automático nos cortes: soava como chiado constante)
+    (pl.sfx || []).forEach(x => { const t = x.w != null ? PALAVRAS[LINHAS[x.l ?? pl.l][x.w]].s + (x.o || 0) : pl.ini + (x.t || 0); out.push({ t, som: x.s, v: x.v ?? .7 }); });
+  });
+  if (typeof PERGUNTA !== 'undefined') out.push({ t: PALAVRAS[LINHAS[PERGUNTA.l][0]].s, som: 'pergunta', v: .6 });
+  return { cues: out.sort((a, b) => a.t - b.t), amb }; };
+</script></body></html>

@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>body{margin:0;background:#000}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js"}}</script></head>
+<body><script type="module">
+import * as THREE from 'three';
+const P=new URLSearchParams(location.search), mode=P.get('m')||'preto';
+const W=540,H=960;
+const r=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+r.setSize(W,H); r.shadowMap.enabled=true; r.shadowMap.type=THREE.PCFSoftShadowMap;
+r.toneMapping=THREE.ACESFilmicToneMapping; r.outputColorSpace=THREE.SRGBColorSpace;
+document.body.appendChild(r.domElement);
+const sc=new THREE.Scene();
+const bg = mode==='preto'? 0xe9e4da : 0xbfd3e6;
+sc.background=new THREE.Color(bg); sc.fog=new THREE.Fog(bg,9,22);
+const cam=new THREE.PerspectiveCamera(35,W/H,0.1,100); cam.position.set(0.3,1.7,9.5); cam.lookAt(0.2,1.3,0);
+sc.add(new THREE.HemisphereLight(0xffffff,0x887766,1.1));
+const sun=new THREE.DirectionalLight(0xfff1dd,2.4); sun.position.set(3,6,4); sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048); sun.shadow.radius=6; Object.assign(sun.shadow.camera,{left:-6,right:6,top:6,bottom:-6}); sc.add(sun);
+const rim=new THREE.DirectionalLight(0xbfdcff,1.2); rim.position.set(-4,3,-5); sc.add(rim);
+// chão e cenário simples
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(60,60),new THREE.MeshStandardMaterial({color:mode==='preto'?0xd8d1c4:0x9aa7b4,roughness:.9}));
+floor.rotation.x=-Math.PI/2; floor.receiveShadow=true; sc.add(floor);
+const bmat=c=>new THREE.MeshStandardMaterial({color:c,roughness:.8});
+[[-3.2,-4,1.6,3.2,0xcfc6b6],[0.2,-6,2.2,4.5,0xc4bba9],[3.4,-4.5,1.8,2.6,0xd6cdbd]].forEach(([x,z,w,h,c])=>{
+  const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,1.5),bmat(mode==='preto'?c:[0xe07a5f,0x81b29a,0xf2cc8f][Math.abs(x|0)%3]));
+  m.position.set(x,h/2,z); m.castShadow=m.receiveShadow=true; sc.add(m);
+  for(let i=0;i<3;i++){const wn=new THREE.Mesh(new THREE.BoxGeometry(.3,.4,.05),bmat(0x3b4252)); wn.position.set(x-w/4+i*w/4,h*.65,z+.76); sc.add(wn);}
+});
+// stickman
+function boneco(cor,{x=0,z=0,ry=0,pose={}}={}){
+  const mat=new THREE.MeshPhysicalMaterial({color:cor,roughness:.35,metalness:0,clearcoat:.6,clearcoatRoughness:.3});
+  const g=new THREE.Group(); const R=0.075;
+  const seg=(len)=>{const m=new THREE.Mesh(new THREE.CapsuleGeometry(R,len,8,16),mat); m.castShadow=true; m.position.y=-len/2; const p=new THREE.Group(); p.add(m); return p;};
+  const quad=new THREE.Group(); quad.position.y=1.0; g.add(quad);
+  const tronco=new THREE.Mesh(new THREE.CapsuleGeometry(R*1.15,0.62,8,16),mat); tronco.castShadow=true; tronco.position.y=0.36; quad.add(tronco);
+  const cab=new THREE.Mesh(new THREE.SphereGeometry(0.24,32,24),mat); cab.castShadow=true; cab.position.y=1.0; quad.add(cab);
+  if(pose.olhos){ for(const s of [-1,1]){const o=new THREE.Mesh(new THREE.SphereGeometry(0.035,16,12),new THREE.MeshBasicMaterial({color:mode==='preto'?0xffffff:0x1d1d1d})); o.position.set(s*0.08,1.03,0.215); quad.add(o);} }
+  const membro=(px,py,a1,a2,b1,b2)=>{const s=seg(0.36); s.position.set(px,py,0); s.rotation.set(a2||0,0,a1); const s2=seg(0.34); s2.position.y=-0.36; s2.rotation.set(b2||0,0,b1); s.add(s2); quad.add(s); return s;};
+  const p=Object.assign({bE:[-.25,0,-.3,0],bD:[.25,0,.3,0],pE:[-.12,0,.05,0],pD:[.12,0,-.05,0]},pose);
+  membro(-0.05,0.68,...p.bE); membro(0.05,0.68,...p.bD);
+  membro(-0.06,0.0,...p.pE); membro(0.06,0.0,...p.pD);
+  if(p.incl) quad.rotation.x=p.incl;
+  g.position.set(x,0,z); g.rotation.y=ry; sc.add(g); return g;
+}
+const C = mode==='preto' ? [0x1a1a1a,0x1a1a1a,0xf4f4f4] : [0xf3f3f3,0xe63946,0x2a9d8f];
+boneco(C[0],{x:-1.1,ry:.5,pose:{olhos:1,bE:[-.4,0,-1.9,0],bD:[2.6,0,.4,0]}});        // acenando
+boneco(C[1],{x:0.25,z:.4,ry:-.2,pose:{olhos:1,bE:[-.15,0,-.1,0],bD:[.15,0,.1,0],incl:.12}}); // cabisbaixo
+boneco(C[2],{x:1.45,z:-.3,ry:-.6,pose:{olhos:1,bE:[-.9,0,1.6,0],bD:[.9,0,-1.6,0],pE:[-.3,0,.4,0],pD:[.35,0,-.2,0]}}); // mãos na cintura
+r.render(sc,cam); window.PRONTO=true;
+</script></body></html>

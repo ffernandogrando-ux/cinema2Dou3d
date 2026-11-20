@@ -1,0 +1,15 @@
+# vídeos de referência de terceiros (não versionar)
+referencias/videos/
+# quadros temporários de render
+**/frames/
+**/_build.html
+node_modules/
+__pycache__/
+**/_render/
+episodios/*/*/video_final.mp4
+episodios/*/*/video_final_leve.mp4
+episodios/*/*/mix.wav
+episodios/*/*/faixa_*.wav
+episodios/*/*/trecho_*.mp4
+episodios/*/*/revisao/
+episodios/*/*/revisao_*/

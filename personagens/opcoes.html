@@ -1,0 +1,134 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=block" rel="stylesheet">
+<style>body{margin:0;background:#FBF4E9;font-family:Poppins}</style></head>
+<body><svg id="s" width="1500" height="1150" viewBox="0 0 1500 1150"></svg>
+<script>
+const INK='#1f2a44', SW=6;
+// ---------- criança parametrizada ----------
+function cabelo(o){
+  const c=o.hair, d=o.hairDark;
+  if(o.hairStyle==='cachos') { // ruivo cacheado
+    let s=''; const pts=[[-92,-30],[-80,-70],[-50,-95],[-12,-108],[28,-104],[62,-88],[88,-60],[96,-24],[-100,4],[100,6]];
+    pts.forEach(([x,y])=>s+=`<circle cx="${x}" cy="${y}" r="34" fill="${c}" stroke="${INK}" stroke-width="${SW}"/>`);
+    s+=`<path d="M-104 0 C-104 -90 104 -90 104 0 C80 -40 -80 -40 -104 0Z" fill="${c}"/>`;
+    pts.slice(0,8).forEach(([x,y])=>s+=`<path d="M${x-12} ${y+4} q12 -14 24 0" fill="none" stroke="${d}" stroke-width="4" stroke-linecap="round"/>`);
+    return s;
+  }
+  if(o.hairStyle==='franja') { // liso com franja reta
+    return `<path d="M-108 30 C-118 -90 -50 -112 0 -110 C56 -112 118 -88 108 30 L96 30 L94 -30 L-94 -30 L-96 30Z" fill="${c}" stroke="${INK}" stroke-width="${SW}" stroke-linejoin="round"/>
+      <path d="M-96 -24 L-90 -52 L-66 -28 L-56 -58 L-34 -26 L-20 -58 L0 -26 L16 -58 L34 -26 L48 -58 L66 -28 L80 -56 L96 -24" fill="${c}" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M-40 -90 q30 -12 60 -4" stroke="#fff" stroke-width="6" opacity=".35" fill="none" stroke-linecap="round"/>`;
+  }
+  if(o.hairStyle==='puff') { // cacheado preso no alto
+    let s=`<circle cx="0" cy="-138" r="58" fill="${c}" stroke="${INK}" stroke-width="${SW}"/>`;
+    for(let i=0;i<9;i++){const a=i/9*Math.PI*2; s+=`<circle cx="${Math.cos(a)*42}" cy="${-138+Math.sin(a)*42}" r="22" fill="${c}"/>`;}
+    s+=`<circle cx="0" cy="-138" r="58" fill="none" stroke="${INK}" stroke-width="${SW}" stroke-dasharray="18 6"/>`;
+    s+=`<rect x="-30" y="-92" width="60" height="16" rx="8" fill="${o.accent}" stroke="${INK}" stroke-width="4"/>`;
+    s+=`<path d="M-102 0 C-104 -86 -40 -96 0 -94 C44 -96 104 -86 102 0 C86 -50 40 -60 0 -56 C-40 -60 -86 -50 -102 0Z" fill="${c}" stroke="${INK}" stroke-width="${SW}" stroke-linejoin="round"/>`;
+    s+=`<circle cx="-104" cy="20" r="16" fill="${c}" stroke="${INK}" stroke-width="5"/><circle cx="104" cy="20" r="16" fill="${c}" stroke="${INK}" stroke-width="5"/>`;
+    return s;
+  }
+}
+function crianca(o){
+  let s=`<g>`;
+  // pernas / roupa de baixo
+  s+=`<rect x="-44" y="725" width="36" height="160" rx="6" fill="${o.pants}" stroke="${INK}" stroke-width="${SW}"/>
+      <rect x="8" y="725" width="36" height="160" rx="6" fill="${o.pants}" stroke="${INK}" stroke-width="${SW}"/>
+      <path d="M-54 892 q0 -18 24 -18 h22 v18z" fill="${o.shoes}" stroke="${INK}" stroke-width="5"/>
+      <path d="M54 892 q0 -18 -24 -18 h-22 v18z" fill="${o.shoes}" stroke="${INK}" stroke-width="5"/>
+      <rect x="-56" y="887" width="48" height="8" fill="#fff" stroke="${INK}" stroke-width="3"/><rect x="8" y="887" width="48" height="8" fill="#fff" stroke="${INK}" stroke-width="3"/>`;
+  if(o.shorts) s+=`<rect x="-50" y="725" width="100" height="70" rx="8" fill="${o.shorts}" stroke="${INK}" stroke-width="${SW}"/>`;
+  // braços
+  for(const [sx,a] of [[-74,10],[74,-10]])
+    s+=`<g transform="translate(${sx} 572) rotate(${a})"><rect x="-23" y="-12" width="46" height="150" rx="23" fill="${o.sleeve}" stroke="${INK}" stroke-width="${SW}"/><rect x="-9" y="10" width="10" height="40" rx="5" fill="#fff" opacity=".4"/><circle cx="0" cy="150" r="17" fill="${o.skin}" stroke="${INK}" stroke-width="5"/></g>`;
+  // tronco
+  s+=`<rect x="-62" y="548" width="124" height="190" rx="22" fill="${o.shirt}" stroke="${INK}" stroke-width="${SW}"/>`;
+  if(o.overalls) s+=`<path d="M-50 640 h100 v96 h-100z" fill="${o.overalls}" stroke="${INK}" stroke-width="5"/><path d="M-44 560 L-36 640 M44 560 L36 640" stroke="${o.overalls}" stroke-width="14"/><path d="M-44 560 L-36 640 M44 560 L36 640" stroke="${INK}" stroke-width="3" fill="none" opacity=".5"/><circle cx="-36" cy="648" r="6" fill="#FFD43B" stroke="${INK}" stroke-width="3"/><circle cx="36" cy="648" r="6" fill="#FFD43B" stroke="${INK}" stroke-width="3"/><rect x="-18" y="666" width="36" height="28" rx="4" fill="none" stroke="${INK}" stroke-width="3"/>`;
+  if(o.stripe) s+=`<rect x="-62" y="610" width="124" height="22" fill="${o.stripe}"/><rect x="-62" y="650" width="124" height="22" fill="${o.stripe}"/><rect x="-62" y="548" width="124" height="190" rx="22" fill="none" stroke="${INK}" stroke-width="${SW}"/>`;
+  if(o.hood) s+=`<path d="M-58 560 q58 40 116 0" fill="none" stroke="${INK}" stroke-width="5"/><path d="M-14 580 v40 M14 580 v40" stroke="#fff" stroke-width="5" stroke-linecap="round"/><rect x="-40" y="660" width="80" height="40" rx="10" fill="none" stroke="${INK}" stroke-width="4"/>`;
+  if(o.star) s+=`<path d="M0 600 l10 22 24 3 -18 16 5 24 -21 -12 -21 12 5 -24 -18 -16 24 -3z" fill="#FFD43B" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/>`;
+  s+=`<rect x="-22" y="512" width="44" height="42" fill="${o.skinDark}" stroke="${INK}" stroke-width="5"/>`;
+  // cabeça
+  s+=`<g transform="translate(0 430)">`;
+  if(o.hairStyle==='puff') s+=cabelo(o);
+  s+=`<circle cx="-100" cy="18" r="20" fill="${o.skin}" stroke="${INK}" stroke-width="${SW}"/><circle cx="100" cy="18" r="20" fill="${o.skin}" stroke="${INK}" stroke-width="${SW}"/>`;
+  s+=`<ellipse rx="102" ry="94" fill="${o.skin}" stroke="${INK}" stroke-width="${SW}"/>`;
+  if(o.hairStyle!=='puff') s+=cabelo(o); else s+=cabelo({...o,hairStyle:'puffFront'})||'';
+  if(o.hairStyle==='puff') s+=`<path d="M-102 0 C-104 -86 -40 -96 0 -94 C44 -96 104 -86 102 0 C86 -50 40 -60 0 -56 C-40 -60 -86 -50 -102 0Z" fill="${o.hair}" stroke="${INK}" stroke-width="${SW}" stroke-linejoin="round"/>`;
+  s+=`<ellipse cx="-62" cy="44" rx="18" ry="11" fill="#FF8FA3" opacity=".55"/><ellipse cx="62" cy="44" rx="18" ry="11" fill="#FF8FA3" opacity=".55"/>`;
+  if(o.freckles) [[-70,30],[-58,38],[-74,44],[58,38],[70,30],[74,44]].forEach(([x,y])=>s+=`<circle cx="${x}" cy="${y}" r="3.2" fill="#B5653A"/>`);
+  s+=`<path d="M-58 -34 q18 -10 34 -2 M24 -36 q18 -8 34 2" fill="none" stroke="${o.hairDark}" stroke-width="7" stroke-linecap="round"/>`;
+  for(const x of [-40,40]) s+=`<g transform="translate(${x} 5)"><ellipse rx="30" ry="34" fill="#fff" stroke="${INK}" stroke-width="${SW}"/><circle r="22" fill="${o.eye}" stroke="${INK}" stroke-width="2" stroke-opacity=".4"/><circle r="11" fill="#1b2238"/><circle cx="-8" cy="-9" r="7" fill="#fff"/><circle cx="8" cy="7" r="3.5" fill="#fff"/></g>`;
+  if(o.glasses) s+=`<circle cx="-40" cy="5" r="40" fill="none" stroke="${o.glasses}" stroke-width="7"/><circle cx="40" cy="5" r="40" fill="none" stroke="${o.glasses}" stroke-width="7"/><path d="M-4 0 q4 -6 8 0" stroke="${o.glasses}" stroke-width="7" fill="none"/>`;
+  s+=`<path d="M-6 38 q6 6 12 0" fill="none" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>`;
+  s+=`<path d="M-30 58 Q0 96 30 58 Q0 74 -30 58Z" fill="#B3263E" stroke="${INK}" stroke-width="${SW}" stroke-linejoin="round"/>`;
+  s+=`</g></g>`;
+  return s;
+}
+// ---------- bichos ----------
+function gato(){return `<g>
+  <path d="M60 60 q70 -10 60 -80 q-4 -24 -20 -10 q10 50 -44 60z" fill="#F29A3D" stroke="${INK}" stroke-width="${SW}" stroke-linejoin="round"/>
+  <ellipse cx="0" cy="40" rx="78" ry="62" fill="#F29A3D" stroke="${INK}" stroke-width="${SW}"/>
+  <ellipse cx="0" cy="56" rx="44" ry="38" fill="#FFE3C2"/>
+  <path d="M-62 10 q12 6 22 0 M-70 34 q12 6 22 0 M62 10 q-12 6 -22 0 M70 34 q-12 6 -22 0" stroke="#C4661F" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="-34" cy="98" rx="20" ry="12" fill="#F29A3D" stroke="${INK}" stroke-width="5"/><ellipse cx="34" cy="98" rx="20" ry="12" fill="#F29A3D" stroke="${INK}" stroke-width="5"/>
+  <path d="M-70 -70 L-62 -150 L-18 -104 Z M70 -70 L62 -150 L18 -104Z" fill="#F29A3D" stroke="${INK}" stroke-width="${SW}" stroke-linejoin="round"/>
+  <path d="M-58 -94 L-56 -128 L-34 -106Z M58 -94 L56 -128 L34 -106Z" fill="#FFB3C1"/>
+  <ellipse cx="0" cy="-60" rx="88" ry="72" fill="#F29A3D" stroke="${INK}" stroke-width="${SW}"/>
+  <path d="M-20 -126 q0 18 -6 28 M0 -130 v28 M20 -126 q0 18 6 28" stroke="#C4661F" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="0" cy="-36" rx="40" ry="28" fill="#FFE3C2"/>
+  ${[-34,34].map(x=>`<g transform="translate(${x} -66)"><ellipse rx="22" ry="25" fill="#fff" stroke="${INK}" stroke-width="5"/><ellipse rx="14" ry="18" fill="#7FB241"/><ellipse rx="6" ry="13" fill="#1b2238"/><circle cx="-6" cy="-8" r="5" fill="#fff"/></g>`).join('')}
+  <path d="M-8 -42 h16 l-8 9z" fill="#FF7A93" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M-16 -26 q8 8 16 -2 q8 10 16 2" fill="none" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-46 -36 h-40 M-46 -28 l-38 8 M46 -36 h40 M46 -28 l38 8" stroke="${INK}" stroke-width="3"/>
+  <ellipse cx="-58" cy="-26" rx="12" ry="7" fill="#FF8FA3" opacity=".5"/><ellipse cx="58" cy="-26" rx="12" ry="7" fill="#FF8FA3" opacity=".5"/>
+</g>`;}
+function salsicha(){return `<g>
+  <path d="M130 10 q50 -30 40 -60" fill="none" stroke="${INK}" stroke-width="16" stroke-linecap="round"/><path d="M130 10 q50 -30 40 -60" fill="none" stroke="#9B5A2E" stroke-width="8" stroke-linecap="round"/>
+  <rect x="-120" y="-20" width="260" height="90" rx="45" fill="#9B5A2E" stroke="${INK}" stroke-width="${SW}"/>
+  <rect x="-60" y="-20" width="32" height="90" fill="#E8434F" stroke="${INK}" stroke-width="4"/><circle cx="-44" cy="44" r="10" fill="#FFD43B" stroke="${INK}" stroke-width="3"/>
+  ${[-100,-60,80,116].map(x=>`<rect x="${x}" y="55" width="24" height="40" rx="10" fill="#9B5A2E" stroke="${INK}" stroke-width="5"/>`).join('')}
+  <ellipse cx="-110" cy="-50" rx="70" ry="62" fill="#9B5A2E" stroke="${INK}" stroke-width="${SW}"/>
+  <ellipse cx="-160" cy="-20" rx="44" ry="30" fill="#B8733F" stroke="${INK}" stroke-width="${SW}"/>
+  <ellipse cx="-196" cy="-30" rx="13" ry="10" fill="#1b2238"/><circle cx="-200" cy="-34" r="3.5" fill="#fff"/>
+  <path d="M-170 0 q14 12 28 0" fill="none" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-60 -90 q50 10 40 80 q-6 20 -26 4 q-10 -40 -30 -70z" fill="#6E3B1C" stroke="${INK}" stroke-width="${SW}" stroke-linejoin="round"/>
+  <g transform="translate(-128 -66)"><ellipse rx="20" ry="23" fill="#fff" stroke="${INK}" stroke-width="5"/><circle r="13" fill="#6B4226"/><circle r="6.5" fill="#1b2238"/><circle cx="-5" cy="-7" r="4.5" fill="#fff"/></g>
+  <path d="M-142 -96 q14 -8 28 -2" stroke="#4a2612" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="-150" cy="-36" rx="10" ry="6" fill="#FF8FA3" opacity=".5"/>
+</g>`;}
+function tartaruga(){return `<g>
+  ${[[-80,60],[80,60],[-60,70],[60,70]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="26" ry="20" fill="#8BD06B" stroke="${INK}" stroke-width="5"/>`).join('')}
+  <path d="M110 40 l40 6 -36 14z" fill="#8BD06B" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M-110 50 C-110 -70 110 -70 110 50 Z" fill="#3FA796" stroke="${INK}" stroke-width="${SW}" stroke-linejoin="round"/>
+  <path d="M-30 -30 l30 -14 30 14 v30 l-30 14 -30 -14z M-80 10 l20 -26 M80 10 l-20 -26 M-30 0 l-50 10 M30 0 l50 10 M0 14 v36 M-60 50 l30 -36 M60 50 l-30 -36" fill="none" stroke="#2B7A6E" stroke-width="5" stroke-linejoin="round"/>
+  <rect x="-118" y="40" width="236" height="20" rx="10" fill="#F2D27A" stroke="${INK}" stroke-width="5"/>
+  <path d="M-110 30 q-40 -10 -60 -50" fill="none" stroke="${INK}" stroke-width="40" stroke-linecap="round"/><path d="M-110 30 q-40 -10 -60 -50" fill="none" stroke="#8BD06B" stroke-width="28" stroke-linecap="round"/>
+  <ellipse cx="-180" cy="-70" rx="56" ry="50" fill="#8BD06B" stroke="${INK}" stroke-width="${SW}"/>
+  ${[-200,-158].map(x=>`<g transform="translate(${x} -80)"><ellipse rx="18" ry="21" fill="#fff" stroke="${INK}" stroke-width="5"/><circle r="11" fill="#3b2a1a"/><circle cx="-4" cy="-6" r="4" fill="#fff"/></g>`).join('')}
+  <path d="M-206 -44 q26 18 50 0" fill="none" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-230 -110 q50 -40 100 0" fill="#E8434F" stroke="${INK}" stroke-width="5"/>
+  <ellipse cx="-218" cy="-54" rx="9" ry="5" fill="#FF8FA3" opacity=".6"/><ellipse cx="-142" cy="-54" rx="9" ry="5" fill="#FF8FA3" opacity=".6"/>
+</g>`;}
+// ---------- folha ----------
+const P=[
+ {id:'A',nome:'Theo',desc:'ruivo cacheado, sardas, camiseta mostarda listrada',hairStyle:'cachos',hair:'#D9632B',hairDark:'#9E3F15',skin:'#F6CDA8',skinDark:'#E9B48E',eye:'#5B8BD0',shirt:'#F2B33D',stripe:'#E59A1F',sleeve:'#F2B33D',pants:'#3E5C8C',shorts:'#3E5C8C',shoes:'#E8434F',freckles:1},
+ {id:'B',nome:'Nico',desc:'cabelo preto com franja, óculos redondos, moletom vermelho',hairStyle:'franja',hair:'#2A2633',hairDark:'#14121a',skin:'#EDC29A',skinDark:'#DDAA80',eye:'#6B4226',shirt:'#E8434F',sleeve:'#E8434F',pants:'#4F78B8',shoes:'#FFFFFF',glasses:'#3a2a20',hood:1},
+ {id:'C',nome:'Lia',desc:'cacheada com coque, macacão jeans, camiseta verde',hairStyle:'puff',hair:'#3B2418',hairDark:'#24140b',skin:'#B07650',skinDark:'#9C6542',eye:'#6B4226',shirt:'#8BD06B',sleeve:'#8BD06B',pants:'#4F78B8',overalls:'#4F78B8',shoes:'#FFD43B',accent:'#FF6B8B',star:0},
+];
+let s=`<rect width="1500" height="1150" fill="#FBF4E9"/>`;
+s+=`<text x="750" y="58" text-anchor="middle" font-size="36" font-weight="800" fill="${INK}">Protagonista — 3 opções</text>`;
+P.forEach((o,i)=>{const cx=250+i*500;
+  s+=`<rect x="${cx-220}" y="80" width="440" height="560" rx="28" fill="${['#DDF1F8','#FCE3E3','#E4F5DA'][i]}" stroke="${INK}" stroke-width="3"/>`;
+  s+=`<g transform="translate(${cx} 10) scale(0.6)">${crianca(o)}</g>`;
+  s+=`<text x="${cx}" y="590" text-anchor="middle" font-size="40" font-weight="800" fill="${INK}">${o.id} · ${o.nome}</text>`;
+  s+=`<text x="${cx}" y="622" text-anchor="middle" font-size="13.5" font-weight="600" fill="#4a4f66">${o.desc}</text>`;});
+s+=`<text x="750" y="712" text-anchor="middle" font-size="36" font-weight="800" fill="${INK}">Bicho recorrente — 3 opções</text>`;
+const B=[['1 · Gato laranja',gato,'#FFF0DA',0.95,1],['2 · Salsicha',salsicha,'#F3E6DA',0.85,30],['3 · Tartaruga',tartaruga,'#E0F2EE',0.85,40]];
+B.forEach(([n,f,bg,sc,dx],i)=>{const cx=250+i*500;
+  s+=`<rect x="${cx-220}" y="735" width="440" height="390" rx="28" fill="${bg}" stroke="${INK}" stroke-width="3"/>`;
+  s+=`<g transform="translate(${cx+dx} 930) scale(${sc})">${f()}</g>`;
+  s+=`<text x="${cx}" y="1100" text-anchor="middle" font-size="34" font-weight="800" fill="${INK}">${n}</text>`;});
+document.getElementById('s').innerHTML=s;
+</script></body></html>
