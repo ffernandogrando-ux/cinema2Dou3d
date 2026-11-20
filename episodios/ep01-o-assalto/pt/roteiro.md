@@ -1,4 +1,4 @@
-# EP01 · O Assalto (v4 — motor raiva → justiça)
+# EP01 · O Assalto (v5 — motor raiva → justiça)
 
 **Emoção principal:** raiva da injustiça → **justiça** ("bem feito!"). **Apoio:** riso (o talento "inútil" vira a arma) e ternura (a mãe volta para casa).
 **Última sensação:** alívio e prazer de justiça — o dono do banco preso com a "prova" na mão, e a mãe abrindo a porta da casa com a chave do cordão.
@@ -8,9 +8,9 @@
 ## Espinha (de trás para frente)
 | Batida | O que acontece |
 |---|---|
-| **H · Final** | A mãe abre a porta da casa com a chave do cordão: "A gente voltou." Antes: o banco vai a leilão "por três parcelas atrasadas" e as casas tomadas voltam aos donos. |
-| **G · Virada de poder** | Belém usa o talento: troca as etiquetas das três pastas, todas com o nome do Mestre. Quando a polícia entra, joga a chave para o Mestre ("Pega!"); ele pega por reflexo e é preso com a chave na mão. |
-| **F · A armação** | Sala 719 (= senha): o Mestre tira a máscara na cadeira do dono; a tela: "Seguro do assalto: dois bilhões. Culpados: três devedores." |
+| **H · Final** | A mansão do dono vai a leilão "por três parcelas atrasadas" (o sistema prova da própria regra). A mãe tira a chave do cordão: "A gente voltou." (imagem: fila de gente com chaves no cordão voltando para as casas). |
+| **G · Virada de poder** | O talento plantado faz no fim exatamente o que fazia no mercado: Belém tira a etiqueta "Prova número um" da chave dele e cola no contrato do seguro (assinado ontem, na mesa do dono), e deixa no cofre no lugar da pasta dele. 9h12 a polícia entra; o próprio Mestre aponta: "A prova tá ali!"; o delegado abre: é o contrato dele. |
+| **F · A armação** | Pela fresta da porta da sala 719 (= senha), Belém vê o Mestre tirar a máscara na cadeira do dono; tela: "CULPADOS: 3"; na mesa, o contrato do seguro. Ele não é visto. |
 | **E · Algo estranho** | O cofre vazio, três pastas com os nomes; na dele, a cópia da chave da casa com "Prova número um"; a câmera apontada para ele. |
 | **D · Pistas** | "Bom dia, Jairo"; o alarme já desligado; a senha de cabeça (7-1-9). |
 | **C · Eu e o que eu quero** | Belém, talento "inútil" de trocar etiqueta; a mãe no quarto de aluguel com a chave no cordão ("Um dia a gente volta"). |
@@ -39,16 +39,15 @@
 ## Cenários
 Abertura 3D: rua com o banco (variação do `bairroToon` com fachada de banco). 2D: esconderijo com o quadro, quarto de aluguel da mãe, saguão do banco, cofre, escada, sala 719, rua com sirenes, ficha policial. Paletas: esconderijo (verde-musgo), quarto (azul-acinzentado), banco (mármore bege e dourado), cofre (cinza-azulado), sala 719 (vinho e ouro), sirenes (azul e vermelho).
 
-## Narração v4 (texto exato em `narracao.txt`)
+## Narração v5 (texto exato em `narracao.txt`)
 Eu tinha um macacão vermelho, uma máscara de porquinho e um plano.
 Assaltar o banco que tomou a casa da minha mãe.
-O plano era do Mestre.
-Ele juntou três pessoas. Eu era uma delas. Cada uma ganhou um apelido de cidade.
+O plano era do Mestre, e ele juntou três pessoas. Cada uma ganhou um apelido de cidade.
 A Manaus abria qualquer porta. O Recife desligava qualquer alarme.
 E eu? Belém. Meu único talento era trocar etiqueta de preço no mercado.
 O Mestre riu: "Disso a gente não vai precisar."
 O banco tomou a nossa casa por três parcelas atrasadas.
-Hoje a minha mãe mora num quarto de aluguel.
+Minha mãe foi pra um quarto de aluguel.
 Mas ainda guarda a chave da casa velha, num cordão no pescoço.
 Toda noite, ela aperta a chave e diz: "Um dia a gente volta."
 O Mestre desenhou tudo no quadro.
@@ -59,22 +58,25 @@ No cofre, o Mestre digitou a senha de cabeça.
 Sete. Um. Nove. Clec.
 E lá dentro não tinha um real.
 Só três pastas. Uma com o nome de cada um.
-Abri a minha. Dentro, a cópia da chave da nossa casa. Com uma etiqueta: "Prova número um."
-Lá no canto, uma câmera, apontada pra mim.
-Eu subi atrás do Mestre. Sala sete, um, nove. A senha do cofre.
-Ele tirou a máscara e sentou na cadeira do dono.
-Na tela: "Seguro do assalto: dois bilhões. Culpados: três devedores."
+Até que eu vi a minha.
+Dentro, a cópia da chave da nossa casa. Com uma etiqueta: "Prova número um."
+E o Mestre tinha sumido escada acima.
+Eu fui atrás. Sala sete, um, nove. A senha do cofre.
+Pela fresta da porta, eu vi ele tirar a máscara e sentar na cadeira do dono.
+Na tela: "Culpados: três."
+Foi aí que eu entendi.
 O Mestre era o dono do banco.
 O assalto era pra ele receber o seguro. E a culpa ia ficar com a gente.
-Só que ele esqueceu do meu talento.
-Eu desci correndo e troquei as etiquetas das três pastas.
-Todas com um nome só: o dele.
-Quando a polícia entrou, eu joguei a chave pro Mestre: "Pega!"
-Ele pegou.
-A polícia pegou ele com a chave na mão.
-Uma semana depois, o banco foi a leilão. Por três parcelas atrasadas.
-E as casas que ele tomou voltaram pros donos.
-E a minha mãe usou a chave do cordão.
+Na mesa dele, o contrato do seguro. Assinado ontem.
+Só que ele tinha rido do meu talento.
+Quando ele desceu pra esperar a polícia, eu entrei.
+Tirei a etiqueta "Prova número um" da minha chave. Colei no contrato.
+E deixei o contrato no cofre, no lugar da minha pasta.
+Nove e doze, a polícia entrou.
+O Mestre apontou: "A prova tá ali!"
+O delegado abriu. Era o contrato dele.
+A mansão do dono foi a leilão. Por três parcelas atrasadas.
+Minha mãe tirou a chave do cordão.
 A gente voltou.
 
 ## Revisões
@@ -84,3 +86,4 @@ A gente voltou.
 - **v3 → 7,8** (revisor-roteiro: clareza resolvida; final empilhado e repetições). **v3.1:** final em 2 frases (sem "Lá fora, as sirenes" e sem "O banco ganhou dois bilhões", que repetiam a tela); sem "Três devedores, com motivo de sobra"; volta "Até que eu reparei na minha"; "Eu era uma delas"; espinha G/H sincronizada.
 - **Teste do espectador v3.1 → 9/10** ✅ (único tropeço: "Até que eu reparei na minha" → trocado por "Abri a minha."). **Liberado para a voz.**
 - **Usuário (20/11), depois do vídeo da v3.1:** "no fim não tem nada de nada" — faltou emoção; o final punia o herói. Decisão: motor **raiva → justiça** (com crítica ao capitalismo). **v4:** plantio do talento de trocar etiqueta; virada de poder (etiquetas trocadas, "Pega!", o Mestre preso com a chave na mão); banco a leilão "por três parcelas atrasadas"; as casas voltam; "A gente voltou."
+- **v4 → revisor 7,1 (lógica 5,5) · espectador: clareza 6,5, satisfação 7, último segundo "bem feito" + ternura.** Os dois apontam a mecânica fraca (trocar nome na capa da pasta não prova nada; "Pega!" e reflexo; casas voltando por mágica). **v5:** o talento vira a arma (etiqueta "Prova número um" colada no contrato do seguro; o Mestre aponta a própria prova); tela "Culpados: três"; "Até que eu vi a minha"; "Foi aí que eu entendi"; pela fresta (não é visto); mansão a leilão por três parcelas; final em 2 frases. 359 palavras.
