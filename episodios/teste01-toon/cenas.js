@@ -113,7 +113,7 @@ const CHINELO = (x, y) => `<g transform="translate(${x} ${y})"><path d="M-26 0 q
 const sobe = (a, b, k) => clamp((k - a) / (b - a));
 const CENAS = [
   // 1 · "Meu vizinho inventou" — ABERTURA 3D: a câmera desce do céu sobre o bairro em desenho até a garagem do vizinho (luz roxa lá dentro); ele e eu na entrada
-  { l: 0, sfx: [{ t: .02, s: 'whoosh', v: .45 }], mb: false, g3d: (tl, d) => ({ set: 'bairroToon', ...MUNDO.trilha([[[-9, 9, 24], [0, 1.4, 2]], [[-3, 4.5, 15], [0, 1.4, 2.4]], [[.9, 1.8, 10.2], [0, 1.3, 2.8]]], tl / d), fov: 50 }),
+  { l: 0, sfx: [{ t: .02, s: 'whoosh', v: .45 }], mb: false, blur: false, g3d: (tl, d) => ({ set: 'bairroToon', ...MUNDO.trilha([[[-9, 9, 24], [0, 1.4, 2]], [[-3, 4.5, 15], [0, 1.4, 2.4]], [[.9, 1.8, 10.2], [0, 1.3, 2.8]]], tl / d), fov: 50 }),
     f: (tl, d, t) => p3T(VIZ, [.75, 0, 3.3], t, { flip: true, olhar: [.3, 0], boca: 'sorriso', palpebra: .3, bD: { h: [70, 120], bend: 20 }, segura: CONTROLE_T, agito: 1.4 })
       + p3T(EU, [-.85, 0, 3.6], t, { olhar: [.6, 0], palpebra: .5, agito: 1.2 }) },
   // 2 · "um portal pra outras dimensões." — ele aperta o controle; o portal abre com overshoot; lavagem roxa; etiqueta de terminal
