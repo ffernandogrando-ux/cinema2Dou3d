@@ -183,7 +183,10 @@ window.CHECAR = async (passo = .25) => { const out = [];
     (window._marcasT || []).forEach(m => { const fora = m.x - m.r < -8 || m.x + m.r > 584 || m.y - m.r < -8 || m.y + m.r > 1032, visivel = m.x + m.r > 0 && m.x - m.r < 576 && m.y + m.r > 0 && m.y - m.r < 1024;
       if (fora && visivel) out.push({ ...base, tipo: 'objeto cortado: ' + m.nome }); });
     // fonte que não está carregada (cai numa serifada padrão): só Poppins, Caveat, monospace e as serifadas de cartela (Shippori Mincho B1, Playfair Display)
-    { const fs = new Set([...document.getElementById('svg').innerHTML.matchAll(/font-family="([^"]+)"/g)].map(m => m[1].split(',')[0].trim()));
+    { const fams = [...document.getElementById('svg').innerHTML.matchAll(/font-family="([^"]+)"/g)].map(m => m[1].split(',')[0].trim());
+      // nome de fonte com palavra que começa por dígito precisa de aspas ("'Baloo 2'"); sem aspas a regra é inválida e cai na serifada padrão
+      fams.forEach(f => { if (!/^['"]/.test(f) && /\s\d/.test(f)) out.push({ ...base, tipo: 'fonte sem aspas (nome com dígito): ' + f }); });
+      const fs = new Set(fams.map(f => f.replace(/^['"]|['"]$/g, '')));
       fs.forEach(f => { if (!['Poppins', 'Caveat', 'monospace', 'Shippori Mincho B1', 'Playfair Display', 'Baloo 2', 'VT323'].includes(f)) out.push({ ...base, tipo: 'fonte não carregada: ' + f }); }); }
     // texto de documento ou placa debaixo da legenda (faixa de ~78 % a 87 % da altura, no meio do quadro)
     if (!pl.semTexto && document.getElementById('sub').innerHTML) (window._textosT || []).forEach(m => { if (m.y1 > 800 && m.y0 < 890 && m.x1 > 120 && m.x0 < 456) out.push({ ...base, tipo: 'texto sob a legenda: ' + m.nome }); }); }

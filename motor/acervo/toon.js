@@ -96,7 +96,7 @@ function toon(P, st = {}) {
     if (solto || ag) arm = { ...arm, h: [arm.h[0] + bal, arm.h[1] - Math.abs(bal) * .3] };
     const hp = [sh[0] + arm.h[0], sh[1] + arm.h[1]], ang = Math.atan2(hp[1] - sh[1], hp[0] - sh[0]); let o = '';
     const manga = TR.tipo === 'moletom' || TR.tipo === 'macacao';
-    if (manga) o += tForma(tMacarrao(sh, hp, arm.bend ?? 0, 44 * L, 38 * L), frente ? TR.cor : TR.corS);
+    if (manga) o += tForma(tMacarrao(sh, hp, arm.bend ?? 0, 44 * L, 38 * L), frente ? (TR.manga || TR.cor) : TR.corS);
     else { o += tForma(tMacarrao(sh, hp, arm.bend ?? 0, 30 * L, 26 * L), P.pele);
       if (TR.tipo === 'camiseta') o += tForma(tMacarrao(sh, [sh[0] + arm.h[0] * .3, sh[1] + arm.h[1] * .3], 0, 46 * L, 42 * L), frente ? TR.cor : TR.corS); }
     if (manga) o += tForma(tElip(hp[0] - Math.cos(ang) * 4, hp[1] - Math.sin(ang) * 4, 21 * L, 21 * L), TR.corS);
