@@ -137,7 +137,7 @@ const CENAS = [
         + (cai > 0 ? `<g transform="translate(${lerp(372, 380, cai)} ${lerp(600, 716, cai * cai)})">${COCO_T}</g>` : ''); } },
 ];
 // ---------------------------------------------------------------- teste de luz de cinema (kit cine): uma camada por plano
-const CINE_ON = true;
+const CINE_ON = false; // usuário (20/11): luz de cinema reprovada ("ficou nada a ver"); fica desligada
 if (CINE_ON) [
   (tl, d, t) => cFaixas(1, 84) + cVinheta(.5) + cGrao(t),                                                   // abertura 3D
   (tl, d, t) => CINE.interior(t, { x: 270, y: 520, r: 470 }) + cBrilho(270, 520, 320, '#C04BFF', .35),       // o portal acende a garagem
