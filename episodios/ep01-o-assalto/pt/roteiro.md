@@ -1,4 +1,4 @@
-# EP01 · O Assalto (v2)
+# EP01 · O Assalto (v2.1)
 
 **Gênero:** filme de assalto. **Formato:** `FORMATO_CINEMA.md`. **Episódio único.** 1ª pessoa, ~330 palavras (~2:05).
 **A ideia em uma frase:** parece um filme de assalto a banco, mas a virada mostra que o assalto era do próprio banco, e os ladrões foram escolhidos por estarem devendo: eles não roubavam, eram a prova.
@@ -8,11 +8,11 @@
 |---|---|
 | **A · Cena-ícone** (0–4 s) | Três pessoas de macacão vermelho e máscara de porquinho-cofre + o Mestre na porta de um banco (abertura 3D: a câmera desce pela rua até a fachada). "Eu tinha um macacão vermelho, uma máscara de porquinho e um plano." |
 | **B · O plano** (4–15 s) | O Mestre junta três pessoas com nome de cidade: Manaus abre portas, Recife desliga alarmes. |
-| **C · Eu e o que eu quero** (15–35 s) | Eu sou Belém. O banco tomou a nossa casa; a mãe mora num quarto de aluguel e guarda a chave da casa velha num cordão ("Um dia a gente volta"). Quero devolver a porta para aquela chave. |
+| **C · Eu e o que eu quero** (15–35 s) | Eu sou Belém. O banco tomou a nossa casa; a mãe mora num quarto de aluguel e guarda a chave da casa velha num cordão ("Um dia a gente volta"). Quero a nossa casa de volta. |
 | **D · Execução com pistas** (35–60 s) | Quadro: 9h00 / 9h10 / 9h12, "Ninguém se machuca" — e ninguém se machucou. Tudo dá certo demais: "Bom dia, Jairo" (o segurança nem se mexe); o alarme não toca sem o Recife encostar; o Mestre passa na frente da Manaus e digita a senha de cabeça (7-1-9). Mas o cofre está vazio, só três pastas com os nossos nomes. |
-| **E · Algo estranho, comigo** (~65 s) | Na MINHA pasta, a chave da casa da minha mãe, com a etiqueta "PROVA Nº 1". A câmera do canto, luz vermelha acesa, apontada para mim. |
+| **E · Algo estranho, comigo** (~65 s) | Na MINHA pasta, uma chave igualzinha à do cordão da minha mãe, com a etiqueta "PROVA Nº 1". A câmera do canto, luz vermelha acesa, apontada para mim. |
 | **F · O lugar escondido** (75–90 s) | Sigo o Mestre escada acima até a sala 719 (a senha do cofre). Ele tira a máscara e senta na cadeira do dono. |
-| **G · Virada** (90–100 s) | Na tela: "ASSALTO SEGURADO: 2 BILHÕES." / "CULPADOS: 3. MOTIVO: DÍVIDA." O Mestre era o dono do banco. A gente não roubava o banco; a gente era a prova. **Flash de pistas** (2 s, sem narração extra): "Bom dia, Jairo", o alarme mudo, a senha de cabeça, a luz vermelha, a placa 719. |
+| **G · Virada** (90–100 s) | Na tela: "SEGURO PAGO: 2 BILHÕES." / "CULPADOS: 3. MOTIVO: DÍVIDA." O Mestre era o dono do banco. A gente não roubava o banco; a gente era a prova. **Flash de pistas** (2 s, sem narração extra): "Bom dia, Jairo", o alarme mudo, a senha de cabeça, a luz vermelha, a placa 719. |
 | **H · Final (eco do desejo)** (100–110 s) | Sirenes. "Eu consegui a chave de volta. Na foto da polícia, ela tava na minha mão." Imagem: a ficha policial de Belém com a chave na mão. |
 
 **A frase que o espectador leva (não dita):** quando o banco perde, quem paga é quem já devia.
@@ -41,7 +41,7 @@
 ## Cenários
 Abertura 3D: rua com o banco (variação do `bairroToon` com fachada de banco). 2D: esconderijo com o quadro, quarto de aluguel da mãe, saguão do banco, cofre, escada, sala 719, rua com sirenes, ficha policial. Paletas: esconderijo (verde-musgo), quarto (azul-acinzentado), banco (mármore bege e dourado), cofre (cinza-azulado), sala 719 (vinho e ouro), sirenes (azul e vermelho).
 
-## Narração v2 (texto exato em `narracao.txt`)
+## Narração v2.1 (texto exato em `narracao.txt`)
 Eu tinha um macacão vermelho, uma máscara de porquinho e um plano.
 Assaltar o banco que tomou a casa da minha mãe.
 O plano era do Mestre.
@@ -52,7 +52,7 @@ O banco tomou a nossa casa por três parcelas atrasadas.
 Hoje a minha mãe mora num quarto de aluguel.
 Mas ainda guarda a chave da casa velha, num cordão no pescoço.
 Toda noite, ela aperta a chave e diz: "Um dia a gente volta."
-Eu queria devolver a porta pra aquela chave.
+Eu queria a nossa casa de volta.
 O Mestre desenhou tudo no quadro.
 Nove horas, entrar. Nove e dez, cofre. Nove e doze, sair.
 "Ninguém se machuca."
@@ -64,17 +64,17 @@ Nove e cinco. Nove e oito. Tudo no horário. Fácil demais.
 No cofre, a Manaus abriu a caixa de ferramentas.
 Mas o Mestre passou na frente e digitou a senha de cabeça.
 Sete. Um. Nove. Clec.
-Só que o cofre tava vazio.
-Só tinha três pastas, uma com o nome de cada um.
+Mas o cofre tava vazio.
+Dentro, três pastas, uma com o nome de cada um.
 Até que eu reparei numa coisa estranha.
 Dentro da minha pasta tinha uma chave.
-A chave da casa da minha mãe.
+Igualzinha à do cordão da minha mãe.
 Com uma etiqueta: "Prova número um."
 Lá no canto, uma câmera com a luzinha vermelha acesa. Apontada pra mim.
 Por isso, eu segui o Mestre escada acima.
 Até a sala sete, um, nove.
 Ele tirou a máscara e sentou na cadeira do dono.
-Na tela, apareceu: "Assalto segurado. Dois bilhões."
+Na tela, apareceu: "Seguro pago: dois bilhões."
 E embaixo: "Culpados: três. Motivo: dívida."
 Foi aí que eu entendi.
 O Mestre era o dono do banco.
@@ -86,3 +86,4 @@ Na foto da polícia, ela tava na minha mão.
 
 ## Revisões
 - **v1 → 6,8** (revisor-roteiro): o protagonista não era a chave (estranheza pública); "álibi" errado; final quebrava tempo/ponto de vista; explicação demais depois da virada; nomes demais e "Natal" ambíguo; "o Professor" perto demais de cópia; 288 palavras. **v2:** a chave da mãe vira a "Prova nº 1" na pasta dele e a câmera aponta para ele; "a gente era a prova"; final em eco do desejo (a chave na mão, na foto da polícia); cortes da explicação; 3 culpados (sem Salvador), só "Belém", Recife no lugar de Natal; "o Mestre"; sala 719 = senha; mãe concreta ("Um dia a gente volta"); 329 palavras.
+- **v2 → 8,0 ✅ liberada para a voz** (revisor-roteiro). **v2.1** aplica as correções curtas: chave "igualzinha à do cordão" (cópia do banco, sem contradizer a mãe); desejo "a nossa casa de volta" fecha com o eco da chave; "Seguro pago" no lugar de "Assalto segurado"; sem repetição de "Só". Nota de storyboard: Manaus e Recife parados olhando as próprias pastas enquanto Belém sobe a escada.

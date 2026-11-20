@@ -21,6 +21,8 @@
 
 - **2026-11-20: melhorias 1–5 aplicadas** (pedido do usuário): kit toon com personagens a 12 qps (`st.liso` desliga), boca pela voz (`VOZ_RMS`, injetado pelo render.js a partir do voz.wav), cenário com acabamento (`paredeToon`, `chaoToon`, `sombraContato`), close de reação pronto (`reacaoToon`, fundo chapado + anéis lisos, sem desfoque) e abertura 3D como peça do acervo (`motor/acervo/toon3d.js`: cenário `bairroToon` com opções + `p3T`). Teste com 2 closes de reação novos ("boleto." e "dele."). Revisor 7,8 → bugs (braço no close, etiqueta nas antenas) corrigidos e conferidos; vídeo entregue. Melhorias 6–8 (silêncio antes da virada, squash/stretch, paletas mais contrastantes) ficam para depois. Próximo: estrutura de roteiro do canal e o piloto.
 
+- **2026-11-20: EP01 "O Assalto"** (`episodios/ep01-o-assalto/`), 1º piloto do canal: quadrilha de macacão vermelho e máscara de porquinho-cofre assalta o banco que tomou a casa da mãe do Belém; o Mestre é o dono do banco; na pasta do Belém, uma chave igual à do cordão da mãe com a etiqueta "Prova número um"; tela "Seguro pago: dois bilhões / Culpados: três. Motivo: dívida."; "a gente era a prova"; eco: "Eu consegui a chave de volta. Na foto da polícia, ela tava na minha mão." Revisões 6,8 → **8,0 ✅** (v2.1, 330 palavras). **Próximo: a voz do usuário** (`pt/voz.wav`) → `alinhar.py` → storyboard → revisor visual.
+
 ## Decisões
 - 2026-11-20: canal novo (não uma temporada dentro do Regra Torta), decisão do usuário.
 - 2026-11-20: sem abertura pelo final (já falhou no EP10 do Regra Torta); o 1º segundo é a cena-ícone do gênero, com narração desde o início.
