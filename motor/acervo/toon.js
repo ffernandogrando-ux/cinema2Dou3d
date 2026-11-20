@@ -116,7 +116,7 @@ function toon(P, st = {}) {
   if (TR.tipo === 'macacao') { if (TR.aberto) r += tForma(`M-26 ${omb - 4} L0 ${omb + H * .45} L26 ${omb - 4}Z`, TR.camisa || '#F4F1EA') + (TR.gravata ? tForma(`M-7 ${omb + 4} L7 ${omb + 4} L10 ${omb + H * .38} L0 ${omb + H * .46} L-10 ${omb + H * .38}Z`, TR.gravata) : '') + tTraco(`M-26 ${omb - 4} L0 ${omb + H * .45} L26 ${omb - 4}`);
     else r += tTraco(`M0 ${omb + 6} V${hip - 6}`, TLW * .7) + tForma(`M-28 ${omb - 4} L-6 ${omb + 26} L-2 ${omb + 4}Z`, TR.corS) + tForma(`M28 ${omb - 4} L6 ${omb + 26} L2 ${omb + 4}Z`, TR.corS);
     r += tForma(tPoli([[16, omb + 46], [46, omb + 46], [46, omb + 76], [16, omb + 76]]), TR.corS); }
-  if (TR.detalhe) r += TR.detalhe(omb, hip);
+  if (TR.detalhe) r += TR.detalhe(omb, hip, st);   // st.flip: quem tem texto deve desvirar (scale(-1 1))
   // pescoço e cabeça
   r += tForma(tMacarrao([14, omb + 4], [24, omb - 34], 4, 30, 30), P.pele);
   const cx = 34, cy = A.cab - A.omb + omb;

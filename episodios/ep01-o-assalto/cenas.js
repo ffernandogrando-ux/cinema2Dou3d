@@ -32,7 +32,7 @@ const quepe = () => tForma(tSpl([[-90, -60], [-80, -120], [0, -146], [80, -126],
 const JAIRO = { pele: '#C98E66', peleS: '#AA744F', barriga: .95, sobrancelha: '#2a1a12', bigode: '#2a1a12', tronco: { tipo: 'camiseta', cor: '#2F3B5C', corS: '#232D47', detalhe: (omb) => tForma(tPoli([[20, omb + 40], [50, omb + 40], [50, omb + 64], [20, omb + 64]]), '#E8C34A') }, calca: { cor: '#232D47', corS: '#1A2238' }, sapato: '#141414', sapatoS: '#000', cabeca: quepe, ph: 2.9 };
 
 // etiqueta de cidade no peito (depois do plano 10 todos usam)
-const comEtiqueta = (P, nome) => ({ ...P, tronco: { ...P.tronco, detalhe: (omb) => `<g transform="translate(-6 ${omb + 82}) scale(.36)">${etiquetaNome(nome)}</g>` } });
+const comEtiqueta = (P, nome) => ({ ...P, tronco: { ...P.tronco, detalhe: (omb, hip, st = {}) => `<g transform="translate(-6 ${omb + 82}) scale(${st.flip ? -.36 : .36} .36)">${etiquetaNome(nome)}</g>` } });
 // ================================================================ PEÇAS DO EPISÓDIO
 const CHAVE = (s = 1, rot = 0) => `<g transform="scale(${s}) rotate(${rot})">${tForma(tPoli([[-26, -60], [0, -84], [26, -60], [26, -30], [-26, -30]]), '#E8B84A', tPinta(tPoli([[0, -84], [26, -60], [26, -30], [0, -30]]), '#C8962E'))}`
   + `${tForma(tElip(0, -52, 7, 7), '#5a3a10')}${tForma(tPoli([[-6, -30], [6, -30], [6, 40], [-6, 40]]), '#E8B84A')}${tForma(tPoli([[6, 14], [22, 14], [22, 22], [6, 22]]), '#E8B84A')}${tForma(tPoli([[6, 28], [18, 28], [18, 36], [6, 36]]), '#E8B84A')}</g>`;
@@ -64,6 +64,22 @@ const cadeadoT = (aberto) => `<g>${tForma(`M-22 -10 V-40 Q-22 -66 0 -66 Q22 -66 
 const alicate = `<g transform="rotate(-30)">${tForma(tPoli([[-6, -70], [6, -70], [10, 0], [-10, 0]]), '#9AA3AD')}${tForma(tMacarrao([-8, 0], [-26, 70], -6, 14, 12), '#D8312B')}${tForma(tMacarrao([8, 0], [26, 70], 6, 14, 12), '#D8312B')}</g>`;
 const grampo = `<g transform="rotate(-20)">${tTraco('M0 0 V-46 Q0 -54 6 -50', TLW * 1.2, '#9AA3AD')}</g>`;
 
+// ---------------------------------------------------------------- PEÇAS DO BLOCO B
+const QUARTO = { parede: '#7E8FA3', paredeS: '#6A7A8E', chao: '#5A5148', chaoS: '#4A423A' };
+// quarto de aluguel: parede azul-acinzentada, janela pequena com a noite, cama de solteiro (o assento fica em y 675 = quadril sentado de s .74)
+function quartoMae() { return paredeToon(QUARTO.parede, QUARTO.paredeS, 800, { passo: 180 }) + chaoToon(QUARTO.chao, QUARTO.chaoS, 800, { tabuas: 1 })
+  + tForma(tPoli([[380, 300], [520, 300], [520, 440], [380, 440]]), '#24305A') + `<circle cx="480" cy="340" r="16" fill="#F4EAD0"/>` + tTraco('M450 300 V440 M380 370 H520', TLW)
+  + tForma(tPoli([[40, 600], [80, 600], [80, 800], [40, 800]]), '#8A6A4A') + sombraContato(200, 800, 330); }
+// a frente da cama (colchão + pé), desenhada por cima das pernas da mãe sentada, para o corpo "encostar" no assento
+const camaAtras = (y = 707) => tForma(tPoli([[20, y - 20], [400, y - 20], [400, y + 34], [20, y + 34]]), '#D9D2C4', tPinta(tPoli([[20, y - 20], [400, y - 20], [400, y - 6], [20, y - 6]]), '#EEE8DC')) + tForma(tPoli([[30, y + 34], [390, y + 34], [390, 800], [30, 800]]), '#8A6A4A') + tForma(tPoli([[20, y - 120], [60, y - 120], [60, y - 20], [20, y - 20]]), '#8A6A4A');
+const giz = `<g transform="translate(14 -10) rotate(-30)">${tForma(tPoli([[-6, -24], [6, -24], [6, 10], [-6, 10]]), '#F4F1EA')}</g>`;
+// planta do banco desenhada no quadro (k = progresso do desenho)
+function plantaBanco(k) { const L = [['M350 520 H540 V350 H350Z', .2], ['M350 430 H430 V350', .45], ['M480 520 V460 A30 30 0 1 1 480.1 460', .7], ['M370 500 L410 470 L450 500', .9]];
+  return L.filter(([, a]) => k > a - .2).map(([d]) => tTraco(d, TLW, '#F4F1EA')).join('') + (k > .85 ? `<text x="480" y="470" font-family="Caveat" font-size="22" text-anchor="middle" fill="#F4F1EA">cofre</text>` : ''); }
+// horário escrito a giz no quadro
+const horario = (h, v, k) => `<g opacity="${k > 0 ? 1 : 0}"><text x="288" y="440" font-family="Caveat" font-weight="700" font-size="130" text-anchor="middle" fill="#F4F1EA">${h}</text>`
+  + `<text x="288" y="560" font-family="Caveat" font-weight="700" font-size="96" text-anchor="middle" fill="#F4F1EA">${v}</text>` + tTraco(`M140 590 H${140 + 300 * Math.min(1, k * 1.5)}`, TLW * 1.4, '#F4F1EA') + `</g>`;
+
 // ================================================================ PLANOS
 const pT = (P, x, y, s, t, o = {}) => pt(P, x, y, s, t, o);
 const CENAS = [
@@ -93,15 +109,15 @@ const CENAS = [
     f: (tl, d, t) => esconderijo({ t }) + pT(MANAUS, 200, 800, .72, t, { mascara: 'testa', olhar: [.3, 0] }) + pT(RECIFE, 400, 800, .72, t, { mascara: 'testa', olhar: [-.2, 0] }) },
   // 7 · Belém entra no quadro e se junta aos dois
   { l: 3, w: 4, cam: { s: [1.05, 1.08], c: [288, 520] },
-    f: (tl, d, t) => esconderijo({ t }) + pT(MANAUS, 125, 800, .64, t, { mascara: 'testa', olhar: [.6, 0] }) + pT(RECIFE, 280, 800, .64, t, { mascara: 'testa', olhar: [.8, 0] })
-      + pT(BELEM, lerp(660, 435, ease(sobe(0, .6, tl))), 800, .64, t, { flip: true, mascara: 'testa', walk: tl < .6 ? tl * 2 : null, olhar: [.5, 0], semCorte: tl < .45 }) },
+    f: (tl, d, t) => esconderijo({ t }) + pT(MANAUS, 110, 800, .58, t, { mascara: 'testa', olhar: [.6, 0] }) + pT(RECIFE, 265, 800, .58, t, { mascara: 'testa', olhar: [.8, 0] })
+      + pT(BELEM, lerp(660, 440, ease(sobe(0, .6, tl))), 800, .58, t, { flip: true, mascara: 'testa', walk: tl < .6 ? tl * 2 : null, olhar: [.5, 0], semCorte: tl < .45 }) },
   // 8–10 · closes das etiquetas no peito (com queixo/máscara na testa visíveis)
   ...[[MANAUS, 'MANAUS', 3, 8], [RECIFE, 'RECIFE', 3, 11], [BELEM, 'BELÉM', 3, 13]].map(([P, nome, l, w]) => ({ l, w, split: false, blur: false, sfx: [{ t: .05, s: 'galeria/ding_1', v: .35 }], cam: { s: [1, 1.05], c: [288, 520] },
     f: (tl, d, t) => fundoChapado(ESC.parede) + pT(P, 230, 1330, 2.2, t, { mascara: 'testa', semCorte: true, nocheck: true, agito: .4 })
       + `<g transform="translate(290 ${lerp(760, 640, ease(sobe(0, .15, tl)))})">${etiquetaNome(nome)}</g>` })),
   // 11 · Manaus abre o cadeado com um grampo (câmera na mão)
   { l: 4, cam: { s: [1.1, 1.13], c: [288, 470] },
-    f: (tl, d, t) => esconderijo({ t }) + pT(comEtiqueta(MANAUS, 'MANAUS'), 220, 900, 1.05, t, { mascara: 'testa', olhar: [.8, .4], bD: { h: [110, 90], bend: 20 }, segura: `<g transform="translate(30 -10) scale(1.2)">${cadeadoT(tl > .9)}</g>`, bE: { h: [150, 70], bend: -30 }, seguraE: `<g transform="translate(10 -6)">${grampo}</g>`, semCorte: true }) },
+    f: (tl, d, t) => esconderijo({ t }) + pT(comEtiqueta(MANAUS, 'MANAUS'), 220, 900, 1.05, t, { mascara: 'testa', olhar: [.8, .4], bD: { h: [110, 90], bend: 20 }, segura: `<g transform="translate(30 -10) scale(1.2)">${cadeadoT(tl > .9)}<g transform="translate(-2 18) rotate(${tl > .9 ? 0 : Math.sin(t * 30) * 12})">${tTraco('M0 0 L-46 -40', TLW * 1.6, '#9AA3AD')}</g></g>`, semCorte: true }) },
   // 12 · insert: o cadeado cai aberto
   { l: 4, w: 4, split: false, sfx: [{ t: .05, s: 'galeria/thin_metal_bop_1', v: .5 }], cam: { s: [1.6, 1.7], c: [288, 512] },
     f: (tl, d, t) => fundoChapado(ESC.paredeS) + `<g transform="translate(288 ${lerp(470, 560, ease(sobe(0, .3, tl)))}) rotate(${lerp(0, 25, sobe(0, .3, tl))}) scale(2.2)">${cadeadoT(true)}</g>` },
@@ -116,4 +132,40 @@ const CENAS = [
   // 15 · reação: Belém aponta para a própria etiqueta, sem graça
   { l: 5, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
     f: (tl, d, t) => fundoChapado(ESC.parede) + pT(comEtiqueta(BELEM, 'BELÉM'), 230, 1130, 1.5, t, { mascara: 'testa', olhar: [-.1, .5], palpebra: .5, boca: { sm: -.1, skew: .5 }, bD: { h: [-8, 66], bend: 30 }, sobr: .4, semCorte: true, agito: .5 }) },
+  // ---------------------------------------------------------------- BLOCO B (16–28): a casa, a mãe e o plano no quadro
+  // 16 · a casinha amarela; no "tomou", o carimbo TOMADO desce na porta e a cor some
+  { l: 6, sfx: [{ w: 2, l: 6, o: 0, s: 'galeria/drum_bonk_1', v: .5 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => { const k = sobe(ws(6, 2) - ws(6, 0), ws(6, 2) - ws(6, 0) + .15, tl); const c = casaFamilia({ carimbo: k }); return k > .5 ? memoria(c) : c; } },
+  // 17 · rajada: boletos vermelhos 1 · 2 · 3 colando na porta (punch-in)
+  { l: 6, w: 7, split: false, sfx: [{ t: .02, s: 'papel', v: .5 }, { t: .25, s: 'papel', v: .5 }, { t: .5, s: 'papel', v: .5 }], cam: { s: [1.6, 1.65], c: [290, 640] },
+    f: (tl, d, t) => memoria(casaFamilia({ carimbo: 1 })) + [0, 1, 2].filter(i => tl > i * .25).map(i => `<g transform="translate(${250 + i * 34} ${650 + i * 22}) rotate(${-8 + i * 9})">${tForma(tPoli([[-40, -54], [40, -54], [40, 54], [-40, 54]]), '#E8434F')}<text x="0" y="14" font-family="Baloo 2" font-weight="800" font-size="40" text-anchor="middle" fill="#fff">${i + 1}</text></g>`).join('') },
+  // 18 · quarto de aluguel: a mãe sentada na cama, olhando a janela pequena (push-in lento)
+  { l: 7, cam: { s: [1, 1.07], c: [288, 520], c1: [300, 512] },
+    f: (tl, d, t) => quartoMae() + camaAtras() + pT(MAE, 160, 800, .74, t, { sentado: true, olhar: [.8, -.4], palpebra: .5, boca: { sm: -.4 }, agito: .5 }) },
+  // 19 · close médio da mãe: a mão segura a chave do cordão
+  { l: 8, split: false, blur: false, cam: { s: [1, 1.04], c: [288, 470] },
+    f: (tl, d, t) => fundoChapado(QUARTO.parede) + pT(MAE, 230, 1240, 1.5, t, { olhar: [.2, .4], palpebra: .55, boca: { sm: -.3 }, bD: { h: [-20, 60], bend: 50, punho: true }, segura: `<g transform="translate(0 30)">${CHAVE(.5)}</g>`, semCorte: true, agito: .4 }) },
+  // 20 · insert: a chave de cabeça de casinha gira no cordão
+  { l: 8, w: 4, split: false, sfx: [{ t: .05, s: 'galeria/glockenspiel_magic_2', v: .3 }], cam: { s: [1, 1.05], c: [288, 500] },
+    f: (tl, d, t) => fundoChapado(MAE.tronco.cor) + tTraco('M288 -100 V380', TLW * 1.5, '#C9A64A') + `<g transform="translate(288 520) scale(${Math.cos(t * 1.6) * .9 + .1 * Math.sign(Math.cos(t * 1.6))} 1)">${CHAVE(2.6)}</g>` },
+  // 21 · plano médio: ela aperta a chave contra o peito, olhos fechados
+  { l: 9, cam: { s: [1.1, 1.14], c: [260, 470] },
+    f: (tl, d, t) => quartoMae() + camaAtras(688) + pT(MAE, 150, 800, .9, t, { sentado: true, olhos: 'fechados', boca: { sm: .1 }, bD: { h: [-10, 40], bend: 60, punho: true }, segura: CHAVE(.35), agito: .4 }) },
+  // 22 · close fechado: "Um dia a gente volta." (fala)
+  { l: 9, w: 8, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
+    f: (tl, d, t) => reacaoToon(MAE, t, tl, { falante: true, olhar: [.3, -.2], palpebra: .45, boca: { sm: .25 }, agito: .4 }, { fundo: QUARTO.parede, forma: QUARTO.paredeS }) },
+  // 23 · Belém na porta do quarto, em contraluz (corredor claro atrás); baixa a máscara no rosto
+  { l: 10, sfx: [{ t: .9, s: 'galeria/rubber_snapping_1', v: .45 }], cam: { s: [1, 1.05], c: [288, 520] },
+    f: (tl, d, t) => fundoChapado(QUARTO.parede) + tForma(tPoli([[150, 260], [430, 260], [430, 800], [150, 800]]), '#F4EAD0') + chaoToon(QUARTO.chao, QUARTO.chaoS, 800)
+      + `<g style="filter:brightness(.18)">${pT(BELEM, 300, 800, .8, t, { mascara: tl > .9 ? 'baixada' : 'testa', olhar: [-.6, 0], agito: .5 })}</g>` },
+  // 24 · esconderijo: o Mestre (máscara + óculos) desenha a planta do banco no quadro
+  { l: 11, sfx: [{ t: .1, s: 'galeria/washboard_scrape_1', v: .3 }], cam: { s: [1, 1.04], c: [320, 520], c1: [340, 516] },
+    f: (tl, d, t) => esconderijo({ t, quadro: plantaBanco(sobe(0, d, tl)) }) + pT(MESTRE, 240, 800, .76, t, { mascara: 'baixada', olhar: [.8, -.2], bD: { h: [110, -40], bend: 20, punho: true }, segura: giz }) },
+  // 25–27 · closes no quadro: 9:00 ENTRAR / 9:10 COFRE / 9:12 SAIR
+  ...[[12, 0, '9:00', 'ENTRAR', -3], [12, 3, '9:10', 'COFRE', 2], [12, 7, '9:12', 'SAIR', -2]].map(([l, w, h, v, rot], i) => ({ l, w, split: false, blur: false, sfx: [{ t: .02, s: 'galeria/washboard_scrape_2', v: .3 }, { t: .3, s: 'tic', v: .4 }],
+    cam: { s: [1, 1.05], c: [288 + (i - 1) * 20, 470], rot: [rot, rot] },
+    f: (tl, d, t) => fundoChapado('#22302A') + horario(h, v, sobe(0, .5, tl)) })),
+  // 28 · close 3/4 do Mestre (máscara + óculos), falante: o focinho mexe; ajeita os óculos
+  { l: 13, split: false, blur: false, cam: { s: [1, 1.05], c: [288, 470] },
+    f: (tl, d, t) => reacaoToon(MESTRE, t, tl, { mascara: 'baixada', falante: true, olhar: [.2, 0], bD: tl < .4 ? { h: [36, -170], bend: 30 } : null, agito: .5 }, { fundo: ESC.parede, forma: ESC.paredeS }) },
 ];
