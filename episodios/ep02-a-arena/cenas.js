@@ -106,7 +106,7 @@ function camaroteM(t, o = {}) { const y = o.chao ?? 800; let r = fundoChapado(CA
     + `<rect x="70" y="470" width="436" height="130" fill="${ARE.areia}"/>` + tTraco('M70 200 H506 V600 H70Z M288 200 V600', TLW * 1.4, CAMA.ouro); }
   r += tForma(tPoli([[-60, y - 30], [640, y - 30], [640, y], [-60, y]]), CAMA.paredeS) + tTraco(`M-60 ${y - 30} H640`, TLW);
   r += `<rect x="-60" y="${y}" width="700" height="600" fill="${CAMA.piso}"/>` + tTraco(`M-60 ${y} H640`, TLW);
-  if (o.vidro) { const [a, b] = o.vidro; r += `<rect x="${a}" y="${y}" width="${b - a}" height="600" fill="${ARE.areia}"/><rect x="${a}" y="${y}" width="${b - a}" height="600" fill="${CAMA.vidro}" opacity=".55"/>`
+  if (o.vidro) { const [a, b] = o.vidro; r += `<rect x="${a}" y="${y}" width="${b - a}" height="600" fill="${ARE.areia}"/><rect x="${a}" y="${y}" width="${b - a}" height="600" fill="${CAMA.vidro}" opacity=".78"/>` + [0, 1, 2].map(i => `<path d="M${a + 30 + i * 90} ${y + 20} l60 -14" stroke="#fff" stroke-width="6" opacity=".8"/>`).join('')
     + [0, 1, 2, 3].map(i => `<path d="M${a} ${y + 40 + i * i * 30} H${b}" stroke="#ffffff" stroke-width="3" opacity=".5"/>`).join('') + tTraco(`M${a} ${y} V1200`, TLW * 1.2, CAMA.ouro); }
   if (o.tapete) r += `<ellipse cx="${o.tapete}" cy="${y + 40}" rx="120" ry="26" fill="#C0392B" stroke="${TINK}" stroke-width="3"/>`;
   return r; }
@@ -133,24 +133,28 @@ function arenaCorte(t, o = {}) { const k = o.aberto || 0, verm = o.verm; let r =
   const meio = (MC.vid0 + MC.vid1) / 2, ang = k * 82;
   for (const [x0, sg] of [[MC.vid0, 1], [MC.vid1, -1]]) r += `<g transform="rotate(${sg * ang} ${x0} ${MC.piso + 6})"><rect x="${Math.min(x0, x0 + sg * (meio - MC.vid0))}" y="${MC.piso}" width="${meio - MC.vid0}" height="12" fill="${CAMA.vidro}" stroke="${TINK}" stroke-width="3" opacity=".9"/></g>`;
   if (o.alcapao) { const a2 = o.alcapao * 80; r += `<g transform="rotate(${a2} ${meio - 34} ${MC.piso + 6})"><rect x="${meio - 34}" y="${MC.piso - 1}" width="68" height="14" fill="#9FC6DA" stroke="${TINK}" stroke-width="3"/></g>`; }
-  r += ret(MC.vid0 - 10, 176, 20, MC.piso - 176, '#5C5A60') + `<g transform="translate(${MC.vid0} ${MC.piso - 120}) scale(.22)">${alavanca(0, 0, 1, o.alavanca || 0, true)}</g>`;
+  r += ret(MC.vid0 - 10, 176, 20, MC.piso - 176, '#5C5A60') + `<g transform="translate(${MC.vid0} ${MC.piso - 70}) scale(.22)">${alavanca(0, 0, 1, o.alavanca || 0, true)}</g>`;
   r += `<ellipse cx="190" cy="${MC.piso - 2}" rx="34" ry="6" fill="#C0392B"/>`;   // tapete do dono
   r += ret(-30, MC.piso - 116, 40, 116, '#2a1f24');                               // porta da escada
   r += `<g transform="translate(70 ${MC.piso})">${poltrona(0, 0, .22)}</g><g transform="translate(120 ${MC.piso})">${poltrona(0, 0, .22)}</g>`;
   return r; }
 // telão de LED (tela cheia ou pequeno): texto vermelho com pontinhos
 function telao(linhas, o = {}) { const tam = o.tam || 64, y0 = o.y ?? 380, n = linhas.length;
-  let r = fundoChapado('#15121a') + ret(30, y0 - 170, 516, Math.max(300, n * tam * 1.25 + 120), '#0A080C') + tTraco(`M30 ${y0 - 170} h516 v${Math.max(300, n * tam * 1.25 + 120)} h-516Z`, TLW * 1.6, '#3a3440');
+  const alt = o.altura || Math.max(300, n * tam * 1.25 + 120); let r = fundoChapado('#15121a') + ret(30, y0 - 170, 516, alt, '#0A080C') + tTraco(`M30 ${y0 - 170} h516 v${alt} h-516Z`, TLW * 1.6, '#3a3440');
   r += `<defs><pattern id="led" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#0A080C"/><circle cx="3" cy="3" r="2.2" fill="#fff"/></pattern><mask id="ledm"><rect x="0" y="0" width="576" height="1024" fill="url(#led)"/></mask></defs>`;
   r += `<g mask="url(#ledm)">` + linhas.map((l, i) => TXT(288, y0 - 30 + i * tam * 1.25, tam, l, '#FF3B30', { fonte: 'VT323' })).join('') + (o.seta ? `<path d="M${o.seta > 0 ? '438 ' + (y0 + n * tam) + ' l40 -50 l40 50z' : '438 ' + (y0 + n * tam - 50) + ' l40 50 l40 -50z'}" fill="${o.seta > 0 ? '#3BD16F' : '#FF3B30'}"/>` : '') + (o.extra || '') + `</g>`;
   return r; }
+// telão em quadro (dentro de um cenário): x, y, largura, altura
+const telaoQ = (x, y, w, h, linhas, tam) => ret(x, y, w, h, '#0A080C') + tTraco(`M${x} ${y} h${w} v${h} h${-w}Z`, TLW * 1.6, '#3a3440') + `<defs><pattern id="ledq" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2.2" fill="#fff"/></pattern><mask id="ledqm"><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#ledq)"/></mask></defs><g mask="url(#ledqm)">` + linhas.map((l, i) => TXT(x + w / 2, y + h / 2 - (linhas.length - 1) * tam * .6 + i * tam * 1.2 + tam * .3, tam, l, '#FF3B30', { fonte: 'VT323' })).join('') + `</g>`;
 const telaoMini = (txt) => `<g mask="url(#ledm2)"><defs><pattern id="led2" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#fff"/></pattern><mask id="ledm2"><rect x="-80" y="-60" width="160" height="120" fill="url(#led2)"/></mask></defs>${TXT(0, 10, 30, txt, '#FF3B30', { fonte: 'VT323' })}</g>`;
 // sala de casa pobre com sofá e TV (a TV mostra a arena)
 function salaPobre(t) { let r = paredeToon('#C98E66', '#AA744F', 800, { passo: 170 }) + chaoToon('#6E5038', '#56402C', 800, { tabuas: 1 });
-  r += ret(380, 560, 170, 140, '#2a2430') + ret(392, 572, 146, 110, ARE.areia) + `<g transform="translate(465 600) scale(.25)">${multidao(-200, 200, 0, 2, t, { pe: 1 })}</g>` + `<rect x="392" y="572" width="146" height="110" fill="#BFE3F5" opacity="${.15 + .15 * Math.sin(t * 20)}"/>` + tTraco('M420 560 L450 520 M510 560 L480 520', TLW);
+  r += ret(380, 560, 170, 140, '#2a2430') + ret(392, 572, 146, 110, ARE.areia) + `<g transform="translate(465 600) scale(.25)">${multidao(-200, 200, 0, 2, t, { pe: 1 })}</g>` + pt(LUTA1, 445, 672, .09, t, { nocheck: true, semCorte: true, sombra: false }) + pt(LUTA2, 490, 672, .09, t, { flip: true, nocheck: true, semCorte: true, sombra: false }) + `<rect x="392" y="572" width="146" height="110" fill="#BFE3F5" opacity="${.15 + .15 * Math.sin(t * 20)}"/>` + tTraco('M420 560 L450 520 M510 560 L480 520', TLW);
   r += ret(420, 700, 90, 100, '#8A6A4A');
   return r; }
-const sofaFrente = (x, y) => tForma(tPoli([[x - 200, y - 110], [x + 140, y - 110], [x + 140, y + 10], [x - 200, y + 10]]), '#5E7A55', tPinta(tPoli([[x + 60, y - 110], [x + 140, y - 110], [x + 140, y + 10], [x + 60, y + 10]]), '#4C6645')) + tTraco(`M${x - 80} ${y - 80} l20 30 l-14 20`, TLW * .8, '#F7E3B0');
+const sofaAtras = (x, y) => tForma(tSpl([[x - 210, y - 60], [x - 214, y - 250], [x - 190, y - 280], [x + 130, y - 280], [x + 154, y - 250], [x + 150, y - 60]]), '#5E7A55', tPinta(tPoli([[x + 60, y - 290], [x + 160, y - 290], [x + 160, y - 60], [x + 60, y - 60]]), '#4C6645')) + tTraco(`M${x - 120} ${y - 240} l26 34 l-18 22`, TLW * .8, '#F7E3B0');
+const sofaFrente = (x, y) => tForma(tPoli([[x - 214, y - 90], [x + 154, y - 90], [x + 154, y + 30], [x - 214, y + 30]]), '#5E7A55', tPinta(tPoli([[x + 70, y - 90], [x + 154, y - 90], [x + 154, y + 30], [x + 70, y + 30]]), '#4C6645'))
+  + tForma(tSpl([[x - 240, y + 30], [x - 244, y - 150], [x - 200, y - 160], [x - 186, y + 30]]), '#6E8A64') + tForma(tSpl([[x + 130, y + 30], [x + 136, y - 150], [x + 176, y - 160], [x + 186, y + 30]]), '#4C6645') + tTraco(`M${x - 60} ${y - 60} l20 26 l-14 18`, TLW * .8, '#F7E3B0');
 function padaria() { let r = paredeToon('#F2E2C0', '#D9C49C', 800, { passo: 200 }) + chaoToon('#8A6A4A', '#6E5038', 800, { tabuas: 1 });
   r += ret(-20, 560, 620, 240, '#8A5A3A', '#6E4428') + ret(-20, 540, 620, 30, '#C9A06A');
   r += [60, 170, 280].map(x => tForma(tElip(x, 520, 46, 22), '#D9852E', tPinta(tElip(x + 14, 526, 30, 14), '#B86A1E'))).join('');
@@ -163,6 +167,7 @@ function gongo(x, y, s = 1, k = 0) { return `<g transform="translate(${x} ${y}) 
 function paredoes(k, y, o = {}) { const gap = lerp(o.g0 ?? 300, o.g1 ?? 60, k), cx = 288; let r = '';
   for (const sd of [-1, 1]) { const xIn = cx + sd * gap; r += tForma(tPoli([[xIn, y - 420], [xIn + sd * 700, y - 420], [xIn + sd * 700, y + 6], [xIn, y + 6]]), '#9A9690', tPinta(tPoli([[xIn, y - 420], [xIn + sd * 30, y - 420], [xIn + sd * 30, y + 6], [xIn, y + 6]]), '#74706C'))
     + [1, 2, 3].map(i => `<path d="M${xIn + sd * i * 90} ${y - 420} V${y}" stroke="#74706C" stroke-width="4"/>`).join('');
+    if (o.topo) r += tForma(tPoli([[xIn, y - 420], [xIn + sd * 700, y - 420], [xIn + sd * 700, y - 470], [xIn - sd * 20, y - 470]]), '#B9B4AE');
     if (o.poeira) r += [0, 1, 2].map(i => `<circle cx="${xIn - sd * (20 + i * 26)}" cy="${y - 10 - i * 14}" r="${18 + i * 8}" fill="#E8DCC0" opacity="${.5 - i * .12}"/>`).join(''); }
   return r; }
 
@@ -173,32 +178,32 @@ const vermA = (t) => t >= ws(17, 7) - .1 && t < ws(29, 0);
 const CENAS = [
   // ---------------------------------------------------------------- BLOCO A (1–26): o mundo e o Davi
   // 1 · PLANO-MESTRE em corte: dois lutadores em guarda na areia, arquibancada de pé, camarote por cima
-  { l: 0, blur: false, split: false, sfx: [{ t: .02, s: G('chatter_1'), v: .35 }], cam: { s: [1.08, 1], c: [288, 560], c1: [288, 520] },
+  { l: 0, blur: false, split: false, sfx: [{ t: .02, s: G('chatter_1'), v: .35 }], cam: { s: [1.04, 1], c: [288, 540], c1: [288, 520] },
     f: (tl, d, t) => arenaCorte(t, { pe: 1, telao: telaoMini('DOMINGO') }) + [[RICACO, 270], [RICA, 330], [RICO2, 372]].map(([P, x], i) => pT(P, x, MC.piso, MC.s, t, { olhar: [.2, .8], nocheck: true, semCorte: true, ph: i })).join('')
-      + pT(LUTA1, 230, MC.areia, .32, t, { bD: { h: [110, -80], bend: 20, punho: true }, bE: { h: [80, -70], bend: 30, punho: true }, olhar: [1, 0], sobr: -.6 }) + pT(LUTA2, 390, MC.areia, .32, t, { flip: true, bD: { h: [110, -80], bend: 20, punho: true }, bE: { h: [80, -70], bend: 30, punho: true }, olhar: [1, 0], sobr: -.6 }) },
+      + pT(LUTA1, 230, MC.areia, .32, t, { bD: { h: [80, -90], bend: 20, punho: true }, bE: { h: [50, -80], bend: 30, punho: true }, olhar: [1, 0], sobr: -.6 }) + pT(LUTA2, 390, MC.areia, .32, t, { flip: true, bD: { h: [80, -90], bend: 20, punho: true }, bE: { h: [50, -80], bend: 30, punho: true }, olhar: [1, 0], sobr: -.6 }) },
   // 2 · close a dois dos lutadores: magros, roupa rasgada, sem armas, se encarando
   { l: 0, w: 5, split: false, cam: { s: [1, 1.05], c: [288, 520], shake: 3 },
-    f: (tl, d, t) => arenaM(t, { pe: 1 }) + pT(LUTA1, 140, 1100, .95, t, { olhar: [1, 0], sobr: -.8, boca: { sm: -.6 }, semCorte: true, bD: { h: [110, -80], bend: 20, punho: true } }) + pT(LUTA2, 450, 1100, .95, t, { flip: true, olhar: [1, 0], sobr: -.8, boca: { o: .3, sm: -.5 }, semCorte: true, bD: { h: [110, -80], bend: 20, punho: true } }) },
+    f: (tl, d, t) => arenaM(t, { pe: 1 }) + pT(LUTA1, 130, 1100, .95, t, { olhar: [1, 0], sobr: -.8, boca: { sm: -.6 }, semCorte: true, bD: { h: [55, -40], bend: 30, punho: true }, bE: { h: [30, -30], bend: 30, punho: true } }) + pT(LUTA2, 460, 1100, .95, t, { flip: true, olhar: [1, 0], sobr: -.8, boca: { o: .3, sm: -.5 }, semCorte: true, bD: { h: [55, -40], bend: 30, punho: true }, bE: { h: [30, -30], bend: 30, punho: true } }) },
   // 3 · 3D: bairro de tijolo, câmera desce até uma janela com luz de TV
   { l: 1, mb: false, blur: false, sfx: [{ t: .05, s: G('slide_whistle_down_2'), v: .25 }],
     g3d: (tl, d) => ({ set: 'bairroToon', opts: { ceu: '#F2B36B', grama: '#8C7A5A', cores: ['#C7643C', '#B5533C', '#A84A2E', '#C7643C', '#B86A4A', '#A8583C'], corCasa: '#B5533C', luz: '#9FD8FF', garagem: true, semente: 11 }, ...MUNDO.trilha([[[-8, 10, 24], [0, 1.4, 2]], [[-2, 4, 14], [0, 1.6, 2.4]], [[0, 2.6, 12], [0, 1.8, 2.6]]], tl / d), fov: 52 }), f: () => '' },
   // 4 · sala: família inteira no sofá rasgado olhando a TV
   { l: 1, w: 3, split: false, sfx: [{ t: .05, s: G('chatter_3'), v: .15 }], cam: { s: [1, 1.07], c: [288, 560] },
-    f: (tl, d, t) => salaPobre(t) + pT(PAI_T, 110, 790, .66, t, { sentado: true, olhar: [.9, 0], palpebra: .55 }) + pT(SENHORA_T, 230, 790, .62, t, { sentado: true, olhar: [.9, 0], palpebra: .5 }) + pT(FILHA, 300, 790, .7, t, { sentado: true, olhar: [.9, -.2], olhos: 'arregalados' }) + sofaFrente(220, 790) },
+    f: (tl, d, t) => salaPobre(t) + sofaAtras(220, 790) + pT(PAI_T, 110, 790, .66, t, { sentado: true, olhar: [.9, 0], palpebra: .55 }) + pT(SENHORA_T, 230, 790, .62, t, { sentado: true, olhar: [.9, 0], palpebra: .5 }) + pT(FILHA, 300, 790, .7, t, { sentado: true, olhar: [.9, -.2], olhos: 'arregalados' }) + sofaFrente(220, 790) },
   // 5 · frente de vidro: ricos de pé erguendo plaquinhas de aposta; travelling
-  { l: 1, w: 6, split: false, sfx: [{ t: .1, s: G('voice_heh_heh_heh_heh_1'), v: .25 }, { t: .5, s: G('glass_bottle_hit_2'), v: .2 }], cam: { s: [1, 1.03], c: [250, 520], c1: [330, 520] },
-    f: (tl, d, t) => camaroteM(t, { vidro: [-60, 640], pe: 1 }) + [[RICACO, 120, '$ 500'], [RICA, 300, '$ 1 MI'], [RICO3, 480, '$ 80']].map(([P, x, v], i) => pT(P, x, 900, .62, t, { flip: i === 2, olhar: [.2, -.2], boca: BOCAS.riso, bE: { h: [-50, -250], bend: -20, punho: true }, seguraE: `<g transform="translate(0 -70) scale(${i === 2 ? -1 : 1} 1)">${placaAposta(v)}</g>` })).join('') },
+  { l: 1, w: 6, split: false, sfx: [{ t: .1, s: G('voice_heh_heh_heh_heh_1'), v: .25 }, { t: .5, s: G('glass_bottle_hit_2'), v: .2 }], cam: { s: [1, 1.03], c: [276, 520], c1: [300, 520] },
+    f: (tl, d, t) => camaroteM(t, { vidro: [-60, 640], pe: 1 }) + [[RICACO, 125, '$ 500'], [RICA, 300, '$ 1 MI'], [RICO3, 450, '$ 80']].map(([P, x, v], i) => pT(P, x, 900, .58, t, { flip: i === 2, olhar: [.2, -.2], boca: BOCAS.riso, bE: { h: [-50, -250], bend: -20, punho: true }, seguraE: `<g transform="translate(0 -70) scale(${i === 2 ? -1 : 1} 1)">${placaAposta(v)}</g>` })).join('') },
   // 6 · telão: "PRÊMIO: 1 MÊS DE COMIDA" com o saco de arroz; push-in
   { l: 2, split: false, blur: false, sfx: [{ t: .05, s: G('ding_2'), v: .3 }], cam: { s: [1, 1.08], c: [288, 420] },
-    f: (tl, d, t) => telao(['PRÊMIO:', '1 MÊS', 'DE COMIDA'], { tam: 62, y: 330 }) + saco(288, 640, 1.1) },
+    f: (tl, d, t) => telao(['PRÊMIO:', '1 MÊS', 'DE COMIDA'], { tam: 62, y: 300, altura: 580, extra: saco(288, 680, 1.3) }) },
   // 7 · rua: um homem ergue um cartaz "PÃO CARO"
   { l: 3, split: false, sfx: [{ t: .05, s: G('voice_raaaaaa_1'), v: .15 }], cam: { s: [1, 1.05], c: [288, 520] },
     f: (tl, d, t) => ruaBairro2D() + pT(CARTAZ_H, 260, 960, .9, t, { boca: BOCAS.grito, sobr: -.8, bE: { h: [-40, -280], bend: -20, punho: true }, seguraE: `<g transform="translate(-20 -120)">${tTraco('M0 0 V150', TLW * 2, '#8A6A4A')}${tForma(tPoli([[-110, -70], [110, -70], [110, 30], [-110, 30]]), '#F4F1EA')}${TXT(0, -6, 50, 'PÃO CARO', '#C0392B')}</g>` }) },
   // 8 · o guarda de colete laranja cola no peito dele "ATRAÇÃO ESPECIAL"
   { l: 3, w: 2, split: false, sfx: [{ w: 3, l: 3, s: G('slap_2'), v: .3 }], cam: { s: [1.02, 1.06], c: [288, 520] },
-    f: (tl, d, t) => { const k = sobe(.15, .45, tl); return ruaBairro2D() + pT(CARTAZ_H, 200, 960, .8, t, { olhos: 'arregalados', boca: BOCAS.o, sobr: .6 })
-      + pT(GUARDA, 430, 960, .8, t, { flip: true, olhar: [1, 0], palpebra: .6, bD: { h: [lerp(40, 175, k), -40], bend: 10 } })
-      + (k > .9 ? `<g transform="translate(236 800) rotate(-8)">${tForma(tPoli([[-62, -26], [62, -26], [62, 26], [-62, 26]]), '#F2C94C')}${TXT(0, -2, 18, 'ATRAÇÃO', TINK)}${TXT(0, 18, 18, 'ESPECIAL', TINK)}</g>` : ''); } },
+    f: (tl, d, t) => { const k = sobe(.15, .45, tl); return ruaBairro2D() + pT(CARTAZ_H, 170, 960, .8, t, { olhos: 'arregalados', boca: BOCAS.o, sobr: .6 })
+      + pT(GUARDA, 410, 960, .8, t, { flip: true, olhar: [1, .3], palpebra: .6, bD: { h: [lerp(40, 200, k), lerp(40, 70, k)], bend: 10 } })
+      + (k > .9 ? `<g transform="translate(204 772) rotate(-8)">${tForma(tPoli([[-62, -26], [62, -26], [62, 26], [-62, 26]]), '#F2C94C')}${TXT(0, -2, 18, 'ATRAÇÃO', TINK)}${TXT(0, 18, 18, 'ESPECIAL', TINK)}</g>` : ''); } },
   // 9 · arena, contra-plongée: lutador com correntes nos pulsos, de cabeça baixa
   { l: 4, split: false, sfx: [{ t: .1, s: G('metal_rattler_2'), v: .35 }], cam: { s: [1, 1.05], c: [288, 560], c1: [288, 520] },
     f: (tl, d, t) => arenaM(t, { pe: 1 }) + pT(ACORR, 288, 1060, 1.05, t, { cabInc: .3, olhar: [0, .8], palpebra: .7, boca: { sm: -.8 }, bD: { h: [20, 90], bend: 30, punho: true }, bE: { h: [-30, 100], bend: -30, punho: true }, semCorte: true })
@@ -207,7 +212,7 @@ const CENAS = [
   { l: 4, w: 3, split: false, cam: { s: [1, 1.05], c: [288, 470] },
     f: (tl, d, t) => reacaoToon(SENHOR, t, tl, { olhos: 'arregalados', sobr: .8, bD: { h: [24, -64], bend: 40 }, olhar: [.6, .3] }, { fundo: ARE.fundo, forma: '#4A4258' }) },
   // 11 · PLANO-MESTRE do camarote em corte, pan da esquerda para a direita: piso firme e frente de vidro
-  { l: 5, split: false, blur: false, sfx: [{ t: .05, s: G('balloon_deflate_1'), v: .15 }], cam: { s: [1.75, 1.75], c: [120, 330], c1: [300, 330], pop: false },
+  { l: 5, split: false, blur: false, sfx: [{ t: .05, s: G('balloon_deflate_1'), v: .15 }], cam: { s: [1.75, 1.75], c: [130, 330], c1: [250, 330], pop: false },
     f: (tl, d, t) => arenaCorte(t, { pe: 1 }) + pT(SEGURANCA, 10, MC.piso, MC.s, t, { nocheck: true, semCorte: true, still: true }) + pT(DONO, 190, MC.piso, MC.s, t, { olhar: [1, .5], nocheck: true, semCorte: true })
       + pT(PREFEITO, 120, MC.piso - 6, MC.s, t, { sentado: true, nocheck: true, semCorte: true }) + `<g transform="translate(300 ${MC.piso}) scale(.2)">${pilhaPremios(0, 0)}</g>` + `<g transform="translate(385 ${MC.piso}) scale(.2)">${botaoPed(0, 0)}</g>`
       + [[RICACO, 258], [RICA, 342]].map(([P, x], i) => pT(P, x, MC.piso, MC.s, t, { olhar: [.4, .6], nocheck: true, semCorte: true, ph: i })).join('') },
@@ -224,19 +229,22 @@ const CENAS = [
     f: (tl, d, t) => camaroteM(t, { vidro: [-60, 640], pe: 1, chao: 860 }) + botaoPed(288, 860, 2.1) },
   // 15 · reação: o ricaço mexe o dedo por cima do botão, sorrindo
   { l: 5, w: 9, split: false, semFala: true, sfx: [{ t: .2, s: G('voice_heh_heh_heh_heh_1'), v: .25 }], cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => reacaoToon(RICACO, t, tl, { boca: BOCAS.sorriso, palpebra: .55, olhar: [.6, .6], bD: { h: [170, -40 + Math.sin(t * 14) * 10], bend: 30 } }, { fundo: CAMA.parede, forma: CAMA.ouro, brilho: '#FF3B30', lado: 1 }) },
+    f: (tl, d, t) => reacaoToon(RICACO, t, tl, { boca: BOCAS.sorriso, palpebra: .55, olhar: [.6, .6], bD: { h: [110, -20 + Math.sin(t * 14) * 10], bend: 30 } }, { fundo: CAMA.parede, forma: CAMA.ouro, brilho: '#FF3B30', lado: 1 }) + botaoPed(486, 930, .9) },
   // 16 · close 3/4 do Davi: acena com o esfregão
   { l: 6, split: false, sfx: [{ t: .1, s: G('rubber_snapping_2'), v: .2 }], cam: { s: [1, 1.05], c: [288, 470], shake: 2 },
     f: (tl, d, t) => fundoChapado(CAMA.parede) + ret(60, 120, 20, 900, CAMA.ouro) + ret(460, 120, 20, 900, CAMA.ouro)
-      + pT(DAVI, 250, 1170, 1.45, t, { olhar: [.4, 0], boca: BOCAS.sorriso, bE: { h: [-70, -250 + Math.sin(t * 10) * 16], bend: -30, punho: true }, seguraE: `<g transform="translate(0 -60) rotate(-10)">${esfregao(.9)}</g>`, semCorte: true }) },
+      + pT(DAVI, 250, 1170, 1.45, t, { olhar: [.4, 0], boca: BOCAS.sorriso, bE: { h: [-40, -240 + Math.sin(t * 10) * 14], bend: -30, punho: true }, seguraE: `<g transform="translate(0 -60) rotate(-10)">${esfregao(.9)}</g>`, semCorte: true }) },
   // 17 · ricos sentados nas poltronas e Davi agachado esfregando aos pés deles; ninguém olha
   { l: 6, w: 4, split: false, sfx: [{ t: .1, s: G('washboard_scrape_1'), v: .2 }], cam: { s: [1, 1.04], c: [288, 540] },
     f: (tl, d, t) => camaroteM(t, { pe: 1, chao: 840 }) + poltrona(120, 840, .9) + poltrona(450, 840, .9, true) + pT(RICO3, 120, 840, .7, t, { sentado: true, olhar: [.6, -.3], segura: taca(.9), bD: { h: [100, -30], bend: 30, punho: true } }) + pT(RICA, 450, 840, .7, t, { sentado: true, flip: true, olhar: [.5, -.3], palpebra: .6 })
       + pT(DAVI, 290, 870, .62, t, { chao: true, inclina: .35, olhar: [0, .8], bD: { h: [130, 60 + Math.sin(t * 9) * 20], bend: 20, punho: true }, segura: `<g transform="rotate(${-60 + Math.sin(t * 9) * 8})">${esfregao(.6)}</g>` }) + `<g transform="translate(380 846)">${balde(.7)}</g>` },
-  // 18 · corte lateral, mais perto: Davi esfrega o vidro; através dele, a arena lá embaixo
-  { l: 7, split: false, sfx: [{ t: .1, s: G('washboard_scrape_3'), v: .2 }], cam: { s: [1.25, 1.3], c: [300, 600], c1: [300, 580], pop: false },
-    f: (tl, d, t) => arenaCorte(t, { pe: 1 }) + pT(DAVI, 290, MC.piso, MC.s, t, { olhar: [.4, .8], inclina: .3, bD: { h: [100, 60 + Math.sin(t * 9) * 16], bend: 20, punho: true }, segura: `<g transform="rotate(-50)">${esfregao(.8)}</g>`, nocheck: true, semCorte: true })
-      + `<g transform="translate(330 ${MC.piso}) scale(.2)">${balde(1)}</g>` + pT(LUTA1, 260, MC.areia, .32, t, { bD: { h: [110, -80], bend: 20, punho: true }, olhar: [1, 0] }) + pT(LUTA2, 360, MC.areia, .32, t, { flip: true, bD: { h: [110, -80], bend: 20, punho: true }, olhar: [1, 0] }) },
+  // 18 · corte lateral de perto: Davi inteiro esfregando o vidro; por baixo do vidro, a arena lá embaixo
+  { l: 7, split: false, sfx: [{ t: .1, s: G('washboard_scrape_3'), v: .2 }], cam: { s: [1, 1.04], c: [288, 512] },
+    f: (tl, d, t) => fundoChapado(CAMA.parede) + [40, 220, 400].map(x => ret(x, 60, 16, 580, CAMA.ouro)).join('') + `<rect x="-40" y="716" width="700" height="400" fill="#2E2838"/>`
+      + [160, 420].map(x => `<path d="M${x} 716 L${x - 70} 1010 L${x + 70} 1010Z" fill="#FFF6D8" opacity=".08"/>`).join('') + `<rect x="-40" y="1010" width="700" height="200" fill="${ARE.areia}"/>` + tTraco('M-40 1010 H640')
+      + pT(LUTA1, 250, 1010, .14, t, { nocheck: true, semCorte: true, bD: { h: [80, -90], bend: 20, punho: true } }) + pT(LUTA2, 330, 1010, .14, t, { flip: true, nocheck: true, semCorte: true, bD: { h: [80, -90], bend: 20, punho: true } })
+      + `<rect x="-40" y="700" width="700" height="16" fill="${CAMA.vidro}" opacity=".85"/>` + tTraco('M-40 700 H640') + tTraco('M-40 716 H640', TLW * .7) + [0, 1, 2, 3].map(i => `<path d="M${30 + i * 150} 720 l50 40" stroke="#BFE3F5" stroke-width="4" opacity=".35"/>`).join('')
+      + pT(DAVI, 270, 700, .75, t, { inclina: .3, olhar: [.4, .8], bD: { h: [120, 80 + Math.sin(t * 9) * 16], bend: 20, punho: true }, segura: `<g transform="rotate(-40)">${esfregao(.7)}</g>` }) + `<g transform="translate(430 700)">${balde(.85)}</g>` },
   // 19 · close do Davi: olhos atentos, de rabo de olho
   { l: 7, w: 5, split: false, cam: { s: [1, 1.06], c: [288, 470] },
     f: (tl, d, t) => reacaoToon(DAVI, t, tl, { olhar: [-1, 0], palpebra: .55, boca: { sm: -.1, skew: .4 } }, { fundo: CAMA.parede, forma: CAMA.ouro }) },
@@ -245,24 +253,116 @@ const CENAS = [
     f: (tl, d, t) => camaroteM(t, { vidro: [360, 700], janela: false }) + ret(300, 120, 60, 680, '#5C5A60', '#48464C') + alavanca(330, 560, 1.3, 0, true) },
   // 21 · insert: a placa "PRÊMIOS" na alavanca, com o Davi desfocado na frente
   { l: 8, w: 4, split: false, cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => fundoChapado('#5C5A60') + alavanca(300, 330, 2.4, 0, false) + `<g style="filter:blur(6px)" opacity=".95">${pT(DAVI, 40, 1420, 1.6, t, { olhar: [1, -.3], nocheck: true, semCorte: true })}</g>` },
+    f: (tl, d, t) => fundoChapado('#5C5A60') + alavanca(300, 330, 2.4, 0, false) + `<g style="filter:blur(6px)" opacity=".95">${pT(DAVI, -70, 1150, 1.5, t, { olhar: [1, -.3], nocheck: true, semCorte: true })}</g>` },
   // 22 · demonstração no corte: um rico puxa a alavanca e o alçapão do meio do vidro abre
   { l: 8, w: 7, split: false, sfx: [{ t: .25, s: G('metal_hit_2'), v: .3 }], cam: { s: [1.7, 1.75], c: [280, 430], pop: false },
     f: (tl, d, t) => { const k = sobe(.15, .5, tl), a = sobe(.4, .8, tl), q = sobe(.75, 1.4, tl);
-      return arenaCorte(t, { pe: 1, alavanca: k, alcapao: a }) + pT(RICO2, 205, MC.piso, MC.s, t, { olhar: [1, 0], boca: BOCAS.sorriso, bD: { h: [150, -70 + k * 50], bend: 20, punho: true }, nocheck: true, semCorte: true })
+      return arenaCorte(t, { pe: 1, alavanca: k, alcapao: a }) + pT(RICO2, 205, MC.piso, MC.s, t, { olhar: [1, 0], boca: BOCAS.sorriso, bE: { h: [lerp(-20, 160, k), -140], bend: -10, punho: true }, nocheck: true, semCorte: true })
         + `<g transform="translate(315 ${MC.piso + q * q * 440}) scale(.2)">${pilhaPremios(0, 0)}</g>` + [[RICA, 260], [RICACO, 370]].map(([P, x], i) => pT(P, x, MC.piso, MC.s, t, { olhar: [0, .8], nocheck: true, semCorte: true, ph: i })).join(''); } },
   // 23 · corte, câmera desce junto: os sacos caem na areia, perto de um vencedor que comemora
   { l: 8, w: 13, split: false, sfx: [{ t: .15, s: G('plastic_rice_bag_hit_1'), v: .4 }, { t: .35, s: G('plastic_rice_bag_hit_3'), v: .35 }], cam: { s: [1.6, 1.6], c: [300, 600], c1: [300, 740], pop: false },
     f: (tl, d, t) => { const q = sobe(0, .4, tl); return arenaCorte(t, { pe: 1, alcapao: 1 }) + `<g transform="translate(315 ${lerp(MC.piso + 200, MC.areia, q * q)}) scale(.24)">${pilhaPremios(0, 0)}</g>`
-      + pT(LUTA1, 200, MC.areia, .32, t, { boca: BOCAS.riso, olhos: 'arregalados', bD: { h: [40, -300], bend: 20, punho: true }, bE: { h: [-40, -300], bend: -20, punho: true }, walk: q < 1 ? null : null }); } },
+      + pT(LUTA1, 200, MC.areia, .32, t, { boca: BOCAS.riso, olhos: 'arregalados', bD: { h: [180, -200], bend: 20, punho: true }, bE: { h: [-40, -300], bend: -20, punho: true }, walk: q < 1 ? null : null }); } },
   // 24 · o dono inteiro no tapete vermelho; a ponta do sapato chega na borda do vidro e recua; push-in até o rosto
-  { l: 9, split: false, cam: { s: [1, 1.25], c: [260, 640], c1: [240, 420] },
-    f: (tl, d, t) => { const pe = Math.sin(clamp(tl / .8) * Math.PI) * 30; return camaroteM(t, { vidro: [340, 700], tapete: 220, pe: 1 }) + pT(DONO, 220, 830, .72, t, { olhar: [.7, .5], palpebra: .5, boca: { sm: .2 }, pD: [pe, -Math.max(0, pe - 10) * .4], bD: { h: [-30, 110], bend: -30, punho: true } }); } },
+  { l: 9, split: false, cam: { s: [1, 1.25], c: [280, 640], c1: [270, 420] },
+    f: (tl, d, t) => { const pe = Math.sin(clamp(tl / .9) * Math.PI) * 95; return camaroteM(t, { vidro: [330, 700], tapete: 250, pe: 1 }) + pT(DONO, 250, 830, .72, t, { olhar: [.7, .5], palpebra: .5, boca: { sm: .2 }, pD: [pe, -Math.max(0, pe - 10) * .4], bD: { h: [-30, 110], bend: -30, punho: true } }); } },
   // 25 · plano a dois lateral: o ricaço se vira e pega o Davi olhando a alavanca
   { l: 10, split: false, cam: { s: [1, 1.04], c: [288, 520] },
-    f: (tl, d, t) => { const vira = tl > .5; return camaroteM(t, { pe: 1 }) + ret(500, 120, 60, 680, '#5C5A60', '#48464C') + alavanca(530, 560, .9, 0, false)
-      + pT(DAVI, 300, 900, .7, t, { olhar: [1, -.2], palpebra: .35, segura: balde(.9), bD: { h: [30, 120], bend: 20, punho: true } }) + pT(RICACO, 110, 900, .72, t, { flip: !vira, olhar: vira ? [1, 0] : [-1, 0], sobr: vira ? .4 : 0, segura: taca(.9), bD: { h: [100, -20], bend: 30, punho: true } }); } },
+    f: (tl, d, t) => { const vira = tl > .5; return camaroteM(t, { pe: 1 }) + ret(440, 120, 60, 680, '#5C5A60', '#48464C') + alavanca(470, 560, .8, 0, false)
+      + pT(DAVI, 300, 900, .68, t, { olhar: [1, -.2], palpebra: .35, segura: balde(.9), bD: { h: [30, 120], bend: 20, punho: true }, bE: { h: [-40, 60], bend: -10, punho: true }, seguraE: `<g transform="rotate(-10) translate(0 -150)">${esfregao(.7)}</g>` }) + pT(RICACO, 140, 900, .7, t, { flip: !vira, olhar: vira ? [1, 0] : [-1, 0], sobr: vira ? .4 : 0, segura: taca(.9), bD: { h: [100, -20], bend: 30, punho: true } }); } },
   // 26 · reação: o ricaço ri, falante: "Faxineiro não precisa saber disso."
   { l: 10, w: 6, split: false, sfx: [{ t: .05, s: G('voice_ha_ha_1'), v: .3 }], cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => reacaoToon(RICACO, t, tl, { falante: true, palpebra: .6, olhar: [-.4, .2], sobr: .3, bD: { h: [150, -50], bend: 30, punho: true }, segura: taca(1) }, { fundo: CAMA.parede, forma: CAMA.ouro }) },
+    f: (tl, d, t) => reacaoToon(RICACO, t, tl, { falante: true, boca: { sm: 1 }, palpebra: .45, olhar: [-.4, .2], sobr: .5, bD: { h: [150, -50], bend: 30, punho: true }, segura: taca(1) }, { fundo: CAMA.parede, forma: CAMA.ouro }) },
+  // ---------------------------------------------------------------- BLOCO B (27–52): a Lia e o jogo
+  // 27 · padaria: Lia no balcão; plaquinha "PÃO R$ 19"; push-in
+  { l: 11, split: false, sfx: [{ t: .05, s: G('bell_2'), v: .25 }], cam: { s: [1, 1.06], c: [288, 540] },
+    f: (tl, d, t) => padaria() + pT(LIA, 230, 900, .78, t, { olhar: [1, -.3], palpebra: .45 }) },
+  // 28 · close da Lia, falante: aponta brava para o preço
+  { l: 11, w: 9, split: false, cam: { s: [1, 1.05], c: [288, 470], shake: 2 },
+    f: (tl, d, t) => padaria() + pT(LIA, 200, 1200, 1.4, t, { falante: true, sobr: -.8, olhar: [1, -.4], bD: { h: [170, -60], bend: 10 }, semCorte: true }) },
+  // 29 · o guarda de colete laranja cola "ATRAÇÃO ESPECIAL" nas costas da Lia
+  { l: 12, split: false, sfx: [{ t: .3, s: G('slap_3'), v: .3 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => { const k = sobe(.1, .4, tl); return padaria() + pT(LIA, 330, 920, .76, t, { olhar: [1, -.3], olhos: k > .9 ? 'arregalados' : null, sobr: k > .9 ? .7 : -.6 })
+      + pT(GUARDA, 120, 920, .78, t, { olhar: [1, .3], palpebra: .6, bD: { h: [lerp(40, 175, k), lerp(40, 80, k)], bend: 10 } })
+      + (k > .9 ? `<g transform="translate(300 735) rotate(6)">${tForma(tPoli([[-62, -26], [62, -26], [62, 26], [-62, 26]]), '#F2C94C')}${TXT(0, -2, 18, 'ATRAÇÃO', TINK)}${TXT(0, 18, 18, 'ESPECIAL', TINK)}</g>` : ''); } },
+  // 30 · reação: Davi arregala os olhos, o esfregão escorrega
+  { l: 12, w: 2, split: false, sfx: [{ t: .15, s: G('wood_hit_1'), v: .3 }], cam: { s: [1, 1.05], c: [288, 470] },
+    f: (tl, d, t) => reacaoToon(DAVI, t, tl, { olhos: 'arregalados', sobr: 1, boca: BOCAS.o }, { fundo: CAMA.parede, forma: CAMA.ouro }) + `<g transform="translate(${470 + tl * 40} ${700 + tl * 300}) rotate(${-20 + tl * 70})">${esfregao(1.1)}</g>` },
+  // 31 · arena: Lia em primeiro plano, 3/4 de costas; no fundo, o portão de grade subindo
+  { l: 13, split: false, sfx: [{ t: .1, s: G('metal_rattler_3'), v: .3 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => arenaM(t, { pe: 1, grade: 400, gradeK: sobe(0, 1, tl) }) + pT(LIA, 140, 1120, 1.15, t, { flip: true, olhar: [-1, -.3], palpebra: .3, semCorte: true }) },
+  // 32 · Caio sai do escuro da grade, magro, com medo
+  { l: 13, w: 3, split: false, cam: { s: [1.04, 1.08], c: [288, 520] },
+    f: (tl, d, t) => arenaM(t, { pe: 1, grade: 300, gradeK: 1 }) + pT(CAIO, lerp(300, 330, sobe(0, .6, tl)), 900, .82, t, { olhar: [-.5, -.2], sobr: .8, palpebra: .2, boca: { sm: -.6 }, walk: tl < .6 ? tl * 2 : null }) },
+  // 33 · flash de memória: Davi, Lia e Caio crianças jogando bola na rua de tijolo
+  { l: 13, w: 5, split: false, blur: false, sfx: [{ t: .1, s: G('drum_bonk_2'), v: .25 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => { const bx = 290 + Math.sin(tl * 4) * 120, by = 760 - Math.abs(Math.sin(tl * 7)) * 120; return memoria(ruaBairro2D() + pT(DAVI_K, 110, 900, .72, t, { olhar: [1, -.2], boca: BOCAS.riso }) + pT(LIA_K, 290, 900, .68, t, { olhar: [.4, -.5], boca: BOCAS.riso }) + pT(CAIO_K, 470, 900, .72, t, { flip: true, olhar: [1, -.2], boca: BOCAS.riso })
+      + tForma(tElip(bx, by, 26, 26), '#F4F1EA', tPinta(tElip(bx + 8, by + 6, 18, 18), '#D8D3C6'))); } },
+  // 34 · telão visto da areia, Lia pequena na frente: "CHANCE DA LIA: 2%"
+  { l: 14, split: false, semFala: true, sfx: [{ t: .1, s: G('ding_4'), v: .3 }], cam: { s: [1, 1.05], c: [288, 470], c1: [288, 440] },
+    f: (tl, d, t) => arenaM(t, { pe: 1, chao: 900 }) + telaoQ(50, 90, 476, 420, ['CHANCE', 'DA LIA:', '2%'], 86) + pT(LIA, 290, 1000, .5, t, { flip: true, olhar: [-.3, -1], nocheck: true }) },
+  // 35 · reação: close da Lia, ela engole seco
+  { l: 14, w: 5, split: false, semFala: true, sfx: [{ t: .15, s: G('bite_apple_1'), v: .15 }], cam: { s: [1, 1.05], c: [288, 470] },
+    f: (tl, d, t) => reacaoToon(LIA, t, tl, { olhar: [.6, -.6], sobr: .8, palpebra: .1, boca: { sm: -.7, w: .6 } }, { fundo: ARE.fundo, forma: '#4A4258' }) },
+  // 36 · corredor de serviço, ao pé da escada: Davi com o balde, olhando a areia pela grade
+  { l: 15, split: false, semFala: true, cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => fundoChapado('#5A5650') + ret(-40, 120, 200, 680, '#4A4640') + [0, 1, 2, 3, 4].map(i => ret(-40 + i * 34, 700 - i * 110, 220 - i * 34, 26, '#C9C2B0')).join('')
+      + ret(340, 180, 300, 620, ARE.areia) + `<rect x="340" y="180" width="300" height="260" fill="${ARE.fundo}"/>` + [0, 1, 2, 3, 4].map(i => tTraco(`M${360 + i * 50} 180 V800`, TLW * 2, '#9AA3AD')).join('') + tTraco('M340 180 V800', TLW * 2)
+      + chaoToon('#4A4640', '#3a3630', 800) + pT(DAVI, 250, 880, .74, t, { olhar: [1, 0], palpebra: .45, boca: { sm: -.5 }, segura: balde(.9), bD: { h: [30, 120], bend: 20, punho: true } }) },
+  // 37 · close do Davi na grade: rosto e mãos apertando as barras
+  { l: 15, w: 8, split: false, sfx: [{ t: .1, s: G('metal_rattler_1'), v: .3 }], cam: { s: [1, 1.06], c: [288, 470], shake: 2 },
+    f: (tl, d, t) => reacaoToon(DAVI, t, tl, { olhar: [.8, .2], sobr: -.9, boca: { sm: -.8, skew: .3 }, bD: { h: [120, -20], bend: 30, punho: true }, bE: { h: [-30, -20], bend: -30, punho: true } }, { fundo: ARE.fundo }) + [0, 1, 2, 3].map(i => tTraco(`M${60 + i * 160} -100 V1200`, TLW * 5, '#9AA3AD')).join('') },
+  // 38 · o juiz de arena bate o gongo com o martelo
+  { l: 16, split: false, sfx: [{ t: .25, s: G('resonating_metal_hit_2'), v: .5 }], cam: { s: [1, 1.05], c: [288, 520], shake: 4 },
+    f: (tl, d, t) => { const bate = sobe(.15, .3, tl); return arenaM(t, { pe: 1 }) + gongo(380, 860, 1.1, tl > .3 ? clamp((tl - .3) / 1.2) : 0)
+      + pT(JUIZ, 160, 900, .8, t, { olhar: [1, -.2], boca: { o: .4 }, bD: { h: [lerp(60, 160, bate), lerp(-200, -110, bate)], bend: 20, punho: true }, segura: `<g transform="rotate(${lerp(-70, 10, bate)})">${tTraco('M0 0 L0 -120', TLW * 2.4, '#8A6A4A')}${tForma(tElip(0, -130, 22, 22), '#C0392B')}</g>` }); } },
+  // 39 · plano aberto da arena, deriva lenta: Lia e Caio parados, um de cada lado; arquibancada de pé
+  { l: 16, w: 3, split: false, cam: { s: [1, 1.03], c: [270, 540], c1: [306, 530], pop: false },
+    f: (tl, d, t) => arenaM(t, { pe: 1, chao: 860 }) + pT(LIA, 110, 930, .5, t, { olhar: [1, 0], palpebra: .3, still: true }) + pT(CAIO, 470, 930, .52, t, { flip: true, olhar: [1, 0], palpebra: .3, still: true }) },
+  // 40 · frente de vidro: o ricaço aperta o botão
+  { l: 17, split: false, sfx: [{ w: 4, l: 17, s: G('drum_bonk_1'), v: .35 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => { const ap = t >= ws(17, 4) - .05; return camaroteM(t, { vidro: [-60, 640], pe: 1, chao: 860 }) + botaoPed(380, 860, 1.05, ap, t)
+      + pT(RICACO, 220, 900, .78, t, { olhar: [1, .4], boca: BOCAS.sorriso, palpebra: .5, bD: { h: [ap ? 200 : 150, ap ? -60 : -110], bend: 20 } }); } },
+  // 41 · close do botão aceso; os holofotes ficam vermelhos
+  { l: 17, w: 7, split: false, semFala: true, sfx: [{ t: 0, s: G('siren_whistle_1'), v: .3 }], cam: { s: [1, 1.08], c: [288, 500] },
+    f: (tl, d, t) => camaroteM(t, { vidro: [-60, 640], pe: 1, chao: 860 }) + botaoPed(288, 860, 2.1, true, t) + HOLO(true) },
+  // 42 · plongée em 3/4: dois paredões vêm da esquerda e da direita, com poeira
+  { l: 18, split: false, sfx: [{ t: 0, s: G('metal_beam_hit_2'), v: .35 }, { t: .4, s: G('ground_thump_1'), v: .3 }], cam: { s: [1, 1.05], c: [288, 520], shake: 3 },
+    f: (tl, d, t) => { const k = sobe(0, d, tl) * .45; return fundoChapado(ARE.areia) + ret(-40, -40, 660, 300, '#4A2A36') + paredoes(k, 760, { poeira: 1, topo: 1, g0: 330, g1: 70 })
+      + pT(LIA, 220, 780, .5, t, { olhar: [-1, -.2], sobr: .8, olhos: 'arregalados' }) + pT(CAIO, 360, 780, .52, t, { flip: true, olhar: [-1, -.2], sobr: .8, olhos: 'arregalados' }) + HOLO(true); } },
+  // 43 · plano baixo, nível do chão: Lia e Caio no meio, os paredões chegando
+  { l: 18, w: 7, split: false, sfx: [{ t: .1, s: G('metal_wobble_2'), v: .3 }], cam: { s: [1, 1.05], c: [288, 520], shake: 3 },
+    f: (tl, d, t) => fundoChapado('#4A2A36') + multidao(-40, 640, 330, 3, t, { pe: 1 }) + chaoToon(ARE.areia, ARE.areiaS, 860) + paredoes(.45 + sobe(0, d, tl) * .2, 860, { poeira: 1, g0: 330, g1: 70 })
+      + pT(LIA, 195, 900, .6, t, { olhar: [-1, 0], olhos: 'arregalados', sobr: 1 }) + pT(CAIO, 385, 900, .62, t, { flip: true, olhar: [-1, 0], olhos: 'arregalados', sobr: 1 }) + HOLO(true) },
+  // 44 · close da Lia: ela olha para o lado
+  { l: 19, split: false, cam: { s: [1, 1.05], c: [288, 470] },
+    f: (tl, d, t) => reacaoToon(LIA, t, tl, { olhar: [1, 0], palpebra: .3, boca: { sm: -.3 } }, { fundo: '#4A2A36', forma: '#9A9690' }) + HOLO(true) },
+  // 45 · close do Caio: ele olha de volta
+  { l: 19, w: 5, split: false, cam: { s: [1, 1.05], c: [288, 470] },
+    f: (tl, d, t) => reacaoToon(CAIO, t, tl, { flip: true, x: 330, olhar: [1, 0], palpebra: .3, boca: { sm: -.2 } }, { fundo: '#4A2A36', forma: '#9A9690' }) + HOLO(true) },
+  // 46 · os dois se sentam na areia, de pernas cruzadas
+  { l: 20, split: false, sfx: [{ t: .3, s: G('ground_thump_3'), v: .3 }], cam: { s: [1, 1.04], c: [288, 540] },
+    f: (tl, d, t) => { const sen = tl > .3; return fundoChapado('#4A2A36') + multidao(-40, 640, 330, 3, t, { pe: 1 }) + chaoToon(ARE.areia, ARE.areiaS, 860) + paredoes(.55, 860, { g0: 330, g1: 70 })
+      + pT(LIA, 185, 900, .6, t, { chao: sen, olhar: [1, 0], palpebra: .35, boca: { sm: .1 } }) + pT(CAIO, 385, 900, .62, t, { flip: true, chao: sen, olhar: [1, 0], palpebra: .35, boca: { sm: .1 } }) + HOLO(true); } },
+  // 47 · arquibancada: o povo, que estava de pé, senta em onda, de braços cruzados
+  { l: 21, split: false, sfx: [{ t: .05, s: G('chatter_2'), v: .3 }], cam: { s: [1, 1.04], c: [230, 520], c1: [340, 520], pop: false },
+    f: (tl, d, t) => fundoChapado('#4A2A36') + multidao(-60, 700, 900, 9, t, { pe: 1, senta: sobe(0, d * .85, tl), passo: 60, degrau: 80, semente: 7 }) + HOLO(true) },
+  // 48 · telão, tilt para baixo com tremor: "AUDIÊNCIA CAINDO"
+  { l: 22, split: false, semFala: true, blur: false, sfx: [{ t: .1, s: G('trumpet_sad_1'), v: .3 }], cam: { s: [1, 1.04], c: [288, 380], c1: [288, 450], shake: 5 },
+    f: (tl, d, t) => telao(['AUDIÊNCIA', 'CAINDO'], { tam: 72, y: 330, seta: -1 }) },
+  // 49 · frente de vidro: ricos vaiando na beira do vidro, polegar para baixo
+  { l: 23, split: false, sfx: [{ t: .05, s: G('voice_bah_1'), v: .3 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => camaroteM(t, { vidro: [-60, 640], pe: 1, senta: 1, chao: 860 }) + [[RICO2, 95], [RICA, 290], [RICO3, 490]].map(([P, x], i) => pT(P, x, 940, .62, t, { flip: i === 2, sobr: -1, boca: BOCAS.grito, olhar: [.3, .5], bE: { h: [-30, -250], bend: -20, punho: true }, ph: i })).join('') + HOLO(true) },
+  // 50 · um rico atira a taça na arena
+  { l: 23, w: 3, split: false, sfx: [{ t: .35, s: G('glass_bottle_hit_4'), v: .35 }], cam: { s: [1, 1.04], c: [288, 520] },
+    f: (tl, d, t) => { const k = sobe(.1, .5, tl); return camaroteM(t, { vidro: [-60, 640], pe: 1, senta: 1, chao: 860 }) + pT(RICACO, 200, 960, .8, t, { sobr: -1, boca: BOCAS.grito, olhar: [1, .4], bE: { h: [lerp(-60, 60, k), lerp(-250, -150, k)], bend: -20, punho: k < .5 }, seguraE: k < .5 ? taca(1) : '' })
+      + (k >= .5 ? `<g transform="translate(${lerp(330, 560, (k - .5) * 2)} ${lerp(520, 760, (k - .5) * 2)}) rotate(${k * 400})">${taca(.9)}</g>` : '') + HOLO(true); } },
+  // 51 · três ricos inteiros disputando o botão a cotoveladas
+  { l: 23, w: 5, split: false, sfx: [{ t: .05, s: G('drum_bonk_3'), v: .3 }, { t: .3, s: G('drum_bonk_4'), v: .3 }, { t: .6, s: G('drum_bonk_2'), v: .3 }], cam: { s: [1, 1.05], c: [288, 520], shake: 2 },
+    f: (tl, d, t) => { const q = Math.floor(tl * 6) % 3; return camaroteM(t, { vidro: [-60, 640], pe: 1, senta: 1, chao: 860 }) + pT(RICO3, 300, 850, .6, t, { sobr: -.8, boca: q === 2 ? BOCAS.riso : BOCAS.grito, olhar: [0, .5], bD: { h: [60, q === 2 ? 40 : -60], bend: 20, punho: true } }) + botaoPed(300, 900, 1.05, true, t)
+      + [[RICACO, 110, 0], [RICA, 490, 1]].map(([P, x, i]) => pT(P, x + (i ? -1 : 1) * (q === i ? 40 : 0), 940, .7, t, { flip: i === 1, sobr: -.8, boca: q === i ? BOCAS.riso : BOCAS.grito, olhar: [1, .5], bD: { h: [q === i ? 190 : 120, q === i ? -40 : -100], bend: 20, punho: q !== i } })).join('') + HOLO(true); } },
+  // 52 · plongée da arena: os paredões mais perto; Lia e Caio sentados, de mãos dadas
+  { l: 23, w: 11, split: false, sfx: [{ t: .05, s: G('metal_beam_hit_3'), v: .3 }], cam: { s: [1, 1.06], c: [288, 520], shake: 3 },
+    f: (tl, d, t) => fundoChapado(ARE.areia) + ret(-40, -40, 660, 300, '#4A2A36') + paredoes(.62 + sobe(0, d, tl) * .08, 760, { poeira: 1, topo: 1, g0: 330, g1: 70 })
+      + pT(LIA, 235, 780, .5, t, { chao: true, olhar: [1, 0], bD: { h: [90, 60], bend: 10 } }) + pT(CAIO, 345, 780, .51, t, { flip: true, chao: true, olhar: [1, 0], bD: { h: [90, 60], bend: 10 } }) + HOLO(true) },
 ];
