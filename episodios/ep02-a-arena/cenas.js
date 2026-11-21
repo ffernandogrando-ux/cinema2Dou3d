@@ -446,7 +446,7 @@ const CENAS = [
   { l: 33, w: 9, split: false, sfx: [{ t: .1, s: G('voice_ha_ha_1'), v: .3 }], cam: { s: [1.15, 1.15], c: [252, 640], pop: false },
     f: (tl, d, t) => arenaCorte(t, { senta: 1, aberto: 1, alavanca: 1 }) + `<g transform="translate(318 ${MC.areia}) scale(.5)">${pilhaPremios(0, 0)}</g>`
       + [[RICACO, 262], [RICA, 318], [RICO2, 374]].map(([P, x], i) => pT(P, x, MC.areia - 84, .26, t, { chao: true, olhar: [-.4, -.8], boca: BOCAS.o, nocheck: true, semCorte: true, ph: i })).join('')
-      + [[SENHORA_T, 30], [SENHOR, 75], [PAI_T, 120]].map(([P, x], i) => pT(P, x, MC.piso, MC.s, t, { olhar: [.8, 1], boca: BOCAS.riso, nocheck: true, semCorte: true, ph: i })).join('') + pT(DONO, 180, MC.piso, MC.s, t, { olhar: [1, 1], nocheck: true, semCorte: true }) + QUENTE },
+      + [[SENHORA_T, 48], [SENHOR, 88], [PAI_T, 128]].map(([P, x], i) => pT(P, x, MC.piso, MC.s, t, { olhar: [.8, 1], boca: BOCAS.riso, nocheck: true, semCorte: true, ph: i })).join('') + pT(DONO, 180, MC.piso, MC.s, t, { olhar: [1, 1], nocheck: true, semCorte: true }) + QUENTE },
   // 72 · reação: a senhora ri, com a taça de um rico na mão
   { l: 33, w: 12, split: false, cam: { s: [1, 1.05], c: [288, 470] },
     f: (tl, d, t) => reacaoToon(SENHORA_T, t, tl, { y: 1120, boca: BOCAS.riso, palpebra: .5, olhar: [.6, .6], bD: { h: [80, -60], bend: 30, punho: true }, segura: taca(1.1) }, { fundo: CAMA.parede, forma: CAMA.ouro }) + QUENTE },
@@ -479,5 +479,5 @@ const CENAS = [
   { l: 38, w: 5, split: false, semFala: true, sfx: [{ t: .4, s: G('metal_rattler_4'), v: .4 }], cam: { s: [1, 1.08], c: [288, 500] },
     f: (tl, d, t) => { const fecha = tl > .4; return camaroteM(t, { janela: false }) + pT(DAVI, 200, 900, .8, t, { invisivel: !fecha, olhar: [.4, .6], palpebra: fecha ? .3 : .1, sobr: fecha ? -.4 : .8, boca: { sm: -.4 }, bD: { h: [120, -20], bend: 10, punho: true } })
       + pT(SEGURANCA, 470, 900, .8, t, { flip: true, olhar: [1, .5], palpebra: .3, bD: { h: [150, -10], bend: 10, punho: true } })
-      + `<g transform="translate(90 840)">${balde(.9)}</g>` + (fecha ? `<g transform="translate(339 624)">${algema(.9)}</g>` + correntePulso(352, 640, 410, 700) : ''); } },
+      + `<g transform="translate(160 840)">${balde(.9)}</g>` + (fecha ? `<g transform="translate(339 624)">${algema(.9)}</g>` + correntePulso(352, 640, 410, 700) : ''); } },
 ];
