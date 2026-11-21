@@ -68,8 +68,14 @@ function tMao(x, y, ang, r, cor, punho) {
 // st: { x, y, s, t, flip, inclina (rad), cabInc (rad), olhar:[x,y], palpebra, olhos:'fechados'|'arregalados', boca:{o,sm,skew}, sobr (−1..1),
 //       bE/bD: {h:[dx,dy], bend, punho}, pE/pD: [dx, dy], segura (SVG na mão da frente), seguraE, walk (fase), semCorte, nocheck }
 const T_ALT = { adulto: { hip: -150, omb: -335, cab: -470, larg: 1 }, baixo: { hip: -96, omb: -215, cab: -320, larg: .9 } };
+// st.invisivel: só o contorno, tracejado (gag do "faxineiro invisível"); o que estiver dentro de <g class="tSol"> (ex.: o balde em st.segura) fica sólido.
+// st.treme: amplitude (px) de um tremido do corpo todo. st.chao: sentado no chão de pernas cruzadas.
+const T_INV_CSS = `<style>.tInv path:not(.tSol path),.tInv circle:not(.tSol circle),.tInv ellipse:not(.tSol ellipse){fill:none!important}.tInv path[stroke]:not(.tSol path){stroke-dasharray:11 8;stroke-linecap:round}</style>`;
 function toon(P, st = {}) {
-  const A0 = T_ALT[P.alt || 'adulto'], A = st.sentado ? { ...A0, hip: -125, omb: A0.omb - A0.hip - 125, cab: A0.cab - A0.hip - 125 } : A0, t = st.liso ? (st.t || 0) : Math.floor((st.t || 0) * 12 + 1e-6) / 12, s = st.s || 1, f = st.flip ? -1 : 1, L = A.larg, bar = P.barriga || 0;
+  if ((st.invisivel || st.treme) && !st._env) { const tt = Math.floor((st.t || 0) * 24), dx = st.treme ? Math.sin(tt * 2.7) * st.treme : 0, dy = st.treme ? Math.cos(tt * 3.9) * st.treme * .5 : 0;
+    const dentro = toon(P, { ...st, _env: 1, sombra: st.invisivel ? false : st.sombra });
+    return (st.invisivel ? T_INV_CSS : '') + `<g${st.invisivel ? ' class="tInv"' : ''} transform="translate(${_p(dx)} ${_p(dy)})">${dentro}</g>`; }
+  const A0 = T_ALT[P.alt || 'adulto'], dz = A0.hip + (st.chao ? 62 : 125), A = (st.sentado || st.chao) ? { ...A0, hip: -(st.chao ? 62 : 125), omb: A0.omb - dz, cab: A0.cab - dz } : A0, t = st.liso ? (st.t || 0) : Math.floor((st.t || 0) * 12 + 1e-6) / 12, s = st.s || 1, f = st.flip ? -1 : 1, L = A.larg, bar = P.barriga || 0;
   const ag = st.still ? 0 : (st.agito ?? 1), ph = st.ph ?? P.ph ?? 0, resp = Math.sin(t * 2.4 + ph) * 4 * ag, peso = Math.sin(t * 1.1 + ph * 1.7) * 5 * ag;
   const w = st.walk != null ? Math.sin(st.walk * Math.PI * 2) : 0;
   let r = `<g transform="translate(${_p(st.x || 0)} ${_p(st.y || 0)}) scale(${s * f} ${s})">`;
@@ -78,6 +84,9 @@ function toon(P, st = {}) {
   for (const [sd, pe] of [[-1, st.pE || [0, 0]], [1, st.pD || [0, 0]]]) {
     const hip = [sd * 26 * L, A.hip], ank = st.sentado ? [sd * 16 + 100 + pe[0], -24 + pe[1]] : [sd * 30 * L + pe[0] + w * 26 * sd, -24 + pe[1] - Math.max(0, w * sd) * 14];
     const C = P.calca || { cor: '#3A3F5C', corS: '#2b2f45' };
+    if (st.chao) { const jo = [sd * 34 + 92, A.hip - 26 + (sd < 0 ? -8 : 0)], an = [sd * -30 + 36, -16];
+      r += tForma(tMacarrao(hip, jo, 0, 44 * L, 40 * L), sd < 0 ? (C.corS || C.cor) : C.cor) + tForma(tMacarrao(jo, an, 0, 38 * L, 34 * L), sd < 0 ? (C.corS || C.cor) : C.cor);
+      r += tForma(tSpl([[an[0] - 30, an[1] + 18], [an[0] - 26, an[1] - 4], [an[0] + 4, an[1] - 8], [an[0] + 28, an[1] + 2], [an[0] + 24, an[1] + 18]]), P.sapato || '#3b6fd6'); continue; }
     if (st.sentado) { const jo = [sd * 16 + 96, A.hip + 4]; r += tForma(tMacarrao(hip, jo, 0, 44 * L, 40 * L), sd < 0 ? (C.corS || C.cor) : C.cor) + tForma(tMacarrao(jo, ank, 0, 38 * L, 34 * L), sd < 0 ? (C.corS || C.cor) : C.cor);
       r += tForma(tSpl([[ank[0] - 28, ank[1] + 26], [ank[0] - 24, ank[1] + 2], [ank[0] + 10, ank[1] - 2], [ank[0] + 46, ank[1] + 12], [ank[0] + 40, ank[1] + 28]]), P.sapato || '#3b6fd6'); continue; }
     if (C.curta) { const joelho = [(hip[0] + ank[0]) / 2, (hip[1] + ank[1]) / 2];
@@ -197,3 +206,7 @@ function tMascaraPorco(modo, ab = 0, o = {}) {
 }
 const tOculos = (cor = TINK) => `<circle cx="8" cy="-10" r="30" fill="#CFE8FF" fill-opacity=".22" stroke="${cor}" stroke-width="${TLW * 1.4}" vector-effect="non-scaling-stroke"/>`
   + `<circle cx="60" cy="-12" r="24" fill="#CFE8FF" fill-opacity=".22" stroke="${cor}" stroke-width="${TLW * 1.4}" vector-effect="non-scaling-stroke"/>` + tTraco('M38 -12 Q36 -18 36 -12', TLW * 1.2, cor) + tTraco('M-22 -10 L-70 -2', TLW * 1.2, cor);
+
+// ---------------------------------------------------------------- ajudantes de plano (2º uso: EP01 e EP02)
+const fundoChapado = (cor) => `<rect x="-400" y="-400" width="1400" height="2000" fill="${cor}"/>`;
+const memoria = (svg) => `<g style="filter:saturate(.55) sepia(.18)">${svg}</g>`;

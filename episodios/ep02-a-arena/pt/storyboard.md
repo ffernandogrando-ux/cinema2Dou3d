@@ -24,16 +24,16 @@ Voz: Gemini Puck com pausas de 0,25 s, 1:55 (`palavras.json`, termina em 114,85 
 
 | # | Tempo | Âncora | Trecho da fala | Câmera / enquadramento | Imagem e ação | Cor do lugar | Efeitos |
 |---|---|---|---|---|---|---|---|
-| 1 | 0,00–2,00 (2,00 s) | 0:0 | Nesta cidade, todo domingo, os | PLANO-MESTRE em corte lateral, câmera desce devagar | dois lutadores na areia, a arquibancada de pé gritando, o camarote de vidro em balanço por cima; escada de serviço no canto | arena ocre/concreto | multidão gritando |
+| 1 | 0,00–2,00 (2,00 s) | 0:0 | Nesta cidade, todo domingo, os | PLANO-MESTRE em corte lateral, câmera desce devagar | dois lutadores grandes e legíveis em guarda na areia (pose de luta), a arquibancada de pé gritando, o camarote de vidro em balanço por cima; escada de serviço no canto | arena ocre/concreto | multidão gritando |
 | 2 | 2,00–4,14 (2,14 s) | 0:5 | pobres lutam entre si na arena. | close a dois dos lutadores, câmera na mão | dois homens magros de roupa rasgada, sem armas, se encarando | arena ocre/concreto | respiração |
 | 3 | 4,14–5,18 (1,04 s) | 1:0 | A cidade inteira | 3D bairro de tijolo (bairroToon), câmera desce até uma janela | casinhas de tijolo; em todas as janelas a mesma luz de TV piscando | bairro tijolo | vento, TV ao longe |
 | 4 | 5,18–6,48 (1,30 s) | 1:3 | assiste pela TV. | sala de casa pobre, plano médio, push-in | família inteira no sofá rasgado olhando a TV (na tela, a arena em miniatura) | bairro tijolo | chiado de TV |
 | 5 | 6,48–8,76 (2,28 s) | 1:6 | E os ricos apostam do camarote. | camarote, frente de vidro, travelling lateral | ricos de pé no vidro erguendo plaquinhas de aposta com cifrão | camarote vinho/dourado/vidro | risadas, tilintar de taça |
 | 6 | 8,76–10,72 (1,96 s) | 2:0 | Quem ganha leva um mês de comida. | telão, push-in | "PRÊMIO: 1 MÊS DE COMIDA" com o desenho de um saco de arroz | telão preto/LED vermelho | plim de LED |
 | 7 | 10,72–11,48 (0,76 s) | 3:0 | Quem reclama | rua do bairro, plano médio | um homem ergue um cartaz "PÃO CARO" | bairro tijolo | grito |
-| 8 | 11,48–13,24 (1,76 s) | 3:2 | vira atração especial. | plano a dois | um segurança inteiro cola no peito dele o adesivo "ATRAÇÃO ESPECIAL" | bairro tijolo | adesivo colando |
+| 8 | 11,48–13,24 (1,76 s) | 3:2 | vira atração especial. | plano a dois | um guarda de colete laranja e quepe (não é o SEGURANÇA do camarote) cola no peito dele o adesivo "ATRAÇÃO ESPECIAL" | bairro tijolo | adesivo colando |
 | 9 | 13,24–14,36 (1,12 s) | 4:0 | Quem faz rebelião | arena, contra-plongée | um lutador com correntes nos pulsos, de cabeça baixa | arena ocre/concreto | corrente arrastando |
-| 10 | 14,36–15,80 (1,44 s) | 4:3 | luta acorrentado. | reação: close de uma menina na arquibancada | ela tapa a boca | arena ocre/concreto | — |
+| 10 | 14,36–15,80 (1,44 s) | 4:3 | luta acorrentado. | reação: close de um senhor na arquibancada | ele tapa a boca | arena ocre/concreto | — |
 | 11 | 15,80–16,74 (0,94 s) | 5:0 | E no camarote? | PLANO-MESTRE do camarote em corte, pan da esquerda para a direita | piso firme (porta, segurança, poltronas, tapete do dono, pilar da alavanca) e frente de vidro sobre a arena (ricos, botão, pilha de prêmios) | camarote vinho/dourado/vidro | ar-condicionado zumbindo |
 | 12 | 16,74–17,72 (0,98 s) | 5:3 | Ar-condicionado, | plano médio | uma rica de pele no ar-condicionado, cabelo esvoaçando, olhos fechados | camarote vinho/dourado/vidro | sopro |
 | 13 | 17,72–18,68 (0,96 s) | 5:4 | champanhe e | plano médio | um rico estoura o champanhe, a rolha voa | camarote vinho/dourado/vidro | pop da rolha |
@@ -52,7 +52,7 @@ Voz: Gemini Puck com pausas de 0,25 s, 1:55 (`palavras.json`, termina em 114,85 
 | 26 | 35,61–38,33 (2,72 s) | 10:6 | riu: "Faxineiro não precisa saber disso." | reação: close do ricaço, falante | ri com a taça na mão: "Faxineiro não precisa saber disso." | camarote vinho/dourado/vidro | risada gorda |
 | 27 | 38,33–40,47 (2,14 s) | 11:0 | Esse mês, a minha irmã mais nova, a Lia, | padaria, plano médio, push-in | Lia no balcão; plaquinha "PÃO R$ 19" | padaria creme | sino da porta |
 | 28 | 40,47–41,75 (1,28 s) | 11:9 | reclamou do preço do pão. | close da Lia, falante | ela aponta brava para o preço | padaria creme | — |
-| 29 | 41,75–42,47 (0,72 s) | 12:0 | Virou atração | plano a dois | um segurança inteiro cola "ATRAÇÃO ESPECIAL" nas costas da Lia | padaria creme | adesivo colando |
+| 29 | 41,75–42,47 (0,72 s) | 12:0 | Virou atração | plano a dois | o guarda de colete laranja e quepe cola "ATRAÇÃO ESPECIAL" nas costas da Lia | padaria creme | adesivo colando |
 | 30 | 42,47–43,17 (0,70 s) | 12:2 | especial. | reação: close do Davi | olhos arregalados, o esfregão escorrega | camarote vinho/dourado/vidro | esfregão caindo |
 | 31 | 43,17–44,17 (1,00 s) | 13:0 | O adversário dela? | arena: Lia em primeiro plano, 3/4 de costas | no fundo, o portão de grade subindo | arena ocre/concreto | grade rangendo |
 | 32 | 44,17–44,81 (0,64 s) | 13:3 | O Caio. | plano médio do Caio | Caio sai do escuro, magro, com medo | arena ocre/concreto | — |
@@ -61,7 +61,7 @@ Voz: Gemini Puck com pausas de 0,25 s, 1:55 (`palavras.json`, termina em 114,85 
 | 35 | 48,15–48,95 (0,80 s) | 14:5 | dois por cento." | reação: close da Lia | ela engole seco | arena ocre/concreto | — |
 | 36 | 48,95–51,15 (2,20 s) | 15:0 | Eu tava lá embaixo, só com um balde. | corredor de serviço, ao pé da escada | Davi com o balde, olhando a areia pela grade | arena ocre/concreto | — |
 | 37 | 51,15–52,61 (1,46 s) | 15:8 | E precisava tirar ela de lá. | close do Davi na grade | rosto e mãos apertando as barras | arena ocre/concreto | grade rangendo |
-| 38 | 52,61–53,47 (0,86 s) | 16:0 | O sino tocou. | plano médio | um segurança bate o gongo com o martelo | arena ocre/concreto | gongo |
+| 38 | 52,61–53,47 (0,86 s) | 16:0 | O sino tocou. | plano médio | um juiz de arena de colete listrado bate o gongo com o martelo | arena ocre/concreto | gongo |
 | 39 | 53,47–54,57 (1,10 s) | 16:3 | Ninguém se mexeu. | plano aberto da arena, deriva lenta | Lia e Caio parados, um de cada lado; a arquibancada de pé | arena ocre/concreto | silêncio |
 | 40 | 54,57–56,01 (1,44 s) | 17:0 | Lá em cima, alguém apertou o botão. | frente de vidro, plano médio | o ricaço aperta o botão | camarote vinho/dourado/vidro | clique gordo |
 | 41 | 56,01–57,43 (1,42 s) | 17:7 | "Mais emoção." | close do botão, os holofotes ficam vermelhos | o botão pisca "MAIS EMOÇÃO" | camarote vinho/dourado/vidro | sirene curta |

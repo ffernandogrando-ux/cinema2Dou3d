@@ -10,16 +10,16 @@ CAM, ARE, BAI, PAD, MEM, TEL = 'camarote vinho/dourado/vidro', 'arena ocre/concr
 # (linha, palavra, câmera, imagem/ação, cor, efeitos)
 PL = [
  # A · o mundo
- (0, 0, 'PLANO-MESTRE em corte lateral, câmera desce devagar', 'dois lutadores na areia, a arquibancada de pé gritando, o camarote de vidro em balanço por cima; escada de serviço no canto', ARE, 'multidão gritando'),
+ (0, 0, 'PLANO-MESTRE em corte lateral, câmera desce devagar', 'dois lutadores grandes e legíveis em guarda na areia (pose de luta), a arquibancada de pé gritando, o camarote de vidro em balanço por cima; escada de serviço no canto', ARE, 'multidão gritando'),
  (0, 5, 'close a dois dos lutadores, câmera na mão', 'dois homens magros de roupa rasgada, sem armas, se encarando', ARE, 'respiração'),
  (1, 0, '3D bairro de tijolo (bairroToon), câmera desce até uma janela', 'casinhas de tijolo; em todas as janelas a mesma luz de TV piscando', BAI, 'vento, TV ao longe'),
  (1, 3, 'sala de casa pobre, plano médio, push-in', 'família inteira no sofá rasgado olhando a TV (na tela, a arena em miniatura)', BAI, 'chiado de TV'),
  (1, 6, 'camarote, frente de vidro, travelling lateral', 'ricos de pé no vidro erguendo plaquinhas de aposta com cifrão', CAM, 'risadas, tilintar de taça'),
  (2, 0, 'telão, push-in', '"PRÊMIO: 1 MÊS DE COMIDA" com o desenho de um saco de arroz', TEL, 'plim de LED'),
  (3, 0, 'rua do bairro, plano médio', 'um homem ergue um cartaz "PÃO CARO"', BAI, 'grito'),
- (3, 2, 'plano a dois', 'um segurança inteiro cola no peito dele o adesivo "ATRAÇÃO ESPECIAL"', BAI, 'adesivo colando'),
+ (3, 2, 'plano a dois', 'um guarda de colete laranja e quepe (não é o SEGURANÇA do camarote) cola no peito dele o adesivo "ATRAÇÃO ESPECIAL"', BAI, 'adesivo colando'),
  (4, 0, 'arena, contra-plongée', 'um lutador com correntes nos pulsos, de cabeça baixa', ARE, 'corrente arrastando'),
- (4, 3, 'reação: close de uma menina na arquibancada', 'ela tapa a boca', ARE, '—'),
+ (4, 3, 'reação: close de um senhor na arquibancada', 'ele tapa a boca', ARE, '—'),
  (5, 0, 'PLANO-MESTRE do camarote em corte, pan da esquerda para a direita', 'piso firme (porta, segurança, poltronas, tapete do dono, pilar da alavanca) e frente de vidro sobre a arena (ricos, botão, pilha de prêmios)', CAM, 'ar-condicionado zumbindo'),
  (5, 3, 'plano médio', 'uma rica de pele no ar-condicionado, cabelo esvoaçando, olhos fechados', CAM, 'sopro'),
  (5, 4, 'plano médio', 'um rico estoura o champanhe, a rolha voa', CAM, 'pop da rolha'),
@@ -40,7 +40,7 @@ PL = [
  # C · o que eu quero
  (11, 0, 'padaria, plano médio, push-in', 'Lia no balcão; plaquinha "PÃO R$ 19"', PAD, 'sino da porta'),
  (11, 9, 'close da Lia, falante', 'ela aponta brava para o preço', PAD, '—'),
- (12, 0, 'plano a dois', 'um segurança inteiro cola "ATRAÇÃO ESPECIAL" nas costas da Lia', PAD, 'adesivo colando'),
+ (12, 0, 'plano a dois', 'o guarda de colete laranja e quepe cola "ATRAÇÃO ESPECIAL" nas costas da Lia', PAD, 'adesivo colando'),
  (12, 2, 'reação: close do Davi', 'olhos arregalados, o esfregão escorrega', CAM, 'esfregão caindo'),
  (13, 0, 'arena: Lia em primeiro plano, 3/4 de costas', 'no fundo, o portão de grade subindo', ARE, 'grade rangendo'),
  (13, 3, 'plano médio do Caio', 'Caio sai do escuro, magro, com medo', ARE, '—'),
@@ -50,7 +50,7 @@ PL = [
  (15, 0, 'corredor de serviço, ao pé da escada', 'Davi com o balde, olhando a areia pela grade', ARE, '—'),
  (15, 8, 'close do Davi na grade', 'rosto e mãos apertando as barras', ARE, 'grade rangendo'),
  # D · o jogo
- (16, 0, 'plano médio', 'um segurança bate o gongo com o martelo', ARE, 'gongo'),
+ (16, 0, 'plano médio', 'um juiz de arena de colete listrado bate o gongo com o martelo', ARE, 'gongo'),
  (16, 3, 'plano aberto da arena, deriva lenta', 'Lia e Caio parados, um de cada lado; a arquibancada de pé', ARE, 'silêncio'),
  (17, 0, 'frente de vidro, plano médio', 'o ricaço aperta o botão', CAM, 'clique gordo'),
  (17, 7, 'close do botão, os holofotes ficam vermelhos', 'o botão pisca "MAIS EMOÇÃO"', CAM, 'sirene curta'),

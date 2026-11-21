@@ -37,7 +37,6 @@ const comEtiqueta = (P, nome) => ({ ...P, tronco: { ...P.tronco, detalhe: (omb, 
 // ================================================================ PEÇAS DO EPISÓDIO
 const CHAVE = (s = 1, rot = 0) => `<g transform="scale(${s}) rotate(${rot})">${tForma(tPoli([[-26, -60], [0, -84], [26, -60], [26, -30], [-26, -30]]), '#E8B84A', tPinta(tPoli([[0, -84], [26, -60], [26, -30], [0, -30]]), '#C8962E'))}`
   + `${tForma(tElip(0, -52, 7, 7), '#5a3a10')}${tForma(tPoli([[-6, -30], [6, -30], [6, 40], [-6, 40]]), '#E8B84A')}${tForma(tPoli([[6, 14], [22, 14], [22, 22], [6, 22]]), '#E8B84A')}${tForma(tPoli([[6, 28], [18, 28], [18, 36], [6, 36]]), '#E8B84A')}</g>`;
-const fundoChapado = (cor) => `<rect x="-400" y="-400" width="1400" height="2000" fill="${cor}"/>`;
 // esconderijo: garagem velha verde-musgo com luminária pendurada e caixa de alarme na parede
 const ESC = { parede: '#5E7A55', paredeS: '#4C6645', chao: '#3C4A36', chaoS: '#2F3B2A' };
 function esconderijo(o = {}) { const y = o.chao ?? 800;
@@ -58,7 +57,6 @@ function casaFamilia(o = {}) { let r = fundoChapado('#9FC6E0') + `<rect x="-400"
   r += [150, 175, 200].map((x, i) => tForma(tElip(x, 600, 12, 10), ['#E86A5A', '#F7E3B0', '#E9A0C8'][i])).join('');
   if (o.carimbo) { const k = o.carimbo; r += `<g transform="translate(290 640) rotate(-12) scale(${1.6 - .6 * k})" opacity="${k}">` + tForma(tPoli([[-150, -50], [150, -50], [150, 50], [-150, 50]]), 'none') + `<rect x="-150" y="-50" width="300" height="100" fill="none" stroke="#C0392B" stroke-width="12"/><text x="0" y="28" font-family="'Baloo 2'" font-weight="800" font-size="78" text-anchor="middle" fill="#C0392B">TOMADO</text></g>`; }
   return r; }
-const memoria = (svg) => `<g style="filter:saturate(.55) sepia(.18)">${svg}</g>`;
 // etiqueta de nome no peito (close)
 const etiquetaNome = (txt) => `<g transform="rotate(-4)">` + tForma(tPoli([[-120, -40], [120, -40], [120, 40], [-120, 40]]), '#FBF8EF') + `<text x="0" y="18" font-family="'Baloo 2'" font-weight="800" font-size="52" text-anchor="middle" fill="${TINK}">${txt}</text></g>`;
 const cadeadoT = (aberto) => `<g>${tForma(`M-22 -10 V-40 Q-22 -66 0 -66 Q22 -66 22 -40 V${aberto ? -56 : -10}`, 'none')}${tTraco(`M-22 -10 V-40 Q-22 -66 0 -66 Q22 -66 22 -40 V${aberto ? -56 : -10}`, TLW * 2.4, '#9AA3AD')}${tForma(tPoli([[-34, -12], [34, -12], [34, 40], [-34, 40]]), '#E8B84A', tPinta(tPoli([[10, -12], [34, -12], [34, 40], [10, 40]]), '#C8962E'))}</g>`;
