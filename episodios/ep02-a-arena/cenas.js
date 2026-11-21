@@ -65,10 +65,10 @@ const coxinha = `<g>${tForma('M0 -34 Q22 0 18 14 Q0 24 -18 14 Q-22 0 0 -34Z', '#
 const saco = (x, y, s = 1, rot = 0, cor = '#E8DCC0') => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})">${tForma('M-46 0 Q-52 -50 -36 -78 L-20 -92 L20 -92 L36 -78 Q52 -50 46 0Z', cor, tPinta('M14 -92 L36 -78 Q52 -50 46 0 L16 0Z', '#C9BC9C'))}${tTraco('M-22 -92 Q0 -82 22 -92', TLW)}${TXT(0, -34, 26, 'ARROZ', '#C0392B')}</g>`;
 const lata = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})">${tForma(tPoli([[-20, -50], [20, -50], [20, 0], [-20, 0]]), '#C0392B', tPinta(tPoli([[8, -50], [20, -50], [20, 0], [8, 0]]), '#9A2A20'))}${ret(-20, -36, 40, 18, '#F4F1EA')}</g>`;
 const pilhaPremios = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})">${saco(-60, 0, 1, -6)}${saco(56, 0, 1, 5, '#E0D2B0')}${saco(0, -70, .95, 2)}${lata(-118, 0)}${lata(116, 0, .9)}${tForma('M-36 -150 L36 -150 L44 -110 L-44 -110Z', '#C49A5A')}${tTraco('M-30 -150 Q0 -196 30 -150', TLW * 1.2)}</g>`;
-function botaoPed(x, y, s = 1, on = false, t = 0) { const pisca = on && Math.floor(t * 6) % 2;
+function botaoPed(x, y, s = 1, on = false, t = 0, semPlaca = false) { const pisca = on && Math.floor(t * 6) % 2;
   return `<g transform="translate(${x} ${y}) scale(${s})">${tForma('M-30 0 L30 0 L22 -150 L-22 -150Z', '#D4A93A', tPinta('M8 0 L30 0 L22 -150 L8 -150Z', '#B08A2A'))}${tForma(tPoli([[-60, -150], [60, -150], [60, -176], [-60, -176]]), '#3a2a20')}`
     + (on ? `<circle cx="0" cy="-200" r="70" fill="#FF3B30" opacity="${pisca ? .35 : .15}"/>` : '') + tForma(`M-46 -176 Q-46 -226 0 -226 Q46 -226 46 -176Z`, pisca ? '#FF6B5E' : '#E0302B', tPinta('M-30 -214 Q-10 -224 6 -222 L-6 -200 Z', '#ffffff66'))
-    + `<g transform="translate(0 -110)">${tForma(tPoli([[-72, -18], [72, -18], [72, 18], [-72, 18]]), '#F4F1EA')}${TXT(0, 7, 19, 'MAIS EMOÇÃO', '#C0392B')}</g></g>`; }
+    + (semPlaca ? '' : `<g transform="translate(0 -110)">${tForma(tPoli([[-72, -18], [72, -18], [72, 18], [-72, 18]]), '#F4F1EA')}${TXT(0, 7, 19, 'MAIS EMOÇÃO', '#C0392B')}</g>`) + `</g>`; }
 function alavanca(x, y, s = 1, k = 0, corda = true) { const a = -40 + k * 80;
   return `<g transform="translate(${x} ${y}) scale(${s})">${tForma(tPoli([[-40, -60], [40, -60], [40, 60], [-40, 60]]), '#5C5A60', tPinta(tPoli([[16, -60], [40, -60], [40, 60], [16, 60]]), '#48464C'))}`
     + `<g transform="rotate(${a})">${tForma(tPoli([[-8, 0], [8, 0], [8, -150], [-8, -150]]), '#9AA3AD')}${tForma(tElip(0, -160, 22, 22), '#E0302B')}</g>`
@@ -232,7 +232,7 @@ const CENAS = [
     f: (tl, d, t) => camaroteM(t, { vidro: [-60, 640], pe: 1, chao: 860 }) + botaoPed(288, 860, 2.1) },
   // 15 · reação: o ricaço mexe o dedo por cima do botão, sorrindo
   { l: 5, w: 9, split: false, semFala: true, sfx: [{ t: .2, s: G('voice_heh_heh_heh_heh_1'), v: .25 }], cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => reacaoToon(RICACO, t, tl, { boca: BOCAS.sorriso, palpebra: .55, olhar: [.6, .6], bD: { h: [60, -25 + Math.sin(t * 14) * 8], bend: 30 } }, { fundo: CAMA.parede, forma: CAMA.ouro, brilho: '#FF3B30', lado: 1 }) + botaoPed(420, 820, .6) },
+    f: (tl, d, t) => reacaoToon(RICACO, t, tl, { boca: BOCAS.sorriso, palpebra: .55, olhar: [.6, .6], bD: { h: [92, -78 + Math.sin(t * 14) * 6], bend: 30 } }, { fundo: CAMA.parede, forma: CAMA.ouro, brilho: '#FF3B30', lado: 1 }) + botaoPed(472, 810, .85, false, 0, true) },
   // 16 · close 3/4 do Davi: acena com o esfregão
   { l: 6, split: false, sfx: [{ t: .1, s: G('rubber_snapping_2'), v: .2 }], cam: { s: [1, 1.05], c: [288, 470], shake: 2 },
     f: (tl, d, t) => fundoChapado(CAMA.parede) + ret(60, 120, 20, 900, CAMA.ouro) + ret(460, 120, 20, 900, CAMA.ouro)
