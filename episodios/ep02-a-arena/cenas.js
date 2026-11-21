@@ -478,10 +478,10 @@ const CENAS = [
   // 79 · telão, push-in lento: "FINAL ESPECIAL: O FAXINEIRO ACORRENTADO CONTRA O DONO"
   { l: 38, split: false, blur: false, semFala: true, sfx: [{ t: .1, s: G('ding_3'), v: .3 }], cam: { s: [1, 1.06], c: [288, 400], c1: [288, 400] },
     f: (tl, d, t) => telao(['FINAL ESPECIAL:', 'O FAXINEIRO', 'ACORRENTADO', 'CONTRA O DONO'], { tam: 56, y: 280 }) },
-  // 80 · plano a dois: o segurança fecha a algema no pulso do Davi; o Davi volta a ser sólido; segura 2 s
+  // 80 · plano a dois: o próprio dono (terno branco, dente de ouro) fecha a algema no pulso do Davi; o Davi volta a ser sólido; segura 2 s
   { l: 38, w: 5, split: false, semFala: true, sfx: [{ t: .4, s: 'arena/corrente_algema', v: .9 }, { t: .42, s: 'arena/impacto_final', v: .8 }], cam: { s: [1, 1.08], c: [288, 500] },
     f: (tl, d, t) => { const fecha = tl > .4; return camaroteM(t, { janela: false }) + pT(DAVI, 200, 900, .8, t, { invisivel: !fecha, olhar: [.4, .6], palpebra: fecha ? .3 : .1, sobr: fecha ? -.4 : .8, boca: { sm: -.4 }, bD: { h: [120, -20], bend: 10, punho: true } })
-      + pT(SEGURANCA, 470, 900, .8, t, { flip: true, olhar: [1, .5], palpebra: .3, bD: { h: [150, -10], bend: 10, punho: true } })
+      + pT(DONO_OURO, 470, 900, .82, t, { flip: true, olhar: [1, .4], palpebra: .45, boca: { sm: 1, o: .35 }, bD: { h: [150, -10], bend: 10, punho: true } })
       + `<g transform="translate(160 840)">${balde(.9)}</g>` + (fecha ? `<g transform="translate(339 624)">${algema(.9)}</g>` + correntePulso(352, 640, 410, 700) : ''); } },
 ];
 
