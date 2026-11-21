@@ -296,11 +296,11 @@ const CENAS = [
     f: (tl, d, t) => arenaM(t, { pe: 1, grade: 300, gradeK: 1 }) + pT(CAIO, lerp(300, 330, sobe(0, .6, tl)), 900, .82, t, { olhar: [-.5, -.2], sobr: .8, palpebra: .2, boca: { sm: -.6 }, walk: tl < .6 ? tl * 2 : null }) },
   // 33 · flash de memória: Davi, Lia e Caio crianças jogando bola na rua de tijolo
   { l: 13, w: 5, split: false, blur: false, sfx: [{ t: .1, s: G('drum_bonk_2'), v: .25 }], cam: { s: [1, 1.04], c: [288, 520] },
-    f: (tl, d, t) => { const bx = 290 + Math.sin(tl * 4) * 120, by = 760 - Math.abs(Math.sin(tl * 7)) * 120; return memoria(ruaBairro2D() + pT(DAVI_K, 110, 900, .72, t, { olhar: [1, -.2], boca: BOCAS.riso }) + pT(LIA_K, 290, 900, .68, t, { olhar: [.4, -.5], boca: BOCAS.riso }) + pT(CAIO_K, 470, 900, .72, t, { flip: true, olhar: [1, -.2], boca: BOCAS.riso })
+    f: (tl, d, t) => { const bx = 290 + Math.sin(tl * 4) * 120, by = 760 - Math.abs(Math.sin(tl * 7)) * 120; return memoria(ruaBairro2D() + pT(DAVI_K, 90, 900, .72, t, { olhar: [1, -.2], boca: BOCAS.riso }) + pT(LIA_K, 270, 900, .68, t, { olhar: [.4, -.5], boca: BOCAS.riso }) + pT(CAIO_K, 495, 900, .72, t, { flip: true, olhar: [1, -.2], boca: BOCAS.riso })
       + tForma(tElip(bx, by, 26, 26), '#F4F1EA', tPinta(tElip(bx + 8, by + 6, 18, 18), '#D8D3C6'))); } },
   // 34 · telão visto da areia, Lia pequena na frente: "CHANCE DA LIA: 2%"
   { l: 14, split: false, semFala: true, sfx: [{ t: .1, s: G('ding_4'), v: .3 }], cam: { s: [1, 1.05], c: [288, 470], c1: [288, 440] },
-    f: (tl, d, t) => arenaM(t, { pe: 1, chao: 900 }) + telaoQ(50, 90, 476, 420, ['CHANCE', 'DA LIA:', '2%'], 86) + pT(LIA, 290, 1000, .5, t, { flip: true, olhar: [-.3, -1], nocheck: true }) },
+    f: (tl, d, t) => arenaM(t, { pe: 1, chao: 880 }) + telaoQ(50, 90, 476, 420, ['CHANCE', 'DA LIA:', '2%'], 86) + pT(LIA, 290, 885, .5, t, { flip: true, olhar: [-.3, -1], nocheck: true }) },
   // 35 · reação: close da Lia, ela engole seco
   { l: 14, w: 5, split: false, semFala: true, sfx: [{ t: .15, s: G('bite_apple_1'), v: .15 }], cam: { s: [1, 1.05], c: [288, 470] },
     f: (tl, d, t) => reacaoToon(LIA, t, tl, { olhar: [.6, -.6], sobr: .8, palpebra: .1, boca: { sm: -.7, w: .6 } }, { fundo: ARE.fundo, forma: '#4A4258' }) },
@@ -328,7 +328,7 @@ const CENAS = [
     f: (tl, d, t) => camaroteM(t, { vidro: [-60, 640], pe: 1, chao: 860 }) + botaoPed(288, 860, 2.1, true, t) + HOLO(true) },
   // 42 · plongée em 3/4: dois paredões vêm da esquerda e da direita, com poeira
   { l: 18, split: false, sfx: [{ t: 0, s: G('metal_beam_hit_2'), v: .35 }, { t: .4, s: G('ground_thump_1'), v: .3 }], cam: { s: [1, 1.05], c: [288, 520], shake: 3 },
-    f: (tl, d, t) => { const k = sobe(0, d, tl) * .45; return fundoChapado(ARE.areia) + ret(-40, -40, 660, 300, '#4A2A36') + paredoes(k, 760, { poeira: 1, topo: 1, g0: 330, g1: 70 })
+    f: (tl, d, t) => { const k = sobe(0, d, tl) * .45; return fundoChapado(ARE.areia) + ret(-40, -40, 660, 300, '#4A2A36') + paredoes(k, 760, { poeira: 1, topo: 1, g0: 240, g1: 70 })
       + pT(LIA, 220, 780, .5, t, { olhar: [-1, -.2], sobr: .8, olhos: 'arregalados' }) + pT(CAIO, 360, 780, .52, t, { flip: true, olhar: [-1, -.2], sobr: .8, olhos: 'arregalados' }) + HOLO(true); } },
   // 43 · plano baixo, nível do chão: Lia e Caio no meio, os paredões chegando
   { l: 18, w: 7, split: false, sfx: [{ t: .1, s: G('metal_wobble_2'), v: .3 }], cam: { s: [1, 1.05], c: [288, 520], shake: 3 },
@@ -363,6 +363,6 @@ const CENAS = [
       + [[RICACO, 110, 0], [RICA, 490, 1]].map(([P, x, i]) => pT(P, x + (i ? -1 : 1) * (q === i ? 40 : 0), 940, .7, t, { flip: i === 1, sobr: -.8, boca: q === i ? BOCAS.riso : BOCAS.grito, olhar: [1, .5], bD: { h: [q === i ? 190 : 120, q === i ? -40 : -100], bend: 20, punho: q !== i } })).join('') + HOLO(true); } },
   // 52 · plongée da arena: os paredões mais perto; Lia e Caio sentados, de mãos dadas
   { l: 23, w: 11, split: false, sfx: [{ t: .05, s: G('metal_beam_hit_3'), v: .3 }], cam: { s: [1, 1.06], c: [288, 520], shake: 3 },
-    f: (tl, d, t) => fundoChapado(ARE.areia) + ret(-40, -40, 660, 300, '#4A2A36') + paredoes(.62 + sobe(0, d, tl) * .08, 760, { poeira: 1, topo: 1, g0: 330, g1: 70 })
-      + pT(LIA, 235, 780, .5, t, { chao: true, olhar: [1, 0], bD: { h: [90, 60], bend: 10 } }) + pT(CAIO, 345, 780, .51, t, { flip: true, chao: true, olhar: [1, 0], bD: { h: [90, 60], bend: 10 } }) + HOLO(true) },
+    f: (tl, d, t) => fundoChapado(ARE.areia) + ret(-40, -40, 660, 300, '#4A2A36') + paredoes(.5 + sobe(0, d, tl) * .08, 760, { poeira: 1, topo: 1, g0: 330, g1: 70 })
+      + pT(LIA, 210, 780, .5, t, { chao: true, olhar: [1, 0], bD: { h: [90, 60], bend: 10 } }) + pT(CAIO, 370, 780, .51, t, { flip: true, chao: true, olhar: [1, 0], bD: { h: [90, 60], bend: 10 } }) + HOLO(true) },
 ];
