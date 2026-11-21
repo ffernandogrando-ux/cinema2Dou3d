@@ -2,8 +2,13 @@
  "cues": [
   {
    "t": 0.02,
-   "som": "galeria/chatter_1",
-   "v": 0.35
+   "som": "arena/arena_urra",
+   "v": 0.75
+  },
+  {
+   "t": 4.34,
+   "som": "arena/whoosh_a",
+   "v": 0.45
   },
   {
    "t": 4.529999999999999,
@@ -16,6 +21,11 @@
    "v": 0.15
   },
   {
+   "t": 6.58,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
    "t": 6.819999999999999,
    "som": "galeria/voice_heh_heh_heh_heh_1",
    "v": 0.25
@@ -26,9 +36,19 @@
    "v": 0.2
   },
   {
+   "t": 8.68,
+   "som": "arena/whoosh_c",
+   "v": 0.45
+  },
+  {
    "t": 8.870000000000001,
    "som": "galeria/ding_2",
    "v": 0.3
+  },
+  {
+   "t": 10.68,
+   "som": "arena/whoosh_a",
+   "v": 0.45
   },
   {
    "t": 10.870000000000001,
@@ -41,9 +61,19 @@
    "v": 0.3
   },
   {
+   "t": 12.879999999999999,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
    "t": 13.12,
    "som": "galeria/metal_rattler_2",
    "v": 0.35
+  },
+  {
+   "t": 15.2,
+   "som": "arena/whoosh_c",
+   "v": 0.45
   },
   {
    "t": 15.39,
@@ -71,6 +101,11 @@
    "v": 0.25
   },
   {
+   "t": 20.630000000000003,
+   "som": "arena/whoosh_a",
+   "v": 0.45
+  },
+  {
    "t": 20.870000000000005,
    "som": "galeria/rubber_snapping_2",
    "v": 0.2
@@ -81,14 +116,29 @@
    "v": 0.2
   },
   {
+   "t": 23.630000000000003,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
    "t": 23.870000000000005,
    "som": "galeria/washboard_scrape_3",
    "v": 0.2
   },
   {
+   "t": 26.39,
+   "som": "arena/whoosh_c",
+   "v": 0.45
+  },
+  {
    "t": 26.830000000000002,
    "som": "galeria/tiny_hit_2",
    "v": 0.3
+  },
+  {
+   "t": 28.910000000000004,
+   "som": "arena/whoosh_a",
+   "v": 0.45
   },
   {
    "t": 29.300000000000004,
@@ -106,9 +156,19 @@
    "v": 0.35
   },
   {
+   "t": 32.13,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
    "t": 35.94,
    "som": "galeria/voice_ha_ha_1",
    "v": 0.3
+  },
+  {
+   "t": 38.11,
+   "som": "arena/whoosh_c",
+   "v": 0.45
   },
   {
    "t": 38.3,
@@ -126,14 +186,29 @@
    "v": 0.3
   },
   {
+   "t": 44.11,
+   "som": "arena/whoosh_a",
+   "v": 0.45
+  },
+  {
    "t": 44.35,
    "som": "galeria/metal_rattler_3",
    "v": 0.3
   },
   {
+   "t": 46.15,
+   "som": "arena/whoosh_b",
+   "v": 0.6
+  },
+  {
    "t": 46.39,
    "som": "galeria/drum_bonk_2",
    "v": 0.25
+  },
+  {
+   "t": 47.87,
+   "som": "arena/whoosh_c",
+   "v": 0.45
   },
   {
    "t": 48.11,
@@ -146,14 +221,29 @@
    "v": 0.15
   },
   {
+   "t": 50.269999999999996,
+   "som": "arena/whoosh_a",
+   "v": 0.45
+  },
+  {
    "t": 53.17,
    "som": "galeria/metal_rattler_1",
    "v": 0.3
   },
   {
+   "t": 54.589999999999996,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
    "t": 54.98,
-   "som": "galeria/resonating_metal_hit_2",
-   "v": 0.5
+   "som": "arena/gongo_grande",
+   "v": 0.9
+  },
+  {
+   "t": 56.67,
+   "som": "arena/whoosh_c",
+   "v": 0.45
   },
   {
    "t": 58.03,
@@ -162,18 +252,23 @@
   },
   {
    "t": 59.05,
-   "som": "galeria/siren_whistle_1",
-   "v": 0.3
+   "som": "arena/botao_alarme",
+   "v": 0.7
+  },
+  {
+   "t": 60.089999999999996,
+   "som": "arena/whoosh_a",
+   "v": 0.45
   },
   {
    "t": 60.23,
-   "som": "galeria/metal_beam_hit_2",
-   "v": 0.35
+   "som": "arena/paredes_concreto",
+   "v": 0.9
   },
   {
-   "t": 60.629999999999995,
-   "som": "galeria/ground_thump_1",
-   "v": 0.3
+   "t": 60.529999999999994,
+   "som": "arena/arena_ohh",
+   "v": 0.6
   },
   {
    "t": 62.470000000000006,
@@ -181,14 +276,29 @@
    "v": 0.3
   },
   {
+   "t": 64.09,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
    "t": 67.49000000000001,
    "som": "galeria/ground_thump_3",
    "v": 0.3
   },
   {
+   "t": 68.73,
+   "som": "arena/whoosh_c",
+   "v": 0.45
+  },
+  {
    "t": 68.92,
-   "som": "galeria/chatter_2",
-   "v": 0.3
+   "som": "arena/arena_ohh",
+   "v": 0.5
+  },
+  {
+   "t": 70.69,
+   "som": "arena/whoosh_a",
+   "v": 0.45
   },
   {
    "t": 70.92999999999999,
@@ -196,9 +306,14 @@
    "v": 0.3
   },
   {
+   "t": 72.81,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
    "t": 73,
-   "som": "galeria/voice_bah_1",
-   "v": 0.3
+   "som": "arena/arena_vaia",
+   "v": 0.9
   },
   {
    "t": 74.5,
@@ -226,9 +341,19 @@
    "v": 0.3
   },
   {
+   "t": 77.57000000000001,
+   "som": "arena/whoosh_c",
+   "v": 0.45
+  },
+  {
    "t": 79.85,
    "som": "galeria/thin_metal_hit_2",
    "v": 0.2
+  },
+  {
+   "t": 81.01,
+   "som": "arena/whoosh_a",
+   "v": 0.45
   },
   {
    "t": 81.5,
@@ -239,6 +364,11 @@
    "t": 84.87,
    "som": "galeria/fist_clenched_2",
    "v": 0.3
+  },
+  {
+   "t": 86.48,
+   "som": "arena/whoosh_b",
+   "v": 0.45
   },
   {
    "t": 86.72,
@@ -256,9 +386,19 @@
    "v": 0.15
   },
   {
+   "t": 88.82000000000001,
+   "som": "arena/whoosh_c",
+   "v": 0.45
+  },
+  {
    "t": 90.50000000000001,
    "som": "galeria/bite_apple_2",
    "v": 0.25
+  },
+  {
+   "t": 92.66,
+   "som": "arena/whoosh_a",
+   "v": 0.45
   },
   {
    "t": 93.3,
@@ -266,19 +406,29 @@
    "v": 0.4
   },
   {
-   "t": 95.27,
-   "som": "galeria/metal_beam_hit_1",
-   "v": 0.4
+   "t": 95.08,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
+   "t": 95.22,
+   "som": "arena/vidro_abre",
+   "v": 1
   },
   {
    "t": 95.72,
    "som": "galeria/plastic_rice_bag_hit_2",
-   "v": 0.4
+   "v": 0.5
   },
   {
    "t": 96.44000000000001,
    "som": "galeria/slide_whistle_down_1",
    "v": 0.4
+  },
+  {
+   "t": 97.92,
+   "som": "arena/whoosh_c",
+   "v": 0.45
   },
   {
    "t": 98.11,
@@ -301,14 +451,24 @@
    "v": 0.25
   },
   {
+   "t": 101.7,
+   "som": "arena/whoosh_a",
+   "v": 0.45
+  },
+  {
    "t": 101.94,
    "som": "galeria/balloon_deflate_2",
    "v": 0.3
   },
   {
    "t": 103.30000000000001,
-   "som": "galeria/metal_beam_hit_4",
-   "v": 0.3
+   "som": "arena/paredes_concreto",
+   "v": 0.5
+  },
+  {
+   "t": 104.24000000000001,
+   "som": "arena/whoosh_b",
+   "v": 0.45
   },
   {
    "t": 104.43,
@@ -316,19 +476,39 @@
    "v": 0.3
   },
   {
+   "t": 105.76,
+   "som": "arena/whoosh_c",
+   "v": 0.45
+  },
+  {
    "t": 106,
    "som": "galeria/balloon_deflate_4",
    "v": 0.25
   },
   {
-   "t": 107.72,
-   "som": "galeria/voice_ha_ha_1",
-   "v": 0.3
+   "t": 107.67,
+   "som": "arena/arena_risada",
+   "v": 0.9
   },
   {
-   "t": 109.82000000000001,
-   "som": "galeria/party_honk_2",
-   "v": 0.3
+   "t": 109.58000000000001,
+   "som": "arena/whoosh_a",
+   "v": 0.45
+  },
+  {
+   "t": 109.77000000000001,
+   "som": "arena/arena_urra",
+   "v": 0.9
+  },
+  {
+   "t": 112.13000000000001,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
+   "t": 114.31,
+   "som": "arena/whoosh_c",
+   "v": 0.45
   },
   {
    "t": 115.83,
@@ -341,15 +521,145 @@
    "v": 0.25
   },
   {
+   "t": 118.23,
+   "som": "arena/whoosh_a",
+   "v": 0.45
+  },
+  {
    "t": 118.47,
    "som": "galeria/ding_3",
    "v": 0.3
   },
   {
+   "t": 120.57000000000001,
+   "som": "arena/whoosh_b",
+   "v": 0.45
+  },
+  {
    "t": 121.11000000000001,
-   "som": "galeria/metal_rattler_4",
-   "v": 0.4
+   "som": "arena/corrente_algema",
+   "v": 0.9
+  },
+  {
+   "t": 121.13000000000001,
+   "som": "arena/impacto_final",
+   "v": 0.8
   }
  ],
- "amb": []
+ "amb": [
+  {
+   "ini": 0,
+   "fim": 4.4799999999999995,
+   "som": "arena_multidao",
+   "v": 0.8
+  },
+  {
+   "ini": 4.4799999999999995,
+   "fim": 6.72,
+   "som": "bairro",
+   "v": 4
+  },
+  {
+   "ini": 6.72,
+   "fim": 8.82,
+   "som": "camarote",
+   "v": 3
+  },
+  {
+   "ini": 8.82,
+   "fim": 10.82,
+   "som": "arena_multidao",
+   "v": 0.7
+  },
+  {
+   "ini": 10.82,
+   "fim": 13.02,
+   "som": "bairro",
+   "v": 4
+  },
+  {
+   "ini": 13.02,
+   "fim": 15.34,
+   "som": "arena_multidao",
+   "v": 0.7
+  },
+  {
+   "ini": 15.34,
+   "fim": 38.25,
+   "som": "camarote",
+   "v": 3
+  },
+  {
+   "ini": 38.25,
+   "fim": 43.370000000000005,
+   "som": "bairro",
+   "v": 4
+  },
+  {
+   "ini": 43.370000000000005,
+   "fim": 44.25,
+   "som": "camarote",
+   "v": 3
+  },
+  {
+   "ini": 44.25,
+   "fim": 50.41,
+   "som": "arena_multidao",
+   "v": 0.7
+  },
+  {
+   "ini": 50.41,
+   "fim": 56.81,
+   "som": "arena_tensa",
+   "v": 2.6
+  },
+  {
+   "ini": 56.81,
+   "fim": 60.23,
+   "som": "camarote",
+   "v": 3
+  },
+  {
+   "ini": 60.23,
+   "fim": 64.23,
+   "som": "arena_multidao",
+   "v": 0.7
+  },
+  {
+   "ini": 64.23,
+   "fim": 72.95,
+   "som": "arena_tensa",
+   "v": 2.6
+  },
+  {
+   "ini": 72.95,
+   "fim": 76.59,
+   "som": "camarote",
+   "v": 3
+  },
+  {
+   "ini": 76.59,
+   "fim": 88.96000000000001,
+   "som": "arena_tensa",
+   "v": 2.6
+  },
+  {
+   "ini": 88.96000000000001,
+   "fim": 95.22,
+   "som": "camarote",
+   "v": 3
+  },
+  {
+   "ini": 95.22,
+   "fim": 112.27000000000001,
+   "som": "arena_multidao",
+   "v": 0.8
+  },
+  {
+   "ini": 112.27000000000001,
+   "fim": 124.91,
+   "som": "camarote",
+   "v": 3
+  }
+ ]
 }
