@@ -1,4 +1,4 @@
-Voz: Gemini Puck com pausas de 0,25 s, 1:55 (`palavras.json`, termina em 114,85 s) + 2 s de silêncio. Kits: `toon` (personagens), `toon3d` (plano 3: bairro de tijolo; janelas com luz de TV piscando = opção nova do `bairroToon`), galeria de efeitos. Cor chapada, **sem luz de cinema** (reprovada em 20/11). 9:16, legenda a ~82 %; todo texto de tela acima de 65 % da altura.
+Voz: Little Dude II (ElevenLabs pelo GenMax) com pausas de 0,25 s, 2:03 (`palavras.json`) + 2 s de silêncio. Kits: `toon` (personagens), `toon3d` (plano 3: bairro de tijolo; janelas com luz de TV piscando = opção nova do `bairroToon`), galeria de efeitos. Cor chapada, **sem luz de cinema** (reprovada em 20/11). 9:16, legenda a ~82 %; todo texto de tela acima de 65 % da altura.
 
 **Regras deste storyboard:**
 - **Violência só sugerida** (público adulto, mas TikTok): ninguém apanha em quadro; as paredes que fecham são o perigo; os ricos caem em cima de sacos macios.
