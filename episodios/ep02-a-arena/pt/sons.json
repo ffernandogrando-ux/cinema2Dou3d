@@ -1,0 +1,355 @@
+{
+ "cues": [
+  {
+   "t": 0.02,
+   "som": "galeria/chatter_1",
+   "v": 0.35
+  },
+  {
+   "t": 4.529999999999999,
+   "som": "galeria/slide_whistle_down_2",
+   "v": 0.25
+  },
+  {
+   "t": 5.47,
+   "som": "galeria/chatter_3",
+   "v": 0.15
+  },
+  {
+   "t": 6.819999999999999,
+   "som": "galeria/voice_heh_heh_heh_heh_1",
+   "v": 0.25
+  },
+  {
+   "t": 7.22,
+   "som": "galeria/glass_bottle_hit_2",
+   "v": 0.2
+  },
+  {
+   "t": 8.870000000000001,
+   "som": "galeria/ding_2",
+   "v": 0.3
+  },
+  {
+   "t": 10.870000000000001,
+   "som": "galeria/voice_raaaaaa_1",
+   "v": 0.15
+  },
+  {
+   "t": 11.78,
+   "som": "galeria/slap_2",
+   "v": 0.3
+  },
+  {
+   "t": 13.12,
+   "som": "galeria/metal_rattler_2",
+   "v": 0.35
+  },
+  {
+   "t": 15.39,
+   "som": "galeria/balloon_deflate_1",
+   "v": 0.15
+  },
+  {
+   "t": 16.32,
+   "som": "galeria/balloon_deflate_3",
+   "v": 0.2
+  },
+  {
+   "t": 17.58,
+   "som": "galeria/mouth_pop_2",
+   "v": 0.4
+  },
+  {
+   "t": 18.470000000000002,
+   "som": "galeria/wind_up_toy_1",
+   "v": 0.15
+  },
+  {
+   "t": 19.96,
+   "som": "galeria/voice_heh_heh_heh_heh_1",
+   "v": 0.25
+  },
+  {
+   "t": 20.870000000000005,
+   "som": "galeria/rubber_snapping_2",
+   "v": 0.2
+  },
+  {
+   "t": 22.070000000000004,
+   "som": "galeria/washboard_scrape_1",
+   "v": 0.2
+  },
+  {
+   "t": 23.870000000000005,
+   "som": "galeria/washboard_scrape_3",
+   "v": 0.2
+  },
+  {
+   "t": 26.830000000000002,
+   "som": "galeria/tiny_hit_2",
+   "v": 0.3
+  },
+  {
+   "t": 29.300000000000004,
+   "som": "galeria/metal_hit_2",
+   "v": 0.3
+  },
+  {
+   "t": 30.380000000000003,
+   "som": "galeria/plastic_rice_bag_hit_1",
+   "v": 0.4
+  },
+  {
+   "t": 30.580000000000005,
+   "som": "galeria/plastic_rice_bag_hit_3",
+   "v": 0.35
+  },
+  {
+   "t": 35.94,
+   "som": "galeria/voice_ha_ha_1",
+   "v": 0.3
+  },
+  {
+   "t": 38.3,
+   "som": "galeria/bell_2",
+   "v": 0.25
+  },
+  {
+   "t": 43.010000000000005,
+   "som": "galeria/slap_3",
+   "v": 0.3
+  },
+  {
+   "t": 43.52,
+   "som": "galeria/wood_hit_1",
+   "v": 0.3
+  },
+  {
+   "t": 44.35,
+   "som": "galeria/metal_rattler_3",
+   "v": 0.3
+  },
+  {
+   "t": 46.39,
+   "som": "galeria/drum_bonk_2",
+   "v": 0.25
+  },
+  {
+   "t": 48.11,
+   "som": "galeria/ding_4",
+   "v": 0.3
+  },
+  {
+   "t": 49.919999999999995,
+   "som": "galeria/bite_apple_1",
+   "v": 0.15
+  },
+  {
+   "t": 53.17,
+   "som": "galeria/metal_rattler_1",
+   "v": 0.3
+  },
+  {
+   "t": 54.98,
+   "som": "galeria/resonating_metal_hit_2",
+   "v": 0.5
+  },
+  {
+   "t": 58.03,
+   "som": "galeria/drum_bonk_1",
+   "v": 0.35
+  },
+  {
+   "t": 59.05,
+   "som": "galeria/siren_whistle_1",
+   "v": 0.3
+  },
+  {
+   "t": 60.23,
+   "som": "galeria/metal_beam_hit_2",
+   "v": 0.35
+  },
+  {
+   "t": 60.629999999999995,
+   "som": "galeria/ground_thump_1",
+   "v": 0.3
+  },
+  {
+   "t": 62.470000000000006,
+   "som": "galeria/metal_wobble_2",
+   "v": 0.3
+  },
+  {
+   "t": 67.49000000000001,
+   "som": "galeria/ground_thump_3",
+   "v": 0.3
+  },
+  {
+   "t": 68.92,
+   "som": "galeria/chatter_2",
+   "v": 0.3
+  },
+  {
+   "t": 70.92999999999999,
+   "som": "galeria/trumpet_sad_1",
+   "v": 0.3
+  },
+  {
+   "t": 73,
+   "som": "galeria/voice_bah_1",
+   "v": 0.3
+  },
+  {
+   "t": 74.5,
+   "som": "galeria/glass_bottle_hit_4",
+   "v": 0.35
+  },
+  {
+   "t": 75.04,
+   "som": "galeria/drum_bonk_3",
+   "v": 0.3
+  },
+  {
+   "t": 75.29,
+   "som": "galeria/drum_bonk_4",
+   "v": 0.3
+  },
+  {
+   "t": 75.59,
+   "som": "galeria/drum_bonk_2",
+   "v": 0.3
+  },
+  {
+   "t": 76.64,
+   "som": "galeria/metal_beam_hit_3",
+   "v": 0.3
+  },
+  {
+   "t": 79.85,
+   "som": "galeria/thin_metal_hit_2",
+   "v": 0.2
+  },
+  {
+   "t": 81.5,
+   "som": "galeria/spring_tube_ghost_1",
+   "v": 0.3
+  },
+  {
+   "t": 84.87,
+   "som": "galeria/fist_clenched_2",
+   "v": 0.3
+  },
+  {
+   "t": 86.72,
+   "som": "galeria/tiny_hit_1",
+   "v": 0.15
+  },
+  {
+   "t": 87.12,
+   "som": "galeria/tiny_hit_3",
+   "v": 0.15
+  },
+  {
+   "t": 87.52000000000001,
+   "som": "galeria/tiny_hit_2",
+   "v": 0.15
+  },
+  {
+   "t": 90.50000000000001,
+   "som": "galeria/bite_apple_2",
+   "v": 0.25
+  },
+  {
+   "t": 93.3,
+   "som": "galeria/metal_hit_3",
+   "v": 0.4
+  },
+  {
+   "t": 95.27,
+   "som": "galeria/metal_beam_hit_1",
+   "v": 0.4
+  },
+  {
+   "t": 95.72,
+   "som": "galeria/plastic_rice_bag_hit_2",
+   "v": 0.4
+  },
+  {
+   "t": 96.44000000000001,
+   "som": "galeria/slide_whistle_down_1",
+   "v": 0.4
+  },
+  {
+   "t": 98.11,
+   "som": "galeria/plastic_rice_bag_hit_1",
+   "v": 0.4
+  },
+  {
+   "t": 98.31,
+   "som": "galeria/plastic_rice_bag_hit_3",
+   "v": 0.4
+  },
+  {
+   "t": 98.51,
+   "som": "galeria/plastic_rice_bag_hit_4",
+   "v": 0.4
+  },
+  {
+   "t": 100.44,
+   "som": "galeria/voice_hmm_1",
+   "v": 0.25
+  },
+  {
+   "t": 101.94,
+   "som": "galeria/balloon_deflate_2",
+   "v": 0.3
+  },
+  {
+   "t": 103.30000000000001,
+   "som": "galeria/metal_beam_hit_4",
+   "v": 0.3
+  },
+  {
+   "t": 104.43,
+   "som": "galeria/chatter_4",
+   "v": 0.3
+  },
+  {
+   "t": 106,
+   "som": "galeria/balloon_deflate_4",
+   "v": 0.25
+  },
+  {
+   "t": 107.72,
+   "som": "galeria/voice_ha_ha_1",
+   "v": 0.3
+  },
+  {
+   "t": 109.82000000000001,
+   "som": "galeria/party_honk_2",
+   "v": 0.3
+  },
+  {
+   "t": 115.83,
+   "som": "galeria/punch_clothes_1",
+   "v": 0.35
+  },
+  {
+   "t": 117.71000000000001,
+   "som": "galeria/glockenspiel_magic_1",
+   "v": 0.25
+  },
+  {
+   "t": 118.47,
+   "som": "galeria/ding_3",
+   "v": 0.3
+  },
+  {
+   "t": 121.11000000000001,
+   "som": "galeria/metal_rattler_4",
+   "v": 0.4
+  }
+ ],
+ "amb": []
+}
