@@ -70,7 +70,7 @@ function tMao(x, y, ang, r, cor, punho) {
 const T_ALT = { adulto: { hip: -150, omb: -335, cab: -470, larg: 1 }, baixo: { hip: -96, omb: -215, cab: -320, larg: .9 } };
 // st.invisivel: só o contorno, tracejado (gag do "faxineiro invisível"); o que estiver dentro de <g class="tSol"> (ex.: o balde em st.segura) fica sólido.
 // st.treme: amplitude (px) de um tremido do corpo todo. st.chao: sentado no chão de pernas cruzadas.
-const T_INV_CSS = `<style>.tInv path:not(.tSol path),.tInv circle:not(.tSol circle),.tInv ellipse:not(.tSol ellipse){fill:none!important}.tInv path[stroke]:not(.tSol path){stroke-dasharray:11 8;stroke-linecap:round}</style>`;
+const T_INV_CSS = `<style>.tInv path:not(.tSol path),.tInv circle:not(.tSol circle),.tInv ellipse:not(.tSol ellipse){fill:none!important}.tInv path[stroke]:not(.tSol path){stroke-dasharray:11 8;stroke-linecap:round;stroke:#F4F1EA!important;stroke-width:4.4px!important}</style>`;
 function toon(P, st = {}) {
   if ((st.invisivel || st.treme) && !st._env) { const tt = Math.floor((st.t || 0) * 24), dx = st.treme ? Math.sin(tt * 2.7) * st.treme : 0, dy = st.treme ? Math.cos(tt * 3.9) * st.treme * .5 : 0;
     const dentro = toon(P, { ...st, _env: 1, sombra: st.invisivel ? false : st.sombra });
