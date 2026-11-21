@@ -11,6 +11,15 @@ norm = lambda w: re.sub(r'[^a-z0-9]', '', unicodedata.normalize('NFD', w.lower()
 roteiro = []
 for li, line in enumerate(l.strip() for l in open(os.path.join(d,'narracao.txt')) if l.strip()):
     for w in line.split(): roteiro.append({'w': w, 'linha': li})
+# padrão (pedido do usuário, 21/11/2026): pausas longas da voz encurtadas para PAUSA s (0,25). O original fica em voz_original.wav.
+_pausa = float(os.environ.get('PAUSA', '0.25'))
+_vo, _vz = os.path.join(d,'voz_original.wav'), os.path.join(d,'voz.wav')
+if _pausa > 0 and not os.path.exists(_vo):
+    os.rename(_vz, _vo)
+    _tmp = os.path.join(d, '_voz16.wav')
+    subprocess.run(['ffmpeg','-v','error','-y','-i',_vo,'-ac','1','-ar','44100','-sample_fmt','s16',_tmp], check=True)
+    subprocess.run([sys.executable,'-I',os.path.join(os.path.dirname(os.path.abspath(__file__)),'enxugar_pausas.py'),_tmp,_vz,str(_pausa)], check=True)
+    os.remove(_tmp)
 # áudio -> palavras com tempo
 raw = subprocess.run(['ffmpeg','-v','error','-i',os.path.join(d,'voz.wav'),'-ac','1','-ar','16000','-f','s16le','-'],capture_output=True).stdout
 a = np.frombuffer(raw, np.int16).astype(np.float32)/32768

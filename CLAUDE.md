@@ -38,7 +38,7 @@ Antes de criar ou alterar qualquer episódio, leia **FORMATO_CINEMA.md** e depoi
 
 Fluxo de um episódio (`episodios/epXX-nome/`):
 1. Preencher a espinha (batidas A–H do `FORMATO_CINEMA.md`, com as pistas e as homenagens listadas) e aprovar com o usuário. Depois, roteiro em `pt/roteiro.md` + `pt/narracao.txt` (texto exato da voz).
-2. Voz do usuário em `pt/voz.wav` → `python3 -I motor/alinhar.py episodios/epXX/pt` (confere fala × roteiro e gera `palavras.json`).
+2. Voz do usuário em `pt/voz.wav` (ou pelo Gemini: `motor/voz_gemini.py`) → `python3 -I motor/alinhar.py episodios/epXX/pt` (confere fala × roteiro e gera `palavras.json`). **Padrão (21/11/2026):** na 1ª vez o alinhador encurta as pausas para 0,25 s e guarda o original em `voz_original.wav` (`PAUSA=0` desliga; voz nova = apague o `voz_original.wav`).
 3. **Storyboard** em `pt/storyboard.md` (plano a plano, nos tempos do `palavras.json`) → revisor visual independente `.claude/agents/revisor-visual.md` (nota ≥ 8, que já vale como aprovação). Só então: cenas em `cenas.js` (planos amarrados a linha/palavra; `sfx`, `foco`, `passos`, `AMBIENTE`).
 4. `node motor/render.js episodios/epXX pt checar` (enquadramento: legenda, personagem cortado, objeto cortado) → `previa 2` (folha de contato) + quadros soltos de cada plano 3D → `video`. Ver "Qualidade do 3D" no guia (oclusão, chão sem piscar, sem cortes).
    O `video` (e o `trecho`) guarda os quadros **por plano** em `pt/_render/cache/`: na próxima vez, só renderiza de novo os planos que mudaram (código comum mudou → todos). Para forçar planos: `REFAZER=40,52 node motor/render.js … video`. O MP4 é sempre codificado inteiro de uma vez, sem emenda.
