@@ -216,9 +216,9 @@ const CENAS = [
     f: (tl, d, t) => reacaoToon(SENHOR, t, tl, { olhos: 'arregalados', sobr: .8, bD: { h: [24, -64], bend: 40 }, olhar: [.6, .3] }, { fundo: ARE.fundo, forma: '#4A4258' }) },
   // 11 · PLANO-MESTRE do camarote em corte, pan da esquerda para a direita: piso firme e frente de vidro
   { l: 5, split: false, blur: false, sfx: [{ t: .05, s: G('balloon_deflate_1'), v: .15 }], cam: { s: [1.75, 1.75], c: [130, 330], c1: [250, 330], pop: false },
-    f: (tl, d, t) => arenaCorte(t, { pe: 1 }) + pT(SEGURANCA, 10, MC.piso, MC.s, t, { nocheck: true, semCorte: true, still: true }) + pT(DONO, 190, MC.piso, MC.s, t, { olhar: [1, .5], nocheck: true, semCorte: true })
+    f: (tl, d, t) => arenaCorte(t, { pe: 1 }) + pT(SEGURANCA, 10, MC.piso, MC.s, t, { nocheck: true, semCorte: true, still: true }) + pT(DONO, 165, MC.piso, MC.s, t, { olhar: [1, .5], nocheck: true, semCorte: true })
       + pT(PREFEITO, 120, MC.piso - 6, MC.s, t, { sentado: true, nocheck: true, semCorte: true }) + `<g transform="translate(300 ${MC.piso}) scale(.2)">${pilhaPremios(0, 0)}</g>` + `<g transform="translate(385 ${MC.piso}) scale(.2)">${botaoPed(0, 0)}</g>`
-      + [[RICACO, 258], [RICA, 342]].map(([P, x], i) => pT(P, x, MC.piso, MC.s, t, { olhar: [.4, .6], nocheck: true, semCorte: true, ph: i })).join('') },
+      + [[RICACO, 270], [RICA, 342]].map(([P, x], i) => pT(P, x, MC.piso, MC.s, t, { olhar: [.4, .6], nocheck: true, semCorte: true, ph: i })).join('') },
   // 12 · uma rica de pele no ar-condicionado, cabelo esvoaçando, olhos fechados
   { l: 5, w: 3, split: false, sfx: [{ t: 0, s: G('balloon_deflate_3'), v: .2 }], cam: { s: [1, 1.04], c: [288, 470] },
     f: (tl, d, t) => fundoChapado(CAMA.parede) + ret(330, 120, 220, 90, '#E8E2D6', '#C9C2B0') + [0, 1, 2, 3].map(i => tTraco(`M${350 + i * 50} 210 Q${330 + i * 50 + Math.sin(t * 18 + i) * 14} 260 ${340 + i * 50} 300`, TLW, '#7FB8E8')).join('')
@@ -381,7 +381,7 @@ const CENAS = [
       + pT(SEGURANCA, 440, 356, .48, t, { flip: true, olhar: [1, .8], palpebra: .3, still: true }) + pT(DAVI, 150, 930, .7, t, { invisivel: tl > .35, olhar: [1, -.7], olhos: 'arregalados', segura: balde(.9), bD: { h: [30, 120], bend: 20, punho: true } }) + HOLO(true) },
   // 56 · close do Davi pontilhado: olha as próprias mãos transparentes; só o balde continua sólido
   { l: 25, w: 10, split: false, cam: { s: [1, 1.05], c: [288, 470] },
-    f: (tl, d, t) => reacaoToon(DAVI, t, tl, { invisivel: true, olhar: [.4, .8], olhos: 'arregalados', boca: BOCAS.o, bD: { h: [110, 30], bend: 30 }, bE: { h: [60, 40], bend: 20, punho: true }, seguraE: `<g transform="translate(0 10)">${balde(1)}</g>` }, { fundo: '#5A5650', forma: '#4A4640' }) + HOLO(true) },
+    f: (tl, d, t) => reacaoToon(DAVI, t, tl, { invisivel: true, olhar: [.4, .8], olhos: 'arregalados', boca: BOCAS.o, bD: { h: [110, -40], bend: 30 }, bE: { h: [70, -70], bend: 20, punho: true }, seguraE: `<g transform="translate(0 10)">${balde(1)}</g>`, y: 1100 }, { fundo: '#5A5650', forma: '#4A4640' }) + HOLO(true) },
   // 57 · plano médio do Davi pontilhado: ajeita o boné, pega o esfregão (balde e esfregão sólidos), firme
   { l: 26, split: false, sfx: [{ t: .3, s: G('fist_clenched_2'), v: .3 }], cam: { s: [1, 1.06], c: [288, 500] },
     f: (tl, d, t) => { const pega = tl > .8, esf = `<g class="tSol">${esfregao(.8)}</g>`; return fundoChapado('#5A5650') + chaoToon('#4A4640', '#3a3630', 860) + (pega ? '' : `<g transform="translate(400 690) rotate(12)">${esf}</g>`)
@@ -411,12 +411,12 @@ const CENAS = [
         + `<g transform="translate(120 880)">${balde(.8)}</g>` + (k > .5 ? QUENTE : HOLO(true)); } },
   // 63 · PLANO-MESTRE: a frente de vidro destrava e abre em placas; primeiro a pilha de prêmios despenca
   { l: 30, split: false, blur: false, sfx: [{ t: .05, s: G('metal_beam_hit_1'), v: .4 }, { t: .5, s: G('plastic_rice_bag_hit_2'), v: .4 }], cam: { s: [1.3, 1.3], c: [260, 540], pop: false },
-    f: (tl, d, t) => { const k = sobe(0, .4, tl), q = sobe(.25, .9, tl); return arenaCorte(t, { pe: 0, senta: 1, aberto: k, alavanca: 1 }) + `<g transform="translate(315 ${lerp(MC.piso, MC.areia, q * q)}) scale(.22)">${pilhaPremios(0, 0)}</g>`
+    f: (tl, d, t) => { const k = sobe(0, .4, tl), q = sobe(.25, .9, tl); return arenaCorte(t, { pe: 0, senta: 1, aberto: k, alavanca: 1 }) + `<g transform="translate(315 ${lerp(MC.piso, MC.areia, q * q)}) scale(.32)">${pilhaPremios(0, 0)}</g>`
       + [[RICACO, 258, 0], [RICA, 300, 1], [RICO2, 350, 2]].map(([P, x, i]) => pT(P, x, MC.piso + sobe(.45, 1, tl) ** 2 * 160, MC.s, t, { olhos: 'arregalados', sobr: 1, boca: BOCAS.o, olhar: [0, 1], treme: 2, nocheck: true, semCorte: true, ph: i })).join('')
       + pT(DONO, 160, MC.piso, MC.s, t, { olhar: [1, .6], nocheck: true, semCorte: true }) + pT(DAVI, 212, MC.piso, MC.s, t, { invisivel: true, bE: { h: [145, -160], bend: -10, punho: true }, nocheck: true, semCorte: true }) + `<g transform="translate(385 ${MC.piso + sobe(.45, 1, tl) ** 2 * 160}) scale(.2)">${botaoPed(0, 0)}</g>` + QUENTE; } },
   // 64 · corte: os ricos caindo atrás dos sacos, de terno, gravata voando; o botão cai junto
   { l: 31, split: false, blur: false, sfx: [{ t: 0, s: G('slide_whistle_down_1'), v: .4 }], cam: { s: [1.3, 1.3], c: [280, 620], c1: [280, 700], pop: false },
-    f: (tl, d, t) => { const q = sobe(0, d, tl); return arenaCorte(t, { senta: 1, aberto: 1, alavanca: 1 }) + `<g transform="translate(315 ${MC.areia}) scale(.22)">${pilhaPremios(0, 0)}</g>`
+    f: (tl, d, t) => { const q = sobe(0, d, tl); return arenaCorte(t, { senta: 1, aberto: 1, alavanca: 1 }) + `<g transform="translate(315 ${MC.areia}) scale(.32)">${pilhaPremios(0, 0)}</g>`
       + [[RICACO, 258, 0], [RICA, 305, 1], [RICO2, 350, 2], [RICO3, 280, 3]].map(([P, x, i]) => `<g transform="rotate(${Math.sin(t * 6 + i) * 25} ${x} ${lerp(MC.piso + 40, MC.areia - 160, q) - 60})">${pT(P, x, lerp(MC.piso + 40 - i * 30, MC.areia - 170 + i * 10, q), MC.s * 1.1, t, { olhos: 'arregalados', boca: BOCAS.grito, bD: { h: [60, -240], bend: 20 }, bE: { h: [-60, -240], bend: -20 }, nocheck: true, semCorte: true, ph: i })}</g>`).join('')
       + `<g transform="translate(400 ${lerp(MC.piso + 60, MC.areia - 120, q)}) rotate(${q * 200}) scale(.2)">${botaoPed(0, 0)}</g>` + pT(DONO, 160, MC.piso, MC.s, t, { olhar: [1, .8], olhos: 'arregalados', nocheck: true, semCorte: true }) + pT(DAVI, 212, MC.piso, MC.s, t, { invisivel: true, olhar: [1, .8], bE: { h: [145, -160], bend: -10, punho: true }, nocheck: true, semCorte: true }) + QUENTE; } },
   // 65 · na areia: eles aterrissam sentados em cima da pilha de sacos
@@ -470,8 +470,8 @@ const CENAS = [
       + pT(DONO, 430, 900, .82, t, { flip: true, olhar: [1, 0], palpebra: .45, boca: { sm: .6 }, bD: { h: [lerp(40, 132, sobe(0, .2, tl)), lerp(80, 56, sobe(0, .2, tl))], bend: 10, punho: true } }) + QUENTE },
   // 78 · plano a dois, push-in no dono: ele sorri devagar para o Davi pontilhado; o contorno do Davi treme
   { l: 37, split: false, sfx: [{ t: .4, s: G('glockenspiel_magic_1'), v: .25 }], cam: { s: [1, 1.1], c: [288, 520], c1: [300, 480] },
-    f: (tl, d, t) => camaroteM(t, { janela: false }) + pT(DAVI, 175, 900, .74, t, { invisivel: true, treme: 5, olhos: 'arregalados', sobr: 1, olhar: [1, 0], segura: balde(.9), bD: { h: [30, 120], bend: 20, punho: true } })
-      + pT(DONO_OURO, 430, 900, .8, t, { flip: true, olhar: [1, 0], palpebra: .5, boca: { sm: lerp(.2, 1, sobe(0, .8, tl)), o: lerp(.1, .4, sobe(0, .8, tl)) } }) + QUENTE },
+    f: (tl, d, t) => camaroteM(t, { janela: false }) + pT(DAVI, 105, 900, .7, t, { invisivel: true, treme: 5, olhos: 'arregalados', sobr: 1, olhar: [1, 0], segura: balde(.9), bD: { h: [30, 120], bend: 20, punho: true } })
+      + pT(LIA, 265, 900, .7, t, { olhos: 'arregalados', sobr: 1, boca: BOCAS.o, olhar: [-1, 0], inclina: -.1, bD: { h: [60, 40], bend: 10 } }) + pT(DONO_OURO, 415, 900, .8, t, { flip: true, olhar: [1, 0], palpebra: .5, boca: { sm: lerp(.2, 1, sobe(0, .8, tl)), o: lerp(.1, .4, sobe(0, .8, tl)) }, bD: { h: [120, 50], bend: 10, punho: true } }) + QUENTE },
   // 79 · telão, push-in lento: "FINAL ESPECIAL: O FAXINEIRO ACORRENTADO CONTRA O DONO"
   { l: 38, split: false, blur: false, semFala: true, sfx: [{ t: .1, s: G('ding_3'), v: .3 }], cam: { s: [1, 1.06], c: [288, 400], c1: [288, 400] },
     f: (tl, d, t) => telao(['FINAL ESPECIAL:', 'O FAXINEIRO', 'ACORRENTADO', 'CONTRA O DONO'], { tam: 56, y: 280 }) },
