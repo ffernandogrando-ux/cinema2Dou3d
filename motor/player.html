@@ -167,7 +167,9 @@ async function render(t) {
 window.render = render; window.DUR = FIM;
 // checagem de enquadramento: olhos de personagem (não figurante) devem ficar entre 25% e 60% da altura, longe da legenda (82%)
 window.CHECAR = async (passo = .25) => { const out = [];
-  for (let t = .1; t < FIM; t += passo) { await render(t); const pl = PLANOS.find(p => t >= p.ini && t < p.fim) || PLANOS[PLANOS.length - 1];
+  // além da grade de tempo, confere o 1º e o último quadro de cada plano (é no fim do movimento de câmera que o personagem sai pela borda)
+  const TS = []; for (let t = .1; t < FIM; t += passo) TS.push(t); PLANOS.forEach(p => { TS.push(p.ini + .02); TS.push(Math.max(p.ini + .02, p.fim - .05)); });
+  for (const t of [...new Set(TS.map(x => +x.toFixed(2)))].sort((a, b) => a - b)) { await render(t); const pl = PLANOS.find(p => t >= p.ini && t < p.fim) || PLANOS[PLANOS.length - 1];
     (window._olhos || []).filter(o => o.r > 34 && o.x > -o.r && o.x < 576 + o.r && o.y > -o.r && o.y < 1024 + o.r).forEach(o => {
       const pct = o.y / 1024; if (pct > .60 && pct < 1.05) out.push({ t: +t.toFixed(2), linha: pl.l, palavra: pl.w || 0, tipo: 'legenda', olho: Math.round(pct * 100) }); });
     const base = { t: +t.toFixed(2), linha: pl.l, palavra: pl.w || 0 };
