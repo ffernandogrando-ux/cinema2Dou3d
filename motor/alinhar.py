@@ -16,8 +16,23 @@ raw = subprocess.run(['ffmpeg','-v','error','-i',os.path.join(d,'voz.wav'),'-ac'
 a = np.frombuffer(raw, np.int16).astype(np.float32)/32768
 m = WhisperModel('small', device='cpu', compute_type='int8', cpu_threads=4)
 prompt = ' '.join(x['w'] for x in roteiro)[:800]
-segs,_ = m.transcribe(a, language='pt', word_timestamps=True, beam_size=5, initial_prompt=prompt)
-fal = [{'w': w.word.strip(), 's': w.start, 'e': w.end} for s in segs for w in s.words]
+def _pedacos(a, sr=16000, alvo=25):
+    # corta o áudio em pedaços de até `alvo` s, sempre no silêncio mais fundo perto do limite
+    j = int(.05*sr); en = np.array([np.sqrt(np.mean(a[i:i+j]**2)+1e-12) for i in range(0, len(a), j)])
+    ini, out = 0, []
+    while (len(a)-ini)/sr > alvo:
+        lo, hi = ini//j + int(alvo*.6*sr)//j, ini//j + int(alvo*sr)//j
+        k = lo + int(np.argmin(en[lo:hi])); out.append((ini, k*j)); ini = k*j
+    out.append((ini, len(a))); return out
+if os.environ.get('PEDACOS', '1') == '1':
+    # padrão: pedaços curtos, sem contexto entre eles (o prompt longo fazia o Whisper pular o começo em vozes de TTS)
+    fal = []
+    for i0, i1 in _pedacos(a):
+        sg,_ = m.transcribe(a[i0:i1], language='pt', word_timestamps=True, beam_size=5, initial_prompt=None, condition_on_previous_text=False)
+        fal += [{'w': w.word.strip(), 's': w.start+i0/16000, 'e': w.end+i0/16000} for x in sg for w in x.words]
+else:
+    segs,_ = m.transcribe(a, language='pt', word_timestamps=True, beam_size=5, initial_prompt=prompt)
+    fal = [{'w': w.word.strip(), 's': w.start, 'e': w.end} for s in segs for w in s.words]
 A = [norm(x['w']) for x in roteiro]; B = [norm(x['w']) for x in fal]
 sm = difflib.SequenceMatcher(None, A, B, autojunk=False)
 difs = []
