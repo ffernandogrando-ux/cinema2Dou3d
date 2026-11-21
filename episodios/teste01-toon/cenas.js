@@ -1,4 +1,4 @@
-// TESTE 01 · pele "scifi-toon" (estilos: Sci-Fi Sitcom Toon do Lemo-Opuscar, só a gramática) no stickman do anima-ovitinho.
+// TESTE 01 · pele "scifi-toon" (estilos: Sci-Fi Sitcom Toon do Lemo-Opuscar, só a gramática), com o kit toon do canal.
 // v2: personagens de corpo inteiro (kit toon, motor/acervo/toon.js), sem linha tremendo; cor chapada com sombra recortada, olhos brancos grandes de pupila pequena,
 // uma paleta por mundo, o portal é a única coisa que brilha, etiqueta de terminal (VT323). Elenco e portal nossos.
 //@acervo toon toon3d cine
